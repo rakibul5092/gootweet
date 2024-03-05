@@ -1,0 +1,110 @@
+<ion-content appHideHeader [body]="mainContent" [scrollEvents]="true" id="main-content" #mainContent>
+  <!-- <app-video *ngIf="videoVisible" [isMobile]="screenWidth<768" class="popup-video" [video]="video" [width]="'300'"
+    [height]="350" (onClose)="videoVisible = false">
+  </app-video> -->
+  <ion-fab *ngIf="screenWidth<1100" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="addPost()">
+        <ion-icon src="assets/img/create-post.svg"></ion-icon>
+        <div></div>
+      </ion-fab-button>
+      <ion-fab-button (click)="uploadVideo()">
+        <ion-icon src="assets/img/video.svg"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="gotoCreateReel()">
+        <ion-icon src="assets/img/reels.svg"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="createLive()">
+        <ion-icon name="videocam-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div id="sliderBody" class="container-fluid p-0">
+    <div [class]="isLoggedin.value? 'row':'row justify-content-center'">
+      <app-my-info class="col-3 d-flex justify-content-end" style="flex: 0 0 25%; padding-right: 10px;" [me]="me"
+        [visible]="screenWidth>1100" [userTypeInNumber]="userTypeInNumber" [wallet]="wallet">
+      </app-my-info>
+
+      <div id="postTop"
+        [class]="'justify-content-center row '+(screenWidth>1100? isLoggedin.value? ' col-9':'col-9':'col-12')">
+        <div class="col-md-8 col-xl-7 p-0 d-flex justify-content-center">
+          <div class="inside-container" [style]="screenWidth>1100? 'max-width: 500px':'width:100%'">
+
+            <div class="create-post p-2" *ngIf="screenWidth>1100" style="margin-top:15px">
+              <div class="row " style="width: 100%">
+                <div class="status-top d-flex">
+                  <img class="cover" [src]="(me?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+                  <div class="row">
+                    <div class="col-12 col-lg-6 col-sm-12 d-flex align-items-center">
+                      <span class="status" (click)="addPost()">Pasidalinkite savo mintimis</span>
+                    </div>
+                    <div class="col-12 col-lg-6 col-sm-12">
+                      <div class="icons d-flex">
+                        <ion-buttons mode="ios">
+                          <ion-button data-toggle="tooltip" data-placement="bottom" title="Įkelkti reel'są"
+                            (click)="gotoCreateReel()">
+                            <ion-icon name="film"></ion-icon>
+                          </ion-button>
+                          <ion-button data-toggle="tooltip" data-placement="bottom" title="Įkelkti video įrašą"
+                            (click)="uploadVideo()">
+                            <ion-icon name="cloud-upload"></ion-icon>
+                          </ion-button>
+                        </ion-buttons>
+                        <ion-button mode="md" (click)="addPost()" class="post-button">Pasidalinti</ion-button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- <app-reels [height]="200" [width]="112.5"></app-reels> -->
+            </div>
+
+            <div class="post-top d-flex pt-3 align-items-center justify-content-between">
+              <div class="left-part d-flex align-items-center">
+                <div class="ml-0 mr-0 slider-title">
+                  Bendras srautas
+                </div>
+                <ion-buttons class="black-buttons">
+                  <ion-button (click)="reload()"
+                    [class]="(newPostService.haveNewWallPost|async)===true? 'blink':''">Naujas įrašas</ion-button>
+                  <ion-button (click)="onAllContacts()">Dalyviai</ion-button>
+                </ion-buttons>
+              </div>
+              <div class="language-selector d-flex">
+                <div class="d-none d-sm-block  selector-placeholder mr-1">Regionas:</div>
+                <select>
+                  <option>LT</option>
+                  <option>EN</option>
+                  <option>ES</option>
+                </select>
+              </div>
+            </div>
+            <div id="post-container" class="blog-cnt mb-5 mt-2" *ngIf="wallPosts.length>0; else skeleton">
+              <app-post *ngFor="let wallPost of wallPosts; let i = index;" [wallPost]="wallPost"
+                [isPopoverVideo]="popoverVideoIndex.index===i" [sliderShow]="i > 2 && i%3 == 1"
+                [showReels]="i > 5 && i%7 == 0" (action)="actionListener($event)" [me]="me"
+                [isLoggedin]="isLoggedin.value">
+              </app-post>
+              <ion-infinite-scroll threshold="15%" (ionInfinite)="findNext($event)">
+                <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </div>
+
+            <ng-template #skeleton style="max-width: 589.9px">
+              <app-post-skeleton> </app-post-skeleton>
+            </ng-template>
+          </div>
+
+        </div>
+        <app-right-side-bar *ngIf="screenWidth>1135" [randomProductsVisible]="true" class="col-lg-4 col-xl-4 ">
+        </app-right-side-bar>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "furniin-d393f"
+  },
+  "targets": {
+    "furniin-d393f": {
+      "hosting": {
+        "app": [
+          "furniin-d393f"
+        ]
+      }
+    }
+  }
+}

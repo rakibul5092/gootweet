@@ -1,0 +1,315 @@
+<!-- for mobile -->
+<div class="manufacturer-tab d-block d-md-none">
+  <button
+    (click)="openAddCategoryPopover()"
+    class="btn ctm-btn cart-btn btnNav w-100"
+  >
+    <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti
+    kategoriją
+  </button>
+</div>
+<!-- for mobile -->
+
+<section class="two-div-section-d mp-0">
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <div class="materials-list-cnt">
+        <div class="category-nav">
+          <div class="category-ul mx-3 mx-md-0">
+            <ul
+              class="nav nav-pills mb-4 m-border-0"
+              id="pills-tab"
+              role="tablist"
+            >
+              <li (click)="service.selectTab(1)" class="nav-item addAni">
+                <a
+                  [class]="service.selectedTab===1? 'nav-link active':'nav-link'"
+                  id="pills-category-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  style="cursor: pointer"
+                  aria-controls="pills-category"
+                  aria-selected="true"
+                  >Kategorijos</a
+                >
+              </li>
+              <li (click)="service.selectTab(2)" class="nav-item addAni">
+                <a
+                  [class]="service.selectedTab===2? 'nav-link active':'nav-link'"
+                  id="pills-sub-category-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  style="cursor: pointer"
+                  aria-controls="pills-sub-category"
+                  aria-selected="false"
+                  >Sub-kategorijos</a
+                >
+              </li>
+              <li (click)="service.selectTab(3)" class="nav-item addAni">
+                <a
+                  [class]="service.selectedTab===3? 'nav-link active':'nav-link'"
+                  id="pills-inner-category-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  style="cursor: pointer"
+                  aria-controls="pills-inner-category"
+                  aria-selected="false"
+                  >Iner-kategorijos</a
+                >
+              </li>
+              <li class="nav-item li-btn d-none d-md-inline-block">
+                <button
+                  (click)="openAddCategoryPopover()"
+                  class="btn ctm-btn cart-btn btnNav"
+                >
+                  <img
+                    src="./../../assets/img/add-circle-full.svg"
+                    alt="img"
+                  />Pridėti kategoriją
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-content" id="pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="pills-category"
+              role="tabpanel"
+              aria-labelledby="pills-category-tab"
+            >
+              <div
+                class="materials-list-list m-radius-0 m-border-0 mb-0 mb-md-0"
+              >
+                <table class="table table-striped mb-0">
+                  <!-- Category list here -->
+                  <ion-reorder-group
+                    *ngIf="service.selectedTab === 1"
+                    (ionItemReorder)="doOrder($event)"
+                    disabled="false"
+                  >
+                    <ion-row
+                      style="min-width: 850px"
+                      *ngFor="let c of service?.categories; let i = index"
+                    >
+                      <ion-col size="1"
+                        >{{'#' + c?.category?.data?.serial}}</ion-col
+                      >
+                      <ion-col>
+                        {{(c?.category?.data?.category)+'
+                        ('+c?.category?.data?.product_count+')'}}
+                      </ion-col>
+                      <ion-col>
+                        <button
+                          class="btn ctm-btn pro-btn btnNav"
+                          (click)="openUpdateCategory(c.category,1)"
+                        >
+                          <img
+                            class="remove_icon"
+                            src="./../../assets/img/settings-g.svg"
+                            alt="img"
+                          />
+                          Nustatymai
+                        </button>
+                        <br />
+                        <button
+                          (click)="askDeletePermission(c.category,1)"
+                          class="btn ctm-btn d-btn btnNav"
+                        >
+                          <img
+                            class="remove_icon"
+                            src="./../../assets/img/delete.svg"
+                            alt="img"
+                          />
+                          Pašalinti
+                        </button>
+                      </ion-col>
+                      <ion-col>
+                        <img
+                          class="cat-img"
+                          [src]="baseUrl+c.category.data.img"
+                        />
+                      </ion-col>
+                      <ion-col>
+                        <ion-button
+                          mode="md"
+                          (click)="changeImageModal(c.category)"
+                          >Change Image</ion-button
+                        >
+                        <ion-select
+                          mode="ios"
+                          placeholder="change"
+                          [style]="c.from || c.to?'background: beige;':''"
+                          [value]="!c.from && !c.to? 'None':c.from?'From':'To'"
+                          (ionChange)="setTo(c.category,i,$event)"
+                          interface="popover"
+                        >
+                          <ion-select-option>None</ion-select-option>
+                          <ion-select-option>From</ion-select-option>
+                          <ion-select-option>To</ion-select-option>
+                        </ion-select>
+                        <ion-button
+                          *ngIf="service.categories[i]?.to"
+                          (click)="submitChange()"
+                        >
+                          Submit</ion-button
+                        >
+                      </ion-col>
+                      <ion-col>
+                        <ion-reorder></ion-reorder>
+                      </ion-col>
+                    </ion-row>
+                  </ion-reorder-group>
+
+                  <!-- Sub category list here -->
+                  <tbody *ngIf="service.selectedTab === 2">
+                    <tr *ngFor="let sub of service.subCategories;let i =index">
+                      <td class="no-th" scope="row">{{'#' + (i + 1)}}</td>
+                      <td>
+                        {{sub?.data?.sub_category +' (ID: '+ sub?.id+')'}}
+                      </td>
+                      <!-- <td>
+                          
+                        {{sub?.data?.timestamp?.toDate()|date:'yyyy-MM-dd'}}</td> -->
+                      <td>
+                        <div
+                          class="sm_megamenu_icon_image left-icon"
+                          [style]="
+                                                                    'height: 30px;width: 30px; margin-right: 10px;background: url(https://www.irankiai.lt/media/megamenu/megamenusprite.png?v=1652335906) no-repeat '+sub?.data?.icon+';'"
+                        ></div>
+                      </td>
+                      <td>
+                        <ion-input
+                          style="
+                            background: lightgray;
+                            --padding: 5px;
+                            margin-right: 10px;
+                            border-radius: 10px;
+                          "
+                          [(ngModel)]="sub.data.icon"
+                          placeholder="Insert icon text"
+                        ></ion-input>
+                        <ion-button mode="md" (click)="saveSubIcon(sub)"
+                          >Save</ion-button
+                        >
+                      </td>
+
+                      <td>
+                        <ion-button mode="md" (click)="choosePhoto(sub.id)"
+                          >Choose Photo</ion-button
+                        >
+                        <input
+                          (change)="onSubImageChange($event, sub.id)"
+                          type="file"
+                          [id]="'sub-'+sub.id"
+                          name="avatar"
+                          style="visibility: hidden"
+                          accept="image/png, image/jpeg"
+                        />
+                      </td>
+
+                      <td>
+                        <img
+                          width="30"
+                          height="30"
+                          [src]="(subBaseUrl+sub?.data?.image)||''"
+                        />
+                      </td>
+                      <td>
+                        <button
+                          (click)="openUpdateCategory(sub,2)"
+                          class="btn ctm-btn pro-btn btnNav"
+                        >
+                          <img
+                            class="remove_icon"
+                            src="./../../assets/img/settings-g.svg"
+                            alt="img"
+                          />
+                          Nustatymai
+                        </button>
+                        <br />
+                        <button
+                          (click)="askDeletePermission(sub,2)"
+                          class="btn ctm-btn d-btn btnNav"
+                        >
+                          <img
+                            class="remove_icon"
+                            src="./../../assets/img/delete.svg"
+                            alt="img"
+                          />
+                          Pašalinti
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                  <!-- inner category start here -->
+                  <tbody *ngIf="service.selectedTab === 3">
+                    <tr
+                      *ngFor="let inner of service.innerCategories; let i = index"
+                    >
+                      <td class="no-th" scope="row">{{'#' + (i + 1)}}</td>
+                      <td>
+                        {{inner?.data?.inner_category +' (Sub-ID:
+                        '+inner?.data?.sub_category_id+')'}}
+                      </td>
+                      <!-- <td>
+                                                {{inner?.data?.timestamp?.toDate()|date:'yyyy-MM-dd'}}</td> -->
+                      <td>
+                        <div style="display: flex">
+                          <div
+                            class="sm_megamenu_icon_image left-icon"
+                            [style]="
+                                                                    'height: 30px;width: 30px; margin-right: 10px;background: url(https://www.irankiai.lt/media/megamenu/megamenusprite.png?v=1652335906) no-repeat '+inner?.data?.icon+';'"
+                          ></div>
+                          <ion-input
+                            style="
+                              background: lightgray;
+                              --padding: 5px;
+                              margin-right: 10px;
+                              border-radius: 10px;
+                            "
+                            [(ngModel)]="inner.data.icon"
+                            placeholder="Insert icon text"
+                          ></ion-input>
+                          <ion-button mode="md" (click)="saveInnerIcon(inner)"
+                            >Save</ion-button
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <button
+                          (click)="openUpdateCategory(inner,3)"
+                          class="btn ctm-btn pro-btn btnNav"
+                        >
+                          <img
+                            class="remove_icon"
+                            src="./../../assets/img/settings-g.svg"
+                            alt="img"
+                          />
+                          Nustatymai
+                        </button>
+                        <br />
+
+                        <button
+                          (click)="askDeletePermission(inner,3)"
+                          class="btn ctm-btn d-btn btnNav"
+                        >
+                          <img
+                            class="remove_icon"
+                            src="./../../assets/img/delete.svg"
+                            alt="img"
+                          />
+                          Pašalinti
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

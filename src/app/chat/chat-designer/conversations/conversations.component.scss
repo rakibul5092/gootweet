@@ -1,0 +1,32 @@
+.designer-chat-cnt-scrl-all {
+  .consultations-all {
+  }
+}
+.minimized {
+  position: absolute;
+  top: 73px;
+  right: 14px;
+  z-index: 9999;
+  background-color: #31116e;
+  padding: 8px;
+  display: flex;
+}
+span.close-m {
+  position: absolute;
+  right: 15px;
+  top: 25px;
+}
+.back-btn {
+  color: #8a889d;
+  margin-right: 4px;
+  cursor: pointer;
+}
+.remove_icon {
+  position: absolute;
+  right: 6px;
+  top: 7px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10000;
+}

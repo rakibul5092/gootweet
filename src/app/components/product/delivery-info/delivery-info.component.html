@@ -1,0 +1,16 @@
+<ion-row style="height: 130px">
+  <ion-col class="info" *ngIf="deliveryType">
+    <ion-row [attr.centered]="centered" class="medium-text">Prękė sandėlyje
+      <span style="font-weight: bold; padding-left: 5px; color: blue;"> YRA</span>
+      <!-- <span class="text-danger">nera</span> -->
+    </ion-row>
+    <ion-row [attr.centered]="centered" class="medium-text">Pristatymas per {{('
+      '+(deliveryType?.delivery_info?.delivery_time)||1
+      +'d.d')}}</ion-row>
+    <ion-row [attr.centered]="centered" class="medium-text">Pristatymo kaina €{{(deliveryType?.delivery_info?.price||
+      0)}}</ion-row>
+    <ion-row [attr.centered]="centered" class="medium-text">Siuntimas į Lietuvą<div class="dot-container">
+        <div></div>
+      </div></ion-row>
+  </ion-col>
+</ion-row>

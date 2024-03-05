@@ -1,0 +1,262 @@
+@import "./../../../theme/mixins/mixins";
+
+.mobile-product {
+  width: 100%;
+  background-color: #fff;
+  border: solid 2px #bdbbc0;
+  margin-bottom: 9px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.button {
+  padding: 7px 15px;
+  background-color: #beb716;
+  color: #fff;
+}
+
+.pH15 {
+  padding: 0px 10px;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.red-text {
+  color: #f55207e0;
+}
+
+.black-text {
+  color: #000;
+}
+
+.gray-text {
+  color: rgb(90, 85, 85);
+}
+
+.large-text {
+  font-size: 20px;
+  font-weight: 800;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // line-height: 20px;
+}
+
+.medium-text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.regular-text {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 24px;
+  letter-spacing: 0px;
+}
+
+.pro-img {
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  padding: 5px;
+
+  .profile-info-container {
+    display: grid;
+
+    .name {
+      font-size: 16px;
+      font-weight: 600;
+      padding-bottom: 5px;
+      margin-left: 15px;
+      color: black;
+    }
+    .name:hover {
+      text-decoration: underline;
+      color: rgb(103, 103, 103);
+    }
+
+    .info-container {
+      display: flex;
+      margin-left: 10px;
+      justify-content: end;
+
+      .info {
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 16px;
+        color: #000000;
+      }
+
+      .flag {
+        width: 28px;
+        height: 23px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.product-img {
+  position: relative;
+}
+
+.quick-view-btn {
+  width: 115px;
+  font-size: 14px;
+  height: 30px;
+  background: #ffb800;
+  position: absolute;
+  right: 0px;
+  bottom: 40px;
+}
+
+.measures {
+  text-align: center;
+
+  div {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.02em;
+
+    /* Iris/100 */
+    color: #5d5fef;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 15px;
+  }
+}
+
+.product {
+  position: relative;
+  border-radius: 5px !important;
+  margin: 0px !important;
+  min-width: 240px;
+
+  .product-txt {
+    padding: 5px 10px 0;
+
+    &.designer-product-txt {
+      padding: 15px;
+    }
+
+    .product-tlt {
+      font-size: 14px !important;
+      font-weight: 700;
+      margin-bottom: 0px;
+      text-align: center;
+      line-height: 23px;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    :hover {
+      color: rgb(103, 103, 103);
+    }
+
+    .product-price {
+      padding: 0;
+      display: flex;
+      align-items: center;
+      // new add
+      width: calc(100% - 15px);
+      padding: 5px 5px 10px 5px;
+
+      &.designer-product-price {
+        position: static;
+        transform: unset;
+      }
+
+      .product-btn {
+        padding-left: 10px;
+        width: 100%;
+        text-align: right;
+
+        .share-btn {
+          @include padding-p-map($product-cart-btn-padding);
+          background: none;
+          color: #bea316;
+          font-weight: 600;
+          font-size: 14px;
+          padding: unset !important;
+
+          img {
+            width: 24px;
+          }
+        }
+
+        @media screen and (max-width: 1420px) {
+          @media screen and (min-width: 1380px) {
+            .share-btn {
+              font-size: 12px;
+              img {
+                width: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .review-pro {
+    position: absolute;
+    z-index: 9;
+    top: 15px;
+    left: 15px;
+    width: max-content;
+
+    .pro-img {
+      width: 41px;
+      height: 41px;
+      box-shadow: none;
+      border: none;
+    }
+  }
+
+  .product-img-p {
+    height: 250px;
+  }
+
+  .thd-img {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 9;
+  }
+
+  .old-price {
+    font-size: 15px;
+    color: #95949f;
+    font-weight: 400;
+    margin-right: 5px;
+
+    .old-money {
+      position: relative;
+      margin-left: 1px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: #95949f;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        transform: rotate(160deg);
+      }
+    }
+  }
+}

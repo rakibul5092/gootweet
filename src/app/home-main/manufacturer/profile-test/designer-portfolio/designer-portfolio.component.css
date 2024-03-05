@@ -1,0 +1,51 @@
+.portfolio-cnt .portfolio-tlt .count-porf {
+  color: #6a6975;
+}
+
+.portfolio-cnt .portfolio-tlt .cart-btn {
+  padding: 0 20px;
+  margin-left: 30px;
+  font-size: 15px;
+}
+
+.portfolio-cnt .pro-btn {
+  padding: 3px 50px;
+}
+
+.portfolio-cnt .blog {
+  position: relative;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.portfolio-cnt .blog .portfolio-img {
+  position: relative;
+}
+
+.portfolio-cnt .blog .portfolio-img .more-img-show {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  left: 0;
+}
+
+.portfolio-cnt .blog .reviews-delet-i {
+  right: -16px;
+  top: -16px;
+  background: #c6c7d4;
+  height: 33px;
+  width: 33px;
+}
+
+.portfolio-cnt .blog .reviews-delet-i img {
+  width: 14px;
+}
+/*# sourceMappingURL=designer-portfolio.component.css.map */

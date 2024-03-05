@@ -1,0 +1,27 @@
+<ion-content>
+	<ion-progress-bar style="height: 2px;" *ngIf="manufacturerService.loading" type="indeterminate"></ion-progress-bar>
+	<div class="main-wrapper">
+		<div class="designer-section mp-0">
+			<div class="row m-0">
+				<div class="designer-body-cnt col-12">
+					<div class="d-manufacturer-cnt pt-0 pt-md-3">
+						<div class="tlt manufacturer-tlt d-none d-md-block">Mano atstovaujami gamintojai</div>
+
+						<div class="blog-cnt px-3 px-md-0">
+
+							<div *ngIf="me" class="row mr-0">
+								<app-manufacturer class="col-12 col-sm-6 col-lg-4 mbc-col pr-0"
+									*ngFor="let item of manufacturerService.manufacturers" [manufacturer]="item"
+									[myUid]="me.uid" (gotoProfileEvent)="gotoProfile(item)"
+									(onRequestEvent)="askRequest($event)">
+								</app-manufacturer>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,47 @@
+@import "src/app/components/product/product.component.scss";
+.price-input {
+  .form-group {
+    .form-input {
+      .form-control {
+        padding: 0 10px 0 30px;
+      }
+    }
+  }
+}
+.search-cat {
+  @include width-p-map($search-cat-width);
+}
+.r-ar {
+  position: absolute;
+  right: -10px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  color: #a3a3a3;
+  font-weight: 400;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+.input-group-txt1 {
+  position: absolute;
+  top: 47%;
+  color: #6a7bff;
+  font-size: 17px;
+  left: 23px;
+  transform: translateY(-50%);
+  font-weight: 700;
+}
+.input-group-txt2 {
+  position: absolute;
+  top: 47%;
+  color: #6a7bff;
+  font-size: 17px;
+  left: 22px;
+  transform: translateY(-50%);
+  font-weight: 700;
+}

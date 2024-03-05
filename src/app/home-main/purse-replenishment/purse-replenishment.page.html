@@ -1,0 +1,86 @@
+<ion-content>
+  <div class="main-wrapper ">
+    <div class="back-li mobile-back d-block d-md-none p-3">
+      <span class="T_underLine" style="display: inline-flex;align-items:center" routerLink="/">
+        <ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+      </span>
+    </div>
+    <section class="purse-section advertisement-section advertisement-section-2">
+      <div class="advertisement-cnt mp-0">
+        <div class="advertisement-4-cnt">
+          <div (click)="back()" class="back-li d-none d-md-inline-block T_underLine"
+            style="display: inline-flex;align-items:center">
+            <ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti į piniginę
+          </div>
+          <div class="row m-0">
+            <div class="col-12 col-lg-6 p-0">
+              <div class="point-gift-cnt upload-post form-cnt border-0 d-flex align-items-center h-100">
+                <div class="">
+                  <div class="tlt upload-post-tlt">Iškelkite savo įrašą</div>
+                  <div class="row mx-0 align-items-center">
+                    <div class="col-12 pl-0">
+                      <label class="mb-0">
+                        <h6>Įveskite norimą papildymo sumą</h6>
+                      </label>
+                    </div>
+                    <div class="col-12 col-md-6 pl-0 form-group">
+                      <div class="form-input">
+                        <span class="input-group-txt" style="z-index: 999;">€</span>
+                        <ion-input type="number" (ionChange)="onAmountChange()" style="--padding-start:25px"
+                          [(ngModel)]="amount" name="point" id="point" class="form-control point-input textIn"
+                          placeholder="Amount"></ion-input>
+                        <ion-label *ngIf="amount && amount<5" style="color: red;font-size: 10px;font-weight: bold;">
+                          Minimum
+                          topup 5€</ion-label>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 form-group">
+                      <button [disabled]="!me || !wallet || !amount || amount<5 || disabled" (click)="topUp()"
+                        class="btn ctm-btn d-btn btnNav">
+                        Patvirtinti
+                      </button>
+                    </div>
+                  </div>
+                  <div class="post-seen-txt">
+                    <div class="pro-cnt">
+                      <div class="pro-img">
+                        <img class="cover" [src]="me?.profile_photo|sanitizeImage:'150_150_'" alt="img" />
+                      </div>
+                      <div class="pro-name-link">
+                        <div *ngIf="me" class="pro-name">
+                          {{me?.full_name|join_name }}
+                          <span class="ar-ri">
+                            <ion-icon name="chevron-forward"></ion-icon>
+                          </span>
+                          <span *ngIf="wallet" class="purse-price">{{(wallet.balance).toFixed(2) +' tšk.'}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 p-0">
+              <div class="wallet-history-cnt form-cnt border-0 d-flex align-items-center">
+                <div class="w-100">
+                  <div class="wallet-tlt">Pasirinkite mokėjimo būdą</div>
+                  <div class="wallet-history-list">
+                    <div class="payment-list">
+                      <div class="payment dgSidemenu">
+                        <img src="./../../assets/img/credit-card.svg" alt="img" />Paysera Bankas
+                        <span class="ar-ri float-right">
+                          <ion-icon name="chevron-forward"></ion-icon>
+                        </span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

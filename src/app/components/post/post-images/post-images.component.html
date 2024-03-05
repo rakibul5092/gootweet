@@ -1,0 +1,116 @@
+<!-- <app-cover-video *ngIf="wallPost?.data?.coverVideo && wallPost?.data?.coverVideo != ''" [id]="wallPost.id"
+  [isLive]="wallPost?.data?.isLiveVideo"
+  [url]="(wallPost?.data?.isLiveVideo? live_video_base:wall_post_video_base) + wallPost?.data?.coverVideo"></app-cover-video>
+<app-cover-image *ngIf="wallPost?.data?.coverImage && wallPost?.data?.coverImage != ''"
+  (openPhotoEvent)="openPhoto($event)" [id]="'cover-image' + wallPost.id" [default]="default"
+  [url]="wallPost?.data?.coverImage | getWallPostCoverImage"></app-cover-image> -->
+
+
+<div [id]="'image-' + wallId" class="product-show product-show-one" *ngIf="files?.length>0">
+  <div *ngIf="files.length<3; else layouts" class="row m-0">
+    <div *ngFor="let file of files | slice: 0:6; let i = index" [class]="
+        length == 1
+          ? 'col-12 p-0'
+          : length == 2
+          ? 'col-6 p-0'
+          : 'col-6 col-lg-4 p-0'
+      ">
+      <div class="show-img-p">
+        <div class="show-img wh-100"
+          [style]="files.length===1 && screen.width.value>1100 ?'max-height:666.666px':'max-height:none'">
+          <div (click)="openLive()" *ngIf="liveVideo; else otherPlayOptions" class="w-100 imgHovr position-relative">
+            <img class="w-100" style="filter: opacity(0.7);"
+              [src]="wallPost.data.files[0].thumbnail|cloudinaryThumb:'image'" />
+            <ion-icon class="play-icon" name="play"></ion-icon>
+            <div class="live-indicator-block">
+              <span class="live-indicator">
+                <ion-icon class="blink" aria-hidden="true" name="radio-button-on"></ion-icon>Live
+              </span>
+            </div>
+          </div>
+          <ng-template #otherPlayOptions>
+            <app-file [wallId]="wallId" [isLiveVideo]="wallPost.data.liveStatus === 2" [class]="'cover w-100 imgHovr'"
+              [file]="file"></app-file>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #layouts>
+    <ng-container [ngSwitch]="layout">
+      <!--************************************** three image tab ******************************************-->
+      <div *ngSwitchCase="1" class="product-show product-show-one">
+        <div class="row m-0">
+          <div *ngFor="let file of files|slice:0:3; let i = index" [class]="i===0? 'col-12 p-0': 'col-6 p-0'">
+            <div [class]="'show-img-p h-100 '+(i===0?'bm': i===1?'rm':'')">
+              <div class="show-img wh-100">
+                <app-file [wallId]="wallId" [file]="file"></app-file>
+                <div *ngIf="files.length>3 && i === 2" class="img-extra">
+                  +{{files.length-3}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--************************************** Four image tab here *********************************** -->
+      <div *ngSwitchCase="2" class="product-show product-show-one">
+        <div class="row m-0">
+          <div *ngFor="let file of files|slice:0:4; let i = index" class=" col-6 p-0">
+            <div [class]="'show-img-p h-100 ' +(i===0?'bm rm': i===1?'bm':i===2?'rm':'')">
+              <div class="show-img wh-100">
+                <app-file [wallId]="wallId" [file]="file"></app-file>
+                <div *ngIf="files.length>4 && i === 3" class="img-extra">
+                  +{{files.length-4}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--************************************** Five image tab here *********************************** -->
+      <div *ngSwitchCase="3" class="product-show product-show-two">
+        <div class="row m-0">
+          <div *ngFor="let file of files|slice:0:4; let i = index" [class]="i === 0? 'col-12 p-0':'col-4 p-0'">
+            <div [class]="'show-img-p h-100 '+(i===0?'bm': i===1?'rm':i===2?'rm':'')">
+              <div class="show-img wh-100">
+                <app-file [wallId]="wallId" [file]="file"></app-file>
+                <div *ngIf="files.length>4 && i === 3" class="img-extra">
+                  +{{files.length-4}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--************************************** Six and more image tab here *********************************** -->
+      <div *ngSwitchCase="4" class="product-show product-show-three">
+        <div class="row m-0">
+          <div *ngFor="let file of files|slice:0:5;let i = index" [class]="i<2? 'col-6 p-0':'col-4 p-0'">
+            <div [class]="'show-img-p h-100 '+(i===0?'bm rm': i===1?'bm':i===2?'rm':i===3?'rm':'')">
+              <div class="show-img wh-100">
+                <app-file [wallId]="wallId" [file]="file"></app-file>
+                <div *ngIf="files.length>5 && i === 4" class="img-extra">
+                  +{{files.length-5}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--************************************** Six and more image tab here *********************************** -->
+      <div *ngSwitchCase="5" class="product-show product-show-three">
+        <div class="row m-0">
+          <div class="col-6 p-0" style="max-height: 500px">
+            <div *ngFor="let file of files|slice:0:2;" class="h-50 rm bm">
+              <app-file [wallId]="wallId" [file]="file"></app-file>
+            </div>
+          </div>
+          <div class="col-6 p-0" style="max-height: 500px;">
+            <div *ngFor="let file of [files[2],files[3],files[4]];let i = index" class="h-33 bm relative">
+              <app-file [wallId]="wallId" [file]="file"></app-file>
+              <div *ngIf="files.length>5 && i === 2" class="img-extra">
+                +{{files.length-5}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

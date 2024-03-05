@@ -1,0 +1,141 @@
+<div class="modal fade blog-modal d-block" style="opacity: 1" id="blog_modal" tabindex="-1" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered p-0 wh-100 m-0">
+    <div class="modal-content h-100">
+      <div class="modal-body p-0 h-100">
+
+        <span (click)="close()" class="close-modal T_underLine">
+          <ion-icon name="arrow-back-outline"></ion-icon> Grįžti
+        </span>
+        <section class="products-section p-0 h-100">
+          <div [class]="screen.width.value<768? 'm-0 h-100 main-container': 'row m-0 h-100 main-container'">
+            <div class="col-12 column-left pl-0">
+              <div class="left-side-bar">
+                <div class="left-side-cnt filter-cnt h-100">
+                  <h4 class="ul-tlt">Katalogo filtravimas</h4>
+                  <div class="form-cnt p-0 border-0" style="align-items: flex-start;">
+                    <form method="post" action="" class="w-100">
+                      <div>
+                        <div class="form-group">
+                          <ion-row>
+                            <ion-col size="10">
+                              <div class="form-input">
+                                <span (click)="onSearchByKeyword($event, page, searchText, 'call')"
+                                  class="input-group-txt" style="z-index: 10;cursor: pointer;"><img
+                                    src="./../../assets/img/search.svg" alt="img" /></span>
+                                <input type="text" name="search" [(ngModel)]="searchText" debounce="500" id="search"
+                                  class="form-control search-input searchIn" placeholder="Įveskite frazę" />
+                                <span *ngIf="searchText.length > 0" (click)="clearText()" class="close-txt remove_icon"
+                                  style="right: 10px;padding: 2px;"><img src="./../../assets/img/close.svg"
+                                    alt="img" /></span>
+
+                              </div>
+                            </ion-col>
+                            <ion-col size="2">
+                              <ion-button mode="md" color="success"
+                                (click)="onSearchByKeyword($event, page, searchText, 'call')">Go
+                              </ion-button>
+                            </ion-col>
+                          </ion-row>
+
+
+                        </div>
+                        <div class="form-group d-none">
+                          <label>
+                            <h6 class="">Kategorijos</h6>
+                          </label>
+
+                          <div class="cat-ul">
+                            <div [class]="category.isSelected ? 'cat-li active':'cat-li'"
+                              *ngFor="let category of advanceSearchService.categoriesForShow">
+                              <div class="form-input">
+                                <label class="ctm-container cat-li-ch">
+                                  {{category?.category}}
+                                  <input
+                                    (click)="onSelectCategoryOrSubCategory($event, category?.category, category?.category_id , null, 'call')"
+                                    type="checkbox" />
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 column-mid p-0">
+              <div class="products-list-cnt">
+
+                <div class="product-list">
+                  <ion-content>
+                    <!-- ******************* products start here ************************ -->
+                    <div class="row m-0" *ngIf="type == 'load_products' || type == 'category_filter'">
+                      <div class="col-6 col-lg-3 p-1" *ngFor="let product of products; let i = index">
+                        <div (click)="checkProduct(product)"
+                          [class]="product.isSelected? 'products-single product active':'product products-single'">
+                          <div class="products-img-txt d-block">
+                            <div class="product-img-p">
+                              <div class="product-img wh-100">
+                                <img class="img-center imgHovr" [defaultImage]="default"
+                                  [lazyLoad]="product.main_images[0] | getSingleImage" alt="img" />
+                              </div>
+                            </div>
+                            <div class="products-txt-all">
+                              <div class="products-txt w-100 d-flex">
+                                <div class="products-tlt">{{product.title}}</div>
+                                <div class="products-price">
+                                  <div class="products-price-tlt">Kaina</div>
+                                  <div class="products-price">
+                                    {{product?.good|getPrice}}<span class="price-t"><sup></sup></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ******************* search products start here ************************ -->
+                    <span *ngIf="type == 'load_products' ">
+                      <ion-infinite-scroll threshold="15%" (ionInfinite)="loadProducts($event)">
+                        <ion-infinite-scroll-content>
+
+                        </ion-infinite-scroll-content>
+                      </ion-infinite-scroll>
+                    </span>
+                    <span *ngIf="type == 'category_filter' ">
+                      <ion-infinite-scroll threshold="15%"
+                        (ionInfinite)="onSelectCategoryOrSubCategory($event, category.data.category, category.id, null, 'scroll')">
+                        <ion-infinite-scroll-content>
+
+                        </ion-infinite-scroll-content>
+                      </ion-infinite-scroll>
+                    </span>
+                    <span *ngIf="type == 'product_title' ">
+                      <ion-infinite-scroll threshold="15%"
+                        (ionInfinite)="onSearchByKeyword($event, page+1, searchText, 'scroll')">
+                        <ion-infinite-scroll-content>
+
+                        </ion-infinite-scroll-content>
+                      </ion-infinite-scroll>
+                    </span>
+                  </ion-content>
+                </div>
+                <div class="selected-btn">
+                  <button (click)="dismiss()" class="btn ctm-btn cart-btn btn_six_ten">
+                    <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+                    {{'Priskirti pažymėtas prekes ('+selectedProducts.length+')'}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

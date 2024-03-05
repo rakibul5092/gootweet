@@ -1,0 +1,78 @@
+<ion-header [class]="(screen.fullScreen | async)===true? 'd-none':''" id="ionHeader" mode="ios" [translucent]="false">
+  <div class="header-container d-flex w-100" *ngIf="screen.width.value>1100;else mobileHeader">
+    <div class="search-container pl-4 d-flex align-items-center">
+      <div (click)="navigateRoot()" class="logo multi-colored-text pt-2 ">Goo<span>Tweet</span></div>
+      <app-search-box style="flex-grow: 100;" class="h-100"></app-search-box>
+    </div>
+    <main ontouchstart class="d-flex justify-content-start">
+      <nav class="tab-link">
+        <a class="menu-item" data-toggle="tooltip" data-placement="bottom" title="Namai"
+          (click)="menuService.onMenuBarClick(0)"><ion-icon src="assets/img/home.svg"></ion-icon></a>
+        <a data-toggle="tooltip" data-placement="bottom" class="menu-item" title="Vaizdo įrašai"
+          (click)="menuService.onMenuBarClick(1)"><ion-icon src="assets/img/video.svg"></ion-icon></a>
+        <a data-toggle="tooltip" data-placement="bottom" class="menu-item" title="Prekių katalogas"
+          (click)="menuService.onMenuBarClick(2)"><ion-icon src="assets/img/products.svg"></ion-icon></a>
+        <a data-toggle="tooltip" data-placement="bottom" class="menu-item" title="Trumpi reel'sai"
+          (click)="menuService.onMenuBarClick(3)"><ion-icon src="assets/img/reels.svg"></ion-icon></a>
+        <div></div>
+        <hr />
+      </nav>
+    </main>
+    <ul class="navbar-nav justify-content-center flex-row">
+      <li *ngIf="isLoggedIn && me?.rule == 'designer'" class="nav-item d-none d-md-inline-block"
+        style="padding-right: 15px"
+        [ngClass]="getCurrentRoute() == '/designer-manufacturer-alphabetically' ? 'active' : ''">
+        <a class="nav-link" title="Mano gamintojai" href="javascript:void(0)"
+          (click)="navigate('designer/designer-manufacturer-alphabetically', 'forward')">
+          <span class="noti navNoti p-0">
+            <ion-icon name="people" style="font-size: 24px"></ion-icon>
+          </span>
+        </a>
+      </li>
+      <!-- Mobile top -->
+      <li class="nav-item h-100 d-flex justify-content-center align-items-center mr-3">
+        <app-notifcation-item [unseenNotificationCount]="newNotification" *ngIf="screenWidth>767"
+          [me]="me"></app-notifcation-item>
+        <span *ngIf="me?.rule != 'designer'" (click)=" openChat($event)"
+          [class]="headerService.isMessenger?  'noti active':'noti'" id="navNoti-chat">
+          <span class="noti-i">
+            <img [class]="headerService.isMessenger? 'active-i':'inactive-i' " src="assets/img/chat-outline.svg"
+              alt="img" id="icon_h" />
+            <span *ngIf="newMessageCount!==0" class="n-count">{{newMessageCount}}</span>
+          </span>
+        </span>
+        <app-cart-item *ngIf="screenWidth>767" [me]="me"></app-cart-item>
+      </li>
+    </ul>
+
+  </div>
+  <ng-template #mobileHeader>
+    <div class="header-container d-flex justify-content-between p-1 align-items-center">
+      <div class="menu-icon" (click)="openMenu()">
+        <ng-container>
+          <app-profile-photo [disabled]="true" [user]="me" [size]="35"></app-profile-photo>
+          <ion-icon name="menu"></ion-icon>
+        </ng-container>
+      </div>
+      <div class="search-input">
+        <app-search-box *ngIf="(headerService.showSearchBar|async)=== true; else logo"
+          [inHeader]="true"></app-search-box>
+        <ng-template #logo>
+          <img src="assets/img/goo-logo.svg" alt="">
+
+        </ng-template>
+      </div>
+      <ion-buttons class="right-buttons d-flex" mode="ios">
+        <ion-button *ngIf="(headerService.showSearchBar|async)===false" (click)="headerService.showSearchBar.next(true)"
+          slot="icon-only">
+          <ion-icon src="assets/img/search.svg"></ion-icon>
+        </ion-button>
+        <ion-button (click)="openChat($event)" slot="icon-only">
+          <ion-icon src="assets/img/chat-outline.svg"></ion-icon>
+          <span *ngIf="newMessageCount!==0" class="n-count">{{newMessageCount}}</span>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ng-template>
+
+</ion-header>

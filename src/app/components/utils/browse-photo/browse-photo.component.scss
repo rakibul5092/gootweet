@@ -1,0 +1,38 @@
+.upload-img {
+    position: absolute;
+    font-size: 10px;
+    cursor: pointer;
+    z-index: 9;
+    display: flex;
+    color: #000;
+    background: #efefef;
+    height: 35px;
+    text-align: center;
+    width: 35px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    input[type="file"] {
+      cursor: pointer;
+      position: absolute;
+      left: 0;
+      height: 100%;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+    }
+    span{
+        .changePro{
+         height: 35px;
+         width: 35px;  
+         cursor: pointer; 
+         object-fit: unset;
+        }:hover {
+            transform: scale(1.05, 1.05);
+            transition: 200ms ease-in-out;
+          }
+    }
+    
+  }

@@ -1,0 +1,21 @@
+<div class="color-size-container form-group">
+  <label>
+    <h6 class="">Dydziai</h6>
+  </label>
+  <div class="selector">
+    <select class="custom-select" [(ngModel)]="size" (change)="addSize(size)">
+      <option *ngFor="let size of sizes" [value]="size.name">
+        {{size.name}}
+      </option>
+    </select>
+    <ion-button mode="md" (click)="addProductService.addToCollection(false, [], sizes, ownerUid)"
+      color="success"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+  </div>
+
+  <div class="selected-colors">
+    <ion-buttons>
+      <ion-button (click)="removeSize(i)" *ngFor="let size of normalGood.sizes; let i = index">{{size}}<ion-icon
+          name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </div>
+</div>

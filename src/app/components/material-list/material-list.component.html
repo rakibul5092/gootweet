@@ -1,0 +1,13 @@
+<div class="catalog-cnt border-0 p-0 m-0">
+  <div class="catalog-ul">
+    <span *ngIf="good | isArray" [style]="isProductDetails?'display: flex; overflow-x: auto':'margin-top: 5px'">
+      <span class="catalog-li" (click)="onSelectMaterial(material)"
+        *ngFor="let material of (slice? (good | slice: 0:4):good); let i = index">
+        <div class="cat-div">
+          <img [style]="isProductDetails? 'min-height: 56px; min-width: 56px':''" [defaultImage]="default"
+            [lazyLoad]="material.images | getMaterialImage" alt="" />
+        </div>
+      </span>
+    </span>
+  </div>
+</div>

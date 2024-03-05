@@ -1,0 +1,491 @@
+<!-- for mobile -->
+<div class="manufacturer-tab d-block d-md-none">
+    <button (click)="openFilterPopup()" class="btn ctm-btn pro-btn w-100">
+        Katalogo filtravimas
+    </button>
+    <button routerLink="/insert" class="btn ctm-btn cart-btn w-100 btnNav">
+        <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+        Pridėti prekę
+    </button>
+</div>
+<div class="text-center d-block d-md-none mb-3">
+    <button class="btn ctm-btn d-btn">Veiksmai su pažymėtais (2)</button>
+</div>
+<!-- for mobile -->
+
+<section class="products-section pb-5 mp-0">
+    <div class="row m-0" style="padding-top: 68px;">
+        <div class="col-12 column-left pl-0 d-none d-md-block">
+            <div class="left-side-bar">
+                <div class="left-side-cnt">
+                    <div class="loading-btn">
+                        <h4 class="ul-tlt">Prekių įkėlimas</h4>
+                        <button routerLink="/insert" class="btn ctm-btn cart-btn w-100 btnNav">
+                            <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+                            Pridėti prekę
+                        </button>
+                    </div>
+                    <div class="importation-btn">
+                        <h4 class="ul-tlt">Prekių įkėlimo API</h4>
+                        <button (click)="openApiInstructions()" class="btn ctm-btn pro-btn w-100 btnNav">
+                            API surišimas
+                        </button>
+                    </div>
+                </div>
+                <div class="left-side-cnt filter-cnt">
+                    <h4 class="ul-tlt">Katalogo filtravimas</h4>
+                    <div class="form-cnt p-0 border-0">
+                        <form method="post" action="">
+                            <div>
+                                <div class="form-group">
+                                    <div class="form-input">
+                                        <span class="input-group-txt"><img src="./../../assets/img/search.svg"
+                                                alt="img" /></span>
+
+                                        <!-- <input type="text" /> -->
+                                        <ion-input name="search" id="search" class="form-control search-input"
+                                            placeholder="Įveskite frazę" style="--padding-start: 40px"
+                                            [(ngModel)]="service.searchText"
+                                            (ionChange)="service.onSearchByKeyword(service.searchText, 0, $event,'call')"
+                                            debounce="1000" type="text"></ion-input>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <h6 class="">Kategorijos</h6>
+                                    </label>
+                                    <div class="cat-ul">
+                                        <div *ngFor="let cat of categories" class="cat-li active">
+                                            <div class="form-input" *ngIf="cat?.products?.length>0">
+                                                <label class="ctm-container cat-li-ch">
+                                                    {{cat?.category}}
+                                                    <input type="checkbox"
+                                                        [checked]="service.categoryName != '' && service.categoryName == cat?.category"
+                                                        (click)="service.filterWithCategory(cat.category, $event)" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="cat-list pt-0">
+                    <span class="cat-l">Privatumo politika</span>
+                    <span class="cat-l">Taisyklės Kontaktai</span>
+                    <span class="cat-l">Pranešti klaidą</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 column-mid p-0">
+            <div *ngIf="service.activeType != 'search'">
+                <div class="products-list-cnt">
+                    <!-- <div *ngIf="category?.products?.length>0" class="commission-cnt table-commission-cnt form-cnt">
+              <div class="tlt">{{category?.category}}</div>
+              <div class="commission-input">
+                <div class="form-group mb-0">
+                  <span class="form-group-input form-group-input1 m-border-0">
+                    <label>Komisinis</label>
+                    <span class="form-input">
+                      <span class="input-group-txt">%</span>
+                      <input name="commission" [value]="category.commission?.commission || 5"
+                        (change)="changeCommission($event)" type="number" min="5" class="form-control email-input textIn"
+                        placeholder="" />
+                    </span>
+                    <button (click)="saveCommission(category)" class="btn ctm-btn cart-btn btnNav">
+                      Keisti
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div> -->
+
+                    <div class="row mr-0">
+                        <div class="col-12 col-lg-4 pr-0" *ngFor="let product of pageS.data | async; let i = index">
+                            <app-product [product]="product" (onCopyMessageEvent)="copyMessage(me.uid,$event)"
+                                (onProductOpenEvent)="openProduct($event, product, me)"
+                                (onDeletePermissionEvent)="askPermissionForDelete(i)"
+                                (onOpenSettingEvent)="openSetting(product.id)">
+                            </app-product>
+                        </div>
+
+                        <!-- <div *ngFor="let product of category.products; let j = index" class="col-12 col-lg-4 pr-0 d-none"> -->
+                        <!-- <div *ngIf="j < 5" class="products-single active m-border-0 m-radius-0">
+                  <div class="products-img-txt">
+                    <span class="products-check">
+                      <label class="ctm-container">
+                        <input type="checkbox" />
+                        <span class="checkmark likeDislike"></span>
+                      </label>
+                    </span>
+                    <div class="products-img">
+                      <img class="img" [src]="product?.main_images|getImage" />
+                    </div>
+  
+                    <div class="products-txt">
+                      <div class="products-tlt">
+                        {{product?.title |shorten:14:'...'}}
+                      </div>
+                      <div class="products-id-c">
+                        <span class="products-id">{{'ID: ' + product.product_id}}</span>
+                        <span class="products-count-txt">Sandėlys
+                          <span class="count-num">{{product?.good | getStock}}</span></span>
+                      </div>
+                      <div class="products-price">
+                        <div class="products-price-tlt">Kaina</div>
+                        <div class="products-price">
+                          {{product?.good|getPrice}}<span class="price-t">{{product?.good|getUnit}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="catalog-cnt">
+                    <div class="catalog-ul">
+                      <div class="pro-m-slider">
+                        <span *ngIf="(product.good|isArray)">
+                          <span class="catalog-li" *ngFor="let material of product.good | slice:0:4; let i = index">
+                            <div class="col-12 p-0 cat-div">
+                              <img [src]="material.images | getMaterialImage" alt="" style="width: 25px; height: 25px" />
+                            </div>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="products-btn">
+                    <button (click)="copyMessage(me.uid,product.id)" class="btn ctm-btn pro-btn btnHovr">
+                      <img class="" style="margin-left: 5px" style="margin-left: 5px" src="./../../assets/img/chat-b.svg"
+                        alt="img" />
+                      Chat kodas<img class="" style="margin-left: 5px" src="./../../assets/img/copy.svg" alt="img" />
+                    </button>
+                    <span (click)="openSingleProductService.openSingleProduct(product, me)">
+                      <img class="info-img remove_icon" src="./../../assets/img/info.svg" alt="img" />
+                    </span>
+                    <button (click)="askPermissionForDelete(product?.id, i, j, product)"
+                      class="btn ctm-btn pro-btn delete-btn">
+                      <img class="m-0 remove_icon" src="./../../assets/img/delete-w.svg" alt="img" />
+                    </button>
+                    <button (click)="openSetting(product?.id)" class="btn ctm-btn pro-btn setting-btn">
+                      <img class="m-0 remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+                    </button>
+                  </div>
+                </div> -->
+                        <!-- <div *ngIf="j == 5" class="more-div m-radius-0 m-border-0">
+                  <button class="btn ctm-btn cart-btn" (click)="showMoreProducts(category.id)">
+                    More
+                  </button>
+                </div> -->
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!--========For Filter========-->
+            <div *ngIf="service.isFilter && !service.isMoreProduct">
+                <div class="products-list-cnt" *ngFor="let category of categories; let i=index">
+                    <div *ngIf="category?.products?.length>0 && service.categoryName == category.category"
+                        class="commission-cnt table-commission-cnt form-cnt">
+                        <div class="tlt">{{category?.category}}</div>
+                        <div class="commission-input">
+                            <div class="form-group mb-0">
+                                <span class="form-group-input form-group-input1 m-border-0">
+                                    <label>Komisinis</label>
+                                    <span class="form-input">
+                                        <span class="input-group-txt">%</span>
+                                        <input name="commission" [value]="category.commission?.commission || 5"
+                                            (change)="changeCommission($event)" type="number" min="5"
+                                            class="form-control email-input textIn" placeholder="" />
+                                    </span>
+                                    <button (click)="saveCommission(category)" class="btn ctm-btn cart-btn btnNav">
+                                        Keisti
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mr-0"
+                        *ngIf="category?.products?.length>0 && service.categoryName == category.category">
+                        <!-- <app-product class="col-12 col-lg-4 pr-0"
+                              *ngFor="let product of category.products; let j = index" [i]="i" [j]="j"
+                              [showMoreBtn]="true" [c_id]="category.id" [product]="product"
+                              (onCopyMessageEvent)="copyMessage(me.uid,$event)"
+                              (onProductOpenEvent)="openProduct($event, me)"
+                              (onDeletePermissionEvent)="askPermissionForDelete($event)"
+                              (onOpenSettingEvent)="openSetting($event)" (onShowMoreEvent)="$event"></app-product> -->
+                        <div *ngFor="let product of category.products; let j = index" class="col-12 col-lg-4 pr-0">
+                            <div *ngIf="j < 5" class="products-single active m-border-0 m-radius-0">
+                                <div class="products-img-txt">
+                                    <span class="products-check">
+                                        <label class="ctm-container">
+                                            <input type="checkbox" />
+                                            <span class="checkmark likeDislike"></span>
+                                        </label>
+                                    </span>
+                                    <div class="products-img">
+                                        <img class="cover" [src]="product?.main_images|getImage" />
+                                    </div>
+
+                                    <div class="products-txt">
+                                        <div class="products-tlt">
+                                            {{product?.title |shorten:14:'...'}}
+                                        </div>
+                                        <div class="products-id-c">
+                                            <span class="products-id">{{'ID: ' + product.product_id}}</span>
+                                            <span class="products-count-txt">Sandėlys
+                                                <span class="count-num">{{product?.good | getStock}}</span></span>
+                                        </div>
+                                        <div class="products-price">
+                                            <div class="products-price-tlt">Kaina</div>
+                                            <div class="products-price">
+                                                {{product?.good|getPrice}}<span
+                                                    class="price-t">{{product?.good|getUnit}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="catalog-cnt">
+                                    <div class="catalog-ul">
+                                        <div class="pro-m-slider">
+                                            <span *ngIf="(product.good|isArray)">
+                                                <span class="catalog-li"
+                                                    *ngFor="let material of product.good | slice:0:4; let i = index">
+                                                    <div class="col-12 p-0 cat-div">
+                                                        <img [src]="material.images | getMaterialImage" alt=""
+                                                            style="width: 25px; height: 25px" />
+                                                    </div>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="products-btn">
+                                    <button (click)="copyMessage(me.uid,product.id)"
+                                        class="btn ctm-btn pro-btn btnHovr">
+                                        <img class="" style="margin-left: 5px" style="margin-left: 5px"
+                                            src="./../../assets/img/chat-b.svg" alt="img" />
+                                        Chat kodas<img class="" style="margin-left: 5px"
+                                            src="./../../assets/img/copy.svg" alt="img" />
+                                    </button>
+                                    <span (click)="openSingleProductService.openSingleProduct(product, me)">
+                                        <img class="info-img remove_icon" src="./../../assets/img/info.svg" alt="img" />
+                                    </span>
+                                    <button (click)="askPermissionForDelete(product?.id, i, j, product)"
+                                        class="btn ctm-btn pro-btn delete-btn">
+                                        <img class="m-0 remove_icon" src="./../../assets/img/delete-w.svg" alt="img" />
+                                    </button>
+                                    <button (click)="openSetting(product?.id)" class="btn ctm-btn pro-btn setting-btn">
+                                        <img class="m-0 remove_icon" src="./../../assets/img/settings-g.svg"
+                                            alt="img" />
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="j == 5" class="more-div m-radius-0 m-border-0">
+                  <button class="btn ctm-btn cart-btn" (click)="showMoreProducts(category.id)">
+                    More
+                  </button>
+                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--========For Filter End========-->
+
+            <!--====FOR MORE START====-->
+            <div *ngIf="service.isMoreProduct && !service.isFilter">
+                <div (click)="back()" class="back-li T_underLine mb-3"
+                    style="display: inline-flex; align-items: center">
+                    <ion-icon name="chevron-back" style="font-size: 17px"></ion-icon>
+                    Sugrįžti
+                </div>
+                <div class="products-list-cnt" *ngFor="let category of categories; let i=index">
+                    <div *ngIf="selectedCategoryId == category.id" class="commission-cnt table-commission-cnt form-cnt">
+                        <div class="tlt">{{category?.category}}</div>
+                        <div class="commission-input">
+                            <div class="form-group mb-0">
+                                <span class="form-group-input form-group-input1 m-border-0">
+                                    <label>Komisinis</label>
+                                    <span class="form-input">
+                                        <span class="input-group-txt">%</span>
+                                        <input name="commission" [value]="category.commission?.commission || 5"
+                                            (change)="changeCommission($event)" type="number" min="5"
+                                            class="form-control email-input textIn" placeholder="" />
+                                    </span>
+                                    <button (click)="saveCommission(category)" class="btn ctm-btn cart-btn btnNav">
+                                        Keisti
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mr-0" *ngIf="selectedCategoryId == category.id">
+                        <!-- <app-product class="col-12 col-lg-4 pr-0" *ngFor="let product of moreProducts; let j = index"
+                              [i]="i" [j]="j" [showMoreBtn]="false" [c_id]="category.id" [product]="product"
+                              (onCopyMessageEvent)="copyMessage(me.uid,$event)"
+                              (onProductOpenEvent)="openProduct($event, me)"
+                              (onDeletePermissionEvent)="askPermissionForDelete($event)"
+                              (onOpenSettingEvent)="openSetting($event)" (onShowMoreEvent)="$event"></app-product> -->
+                        <div *ngFor="let product of moreProducts; let j = index" class="col-12 col-lg-4 pr-0">
+                            <div class="products-single active m-border-0 m-radius-0">
+                                <div class="products-img-txt">
+                                    <span class="products-check">
+                                        <label class="ctm-container">
+                                            <input type="checkbox" />
+                                            <span class="checkmark likeDislike"></span>
+                                        </label>
+                                    </span>
+                                    <div class="products-img">
+                                        <img class="cover" [src]="product?.main_images|getImage" />
+                                    </div>
+
+                                    <div class="products-txt">
+                                        <div class="products-tlt">
+                                            {{product?.title |shorten:14:'...'}}
+                                        </div>
+                                        <div class="products-id-c">
+                                            <span class="products-id">{{'ID: ' + product.product_id}}</span>
+                                            <span class="products-count-txt">Sandėlys
+                                                <span class="count-num">{{product?.good | getStock}}</span></span>
+                                        </div>
+                                        <div class="products-price">
+                                            <div class="products-price-tlt">Kaina</div>
+                                            <div class="products-price">
+                                                {{product?.good|getPrice}}<span
+                                                    class="price-t">{{product?.good|getUnit}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="catalog-cnt">
+                                    <div class="catalog-ul">
+                                        <div class="pro-m-slider">
+                                            <span *ngIf="(product.good|isArray)">
+                                                <span class="catalog-li"
+                                                    *ngFor="let material of product.good | slice:0:4; let i = index">
+                                                    <div class="col-12 p-0 cat-div">
+                                                        <img [src]="material.images | getMaterialImage" alt=""
+                                                            style="width: 25px; height: 25px" />
+                                                    </div>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="products-btn">
+                                    <button (click)="copyMessage(me.uid,product.id)"
+                                        class="btn ctm-btn pro-btn btnHovr">
+                                        <img class="" style="margin-left: 5px" style="margin-left: 5px"
+                                            src="./../../assets/img/chat-b.svg" alt="img" />
+                                        Chat kodas<img class="" style="margin-left: 5px"
+                                            src="./../../assets/img/copy.svg" alt="img" />
+                                    </button>
+                                    <span (click)="openSingleProductService.openSingleProduct(product, me)">
+                                        <img class="info-img remove_icon" src="./../../assets/img/info.svg" alt="img" />
+                                    </span>
+                                    <button (click)="askPermissionForDelete(product?.id, i, j, product)"
+                                        class="btn ctm-btn pro-btn delete-btn">
+                                        <img class="m-0 remove_icon" src="./../../assets/img/delete-w.svg" alt="img" />
+                                    </button>
+                                    <button (click)="openSetting(product?.id)" class="btn ctm-btn pro-btn setting-btn">
+                                        <img class="m-0 remove_icon" src="./../../assets/img/settings-g.svg"
+                                            alt="img" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ion-infinite-scroll (ionInfinite)="loadProducts($event)">
+                    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+            </div>
+            <!--====FOR MORE END====-->
+
+            <!-- ======================== search result   ==================== -->
+
+            <span *ngIf="service.activeType == 'search' && service.searchType == 'product_id' ">
+                <div class="row">
+                    <!-- <app-product class="col-12 col-lg-4 pr-0"
+                          *ngFor="let product of service.searchProducts; let j = index" [i]="0" [j]="j"
+                          [showMoreBtn]="false" [c_id]="null" [product]="product"
+                          (onCopyMessageEvent)="copyMessage(me.uid,$event)" (onProductOpenEvent)="openProduct($event, me)"
+                          (onDeletePermissionEvent)="askPermissionForDelete($event)"
+                          (onOpenSettingEvent)="openSetting($event)" (onShowMoreEvent)="$event"></app-product> -->
+                    <div *ngFor="let product of service.searchProducts; let j = index" class="col-12 col-lg-6 pr-0">
+                        <div class="products-single active m-border-0 m-radius-0">
+                            <div class="products-img-txt">
+                                <span class="products-check">
+                                    <label class="ctm-container">
+                                        <input type="checkbox" />
+                                        <span class="checkmark likeDislike"></span>
+                                    </label>
+                                </span>
+                                <div class="products-img">
+                                    <img class="cover" [src]="product?.main_images|getImage" />
+                                </div>
+
+                                <div class="products-txt">
+                                    <div class="products-tlt">
+                                        {{product?.title |shorten:14:'...'}}
+                                    </div>
+                                    <div class="products-id-c">
+                                        <span class="products-id">{{'ID: ' + product.product_id}}</span>
+                                        <span class="products-count-txt">Sandėlys
+                                            <span class="count-num">{{product?.good | getStock}}</span></span>
+                                    </div>
+                                    <div class="products-price">
+                                        <div class="products-price-tlt">Kaina</div>
+                                        <div class="products-price">
+                                            {{product?.good|getPrice}}<span
+                                                class="price-t">{{product?.good|getUnit}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="catalog-cnt">
+                                <div class="catalog-ul">
+                                    <div class="pro-m-slider">
+                                        <span *ngIf="(product.good)|isArray">
+                                            <span class="catalog-li"
+                                                *ngFor="let material of product.good | slice:0:4; let i = index">
+                                                <div class="col-12 p-0 cat-div">
+                                                    <img [src]="material.images | getMaterialImage" alt=""
+                                                        style="width: 25px; height: 25px" />
+                                                </div>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="products-btn">
+                                <button (click)="copyMessage(me.uid,product.id)" class="btn ctm-btn pro-btn btnHovr">
+                                    <img class="" style="margin-left: 5px" style="margin-left: 5px"
+                                        src="./../../assets/img/chat-b.svg" alt="img" />Chat kodas<img class=""
+                                        style="margin-left: 5px" style="margin-left: 5px"
+                                        src="./../../assets/img/copy.svg" alt="img" />
+                                </button>
+                                <span (click)="openSingleProductService.openSingleProduct(product, me)">
+                                    <img class="info-img remove_icon" src="./../../assets/img/info.svg" alt="img" />
+                                </span>
+                                <button (click)="askPermissionForDelete(product?.id, '', j, product)"
+                                    class="btn ctm-btn pro-btn delete-btn">
+                                    <img class="m-0 remove_icon" src="./../../assets/img/delete-w.svg" alt="img" />
+                                </button>
+                                <button (click)="openSetting(product?.id)" class="btn ctm-btn pro-btn setting-btn">
+                                    <img class="m-0 remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ion-infinite-scroll
+                        (ionInfinite)="service.onSearchByKeyword(service.searchText, service.page+1, $event, 'scroll')">
+                        <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
+                </div>
+            </span>
+        </div>
+    </div>
+</section>

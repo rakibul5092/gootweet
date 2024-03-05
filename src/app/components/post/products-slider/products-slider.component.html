@@ -1,0 +1,21 @@
+<swiper #swiper [config]="config">
+  <ng-template swiperSlide *ngFor="let product of products; let i = index">
+    <div class="product-wrapper">
+      <div class="product">
+        <div (click)="openProduct(i)" class="price">€{{(product?.good | getPrice)}}</div>
+        <img id="sliderAnimatedGif" (click)="openProduct(i)" class="animated-gif" *ngIf="i === 0" src="assets/01.gif" />
+        <img (click)="openProduct(i)" [src]="(product.main_images|getImage)" alt="">
+        <div class="product-bottom">
+          <div (click)="openProduct(i)" class="text">
+            <div class="title">{{product.title}}</div>
+          </div>
+          <div class="button-container">
+            <button (click)="sendToMessenger(product)" *ngIf="buttonText!==''" class="ask-btn-all">
+              <img src="assets/img/telegram.svg" alt="img" />
+              {{buttonText }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</swiper>

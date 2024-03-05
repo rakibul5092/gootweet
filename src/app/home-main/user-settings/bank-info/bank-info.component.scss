@@ -1,0 +1,8 @@
+@import "./../shared.scss";
+.form-container {
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+  }
+}

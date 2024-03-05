@@ -1,0 +1,14 @@
+<svg id="account_balance-24px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_1040" data-name="Group 1040">
+    <rect id="Rectangle_294" data-name="Rectangle 294" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_1042" data-name="Group 1042">
+    <g id="Group_1041" data-name="Group 1041">
+      <rect id="Rectangle_295" data-name="Rectangle 295" width="3" height="7" transform="translate(4 10)" fill="#6a7bff"/>
+      <rect id="Rectangle_296" data-name="Rectangle 296" width="3" height="7" transform="translate(10.5 10)" fill="#6a7bff"/>
+      <rect id="Rectangle_297" data-name="Rectangle 297" width="20" height="3" transform="translate(2 19)" fill="#6a7bff"/>
+      <rect id="Rectangle_298" data-name="Rectangle 298" width="3" height="7" transform="translate(17 10)" fill="#6a7bff"/>
+      <path id="Path_174" data-name="Path 174" d="M12,1,2,6V8H22V6Z" fill="#6a7bff"/>
+    </g>
+  </g>
+</svg>

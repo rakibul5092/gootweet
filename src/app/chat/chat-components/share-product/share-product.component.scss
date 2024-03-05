@@ -1,0 +1,9 @@
+@import "./../../../../theme/mixins/mixins";
+.current-price {
+  img {
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid white;
+  }
+}

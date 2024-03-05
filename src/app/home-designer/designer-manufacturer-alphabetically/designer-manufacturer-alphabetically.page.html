@@ -1,0 +1,52 @@
+<ion-content>
+	<div class="main-wrapper">
+		<div class="designer-section">
+			<div class="row m-0">
+				<div class="designer-body-cnt col-12">
+					<div class="sort-menu-cnt">
+						<div class="tlt">
+							<span class="d-inline-block pr-3 mb-2">Mano atstovaujami gamintojai</span>
+							<span class="d-inline-block m-w-100 mb-2">
+								<button (click)="gotoManufacturerCatalog()" class="btn ctm-btn cart-btn m-0 btnDWU">Visų
+									gamintojų katalogas</button>
+							</span>
+
+						</div>
+					</div>
+					<div class="blog-cnt">
+						<div class="row mr-0">
+							<div *ngFor="let item of manufacturerService.items;" class="col-md-4 col-manu pr-0">
+								<div class="blog" (click)="gotoProfile(item?.manufacturerInfo)"
+									style="cursor: pointer;">
+									<div class="pro-cnt border-0">
+										<div class="pro-img">
+											<img class="cover"
+												[src]="(item?.manufacturerInfo?.profile_image|sanitizeImage:'150_150_')"
+												alt="img" />
+										</div>
+										<div class="pro-name-link">
+											<div class="pro-name postText">
+												{{item?.manufacturerInfo?.full_name|join_name}}
+												<img src="./../../assets/img/verified.svg" alt="img" />
+											</div>
+											<div class="pro-link">
+												<span>Gamintojas</span>
+												<!-- <span class="pub-t">3h</span> -->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<ion-infinite-scroll (ionInfinite)="findNext($event)">
+								<ion-infinite-scroll-content>
+								</ion-infinite-scroll-content>
+							</ion-infinite-scroll>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</ion-content>

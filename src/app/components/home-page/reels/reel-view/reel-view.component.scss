@@ -1,0 +1,96 @@
+ion-content {
+  --background: black;
+}
+.top-buttons {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 10px;
+  z-index: 999;
+  ion-buttons {
+    display: flex;
+    justify-content: space-between;
+    ion-button {
+      background: var(--dark-background);
+      border-radius: 50%;
+      --color: white;
+    }
+  }
+}
+@media screen and (min-width: 1100px) {
+  .top-buttons {
+    padding: 10px 65px 10px 10px;
+  }
+}
+
+.reel-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  .volume {
+    z-index: 9999;
+    position: absolute;
+    right: 12px;
+    top: 70px;
+  }
+  @media screen and (min-width: 1100px) {
+    .volume {
+      right: 65px;
+    }
+  }
+  .bottom-container {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    .left-info {
+      width: 88%;
+      .about-reel {
+        padding: 10px;
+        color: white;
+        .text {
+          width: 80%;
+          font-size: 12px;
+          height: 20px;
+        }
+        .more-btn {
+          font-size: 12px;
+          cursor: pointer;
+        }
+      }
+    }
+    .right-buttons {
+      gap: 20px;
+      flex-direction: column;
+      position: absolute;
+      right: 0px;
+      bottom: 60px;
+      right: 10px;
+      .icons {
+        flex-direction: column;
+        font-size: 12px;
+        font-weight: bolder;
+        --color: white;
+        height: unset;
+        .text-icon {
+          align-items: center;
+          flex-direction: column;
+        }
+        ion-icon {
+          font-size: 25px;
+        }
+      }
+    }
+    @media screen and (min-width: 1100px) {
+      .right-buttons {
+        right: 65px;
+      }
+    }
+  }
+}
+
+app-profile-photo {
+  --name-color: white;
+  --designation-color: #fbfbfb;
+}

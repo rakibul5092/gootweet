@@ -1,0 +1,260 @@
+<!-- for mobile -->
+<div class="manufacturer-tab d-block d-md-none">
+    <button routerLink="/materials-add" class="btn ctm-btn cart-btn w-100 btnNav">
+        <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+        Pridėti medžiagą
+    </button>
+</div>
+<!-- for mobile -->
+
+<section class="two-div-section-d pb-5 mp-0">
+    <div class="row m-0" style="padding-top: 68px;">
+        <div class="col-12 column-left pl-0 d-none d-md-block">
+            <div class="left-side-bar">
+                <div class="left-side-cnt d-none">
+                    <h4 class="ul-tlt">Mano prekiniai ženklai</h4>
+                    <div class="pro-ul">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link pl-0" href="#">
+                                    <div class="pro-cnt pb-1">
+                                        <div class="pro-img">
+                                            <img class="cover"
+                                                src="https://unctad.org/sites/default/files/inline-images/ccpb_workinggroup_productsafety_800x450.jpg"
+                                                alt="img" />
+                                        </div>
+
+                                        <div class="pro-name-link">
+                                            <div class="pro-name">
+                                                Baldai #2
+                                                <span class="noti">
+                                                    <span class="noti-i"><img src="./../../assets/img/chat-outline.svg"
+                                                            alt="img" /><span class="n-count">1</span></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div><span class="management-l">Valdymas</span></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-0" href="#">
+                                    <div class="pro-cnt pb-1">
+                                        <div class="pro-img">
+                                            <img class="cover"
+                                                src="https://unctad.org/sites/default/files/inline-images/ccpb_workinggroup_productsafety_800x450.jpg"
+                                                alt="img" />
+                                        </div>
+
+                                        <div class="pro-name-link">
+                                            <div class="pro-name">
+                                                Baldai #2
+                                                <span class="noti">
+                                                    <span class="noti-i"><img src="./../../assets/img/chat-outline.svg"
+                                                            alt="img" /><span class="n-count">1</span></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div><span class="management-l">Valdymas</span></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="left-side-cnt">
+                    <div class="loading-btn">
+                        <h4 class="ul-tlt">Prekių įkėlimas</h4>
+                        <button routerLink="/materials-add" class="btn ctm-btn cart-btn w-100 btnNav">
+                            <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+                            Pridėti medžiagą
+                        </button>
+                    </div>
+                    <div class="importation-btn">
+                        <h4 class="ul-tlt">Importavimas</h4>
+                        <button class="btn ctm-btn pro-btn w-100 d-none">
+                            Importuoti XML
+                        </button>
+                        <button (click)="openApiInstructions()" class="btn ctm-btn pro-btn w-100 btnNav">API
+                            surišimas
+                        </button>
+                        <button class="btn ctm-btn pro-btn w-100 d-none">
+                            Įkelti XML prieigos raktą
+                        </button>
+                    </div>
+                </div>
+                <div class="left-side-cnt filter-cnt d-none">
+                    <h4 class="ul-tlt">Katalogo filtravimas</h4>
+                    <div class="form-cnt p-0 border-0">
+                        <form method="post" action="">
+                            <div>
+                                <div class="form-group">
+                                    <div class="form-input">
+                                        <span class="input-group-txt"><img src="./../../assets/img/search.svg"
+                                                alt="img" /></span>
+
+                                        <input type="text" name="search" id="search" class="form-control search-input"
+                                            placeholder="Įveskite frazę" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <h6 class="">Požymiai</h6>
+                                    </label>
+                                    <div class="form-input">
+                                        <label class="ctm-container">
+                                            Yra sandėlyje
+                                            <input type="checkbox" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-input">
+                                        <label class="ctm-container">
+                                            Yra sandėlyje
+                                            <input type="checkbox" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mx-0 align-items-center">
+                                    <div class="col-12 pl-0">
+                                        <label>
+                                            <h6>Aktyvus skelbimo iškėlimo laikotarpis</h6>
+                                        </label>
+                                    </div>
+                                    <div class="col-12 col-md-6 pl-0 form-group">
+                                        <div class="form-input">
+                                            <span class="input-group-txt"><img src="./../../assets/img/calendar.svg"
+                                                    alt="img" /></span>
+
+                                            <input type="text" name="date-f" id="date-f" class="form-control"
+                                                placeholder="2020-08-23" />
+                                            <span class="r-ar">
+                                                <ion-icon name="chevron-down"></ion-icon>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 pr-0 form-group">
+                                        <div class="form-input">
+                                            <span class="input-group-txt"><img src="./../../assets/img/calendar.svg"
+                                                    alt="img" /></span>
+
+                                            <input type="text" name="date-l" id="date-l" class="form-control"
+                                                placeholder="2020-08-23" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <h6 class="">Kategorijos</h6>
+                                    </label>
+                                    <div class="cat-ul">
+                                        <div class="cat-li active">
+                                            <div class="form-input" *ngFor="let category of categories">
+                                                <label class="ctm-container cat-li-ch">
+                                                    {{category?.data?.category}}
+                                                    <span class="count-li">
+                                                        {{'(' + category?.subCategories?.length + ')'}}
+                                                    </span>
+                                                    <span class="b-ar">
+                                                        <ion-icon name="chevron-down"></ion-icon>
+                                                    </span>
+                                                    <input type="checkbox" [checked]="category?.isSelected"
+                                                        (click)="getMaterialsByCategories(category, null)" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+
+                                                <div class="in-cat-ul" *ngIf="category.isSelected">
+                                                    <div class="in-cat-li">
+                                                        <div class="form-input"
+                                                            *ngFor="let subCate of category?.subCategories">
+                                                            <label class="ctm-container">
+                                                                {{subCate?.data?.sub_category}}
+                                                                <input type="checkbox" [checked]="subCate?.isSelected"
+                                                                    (click)="getMaterialsByCategories(category, subCate)" />
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="cat-list pt-0">
+                    <span class="cat-l">Privatumo politika</span>
+                    <span class="cat-l">Taisyklės Kontaktai</span>
+                    <span class="cat-l">Pranešti klaidą</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 column-mid p-0">
+            <div class="materials-list-cnt">
+                <div class="materials-list-list">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th class="no-th" scope="col">No.</th>
+                                <th scope="col">
+                                    <img src="./../../assets/img/photo.svg" alt="img" />
+                                </th>
+                                <th scope="col">Pavadinimas</th>
+                                <th scope="col">Kategorija</th>
+                                <th scope="col" class="d-md-table-cell d-none">code</th>
+                                <th scope="col" class="d-md-table-cell d-none">Valdymas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let material of materialsService.materials; let i = index">
+
+                                <td class="no-th" scope="row">{{'#' + (i + 1)}}</td>
+                                <td class="img-td">
+                                    <img [src]="material?.images | getMImage" />
+                                </td>
+                                <td class="name-td">
+                                    {{material?.name}}
+
+                                    <button (click)="askPermissionForDelete(material, i)"
+                                        class="btn ctm-btn d-btn w-100 d-block d-md-none mt-3 btnNav">
+                                        <img class="remove_icon" src="./../../assets/img/delete.svg" alt="img" />
+                                        Pašalinti
+                                    </button>
+                                </td>
+                                <td>
+                                    {{material?.category?.data?.category}}
+                                    <button (click)="onEditMaterial(material.id)"
+                                        class="btn ctm-btn pro-btn w-100 d-block d-md-none mt-3 btnNav">
+                                        <img class="remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+                                        Nustatymai
+                                    </button>
+                                </td>
+                                <td class="d-md-table-cell d-none">{{material?.code}}</td>
+                                <td class="d-md-table-cell d-none">
+                                    <button (click)="onEditMaterial(material.id)" class="btn ctm-btn pro-btn btnNav ">
+                                        <img class="remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+                                        Nustatymai
+                                    </button>
+                                    <br />
+                                    <button (click)="askPermissionForDelete(material, i)"
+                                        class="btn ctm-btn d-btn btnNav">
+                                        <img class="remove_icon" src="./../../assets/img/delete.svg" alt="img" />
+                                        Pašalinti
+                                    </button>
+                                </td>
+                            </tr>
+                            <ion-infinite-scroll (ionInfinite)="findMaterials($event)">
+                                <ion-infinite-scroll-content>
+                                </ion-infinite-scroll-content>
+                            </ion-infinite-scroll>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

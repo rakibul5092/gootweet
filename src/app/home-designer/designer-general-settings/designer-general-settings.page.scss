@@ -1,0 +1,48 @@
+@import "./../../../theme/mixins/mixins";
+@import "./../../../theme/pages/user-settings";
+.designer-body-cnt {
+  display: flex;
+  align-self: center;
+  width: 100%;
+  .user-settings-section {
+    .column-left {
+      @include flex-p-map($designer-settings-column-left-flex);
+      @include max-width-p-map($designer-settings-column-left-max-width);
+    }
+    .column-mid {
+      @include flex-p-map($designer-settings-column-mid-flex);
+      @include max-width-p-map($designer-settings-column-mid-max-width);
+    }
+  }
+  .left-side-cnt {
+    .setting-ul {
+      background: #3a3055;
+      @include min-height-p-map($designer-setting-ul-min-height);
+    }
+  }
+  .form-cnt {
+    .form-group {
+      @include width-p-map($designer-settings-form-group-width);
+    }
+  }
+}
+.user-settings-section {
+  background: #f5f5f6;
+  .log-reg {
+    background: #f5f5f6;
+    .log-reg-cnt-1 {
+      .form-cnt {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+// responsive start
+@media (max-width: 425px) and (min-width: 376px) {
+  .blog-section {
+    .designer-body-cnt {
+      border: 1px solid #000;
+    }
+  }
+}

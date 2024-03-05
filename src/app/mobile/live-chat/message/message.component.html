@@ -1,0 +1,12 @@
+<div class="chat-message mb-1 w-100" style="display: flex;gap: 10px;"
+  [style]="atTop? index === 2?'opacity:0.6':index===3? 'opacity:0.3':index>3?'opacity:0':'':''">
+  <img style="height: 35px; width: 35px; border-radius: 50%" [src]="message.from.profile_photo|sanitizeImage" />
+  <div class="message-content w-100">
+    <div class="d-flex" style="flex-direction: column;">
+      <span class="h5 pl-1">{{message.from.full_name|join_name}}</span>
+      <p class="h6 pl-1">{{message.body}}</p>
+    </div>
+    <img *ngIf="message.product" style="width: 100px; height: 100px; margin-left: 5px;object-fit: contain;"
+      [src]="liveProductPhotoBaseUrl + message?.product?.photo" />
+  </div>
+</div>

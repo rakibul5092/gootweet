@@ -1,0 +1,43 @@
+<div class="write-comment-box">
+  <div class="input-group">
+    <ion-chip *ngIf="(comment && comment?.replyCommentForEdit) || (wallPost && wallPost?.commentText)" outline
+      color="dark">
+      <ion-label>Edit</ion-label>
+      <ion-icon (click)="onEditCancel()" name="close-circle">
+      </ion-icon>
+    </ion-chip>
+    <div class="send_input textIn">
+      <img class="cover" src="{{me?.profile_photo | sanitizeImage: '150_150_' }}" alt="img" />
+      <input [(ngModel)]="text" id="reply-input{{ isReply?comment?.id:wallPost?.id }}" (keyup.enter)="sendComments()"
+        (ionChange)="onCommentTyping()" type="text" class="form-control " placeholder="Rašyti žinutę..." />
+      <ion-buttons>
+        <ion-button id="click-trigger"><ion-icon name="happy-outline"></ion-icon></ion-button>
+        <ion-button class="pr-3" id="click-gif">GIF</ion-button>
+        <ion-button class="pr-2" (click)="sendComments()"><ion-icon name="send-outline"></ion-icon></ion-button>
+      </ion-buttons>
+
+    </div>
+  </div>
+</div>
+<ion-popover class="emoji-popover" animated="true" mode="ios" trigger="click-trigger" triggerAction="click">
+  <ng-template>
+    <emoji-mart isNative="true" [showPreview]="false" [emojiTooltip]="false"
+      (emojiClick)="addEmoji($event)"></emoji-mart>
+  </ng-template>
+</ion-popover>
+
+
+<ion-popover #gifPopover mode="ios" trigger="click-gif" (didPresent)="initialGifs()" class="gif-popover"
+  triggerAction="click" [backdropDismiss]="true" [showBackdrop]="true">
+  <ng-template>
+    <ion-content style="--background: #222;" class="ion-padding">
+      <ion-searchbar style="--background: white;color: black;" [clearIcon]="'close-circle'" mode="ios"
+        (ionInput)="startSearchGif($event)" [debounce]="2000" placeholder="Search gif"></ion-searchbar>
+      <div class="gif-list d-flex flex-column">
+        <img style="width: 100%;" (click)="sendGif(result.images.downsized_large.url, gifPopover)"
+          *ngFor="let result of giphyResults" [src]="result.images.downsized_large.url" />
+      </div>
+      <img src="assets/giphy-logo.gif" />
+    </ion-content>
+  </ng-template>
+</ion-popover>

@@ -1,0 +1,26 @@
+<div class="custom-modal-body">
+  <button (click)="close()" type="button" class="close remove_icon custom-close" data-dismiss="modal"
+    aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="post-cnt">
+    <div class="share-box">
+
+      <div class="share-ul-box">
+        <div class="share-ul-tlt">Pažymėkite kur norite dalintis</div>
+        <div class="share-ul-btn d-block d-md-flex">
+          <div class="share-ul">
+            <a (click)="fb()" class="share-li fb-li"><img src="./../../assets/img/facebook-i.svg" alt="img" /></a>
+            <a (click)="tweet()" class="share-li tw-li"><img src="./../../assets/img/twitter.svg" alt="img" /></a>
+            <a (click)="linkedIn()" class="share-li linked-li"><img src="./../../assets/img/linked.svg" alt="img" /></a>
+            <a class="share-li wh-li" (click)="whatsApp()"><img src="./../../assets/img/wh.svg" alt="img" /></a>
+            <a class="share-li tel-li" (click)="telegram()"><img src="./../../assets/img/tel.svg" alt="img" /></a>
+            <a (click)="pinIt()" class="share-li pin-li"><img src="./../../assets/img/pin.svg" alt="img" /></a>
+          </div>
+          <div class="text-right d-none d-md-block">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

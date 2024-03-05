@@ -1,0 +1,131 @@
+<ion-content>
+  <div class="chat-section cart-section" style="height: auto;">
+    <div class="chat-top1 user-list-top">
+
+      <div *ngIf="screen.width.value>767" class="chat-top">
+        <div class="pro-cnt p-2 border-0">
+          <div class="pro-name-link px-0">
+            <div class="pro-name pl-3 pr-0">
+              <span (click)="close()"
+                style="cursor: pointer; font-size: 25px; font-weight: 700; position: absolute; left: -24px;">
+                <ion-icon class="remove_icon" name="close"></ion-icon>
+              </span>
+              Bendra krepšelio suma: <span class="total-price">€ {{totalCartPrice || 0}}</span>
+            </div>
+            <div class="chat-ss">
+              <!-- <button class="btn ctm-btn d-btn" *ngIf="user.emailVerified">Peržiūrėti pilną krepšelį</button> -->
+              <ion-button (click)="sendCart()" color="success" mode="md"
+                style="cursor: pointer;font-size: 12px;text-transform: none;">Sipūsti klientu
+                <ion-icon name="send" style="margin-left: 5px;font-size:18px"></ion-icon>
+              </ion-button>
+              <!-- <ion-icon (click)="sendCart()" style="cursor: pointer;font-size: 24px;" name="send"></ion-icon> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- for mobile -->
+      <div *ngIf="screen.width.value<768" class="mobile-chat-top d-block">
+        <div class="pro-cnt">
+          <div class="pro-name-link px-0">
+            <div class="pro-name">Krepšelis<span class="num-cart">{{cartItems.length || 0}}</span></div>
+            <div class="chat-ss" style="top: -5px;">
+              <span class="cart-btn-a pr-2">
+                <ion-icon (click)="sendCart()" style="cursor: pointer;font-size: 20px;" name="send"></ion-icon>
+              </span>
+              <span (click)="close()" class="close-m m-0"><img src="./../../assets/img/close.svg" alt="img" /></span>
+            </div>
+          </div>
+        </div>
+        <div class="ch-total-p pb-3">Bendra krepšelio suma: <span class="total-price">€ {{totalCartPrice || 0}}</span>
+        </div>
+        <!-- <div class="cart-btn-a" *ngIf="user.emailVerified"><button class="btn ctm-btn cart-btn w-100">Peržiūrėti pilną
+        krepšelį</button></div> -->
+
+
+      </div>
+      <!-- for mobile -->
+
+
+    </div>
+
+    <div *ngIf="screen.width.value>767" class="item-list">
+      <div *ngIf="this.cartItems.length == 0 && this.hideLoader == true" class="item-tlt tlt">No Product in your
+        cart yet</div>
+      <ion-list *ngIf="this.cartItems.length == 0 && this.hideLoader == false" id="skeleton">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </ion-list>
+      <div *ngFor="let cartItem of this.cartItems" class="item">
+        <div class="item-img flex-box  radius-5 overflow-hidden"><img class="img-center"
+            [src]="(cartItem?.data?.main_images|getImage)" alt="img" />
+
+        </div>
+        <div class="item-tlt">
+          <div class="tlt">{{cartItem?.data?.title}}</div>
+          <div class="item-txt">
+            <span class="item-txt-s" *ngIf="checkMaterial(cartItem)">
+              <span class="">
+                <img [src]="cartItem.data.good | getMaterialImageForCartList" alt="" class="cover">
+              </span>
+              <span>{{'Code-'+MaterialCodeForCartList(cartItem.data.good)}}</span>
+            </span>
+            <span class="item-txt-s"
+              *ngIf="cartItem.data.good.quantity && cartItem.data.totalUnitOfMeasurment != 0">{{cartItem.data.good.unit+'-'+cartItem.data.totalUnitOfMeasurment
+              }}</span>
+          </div>
+        </div>
+
+        <div class="item-modify text-right">
+          <span class="date-txt"
+            *ngIf="+cartItem.data.good.inStock < cartItem.data.quantity">{{cartItem.data.good.expectedStock}}
+          </span>
+          <span class="item-quantity">
+            <span class="inc-item id-item" (click)="decreseQnt(cartItem?.cart_item_id)">&#8722;</span>
+            <span class="total-item">{{cartItem?.data?.quantity}}</span>
+            <span class="dec-item id-item" (click)="increseQnt(cartItem?.cart_item_id)">&#43;</span>
+          </span>
+          <span class="item-price">€{{cartItem?.item_price}}</span>
+          <span class="reviews-delet-i">
+            <img (click)="removeFromCart(cartItem?.cart_item_id)" src="./../../assets/img/delete.svg" alt="img" />
+          </span>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- for mobile -->
+    <div *ngIf="screen.width.value<768" class="item-list mobile-item-list">
+      <div *ngFor="let cartItem of cartItems" class="item">
+        <div class="item-modify">
+          <span class="item-quantity">
+            <span class="inc-item id-item" (click)="decreseQnt(cartItem?.cart_item_id)">&#8722;</span>
+            <span class="total-item">{{cartItem?.data?.quantity}}</span>
+            <span class="dec-item id-item" (click)="increseQnt(cartItem?.cart_item_id)">&#43;</span>
+          </span>
+        </div>
+        <div class="item-img flex-box  radius-5 overflow-hidden"><img class="img-center"
+            [src]="(cartItem?.data?.main_images|getImage)" alt="img" /></div>
+        <div class="item-tlt tlt">
+          <div class="tlt-m">{{cartItem?.data?.title}}</div>
+          <div class="item-price">€{{cartItem?.item_price}}</div>
+        </div>
+        <div class="item-modify item-modify-d text-right">
+          <span (click)="removeFromCart(cartItem?.cart_item_id)" class="reviews-delet-i"><img
+              src="./../../assets/img/delete.svg" alt="img" /></span>
+        </div>
+
+      </div>
+    </div>
+    <!-- for mobile -->
+
+    <!-- <div *ngIf="cartItems.length > 0" class="text-center">
+      <button class="btn ctm-btn cart-btn">Išsaugoti krepšelį mano kolekcijoje</button>
+    </div> -->
+  </div>
+</ion-content>

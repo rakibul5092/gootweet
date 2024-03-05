@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="onModalClose()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div id="live-messages-container" class="live-messages">
+    <app-comment *ngFor="let message of messages" [comment]="message"></app-comment>
+  </div>
+  <div class="write-box-container">
+    <div class="write-box" *ngIf="me">
+      <ion-input placeholder="Write your comment..." (keyup.enter)="onSendMessage()"
+        [(ngModel)]="messageText"></ion-input>
+      <ion-buttons>
+        <ion-button (click)="onSendMessage()"><ion-icon name="send"></ion-icon></ion-button>
+      </ion-buttons>
+    </div>
+  </div>
+</ion-content>

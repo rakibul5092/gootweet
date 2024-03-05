@@ -1,0 +1,110 @@
+<section class="products-section pb-5 mp-0">
+    <div class="row m-0" style="padding-top: 68px;">
+        <div class="col-12 column-left pl-0 d-none d-md-block">
+            <div class="left-side-bar">
+                <div class="left-side-cnt mb-0 d-none">
+                    <h4 class="ul-tlt">Mano prekiniai ženklai</h4>
+                    <div class="pro-ul">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link pl-0" href="#">
+                                    <div class="pro-cnt pb-1">
+                                        <div class="pro-img">
+                                            <img class="cover"
+                                                src="https://unctad.org/sites/default/files/inline-images/ccpb_workinggroup_productsafety_800x450.jpg"
+                                                alt="img" />
+                                        </div>
+
+                                        <div class="pro-name-link">
+                                            <div class="pro-name">
+                                                Baldai #2
+                                                <span class="noti">
+                                                    <span class="noti-i"><img src="./../../assets/img/chat-outline.svg"
+                                                            alt="img" /><span class="n-count">1</span></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div><span class="management-l">Valdymas</span></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-0" href="#">
+                                    <div class="pro-cnt pb-1">
+                                        <div class="pro-img">
+                                            <img class="cover"
+                                                src="https://unctad.org/sites/default/files/inline-images/ccpb_workinggroup_productsafety_800x450.jpg"
+                                                alt="img" />
+                                        </div>
+
+                                        <div class="pro-name-link">
+                                            <div class="pro-name">
+                                                Baldai #2
+                                                <span class="noti">
+                                                    <span class="noti-i"><img src="./../../assets/img/chat-outline.svg"
+                                                            alt="img" /><span class="n-count">1</span></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div><span class="management-l">Valdymas</span></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cat-list">
+                    <span class="cat-l">Privatumo politika</span>
+                    <span class="cat-l">Taisyklės Kontaktai</span>
+                    <span class="cat-l">Pranešti klaidą</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 column-mid p-0">
+            <div class="purchase-list-cnt order-purchase-list-cnt ">
+
+                <div class="purchase-list">
+                    <div class="tlt mb-3 mx-3 mx-md-0">Neįvykdyti užsakymai</div>
+                    <div *ngFor="let order of orders" (click)="gotoOrderProducts(order.id)"
+                        class="single-purchase m-radius-0">
+                        <div class="row ml-0">
+                            <div class="col-12 purchase-col2 pl-0">
+                                <div class="pro-cnt mb-0">
+                                    <div class="pro-name-link pl-0 pr-4">
+                                        <div class="pro-name pb-1">{{'Užsakymas
+                                            #'+order.id}}</div>
+                                        <div class="pro-link">{{order?.timestamp?.toDate()|date:'yyyy-MM-dd'}}
+                                        </div>
+                                    </div>
+                                    <div class="price"><span class="type-m">€</span>{{order.totalPrice}}</div>
+                                </div>
+                            </div>
+                            <div class="col-12 purchase-col3 pl-0">
+                                <div class="purchase-price mt-3 mt-md-0">
+                                    <div class="price-single">
+                                        <button class="btn ctm-btn cart-btn btnNav"><img *ngIf="order.inProgress"
+                                                class="img-m" src="./../../assets/img/done-b.svg" alt="img" />Vykdomas
+                                        </button>
+                                    </div>
+                                    <div class="price-single">
+                                        <button class="btn ctm-btn cart-btn btnNav "><img *ngIf="order.sent"
+                                                class="img-m" src="./../../assets/img/done-b.svg" alt="img" />Išsiųstas
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ar-order" style="cursor: pointer">
+                            <span class="ex-m"><img class="img-m expand_icon" src="./../../assets/img/expand.svg"
+                                    alt="img" /></span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</section>

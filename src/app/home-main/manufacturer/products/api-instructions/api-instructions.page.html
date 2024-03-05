@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Product import API</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid style="padding: 20px;">
+
+    <ion-row>
+      <ion-col>
+        <ion-label style="font-weight: bold;font-size: 14px;color: rgb(15, 13, 43);">API URL</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>This url can be used for api post request.</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-textarea cols="1" rows="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;">
+          https://manufacturers.gootweet.com/api/v1/products/add-products-collection</ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px;">
+      <ion-col>
+        <ion-label style="font-weight: bold;font-size: 14px;color: rgb(15, 13, 43);">API key</ion-label>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>This key have to provide in the field 'api_key'.</ion-label>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-textarea cols="1" rows="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;">{{me?.uid}}</ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 25px;">
+      <ion-col>
+        <ion-label style="font-weight: bold;font-size: 14px;color: rgb(15, 13, 43);">Category</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size='4'>
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select interface="popover" [(ngModel)]="selectedCategory" (ionChange)="changeCategory()">
+            <ion-select-option *ngFor="let cat of categoryService.categories" [value]="cat.category">
+              {{cat.category.data.category}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size='4'>
+        <ion-item>
+          <ion-label>Subcategory</ion-label>
+          <ion-select interface="popover" [(ngModel)]="selectedSubCategory" (ionChange)="changeSubCategory()">
+            <ion-select-option *ngFor="let sub of addCategoryService.subCategories" [value]="sub">
+              {{sub.data.sub_category}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size='4'>
+        <ion-item>
+          <ion-label>Innercategory</ion-label>
+          <ion-select interface="popover" [(ngModel)]="selectedInnerCategory" (ionChange)="changeInnerCategory()">
+            <ion-select-option *ngFor="let inner of addCategoryService.innerCategories" [value]="inner">
+              {{inner.data.inner_category}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-textarea cols="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;padding: 10px;" row="3">
+          {{(category|json)||''}}
+        </ion-textarea>
+      </ion-col>
+      <ion-col size="4">
+        <ion-textarea cols="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;padding: 10px;" row="3">
+          {{(subCategory|json)||''}}
+        </ion-textarea>
+      </ion-col>
+      <ion-col size="4">
+        <ion-textarea cols="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;padding: 10px;" row="3">
+          {{(innerCategory|json)||''}}
+        </ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px;">
+      <ion-col>
+        <ion-label style="font-weight: bold;font-size: 14px;color: rgb(15, 13, 43);">Post data</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Normal product: Have to follow this JSON format data structure for successful api request.
+        </ion-label>
+        <ion-textarea cols="1" rows="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;">{{structureNormal}}</ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px;">
+      <ion-col>
+        <ion-label>Advance product: Have to follow this JSON format data structure for successful api request.
+        </ion-label>
+        <ion-textarea cols="1" rows="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;">{{structureVariation}}</ion-textarea>
+      </ion-col>
+    </ion-row>
+
+
+
+
+    <ion-row style="margin-top: 25px;">
+      <ion-col>
+        <ion-label style="font-weight: bold;font-size: 14px;color: rgb(15, 13, 43);">Response</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>If request success, then will get this response</ion-label>
+        <ion-textarea cols="1" rows="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;">{{responseSuccess}}</ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>If request failed, then will get this response</ion-label>
+        <ion-textarea cols="1" rows="1" disabled="true" mode="ios"
+          style="width: 100%;--background:rgb(236, 236, 236); margin-top: 15px;">{{responseFailed}}</ion-textarea>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

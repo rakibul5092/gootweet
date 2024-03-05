@@ -1,0 +1,18 @@
+.color-size-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  .selector {
+    display: flex;
+    gap: 5px;
+  }
+}
+ion-buttons {
+  display: block;
+}
+ion-button {
+  font-size: 12px;
+  margin: 0px;
+}

@@ -1,0 +1,57 @@
+<div class="blog-cnt portfolio-cnt w-100">
+    <div class="tlt tlt1 portfolio-tlt mt-2 mb-3">
+        Portefelis
+        <span class="count-porf">{{'(' + profileService.portfolios.length + ')'}}</span>
+        <button *ngIf="isMyProfile" style="cursor: pointer;" (click)="gotoAddPortfolio()"
+            class="btn ctm-btn cart-btn btnDWU ml-3"><img src="./../../assets/img/add-box-w.svg" alt="img" /> Pridėti
+            projektą
+        </button>
+    </div>
+    <div *ngFor="let portfolio of profileService.portfolios; let i = index" class="blog apie-blog">
+        <span *ngIf=" isMyProfile" (click)="onDeletePortfolio(portfolio, i)" class="reviews-delet-i">
+            <img src="./../../assets/img/delete.svg" alt="img" />
+        </span>
+        <div class="apie-blog-all pb-3">
+            <div class="apie-blog-cnt bg-white p-0">
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6">
+                        <div class="apie-cnt p-0">
+                            <div class="tlt mb-3">{{portfolio?.data?.header}}</div>
+                            <div class="apie-txt">
+                                <p class="mb-0">{{portfolio?.data?.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="portfolio-img">
+                            <img class="cover" [src]="portfolio?.data?.images[0] | getPortfolioImage" alt="img" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-0">
+                    <div *ngIf="portfolio?.data?.images.length > 1" class="col-6 col-md-4 pl-0">
+                        <div class="portfolio-img">
+                            <img class="cover" [src]="portfolio?.data?.images[1] | getPortfolioImage" alt="img" />
+                        </div>
+                    </div>
+                    <div *ngIf="portfolio?.data?.images.length > 2" class="col-6 col-md-4 pl-0">
+                        <div class="portfolio-img">
+                            <img class="cover" [src]="portfolio?.data?.images[2] | getPortfolioImage" alt="img" />
+                        </div>
+                    </div>
+                    <div *ngIf="portfolio?.data?.images.length > 3" class="col-6 col-md-4 pl-0">
+                        <div class="portfolio-img">
+                            <img class="cover" [src]="portfolio?.data?.images[3] | getPortfolioImage" alt="img" />
+                            <div class="more-img-show">5+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="findNextPortfolio($event)">
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</div>

@@ -1,0 +1,66 @@
+<ion-content #content>
+  <div *ngIf="!service.isLoading;else loading" class="chat-section user-list-section pb-0"
+    style="height: 100%; z-index: 999">
+    <div class="chat-top1 user-list-top">
+      <div class="chat-top">
+        <div class="pro-cnt pt-2 pb-2 border-0">
+          <div class="pro-name-link pl-0">
+            <div class="pro-name">Gootweet chats</div>
+            <div class="chat-ss">
+              <span class="chat-search"><img class="remove_icon" src="./../../assets/img/search-w.svg"
+                  alt="img" /></span>
+              <span class="chat-setting"><img class="remove_icon" src="./../../assets/img/settings-w.svg"
+                  alt="img" /></span>
+              <span (click)="dismiss()" class="close-m m-0"><img class="remove_icon"
+                  src="./../../assets/img/close-w.svg" alt="img" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="(service.contacts|async).length==0;else contacts" class="empty-conversation">
+      Empty conversations
+    </div>
+
+    <ng-template #contacts>
+      <div class="user-list" style="width: 100%">
+        <div (click)="openMessage(contact)" *ngFor="let contact of service.contacts|async"
+          class="user d-flex active noti_item" style="cursor: pointer">
+          <div class="pro-cnt border-0">
+            <div class="pro-img">
+              <img class="cover" [src]="(contact?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+            </div>
+            <div class="pro-name-link">
+              <div class="pro-name">
+                {{contact?.full_name|join_name: 20}}
+                <img src="./../../assets/img/verified.svg" alt="img" />
+                <span class="pro-side-txt">{{(contact?.status? contact?.status:'')|shorten:8:'..'}}</span>
+              </div>
+
+              <div
+                [class]="'message ' + (!(contact?.lastMessage?.isRead) && contact?.lastMessage?.from == contact?.uid?'unread':'pro-link')">
+                {{(contact?.lastMessage?.type == 1? contact?.lastMessage?.body: 'Attachment')| shorten:20:'...'}}
+              </div>
+            </div>
+          </div>
+
+          <div class="active-time">
+            {{contact?.lastMessage?.timeStamp|dateAgo}}
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <ion-list id="skeleton">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </ion-list>
+  </ng-template>
+</ion-content>

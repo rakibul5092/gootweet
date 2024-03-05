@@ -1,0 +1,153 @@
+<div *ngIf="visible" class="purchase-list-cnt bottom-border">
+  <div class="purchase-list">
+    <div class="single-purchase cmt-p" style="position: relative">
+      <h5 style="color: royalblue">Prekės pardavėjas</h5>
+      <div class="row ml-0">
+        <div class="col-12 purchase-col2 pl-0 mm-w-100">
+          <app-profile-photo [user]="cartItem.owner" [verified]="true" [nameVisible]="true" size="50"
+            [nameWidth]="'unset'"></app-profile-photo>
+        </div>
+        <div class="col-12 purchase-col3 pl-0 mm-w-100">
+          <div class="
+              purchase-price
+              mt-2 mt-md-0
+              justify-content-start justify-content-lg-end
+            ">
+            <div class="price-single mb-3 mb-md-0">
+              <span class="pr-ur-tlt d-block d-md-inline-block">Produktų kaina:</span>
+              <span class="price">{{
+                "€" + cartItem.totalPrice.toFixed(2)
+                }}</span>
+            </div>
+            <div *ngIf="cartItem?.selectedDeliveryType" class="price-single mb-3 mb-md-0">
+              <span class="pr-ur-tlt d-block d-md-inline-block">{{
+                "Pristatymas:"
+                }}</span>
+              <span class="price">
+                {{
+                "€" + +cartItem?.selectedDeliveryType?.delivery_info?.price
+                }}
+              </span>
+            </div>
+            <div *ngIf="cartItem?.selectedDeliveryType" class="price-single mb-3 mb-md-0">
+              <span class="pr-ur-tlt d-block d-md-inline-block">Iš viso:</span>
+              <span class="price">{{"€" + ( cartItem.totalPrice +
+                +cartItem?.selectedDeliveryType?.delivery_info?.price).toFixed(2)}}</span>
+            </div>
+            <div class="price-single mb-3 mb-md-0">
+              <button (click)="
+                  makePayment(cartItem.id, cartItem.ownerUid,
+                    +(
+                      cartItem.totalPrice +
+                      +cartItem?.selectedDeliveryType?.delivery_info?.price
+                    ).toFixed(2),
+                    cartItem.shortNote
+                  )
+                " [disabled]="!cartItem.isAvailable" *ngIf="!cartItem.isPaid" class="btn ctm-btn cart-btn btnNav">
+                Apmokėti
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="delivery-form">
+        <div class="row">
+          <div *ngIf="cartItem?.selectedDeliveryType" class="col-12 col-md-6 col-lg-3">
+            <div class="form-group mb-3 mb-lg-0">
+              <label style="margin-right: 5px">
+                Pristatymo sails:
+              </label>
+              <select class="custom-select" [(ngModel)]="cartItem.selectedDeliveryType.destination">
+                <option [value]="cartItem.selectedDeliveryType?.destination">
+                  {{cartItem.selectedDeliveryType?.destination == "Nida"? "Kuršiųneriją":
+                  cartItem.selectedDeliveryType?.destination}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="form-group mb-3 mb-lg-0">
+              <label style="margin-right: 5px">
+                Pristatymo Budus:
+              </label>
+              <select class="custom-select">
+                <option selected value="Pristatymas">
+                  Pristatymas iki namų
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <ion-textarea [(ngModel)]="cartItem.shortNote" style="
+          background: #f5f5f6;
+          border: 1px solid #dfdfe2;
+          margin-bottom: 15px;
+          padding-left: 10px;
+          padding-inline-start: 10px;
+        " rows="2" cols="20" spellcheck="true" placeholder="Čia įveskite visas pastabas...">
+            </ion-textarea>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <button (click)="productShow = false" class="btn btn-secondary" *ngIf="productShow">
+              Slėpti prekes
+            </button>
+            <button (click)="productShow = true" class="btn btn-secondary" *ngIf="!productShow">
+              Rodyti prekes
+            </button>
+          </div>
+        </div>
+      </div>
+      <div (click)="askPermissionForDelete()" class="add-btn remove_icon">
+        <img src="./../../assets/img/delete.svg" alt="img" />
+      </div>
+
+
+      <div class="purchase-list-cnt product-cl-show" *ngIf="productShow">
+        <div class="purchase-list">
+          <div *ngFor="let items of cartItem.products; let j = index" class="single-purchase mb-1">
+            <div class="row ml-0">
+              <div class="col-6 purchase-col1 pl-0 mb-3 mb-lg-0">
+                <div class="row m-0">
+                  <div class="col-12 p-0">
+                    <img class="img-center" [src]="items.data.main_images[0] | getSingleImage" alt="img" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 purchase-col2 pl-0">
+                <div class="purchase-mid-txt">
+                  <div class="tlt tlt1">{{ items?.data?.title }}</div>
+                </div>
+              </div>
+              <div class="col-12 purchase-col3 mt-3 mt-lg-0 pl-0">
+                <div class="purchase-price">
+                  <div class="price-single">
+                    <div class="pr-ur-tlt">Vieneto</div>
+                    <div class="price">
+                      €{{ (+items?.data?.cart_price).toFixed(2) }}
+                    </div>
+                  </div>
+                  <div class="price-single">
+                    <div class="pr-ur-tlt">Kiekis</div>
+                    <div class="price qnt">
+                      <span class="">{{ items?.data?.quantity }} </span>
+                    </div>
+                  </div>
+                  <div class="price-single">
+                    <div class="pr-ur-tlt">Iš viso</div>
+                    <div class="price">€{{ (+items?.data?.cart_price).toFixed(2) }}</div>
+                  </div>
+                  <div class="price-single">
+                    <ion-buttons>
+                      <ion-button (click)="onProdDelete(j)"><ion-icon name="close"
+                          color="danger"></ion-icon></ion-button>
+                    </ion-buttons>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

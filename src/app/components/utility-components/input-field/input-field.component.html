@@ -1,0 +1,7 @@
+<div class="content-wrapper">
+  <ion-icon *ngIf="icon" [name]="icon"></ion-icon>
+  <input [style]="icon!==''? 'padding: 20px 40px':''" [attr.icon]="icon !== ''" [readonly]="readonly"
+    [class]="readonly ? 'input-field-readonly' : 'input-field'" [type]="type" [name]="label" [value]="value"
+    (input)="change($event)" (blur)="touched(true)" [disabled]="disabled" [placeholder]="placeholder" />
+  <label *ngIf="label" [style]="icon!==''? 'left: 30px':''" class="input-label">{{ label }}</label>
+</div>

@@ -1,0 +1,31 @@
+@import "./../../theme/mixins/_mixins";
+.header-section {
+  .btn {
+    padding: 5px 20px;
+  }
+  .navbar-light {
+    .navbar-nav {
+      width: 100%;
+      justify-content: flex-end;
+      .lan-li {
+        border-left: 2px solid #eaeaea;
+      }
+    }
+  }
+}
+.log-reg {
+  @include padding-p-map($s-log-reg-padding);
+}
+ion-spinner {
+  --color: white;
+}
+
+.input-group-txt-eye {
+  position: absolute;
+  top: 47%;
+  color: #6a7bff;
+  font-size: 17px;
+  right: 12px;
+  transform: translate(0px, -50%);
+  font-weight: 700;
+}

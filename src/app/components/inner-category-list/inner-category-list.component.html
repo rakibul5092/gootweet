@@ -1,0 +1,18 @@
+<ion-content class="inner-container">
+  <label>
+    <h6>Inner Kategorijos</h6> <ion-buttons *ngIf="me && me.uid === ownerUid" mode="ios"><ion-button
+        (click)="arrange = true">Arrange</ion-button></ion-buttons>
+  </label>
+  <div *ngIf="arrange" class="cancel-save">
+    <ion-button mode="md" color="danger" (click)="arrange= false">Cancel</ion-button>
+    <ion-button mode="md" color="success" (click)="onSave()">Save</ion-button>
+  </div>
+  <ion-reorder-group [disabled]="!arrange" (ionItemReorder)="handleReorder($any($event))">
+    <button mode="md" [disabled]="profileService.selectedInnerCategoryId==inner.id" id="open-modal" expand="block"
+      class="inner-item ion-activatable ripple-parent rounded-rectangle "
+      (click)="onSelectInnerCat(inner.id, inner.inner_category)" *ngFor="let inner of innerCategories">
+      <div class="name">{{inner.inner_category}}</div>
+      <ion-reorder *ngIf="arrange"></ion-reorder>
+    </button>
+  </ion-reorder-group>
+</ion-content>

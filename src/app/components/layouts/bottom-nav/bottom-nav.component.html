@@ -1,0 +1,14 @@
+<div [style]="(screenService.fullScreen | async)===true ? 'height: 0px' : 'height: 60px'" id="tabs" class="tabs ">
+  <ng-container *ngFor="let tab of tabs; let i =index">
+    <div class="tab d-flex flex-column justify-content-center align-items-center" (click)="onClick(tab, i, $event)"
+      *ngIf="tab.visible" [attr.selected]="tab.selected">
+      <ion-icon *ngIf="!(screenService.fullScreen|async)===true" class="nav-icon" [src]="tab.src"></ion-icon>
+      <ion-icon *ngIf="(newPostService.haveNewWallPost|async)===true && i === 0" name="ellipse"
+        class="new-wallpost-noti">
+      </ion-icon>
+      <span *ngIf="!me && cartListPopupService?.cartItems?.length>0 && tab.route === 'cart'" class="cart_count--mobile">
+        {{cartListPopupService?.cartItems?.length || ''}}
+      </span>
+    </div>
+  </ng-container>
+</div>

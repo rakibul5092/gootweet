@@ -1,0 +1,165 @@
+<!-- Modal -->
+<div class="custom-modal-body h-100">
+  <button (click)="close()" type="button" class="close remove_icon" data-dismiss="modal" aria-label="Close">
+    <img src="./../../assets/img/close.svg" alt="img" />
+  </button>
+  <div class="materials-list-cnt">
+    <div class="category-nav">
+      <ul class="nav nav-pills border-0 pt-0" id="pills-tab" role="tablist">
+        <li (click)="selectTab(1)" class="nav-item addAni">
+          <a [class]="selectedTab === 1? 'nav-link active':'nav-link'" id="pills-category-tab" data-toggle="pill"
+          role="tab" style="cursor: pointer" aria-selected="false"
+          aria-controls="pills-category">Kategorijos</a>
+        </li>
+        <li (click)="selectTab(2)" class="nav-item addAni">
+          <a [class]="selectedTab===2? 'nav-link active':'nav-link'" id="pills-sub-category-tab"
+          data-toggle="pill" role="tab" style="cursor: pointer" aria-controls="pills-sub-category"
+          aria-selected="false">Sub-kategorijos</a>
+        </li>
+
+      </ul>
+
+      <div class="log-reg search-cat-input reg-step-4 p-0">
+        <div *ngIf="selectedTab ===1" class="form-cnt form-cnt-1 category-input border-0">
+          <div class="row w-100">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Kategorija</h6>
+                </label>
+                <div class="form-input">
+                  <ion-input [(ngModel)]="category.data.category" type="text" name="railing_furniture"
+                  id="railing_furniture" class="form-control textIn" placeholder=""></ion-input>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <label>
+                <span style="visibility: hidden" class="">Kategorija</span>
+              </label>
+              <div class="form-group">
+                <button (click)="addCategory()" class="btn ctm-btn cart-btn btnNav">
+                  <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedTab===2" class="form-cnt form-cnt-1 sub-category-input border-0">
+          <div class="row w-100">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Kategorija</h6>
+                </label>
+                <div class="ctm-select" ctm-slt-n="cat_name">
+                  <div class="ctm-select-txt pad-l-10">
+                    <span class="select-txt" id="type_category">{{category?.data?.category}}</span>
+                    <span class="select-arr">
+                      <ion-icon name="chevron-forward"></ion-icon>
+                    </span>
+                  </div>
+                  <div class="ctm-option-box">
+                    <div (click)="selectedCategory(category)" *ngFor="let category of categories"
+                    class="ctm-option">
+                    {{category?.data?.category}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="form-group">
+              <label>
+                <h6 class="mb-0">Sub-Kategorija</h6>
+              </label>
+              <div class="form-input">
+                <ion-input [(ngModel)]="subCategory.data.sub_category" type="text" name="railing_furniture"
+                 class="form-control textIn" placeholder=""></ion-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <label>
+              <span style="visibility: hidden" class="">Kategorija</span>
+            </label>
+            <div class="form-group">
+              <button (click)="addSubCategory()" class="btn ctm-btn cart-btn btnNav">
+                <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-category" role="tabpanel"
+      aria-labelledby="pills-category-tab">
+      <div class="materials-list-list border-0">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr>
+              <th class="no-th" scope="col">Nr.</th>
+              <th *ngIf="selectedTab==1" scope="col">
+                Kategorija
+              </th>
+              <th *ngIf="selectedTab==2" scope="col">
+                Sub-Kategorija
+              </th>
+              <th scope="col">Data</th>
+              <th scope="col">Valdymas</th>
+            </tr>
+          </thead>
+          <!-- started categories list here -->
+          <tbody *ngIf="selectedTab==1">
+            <tr *ngFor="let category of categories; let i = index">
+              <td class="no-th" scope="row">{{'#'+(i+1)}}</td>
+              <td>{{category?.data?.category}}</td>
+              <td>{{category?.data?.timestamp?.toDate() | date:'yyyy-MM-dd'}}</td>
+              <td>
+                <button class="btn ctm-btn pro-btn btnNav">
+                  <img class="remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+                  Nustatymai
+                </button>
+                <br />
+                <button (click)="deleteCategory(category)" class="btn ctm-btn d-btn btnNav">
+                  <img class="remove_icon" src="./../../assets/img/delete.svg" alt="img" />
+                  Pašalinti
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <!-- started sub categories list here -->
+          <tbody *ngIf="selectedTab==2">
+            <tr *ngFor="let subcategory of subCategories; let i = index">
+              <td class="no-th" scope="row">{{'#'+(i+1)}}</td>
+              <td>{{subcategory?.data?.sub_category}}</td>
+              <td>{{subcategory?.data?.timestamp?.toDate() | date:'yyyy-MM-dd'}}</td>
+              <td>
+                <button class="btn ctm-btn pro-btn btnNav">
+                  <img class="remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+                  Nustatymai
+                </button>
+                <br />
+                <button (click)="deleteSubCategory(subcategory)" class="btn ctm-btn d-btn btnNav">
+                  <img class="remove_icon" src="./../../assets/img/delete.svg" alt="img" />
+                  Pašalinti
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+</div>
+</div>

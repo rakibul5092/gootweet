@@ -1,0 +1,9 @@
+@import "./../../../theme/mixins/_mixins";
+@import "./../../../theme/pages/purchase";
+@import "./../../../theme/pages/order-products";
+.status {
+  font-size: 16px;
+  color: #a3a3a3;
+  font-weight: 400;
+  text-transform: capitalize;
+}

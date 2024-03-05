@@ -1,0 +1,39 @@
+@import "./../../../theme/mixins/mixins";
+
+.blog-section {
+  .product-list {
+    .product-col {
+      @include max-width-p-map($designer-product-col-max-width);
+      @include flex-p-map($designer-product-col-flex);
+    }
+  }
+}
+.product-list1 {
+  .product {
+    .product-img-p {
+      height: 100%;
+    }
+
+    .product-txt {
+      .product-tlt {
+        display: flex;
+        .pro-btn {
+          white-space: nowrap;
+          height: max-content;
+          padding: 3px 30px;
+          margin-left: 15px;
+        }
+      }
+      .product-price {
+        display: flex;
+        align-items: center;
+        .current-price {
+          width: 35%;
+        }
+        .price-set {
+          width: 65%;
+        }
+      }
+    }
+  }
+}

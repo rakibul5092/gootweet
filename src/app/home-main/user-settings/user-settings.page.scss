@@ -1,0 +1,10 @@
+@import "./../../../theme/mixins/_mixins";
+@import "./../../../theme/pages/user-settings";
+ion-input {
+  --padding-start: 20px;
+}
+
+.component-container {
+  min-width: 390px;
+  margin-top: 20px;
+}

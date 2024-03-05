@@ -1,0 +1,152 @@
+<ion-content>
+  <div class="main-wrapper ">
+    <div class="back-li mobile-back d-block d-md-none p-3">
+      <span style="cursor: pointer;" (click)="nav.navigateBack('/')">
+        <ion-icon name="chevron-back"></ion-icon> Sugrįžti
+      </span>
+    </div>
+    <section class="purse-section advertisement-section advertisement-section-2">
+      <div class="advertisement-cnt mp-0">
+        <div class="advertisement-4-cnt">
+          <div (click)="nav.navigateBack('/')" style="display: inline-flex;align-items:center"
+            class="back-li d-none d-md-inline-block T_underLine">
+            <ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+          </div>
+          <div class="row m-0">
+            <div class="col-12 col-lg-6 p-0">
+              <div class="profile-pp">
+                <div class="profile-p">
+                  <div class="pro-cnt" *ngIf="me">
+                    <div class="pro-img">
+                      <img class="cover" [src]="(me?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+                    </div>
+                    <div class="pro-name-link">
+                      <div class="pro-name">{{me?.full_name|join_name}}</div>
+                    </div>
+                  </div>
+                  <div class="price">
+                    <div class="price-icon">
+                      <img src="./../../assets/img/wallet-b.svg" alt="img" />
+                    </div>
+                    <div class="price-am" *ngIf='wallet'>
+                      <div class="">Piniginė</div>
+                      <div class="pr-tlt">{{ (wallet?.balance).toFixed(2)+' tšk.'}}</div>
+                    </div>
+                  </div>
+                  <div (click)="topUp()" class="text-center">
+                    <button [disabled]="!me && !wallet" class="btn w-100 ctm-btn cart-btn btnNav">
+                      Pildyti mano piniginę
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 p-0">
+              <div class="wallet-history-cnt form-cnt border-0">
+                <div class="wallet-tlt mb-3">Piniginės istorija</div>
+                <div class="wallet-history-list">
+                  <table class="table table-striped mb-0">
+                    <thead>
+                      <tr>
+                        <th class="pt-0" scope="col">Data</th>
+                        <th class="pt-0" scope="col">Išrašas</th>
+                        <th class="pt-0" scope="col">Išlaidos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr [class]="tran.isCredit? 'active':''" *ngFor="let tran of transactions">
+                        <td>{{tran.timestamp.toDate() | date: 'yyyy-MM-dd'}}</td>
+                        <td style="cursor: pointer;" (click)="openInvoice(tran)">
+                          <img class="ar-n" src="./../../assets/img/arrow-circle-r.svg" alt="img" />
+                          <img class="ar-g" src="./../../assets/img/arrow-circle-g.svg" alt="img" />
+                          <img src="./../../assets/img/attach-file.svg" alt="img" />
+                          <!-- <ion-icon name="attach"></ion-icon> -->
+                          <!-- <a [href]="invoiceBase+tran.id+'.pdf'" target="_blank">Download</a> -->
+                        </td>
+                        <!-- <td>{{(tran?.isCredit? '+'+tran?.amount:'-'+tran?.amount)+' '+tran?.currency}} -->
+                        <!-- </td> -->
+                        <td>
+                          <ion-icon *ngIf="tran.type==='commission';" id="click-trigger" name="help-circle-outline"
+                            style="font-size: 25px;"></ion-icon>
+                          <ion-popover trigger="click-trigger" triggerAction="click">
+                            <ng-template>
+                              <ion-content class="ion-padding" scrollY="false">
+                                <div>
+                                  {{tran.paid+"€ - 5%, viso: "+'-'+tran.amount+"€"}}
+                                </div>
+
+                              </ion-content>
+                            </ng-template>
+                          </ion-popover>
+                        </td>
+
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="point-gift-cnt upload-post form-cnt border-0 d-none">
+                <div class="tlt upload-post-tlt">Iškelkite savo įrašą</div>
+                <div class="row mx-0 align-items-center">
+                  <div class="col-12 pl-0">
+                    <label class="mb-0">
+                      <h6>Pasirinkite dienos biudžetą</h6>
+                    </label>
+                  </div>
+                  <div class="col-12 col-md-6 pl-0 form-group">
+                    <div class="form-input">
+                      <span class="input-group-txt">Taškai</span>
+                      <input type="text" name="point" id="point" class="form-control point-input" placeholder="25" />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 form-group">
+                    <button class="btn ctm-btn d-btn">Patvirtinti</button>
+                  </div>
+                </div>
+                <div class="row mx-0 align-items-center">
+                  <div class="col-12 pl-0">
+                    <label>
+                      <h6>Aktyvus skelbimo iškėlimo laikotarpis</h6>
+                    </label>
+                  </div>
+                  <div class="col-12 col-md-6 pl-0 form-group">
+                    <div class="form-input">
+                      <span class="input-group-txt"><img src="./../../assets/img/calendar.svg" alt="img" /></span>
+                      <input type="text" name="date-f" id="date-f" class="form-control" placeholder="20-08-2020" />
+                      <span class="r-ar">
+                        <ion-icon name="chevron-forward"></ion-icon>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 form-group">
+                    <div class="form-input">
+                      <span class="input-group-txt"><img src="./../../assets/img/calendar.svg" alt="img" /></span>
+                      <input type="text" name="date-l" id="date-l" class="form-control" placeholder="20-08-2020" />
+                    </div>
+                  </div>
+                </div>
+                <div class="post-seen-txt">
+                  <div class="post-s-icon">
+                    <img src="./../../assets/img/warning.svg" alt="img" />
+                  </div>
+                  <div class="post-s-txt">
+                    <div class="post-s-txt1">
+                      Jūsų įraša pamatys vidutiniškai
+                    </div>
+                    <div class="post-s-txt2">100 000 vatotojų</div>
+                  </div>
+                </div>
+                <div class="total-point"><span>Iš viso: </span>125 taškai</div>
+                <div class="text-right">
+                  <button class="btn ctm-btn pro-btn">Praleisti</button>
+                  <button class="btn ctm-btn cart-btn">Užsakyti</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

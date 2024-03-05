@@ -1,0 +1,57 @@
+<ion-content>
+  <div class="main-container">
+    <div class="container mt-5 pt-5">
+      <div
+        (click)="gotoPaymentConfirmation()"
+        class="payment-method p-2 d-flex bg-white"
+      >
+        <button class="bg-transparent">
+          <ion-icon
+            name="ellipse-outline"
+            style="font-size: 30px"
+            class="text-dark"
+          ></ion-icon>
+        </button>
+        <button class="bg-transparent pl-2 d-flex align-items-center">
+          <ion-icon
+            name="card-outline"
+            style="font-size: 37px"
+            class="text-danger pr-2"
+          ></ion-icon>
+          <span style="font-size: 19px">Add a new card</span>
+        </button>
+      </div>
+      <div class="mt-4 p-2">
+        <div
+          style="height: 0.5px; background-color: #d1cdcd"
+          class="mb-2"
+        ></div>
+        <div class="d-flex align-items-center">
+          <span style="font-size: 17px"> 100% secure payment with</span>
+          <button class="bg-transparent pl-1 d-flex align-items-center">
+            <ion-icon
+              name="card-outline"
+              style="font-size: 28px"
+              class="text-dark"
+            ></ion-icon>
+          </button>
+          <button class="bg-transparent pl-0 d-flex align-items-center">
+            <ion-icon
+              name="id-card-outline"
+              style="font-size: 28px; transform: rotate(90deg)"
+              class="text-primary"
+            >
+            </ion-icon>
+          </button>
+          <button class="bg-transparent d-flex align-items-center">
+            <ion-icon
+              name="logo-pwa"
+              style="font-size: 28px"
+              class="text-dark"
+            ></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

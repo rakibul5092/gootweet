@@ -1,0 +1,44 @@
+<ion-content
+  style="
+    --padding-left: 15px;
+    --padding-top: 15px;
+    --padding-right: 15px;
+    --padding-bottom: 15px;
+  "
+>
+  <div
+    (click)="selected = img"
+    [style]="
+      'width: 100%;display: flex; justify-content: center; align-items: center;' +
+      (img === selected ? 'background: #dbdbdb;' : 'background: transparent;')
+    "
+    *ngFor="let img of images"
+  >
+    <img width="70" height="70" [src]="baseUrl + img" />
+  </div>
+</ion-content>
+<ion-footer>
+  <div
+    style="
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding: 15px;
+    "
+  >
+    <ion-button
+      (click)="onCancel()"
+      style="margin-right: 20px"
+      mode="md"
+      color="danger"
+      >Cancel</ion-button
+    >
+    <ion-button
+      (click)="OnSet()"
+      [disabled]="selected == ''"
+      mode="md"
+      color="success"
+      >Set Image</ion-button
+    >
+  </div>
+</ion-footer>

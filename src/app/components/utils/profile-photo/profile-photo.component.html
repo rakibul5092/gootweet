@@ -1,0 +1,18 @@
+<div (click)="gotoProfile()" class="img-round" [style]="'width: ' + size + 'px; height:' + size + 'px'">
+  <div *ngIf="isSlider" class="online-container">
+    <div class="online"></div>
+  </div>
+  <img [style]="'cursor: pointer;'+style" class="img-round-image" [src]="user?.profile_photo| sanitizeImage: ''" />
+</div>
+<div (click)="gotoProfile()" *ngIf="nameVisible" class="pro-name" [style]="'width: '+nameWidth"
+  [title]="user?.full_name | join_name">
+  <div>
+    {{ user?.full_name | join_name }}
+    <img *ngIf="verified" [src]="verifyIcon" />
+  </div>
+  <div *ngIf="ratingVisible" class="rating d-flex justify-content-center align-items-center mt-1">
+    <img width="17" height="17" src="assets/img/star-border.svg" />
+    {{' 4.9/5'}}
+  </div>
+  <div *ngIf="statusVisible">{{profileText|| (user?.rule | status: user?.status)+' . '+convertedTime}}</div>
+</div>

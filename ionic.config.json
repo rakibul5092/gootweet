@@ -1,0 +1,7 @@
+{
+  "name": "Gootweet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

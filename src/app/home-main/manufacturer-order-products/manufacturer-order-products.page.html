@@ -1,0 +1,160 @@
+<ion-content>
+	<div class="main-wrapper  products">
+
+		<section class="two-div-section-d py-5 mp-0">
+			<div class="row m-0">
+				<div class="col-12 column-mid mt-5 mt-md-0 p-0">
+					<div class="back-btn">
+						<span class="T_underLine" style="display: inline-flex;align-items:center" (click)="back()">
+							<ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon>
+							Sugrįžti
+						</span>
+					</div>
+					<div class="tlt tlt1 mb-3 mx-3 mx-md-0">Prekės</div>
+					<div class="purchase-list-cnt">
+						<div class="purchase-list">
+							<div *ngFor="let product of order?.products" class="single-purchase m-radius-0">
+								<div class="row ml-0">
+									<div class="col-12 purchase-col1 pl-0 mb-3 mb-md-0">
+										<div class="row m-0">
+											<div class="col-12 p-0"><img class="cover"
+													[src]="product.data.main_images|getImage" alt="img" />
+											</div>
+
+										</div>
+									</div>
+									<div class="col-12 purchase-col2 pl-0">
+										<!-- <span class="ware-h">Sandėlys<span class="w-count">14</span></span> -->
+										<div class="basket-txt-all">
+											<div class="tlt tlt1 mb-1">{{product?.data?.title}}</div>
+											<div class="purchase-price">
+												<div class="price-single d-flex align-items-center">
+													<div class="pr-ur-tlt mr-2" style="margin-bottom: 5px;">Kaina:</div>
+													<div class="price" style="font-size: 18px; margin-bottom: 5px;">
+														€{{product?.item_price}}<span class="pr-type">/vnt</span></div>
+												</div>
+												<div class="price-single">
+													<div class="pr-ur-tlt">PREKĖS ID:<span
+															class="id-txt">{{product?.data?.product_id}}</span>
+													</div>
+													<div *ngIf="product?.data?.good?.code" class="pr-ur-tlt">MEDŽIAGOS
+														ID:<span class="id-txt">{{product?.data?.good?.code}}</span>
+													</div>
+												</div>
+											</div>
+											<div *ngIf="product?.data?.good?.images"
+												class="catalog-cnt d-flex align-items-center border-0 p-0 m-0">
+												<div class="cat-tlt mr-2" style="margin-bottom: 10px;">MEDŽIAGOS</div>
+												<div class="catalog-ul">
+													<span class="catalog-li mr-3">
+														{{product?.data?.good?.material}}
+													</span>
+													<img style="height: 25px; width: 25px;"
+														[src]="product.data.good.images | getMaterialImage" />
+
+												</div>
+											</div>
+											<div class="catalog-cnt d-flex align-items-center border-0 p-0 m-0">
+												<div class="cat-tlt mr-2" style="margin-bottom: 10px;">Kiekis:</div>
+												<div class="catalog-ul">
+													<span class="catalog-li">
+														{{product?.data?.quantity}} vnt.
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<ion-textarea *ngIf="order?.note" [value]="order?.note" disabled="true"
+								style="background: #f5f5f6;border: 1px solid #dfdfe2;" rows="2" cols="20"
+								spellcheck="true" placeholder="Čia įveskite visas pastabas..."></ion-textarea>
+
+
+
+						</div>
+
+
+					</div>
+				</div>
+				<div class="col-12 column-left pr-0">
+					<div class="left-side-bar mx-3 mx-md-0">
+						<div class="left-side-cnt order-s-cnt">
+							<div class="pro-cnt">
+								<div class="pro-name-link pl-0 w-100">
+									<div class="pro-name pb-1">Užsakymas #{{order?.id}}</div>
+									<div class="pro-link">{{order?.timestamp.toDate()|date:'yyyy-MM-dd'}}</div>
+									<div class="order-btn text-center mt-4" style="display: flex;
+									width: 100%;">
+										<button [disabled]="!order" (click)="setInProgress(order.id, order.inProgress)"
+											class="btn ctm-btn pro-btn">
+											<img *ngIf="order?.inProgress" class="img-m"
+												src="./../../assets/img/done-b.svg" alt="img" />Vykdomas</button>
+										<button [disabled]="!order" (click)="setSent(order.id, order.sent)"
+											class="btn ctm-btn pro-btn"><img *ngIf="order?.sent" class="img-m"
+												src="./../../assets/img/done-b.svg" alt="img" />Išsiųstas</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="left-side-cnt user-info-s-cnt">
+							<div class="pro-cnt">
+								<div class="pro-img border-0">
+									<img class="cover" [src]="(userData?.profile_photo|sanitizeImage:'150_150_')"
+										alt="img" />
+								</div>
+								<div class="pro-name-link">
+									<div class="pro-name pb-1">{{userData?.full_name|join_name}}
+
+									</div>
+								</div>
+							</div>
+							<div class="user-info">
+								<div class="info-tlt tlt">Informacija</div>
+								<table>
+									<tr>
+										<th>Tel. nr.</th>
+										<td>{{userData?.details?.telephone_no ? userData?.details?.telephone_no : '--'}}
+										</td>
+									</tr>
+									<tr>
+										<th>El. paštas</th>
+										<td>{{userData?.email}}</td>
+									</tr>
+									<tr>
+										<th>Miestas</th>
+										<td>{{userData?.city ? userData?.city : '--'}}</td>
+									</tr>
+									<tr>
+										<th>Adresas</th>
+										<td>{{userData?.address ? userData?.address : '--'}}</td>
+									</tr>
+									<tr>
+										<th>Namas</th>
+										<td>{{userData?.house_number ? userData?.house_number : '--'}}</td>
+									</tr>
+									<tr>
+										<th>Buto numeris</th>
+										<td>{{userData?.flat_number ? userData?.flat_number : '--'}}</td>
+									</tr>
+
+									<tr>
+										<th>Pašto kodas</th>
+										<td>{{userData?.postal_code ? userData?.postal_code : '--'}}</td>
+									</tr>
+								</table>
+
+								<!-- <div class="info-tlt info-tlt1 tlt ">Palildoma informacija</div>
+                <div class="info-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                  vulputate mattis facilisis. Cras id aliquam nulla. Donec tempus ultrices vehicula.
+              </div> -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</ion-content>

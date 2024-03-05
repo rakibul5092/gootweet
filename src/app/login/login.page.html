@@ -1,0 +1,112 @@
+<ion-content>
+  <div class="main-wrapper mb-0">
+    <div class="log-reg">
+      <div class="log-reg-cnt">
+        <div class="row m-0" [style]="(screen.width|async) <768? 'margin-top:50px!important':'margin-top:0px'">
+          <div class="col-md-6 p-0">
+            <div class="form-cnt" style="padding: 15px 30px;">
+              <div class="col p-0">
+                <h4 class="dark-text pl-md-0 pl-3 text-left log-tlt">
+                  Prisijungti
+                </h4>
+              </div>
+              <form [formGroup]="onLoginForm">
+                <div class="form-group" style="margin-bottom: 0px;padding-bottom: 0px;">
+                  <label style="margin-bottom: 0px;">
+                    <h6 class="dark-text f-20 weaker">El. paštas</h6>
+                  </label>
+                  <div class="form-input">
+                    <span class="input-group-txt"><img src="./../../assets/img/gmail.svg" alt="img" /></span>
+                    <input formControlName="email" type="email" name="email" id="email"
+                      class="form-control email-input textIn" placeholder="Jūsų el. paštas" />
+                  </div>
+                  <p ion-text class="text04" style="height: 20px;">
+                    <ion-label *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')"
+                      style="font-size: 12px; color: red">
+                      Required Field
+                    </ion-label>
+                  </p>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0px;padding-bottom: 0px;">
+                  <label style="margin-bottom: 0px;">
+                    <h6 class="dark-text f-20 weaker" style="margin-top: 0px;">Slaptažodis</h6>
+                  </label>
+                  <div class="form-input">
+                    <span class="input-group-txt"><img src="./../../assets/img/lock.svg" alt="img" /></span>
+                    <input formControlName="password" [type]="passType" name="password" id="password"
+                      class="form-control textIn" placeholder="Jūsų slaptažodis" />
+                    <span class="input-group-txt-eye">
+                      <ion-icon (click)="passType == 'password'? passType='text':passType='password' "
+                        [name]="passType=='password'? 'eye':'eye-off'" style="
+                              font-size: 20px;
+                              margin-top: 10px;
+                              cursor: pointer;
+                            "></ion-icon>
+                    </span>
+                  </div>
+                  <p ion-text class="text04" style="height: 20px;">
+                    <ion-label
+                      *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')"
+                      style="font-size: 12px; color: red">
+                      Required Field
+                    </ion-label>
+                  </p>
+                </div>
+                <div class="row text-right mb-2">
+                  <div (click)="openResetPopover()" class="col-12">
+                    <a class="T_underLine" style="
+                            cursor: pointer;
+                            text-decoration: underline;
+                            font-size: 12px;
+                            color: rgb(82, 82, 194);
+                          ">Pamirštas slaptažodis?</a>
+                  </div>
+                </div>
+                <div class="row mt-3 text-center">
+                  <div class="col-12">
+                    <button [disabled]="userLoginService.disabled" (click)="logIn()" type="submit" id="login_submit"
+                      class="btn ctm-btn log-reg-btn btnHovr">
+                      {{!(loading|async)?'Prisijungti':'' }}
+                      <ion-spinner *ngIf="loading|async" name="circular"></ion-spinner>
+                    </button>
+                  </div>
+                </div>
+                <div class="row mt-2 text-center mr-0 mt-4">
+                  <div class="col-12 pr-0 mb-2">
+                    <button [disabled]="userLoginService.disabled" (click)="userLoginService.loginWithGmail()"
+                      class="btn ctm-btn w-100 btnHovr google-btn">
+                      <ion-icon name="logo-google"></ion-icon>
+                      Google
+                    </button>
+                  </div>
+                  <div class="lg-txt-cnt w-100 ">
+                    <div class="lg-txt">Dar neturi paskyros?</div>
+                    <div class="lg-txt-btn">
+                      <a routerLink="/register" routerDirection="forward"><button class="btn ctm-btn btnHovr">
+                          Registruotis
+                        </button></a>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 pr-0">
+                    <button [disabled]="userLoginService.disabled" (click)="userLoginService.loginWithFacebook()"
+                      class="btn ctm-btn w-100 btnHovr fb-btn">
+                      <ion-icon name="logo-facebook"></ion-icon>
+                      Facebook
+                    </button>
+                  </div> -->
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <div class="col-md-6 p-0">
+            <div class="reg-log-img">
+              <app-cloudinary-player></app-cloudinary-player>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

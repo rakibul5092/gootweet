@@ -1,0 +1,59 @@
+<div class="products-single active m-border-0 m-radius-0">
+  <div class="products-img-txt">
+    <span class="products-check">
+      <label class="ctm-container">
+        <input type="checkbox" />
+        <span class="checkmark likeDislike"></span>
+      </label>
+    </span>
+    <div class="products-img">
+      <img class="img" [src]="product?.main_images | getImage" />
+    </div>
+
+    <div class="products-txt">
+      <div class="products-tlt">
+        {{ product?.title | shorten: 14:"..." }}
+      </div>
+      <div class="products-id-c">
+        <span class="products-id">{{ "ID: " + product.product_id }}</span>
+        <span class="products-count-txt">Sandėlys
+          <span class="count-num">{{ product?.good | getStock }}</span></span>
+      </div>
+      <div class="products-price">
+        <div class="products-price-tlt">Kaina</div>
+        <div class="products-price">
+          {{ product?.good | getPrice
+          }}<span class="price-t">{{ product?.good | getUnit }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="catalog-cnt">
+    <div class="catalog-ul">
+      <div class="pro-m-slider">
+        <span *ngIf="product.good | isArray">
+          <span class="catalog-li" *ngFor="let material of product.good | slice: 0:4; let i = index">
+            <div class="col-12 p-0 cat-div">
+              <img [src]="material.images | getMaterialImage" alt="" style="width: 25px; height: 25px" />
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="products-btn">
+    <button (click)="copyMessage(product.id)" class="btn ctm-btn pro-btn btnHovr">
+      <img class="" style="margin-left: 5px" style="margin-left: 5px" src="./../../assets/img/chat.svg" alt="img" />
+      Chat kodas<img class="" style="margin-left: 5px" src="./../../assets/img/copy.svg" alt="img" />
+    </button>
+    <span (click)="openSingleProduct()">
+      <img class="info-img remove_icon" src="./../../assets/img/info.svg" alt="img" />
+    </span>
+    <button (click)="askPermissionForDelete()" class="btn ctm-btn pro-btn delete-btn">
+      <img class="m-0 remove_icon" src="./../../assets/img/delete-w.svg" alt="img" />
+    </button>
+    <button (click)="openSetting()" class="btn ctm-btn pro-btn setting-btn">
+      <img class="m-0 remove_icon" src="./../../assets/img/settings-g.svg" alt="img" />
+    </button>
+  </div>
+</div>

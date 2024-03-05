@@ -1,0 +1,3027 @@
+@mixin transform($v, $d1, $d2: null) {
+  @if $v==translateX {
+    @include translateX($d1);
+  } @else if $v==rotate {
+    @include rotate($d1);
+  } @else if $v==translateY {
+    @include translateY($d1);
+  } @else if $v==translate {
+    @include translate($d1, $d2);
+  }
+}
+
+@mixin translate($v1, $v2) {
+  transform: translate($v1, $v2);
+  -webkit-transform: translate($v1, $v2);
+}
+
+@mixin translateX($v1) {
+  transform: translateX($v1);
+  -webkit-transform: translateX($v1);
+}
+
+@mixin translateY($v1) {
+  transform: translateY($v1);
+  -webkit-transform: translateY($v1);
+}
+
+@mixin rotate($v1) {
+  transform: rotate($v1);
+  -webkit-transform: rotate($v1);
+}
+
+@mixin transition-duration($v1) {
+  -webkit-transition-duration: $v1;
+  transition-duration: $v1;
+}
+
+@mixin dimension($h: null, $w: null) {
+  @if $h !=null {
+    height: $h;
+  }
+
+  @if $w !=null {
+    width: $w;
+  }
+}
+
+@mixin dimensionMax($h: null, $w: null) {
+  @if $h !=null {
+    max-height: $h;
+  }
+
+  @if $w !=null {
+    max-width: $w;
+  }
+}
+
+@mixin dimensionMin($h: null, $w: null) {
+  @if $h !=null {
+    min-height: $h;
+  }
+
+  @if $w !=null {
+    min-width: $w;
+  }
+}
+
+@mixin directionPos($t: null, $r: null, $b: null, $l: null) {
+  @if $t !=null {
+    top: $t;
+  }
+
+  @if $r !=null {
+    right: $r;
+  }
+
+  @if $b !=null {
+    bottom: $b;
+  }
+
+  @if $l !=null {
+    left: $l;
+  }
+}
+
+/* breakpoint mixin*/
+@mixin breakpoint($mq01: 0, $mq2: false, $maxmin: max-width) {
+  @if $mq2==false {
+    @media ($maxmin: $mq01) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $mq01) and (max-width: $mq2) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-h($mq01: 0, $mq2: false, $maxmin: max-height) {
+  @if $mq2==false {
+    @media ($maxmin: $mq01) {
+      @content;
+    }
+  } @else {
+    @media (min-height: $mq01) and (max-height: $mq2) {
+      @content;
+    }
+  }
+}
+
+/* responsive font size mixin*/
+@mixin font-size-map($font-size-map) {
+  @each $breakpoint, $font-size in $font-size-map {
+    @if $breakpoint==null {
+      font-size: $font-size;
+    } @else {
+      @include breakpoint($breakpoint) {
+        font-size: $font-size;
+      }
+    }
+  }
+}
+
+/* responsive width mixin*/
+@mixin width-p-map($width-p-map) {
+  @each $breakpoint, $width-p in $width-p-map {
+    @if $breakpoint==null {
+      width: $width-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        width: $width-p;
+      }
+    }
+  }
+}
+
+/*/ responsive min-width mixin*/
+@mixin min-width-p-map($min-width-p-map) {
+  @each $breakpoint, $min-width-p in $min-width-p-map {
+    @if $breakpoint==null {
+      min-width: $min-width-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        min-width: $min-width-p;
+      }
+    }
+  }
+}
+
+/*/ responsive min-height mixin*/
+@mixin min-height-p-map($min-height-p-map) {
+  @each $breakpoint, $min-height-p in $min-height-p-map {
+    @if $breakpoint==null {
+      min-height: $min-height-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        min-height: $min-height-p;
+      }
+    }
+  }
+}
+
+/*/ responsive height mixin*/
+@mixin height-p-map($height-p-map) {
+  @each $breakpoint, $height-p in $height-p-map {
+    @if $breakpoint==null {
+      height: $height-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        height: $height-p;
+      }
+    }
+  }
+}
+
+/* responsive top mixin*/
+@mixin top-p-map($top-p-map) {
+  @each $breakpoint, $top-p in $top-p-map {
+    @if $breakpoint==null {
+      top: $top-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        top: $top-p;
+      }
+    }
+  }
+}
+
+/* responsive right mixin*/
+@mixin right-p-map($right-p-map) {
+  @each $breakpoint, $right-p in $right-p-map {
+    @if $breakpoint==null {
+      right: $right-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        right: $right-p;
+      }
+    }
+  }
+}
+
+/* responsive bottom mixin*/
+@mixin bottom-p-map($bottom-p-map) {
+  @each $breakpoint, $bottom-p in $bottom-p-map {
+    @if $breakpoint==null {
+      bottom: $bottom-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        bottom: $bottom-p;
+      }
+    }
+  }
+}
+
+/* responsive left mixin*/
+@mixin left-p-map($left-p-map) {
+  @each $breakpoint, $left-p in $left-p-map {
+    @if $breakpoint==null {
+      left: $left-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        left: $left-p;
+      }
+    }
+  }
+}
+
+/* responsive transform: translate() mixin*/
+@mixin transform-translate-p-map($transform-translate-p-map) {
+  @each $breakpoint, $transform-translate-p in $transform-translate-p-map {
+    @if $breakpoint==null {
+      transform: translate($transform-translate-p);
+    } @else {
+      @include breakpoint($breakpoint) {
+        transform: translate($transform-translate-p);
+      }
+    }
+  }
+}
+
+/* responsive line-height mixin*/
+@mixin line-height-p-map($line-height-p-map) {
+  @each $breakpoint, $line-height-p in $line-height-p-map {
+    @if $breakpoint==null {
+      line-height: $line-height-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        line-height: $line-height-p;
+      }
+    }
+  }
+}
+
+/* responsive padding mixin*/
+@mixin padding-p-map($padding-p-map) {
+  @each $breakpoint, $padding-p in $padding-p-map {
+    @if $breakpoint==null {
+      padding: $padding-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        padding: $padding-p;
+      }
+    }
+  }
+}
+
+/* responsive font-size mixin*/
+@mixin font-size-p-map($font-size-p-map) {
+  @each $breakpoint, $font-size-p in $font-size-p-map {
+    @if $breakpoint==null {
+      font-size: $font-size-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        font-size: $font-size-p;
+      }
+    }
+  }
+}
+
+/* responsive margin-top mixin for height*/
+@mixin margin-top-p-map-h($margin-top-p-map) {
+  @each $breakpoint, $margin-top-p in $margin-top-p-map {
+    @if $breakpoint==null {
+      margin-top: $margin-top-p;
+    } @else {
+      @include breakpoint-h($breakpoint) {
+        margin-top: $margin-top-p;
+      }
+    }
+  }
+}
+
+/* responsive margin-top mixin*/
+@mixin margin-top-p-map($margin-top-p-map) {
+  @each $breakpoint, $margin-top-p in $margin-top-p-map {
+    @if $breakpoint==null {
+      margin-top: $margin-top-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        margin-top: $margin-top-p;
+      }
+    }
+  }
+}
+
+/* responsive margin-right mixin*/
+@mixin margin-right-p-map($margin-right-p-map) {
+  @each $breakpoint, $margin-right-p in $margin-right-p-map {
+    @if $breakpoint==null {
+      margin-right: $margin-right-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        margin-right: $margin-right-p;
+      }
+    }
+  }
+}
+
+/* responsive margin-bottom mixin*/
+@mixin margin-bottom-p-map($margin-bottom-p-map) {
+  @each $breakpoint, $margin-bottom-p in $margin-bottom-p-map {
+    @if $breakpoint==null {
+      margin-bottom: $margin-bottom-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        margin-bottom: $margin-bottom-p;
+      }
+    }
+  }
+}
+
+/* responsive margin mixin*/
+@mixin margin-p-map($margin-p-map) {
+  @each $breakpoint, $margin-p in $margin-p-map {
+    @if $breakpoint==null {
+      margin: $margin-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        margin: $margin-p;
+      }
+    }
+  }
+}
+
+/* responsive margin-left mixin*/
+@mixin margin-left-p-map($margin-left-p-map) {
+  @each $breakpoint, $margin-left-p in $margin-left-p-map {
+    @if $breakpoint==null {
+      margin-left: $margin-left-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        margin-left: $margin-left-p;
+      }
+    }
+  }
+}
+
+@mixin letter-spacing-p-map($letter-spacing-p-map) {
+  @each $breakpoint, $letter-spacing-p in $letter-spacing-p-map {
+    @if $breakpoint==null {
+      letter-spacing: $letter-spacing-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        letter-spacing: $letter-spacing-p;
+      }
+    }
+  }
+}
+
+/* responsive margin mixin for height*/
+@mixin margin-p-map-h($margin-p-map) {
+  @each $breakpoint, $margin-p in $margin-p-map {
+    @if $breakpoint==null {
+      margin: $margin-p;
+    } @else {
+      @include breakpoint-h($breakpoint) {
+        margin: $margin-p;
+      }
+    }
+  }
+}
+
+@mixin display-p-map($display-p-map) {
+  @each $breakpoint, $display-p in $display-p-map {
+    @if $breakpoint==null {
+      display: $display-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        display: $display-p;
+      }
+    }
+  }
+}
+
+@mixin float-p-map($float-p-map) {
+  @each $breakpoint, $float-p in $float-p-map {
+    @if $breakpoint==null {
+      float: $float-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        float: $float-p;
+      }
+    }
+  }
+}
+
+@mixin text-align-p-map($text-align-p-map) {
+  @each $breakpoint, $text-align-p in $text-align-p-map {
+    @if $breakpoint==null {
+      text-align: $text-align-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        text-align: $text-align-p;
+      }
+    }
+  }
+}
+
+@mixin position-p-map($position-p-map) {
+  @each $breakpoint, $position-p in $position-p-map {
+    @if $breakpoint==null {
+      position: $position-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        position: $position-p;
+      }
+    }
+  }
+}
+
+@mixin border-bottom-p-map($border-bottom-p-map) {
+  @each $breakpoint, $border-bottom-p in $border-bottom-p-map {
+    @if $breakpoint==null {
+      border-bottom: $border-bottom-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        border-bottom: $border-bottom-p;
+      }
+    }
+  }
+}
+
+@mixin justify-content-p-map($justify-content-p-map) {
+  @each $breakpoint, $justify-content-p in $justify-content-p-map {
+    @if $breakpoint==null {
+      justify-content: $justify-content-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        justify-content: $justify-content-p;
+      }
+    }
+  }
+}
+
+/* 27-06*/
+/* background*/
+@mixin background-p-map($background-p-map) {
+  @each $breakpoint, $background-p in $background-p-map {
+    @if $breakpoint==null {
+      background: $background-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        background: $background-p;
+      }
+    }
+  }
+}
+
+/* padding-top*/
+@mixin padding-top-p-map($padding-top-p-map) {
+  @each $breakpoint, $padding-top-p in $padding-top-p-map {
+    @if $breakpoint==null {
+      padding-top: $padding-top-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        padding-top: $padding-top-p;
+      }
+    }
+  }
+}
+
+/* border-radius*/
+@mixin border-radius-p-map($border-radius-p-map) {
+  @each $breakpoint, $border-radius-p in $border-radius-p-map {
+    @if $breakpoint==null {
+      border-radius: $border-radius-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        border-radius: $border-radius-p;
+      }
+    }
+  }
+}
+
+/* border-right*/
+@mixin border-right-p-map($border-right-p-map) {
+  @each $breakpoint, $border-right-p in $border-right-p-map {
+    @if $breakpoint==null {
+      border-right: $border-right-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        border-right: $border-right-p;
+      }
+    }
+  }
+}
+
+/* border-left*/
+@mixin border-left-p-map($border-left-p-map) {
+  @each $breakpoint, $border-left-p in $border-left-p-map {
+    @if $breakpoint==null {
+      border-left: $border-left-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        border-left: $border-left-p;
+      }
+    }
+  }
+}
+
+/* flex*/
+@mixin flex-p-map($flex-p-map) {
+  @each $breakpoint, $flex-p in $flex-p-map {
+    @if $breakpoint==null {
+      flex: $flex-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        flex: $flex-p;
+      }
+    }
+  }
+}
+
+/* max-width*/
+@mixin max-width-p-map($max-width-p-map) {
+  @each $breakpoint, $max-width-p in $max-width-p-map {
+    @if $breakpoint==null {
+      max-width: $max-width-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        max-width: $max-width-p;
+      }
+    }
+  }
+}
+
+@mixin padding-left-p-map($padding-left-p-map) {
+  @each $breakpoint, $padding-left-p in $padding-left-p-map {
+    @if $breakpoint==null {
+      padding-left: $padding-left-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        padding-left: $padding-left-p;
+      }
+    }
+  }
+}
+
+@mixin padding-right-p-map($padding-right-p-map) {
+  @each $breakpoint, $padding-right-p in $padding-right-p-map {
+    @if $breakpoint==null {
+      padding-right: $padding-right-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        padding-right: $padding-right-p;
+      }
+    }
+  }
+}
+
+@mixin padding-bottom-p-map($padding-bottom-p-map) {
+  @each $breakpoint, $padding-bottom-p in $padding-bottom-p-map {
+    @if $breakpoint==null {
+      padding-bottom: $padding-bottom-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        padding-bottom: $padding-bottom-p;
+      }
+    }
+  }
+}
+
+@mixin border-p-map($border-p-map) {
+  @each $breakpoint, $border-p in $border-p-map {
+    @if $breakpoint==null {
+      border: $border-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        border: $border-p;
+      }
+    }
+  }
+}
+
+/* color*/
+@mixin color-p-map($color-p-map) {
+  @each $breakpoint, $color-p in $color-p-map {
+    @if $breakpoint==null {
+      color: $color-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        color: $color-p;
+      }
+    }
+  }
+}
+
+/* flex-wrap*/
+@mixin flex-wrap-p-map($flex-wrap-p-map) {
+  @each $breakpoint, $flex-wrap-p in $flex-wrap-p-map {
+    @if $breakpoint==null {
+      flex-wrap: $flex-wrap-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        flex-wrap: $flex-wrap-p;
+      }
+    }
+  }
+}
+
+/* max-height*/
+@mixin max-height-p-map($max-height-p-map) {
+  @each $breakpoint, $max-height-p in $max-height-p-map {
+    @if $breakpoint==null {
+      max-height: $max-height-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        max-height: $max-height-p;
+      }
+    }
+  }
+}
+
+/* overflow*/
+@mixin overflow-p-map($overflow-p-map) {
+  @each $breakpoint, $overflow-p in $overflow-p-map {
+    @if $breakpoint==null {
+      overflow: $overflow-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        overflow: $overflow-p;
+      }
+    }
+  }
+}
+
+/* overflow-y*/
+@mixin overflow-y-p-map($overflow-y-p-map) {
+  @each $breakpoint, $overflow-y-p in $overflow-y-p-map {
+    @if $breakpoint==null {
+      overflow-y: $overflow-y-p;
+    } @else {
+      @include breakpoint($breakpoint) {
+        overflow-y: $overflow-y-p;
+      }
+    }
+  }
+}
+
+/*overflow-y*/
+$m-overflow-y-auto: (
+  null: null,
+  767px: auto,
+);
+/*border*/
+$pur-th-purchase-col3-purchase-price-flex-wrap: (
+  null: null,
+  767px: wrap,
+);
+/*border*/
+$mb-z-border: (
+  null: null,
+  767px: none !important,
+);
+/*border-radius*/
+$mb-z-border-radius: (
+  null: 5px,
+  767px: 0 !important,
+);
+$m-z-border-radius: (
+  null: null,
+  767px: 0 !important,
+);
+$like-btn-border-radius: (
+  null: 15px,
+  767px: 5px,
+);
+/*right*/
+$m-reviews-delet-i-right: (
+  null: 10px,
+  767px: 20px,
+);
+/*top*/
+$reviews-delet-i-top: (
+  null: 10px,
+  991px: -35px,
+);
+$m-reviews-delet-i-top: (
+  null: 10px,
+  767px: 30px,
+);
+
+/*min-height*/
+$setting-ul-min-height: (
+  null: 390px,
+  767px: max-content,
+);
+
+/*left*/
+$m-top-btn-left: (
+  null: null,
+  767px: 0,
+);
+$m-top-btn-position: (
+  null: absolute,
+  767px: inherit,
+);
+$m-top-btn-bottom: (
+  null: 20px,
+  767px: 0,
+);
+/*margin-right*/
+$navbar-brand-margin-right: (
+  null: null,
+  575px: 5px,
+);
+
+/*min-width*/
+$notification-popover-content-width: (
+  null: calc(335px + 5%),
+  1500px: calc(335px + 5%),
+  1450px: calc(335px + 6%),
+  1300px: calc(265px + 7%),
+  767px: 100%,
+);
+
+$home-page-post-padding-right: (
+  null: 8%,
+  1500px: 7%,
+  1450px: 6%,
+  1300px: 5%,
+  767px: 100%,
+);
+$chat-pop-min-width: (
+  null: 350px !important,
+  767px: 100% !important,
+);
+$navbar-brand-img-min-width: (
+  null: 114px,
+  575px: 80px,
+  370px: 70px,
+);
+
+/*border-left*/
+$noti-a-border-left: (
+  null: 1px solid #eaeaea,
+  767px: none,
+);
+
+/*border-right*/
+$noti-a-border-right: (
+  null: 1px solid #eaeaea,
+  767px: none,
+);
+
+/* position*/
+$reply-btn-position: (
+  null: null,
+  767px: absolute,
+);
+
+$pro-cnt-al-btn-position: (
+  null: absolute,
+  1250px: static,
+  991px: absolute,
+  575px: static,
+);
+$li-btn-position: (
+  null: absolute,
+  1300px: static,
+);
+$sort-menu-btn-position: (
+  null: absolute,
+  1400px: static,
+);
+$materials-mat-btn-position: (
+  null: absolute,
+  991px: static,
+);
+/* flex*/
+$selected-img-ul-col-12-flex: (
+  null: 0 0 20%,
+);
+$materials-col-12-flex: (
+  null: 0 0 20%,
+  991px: 0 0 25%,
+  767px: 0 0 33.33%,
+  575px: 0 0 50%,
+);
+$left-modal-column-flex: (
+  null: 0 0 320px,
+  1300px: 0 0 250px,
+  767px: 0 0 100%,
+);
+$right-modal-column-flex: (
+  null: 0 0 calc(100% - 320px),
+  1300px: 0 0 calc(100% - 250px),
+  767px: 0 0 100%,
+);
+$in-relative-products-col-12-flex: (
+  null: null,
+  1300px: 0 0 33.33%,
+  1100px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$in-relative-products-in-pro-col-flex: (
+  null: null,
+  1250px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$program-pro-col-flex: (
+  null: null,
+  1250px: 0 0 50%,
+);
+$modal-ten-products-list-cnt-col-12-flex: (
+  null: 20%,
+  1700px: 0 0 25%,
+  1300px: 0 0 33.33%,
+  1100px: 0 0 50%,
+  991px: 0 0 100%,
+);
+$modal-products-list-cnt-col-12-flex: (
+  null: null,
+  1650px: 0 0 33.33%,
+  1200px: 0 0 50%,
+  991px: 0 0 100%,
+);
+$products-list-cnt-col-12-flex: (
+  null: null,
+  1650px: 0 0 50%,
+  1100px: 0 0 100%,
+);
+$assign-services-cnt-res-col-12-flex: (
+  null: null,
+  1200px: 0 0 100%,
+);
+$products-column-left-flex: (
+  null: 0 0 350px,
+  991px: 0 0 100%,
+);
+$products-column-mid-flex: (
+  null: 0 0 calc(100% - 350px),
+  991px: 0 0 100%,
+);
+$two-div-section-column-left-flex: (
+  null: 0 0 250px,
+  991px: 0 0 100%,
+);
+$two-div-section-column-mid-flex: (
+  null: 0 0 calc(100% - 250px),
+  991px: 0 0 100%,
+);
+$discount-left-flex: (
+  null: 0 0 285px,
+  1350px: 0 0 260px,
+  991px: 0 0 100%,
+);
+$discount-right-flex: (
+  null: 0 0 calc(100% - 285px),
+  1350px: 0 0 calc(100% - 260px),
+  991px: 0 0 100%,
+);
+$user-settings-column-left-flex: (
+  null: 0 0 350px,
+  1150px: 0 0 280px,
+  767px: 0 0 100%,
+);
+$user-settings-column-mid-flex: (
+  null: 0 0 calc(100% - 350px),
+  1150px: 0 0 calc(100% - 280px),
+  767px: 0 0 100%,
+);
+$reviews-column-left-flex: (
+  null: 0 0 250px,
+  767px: 0 0 100%,
+);
+$reviews-column-mid-flex: (
+  null: 0 0 calc(100% - 250px),
+  767px: 0 0 100%,
+);
+$column-left-flex: (
+  null: 0 0 250px,
+  767px: 0 0 100%,
+);
+$column-mid-flex: (
+  null: 0 0 calc(100% - 590px),
+  1300px: 0 0 calc(100% - 530px),
+  1150px: 0 0 calc(100% - 250px),
+  767px: 0 0 100%,
+);
+$column-right-flex: (
+  null: 0 0 340px,
+  1300px: 0 0 280px,
+  1150px: 0 0 100%,
+);
+$manufacturer-d-column-mid-flex: (
+  null: 0 0 calc(100% - 710px),
+  1150px: 0 0 calc(100% - 250px),
+  767px: 0 0 100%,
+);
+$manufacturer-d-column-right-flex: (
+  null: 0 0 460px,
+  1150px: 0 0 100%,
+);
+$advertisement-column-mid-flex: (
+  null: 0 0 calc(100% - 350px),
+  1050px: 0 0 100%,
+);
+$advertisement-column-right-flex: (
+  null: 0 0 350px,
+  1050px: 0 0 100%,
+);
+$constructor-column-mid-flex: (
+  null: 0 0 calc(100% - 400px),
+  1300px: 0 0 calc(100% - 300px),
+  1200px: 0 0 100%,
+);
+$constructor-column-right-flex: (
+  null: 0 0 400px,
+  1300px: 0 0 300px,
+  1200px: 0 0 100%,
+);
+$local-product-col-12-flex: (
+  null: null,
+  1300px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$reviews-blog-col-12-flex: (
+  null: null,
+  1250px: 0 0 100%,
+);
+$product-col-flex: (
+  null: null,
+  1300px: 0 0 33.33%,
+  1050px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$product-col-left-right-flex: (
+  null: null,
+  1100px: 0 0 100%,
+);
+
+$designer-chat-cnt-flex: (
+  null: 0 0 720px,
+  1450px: 0 0 710px,
+  1320px: 0 0 660px,
+  1200px: 0 0 610px,
+);
+/*$designer-body-cnt-flex: (
+  null: 0 0 calc(100% - 800px),
+  1600px: 0 0 calc(100% - 700px),
+  1400px: 0 0 calc(100% - 600px),
+  1200px: 0 0 calc(100% - 550px),
+  1100px: 0 0 100%,
+);*/
+$designer-body-cnt-flex: (
+  null: 0 0 calc(100% - 730px),
+  1450px: 0 0 calc(100% - 720px),
+  1320px: 0 0 calc(100% - 670px),
+  1250px: 0 0 calc(100% - 350px),
+  1200px: 0 0 calc(100% - 300px),
+  767px: 0 0 100%,
+);
+$designer-chat-collapsed-cnt-flex: (
+  null: 0 0 365px,
+  1200px: 0 0 315px,
+);
+$designer-body-collapsed-cnt-flex: (
+  null: 0 0 calc(100% - 350px),
+  1200px: 0 0 calc(100% - 300px),
+  767px: 0 0 100%,
+);
+$designer-settings-column-left-flex: (
+  null: 0 0 270px,
+  1400px: 0 0 220px,
+  991px: 0 0 100%,
+);
+$col-manu-flex: (
+  null: 0 0 33.33%,
+  1700px: 0 0 50%,
+  576px: 0 0 100%,
+);
+$mbc-col-flex: (
+  null: 0 0 33.33%,
+  1700px: 0 0 50%,
+  991px: 0 0 100%,
+);
+$filter-col-flex: (
+  null: null,
+  1400px: 0 0 100%,
+);
+$designer-settings-column-mid-flex: (
+  null: 0 0 calc(100% - 270px),
+  1400px: 0 0 calc(100% - 220px),
+  991px: 0 0 100%,
+);
+$chat-collapsed-column-mid-flex: (
+  null: 0 0 calc(100% - 350px),
+  1320px: 0 0 calc(100% - 300px),
+  1100px: 0 0 100%,
+);
+$chat-collapsed-column-right-flex: (
+  null: 0 0 350px,
+  1320px: 0 0 300px,
+  1100px: 0 0 100%,
+);
+$col-upload-flex: (
+  null: 0 0 35%,
+  1700px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$col-img-flex: (
+  null: 0 0 21.66%,
+  1700px: 0 0 50%,
+  767px: 0 0 100%,
+);
+
+$purchase-column-mid-flex: (
+  null: 0 0 calc(100% - 270px),
+  767px: 0 0 100%,
+);
+$purchase-column-right-flex: (
+  null: 0 0 270px,
+  767px: 0 0 100%,
+);
+$reviews-img-flex: (
+  null: 0 0 90px,
+  1400px: 0 0 16.66%,
+  767px: 0 0 33.33%,
+  575px: 0 0 50%,
+);
+$designer-single-chat-flex: (
+  null: 0 0 calc(100% - 350px),
+  1200px: 0 0 calc(100% - 300px),
+);
+$designer-chat-list-flex: (
+  null: 0 0 350px,
+  1200px: 0 0 300px,
+);
+
+/* max-width*/
+$designer-single-chat-max-width: (
+  null: calc(100% - 350px),
+  1200px: calc(100% - 300px),
+);
+$designer-chat-list-max-width: (
+  null: 350px,
+  1200px: 300px,
+);
+$reviews-img-max-width: (
+  null: 90px,
+  1400px: 16.66%,
+  767px: 33.33%,
+  575px: 50%,
+);
+$col-upload-max-width: (
+  null: 35%,
+  1700px: 50%,
+  767px: 100%,
+);
+$col-img-max-width: (
+  null: 21.66%,
+  1700px: 50%,
+  767px: 100%,
+);
+
+$mbc-col-max-width: (
+  null: 33.33%,
+  1700px: 50%,
+  991px: 100%,
+);
+$filter-col-max-width: (
+  null: null,
+  1400px: 100%,
+);
+$col-manu-max-width: (
+  null: 33.33%,
+  1700px: 50%,
+  576px: 100%,
+);
+$designer-settings-column-left-max-width: (
+  null: 270px,
+  1400px: 220px,
+  991px: 100%,
+);
+$designer-settings-column-mid-max-width: (
+  null: calc(100% - 270px),
+  1400px: calc(100% - 220px),
+  991px: 100%,
+);
+$designer-chat-cnt-max-width: (
+  null: 715px,
+  1450px: 705px,
+  1320px: 655px,
+  1200px: 605px,
+);
+/*$designer-body-cnt-max-width: (
+  null: calc(100% - 800px),
+  1600px: calc(100% - 700px),
+  1400px: calc(100% - 600px),
+  1200px: calc(100% - 550px),
+  1100px: 100%,
+);*/
+$designer-body-cnt-max-width: (
+  null: calc(100% - 730px),
+  1450px: calc(100% - 720px),
+  1320px: calc(100% - 670px),
+  1250px: calc(100% - 350px),
+  1200px: calc(100% - 300px),
+  767px: 100%,
+);
+$designer-chat-collapsed-cnt-max-width: (
+  null: 365px,
+  1200px: 315px,
+);
+$designer-body-collapsed-cnt-max-width: (
+  null: calc(100% - 350px),
+  1200px: calc(100% - 300px),
+  767px: 100%,
+);
+$user-settings-column-left-max-width: (
+  null: 350px,
+  1150px: 280px,
+  767px: 100%,
+);
+
+$user-settings-column-mid-max-width: (
+  null: calc(100% - 350px),
+  1150px: calc(100% - 280px),
+  767px: 100%,
+);
+$product-col-left-right-max-width: (
+  null: null,
+  1100px: 100%,
+);
+$materials-col-12-max-width: (
+  null: 20%,
+  991px: 25%,
+  767px: 33.33%,
+  575px: 50%,
+);
+$discount-left-max-width: (
+  null: 285px,
+  1350px: 260px,
+  991px: 100%,
+);
+$discount-right-max-width: (
+  null: calc(100% - 285px),
+  1350px: calc(100% - 260px),
+  991px: 100%,
+);
+$program-pro-col-max-width: (
+  null: null,
+  1250px: 50%,
+);
+$product-col-max-width: (
+  null: null,
+  1300px: 33.33%,
+  1050px: 50%,
+  767px: 100%,
+);
+$constructor-column-mid-max-width: (
+  null: calc(100% - 400px),
+  1300px: calc(100% - 300px),
+  1200px: 100%,
+);
+$constructor-column-right-max-width: (
+  null: 400px,
+  1300px: 300px,
+  1200px: 100%,
+);
+$reviews-blog-col-12-max-width: (
+  null: null,
+  1250px: 100%,
+);
+$reviews-column-left-max-width: (
+  null: 250px,
+  767px: 100%,
+);
+$reviews-column-mid-max-width: (
+  null: calc(100% - 250px),
+  767px: 100%,
+);
+$left-modal-column-max-width: (
+  null: 300px,
+  1300px: 250px,
+  767px: 100%,
+);
+$right-modal-column-max-width: (
+  null: calc(100% - 320px),
+  1300px: calc(100% - 250px),
+  767px: 100%,
+);
+$selected-img-ul-col-12-max-width: (
+  null: 20%,
+);
+$manufacturer-d-column-mid-max-width: (
+  null: calc(100% - 710px),
+  1150px: calc(100% - 250px),
+  767px: 100%,
+);
+$manufacturer-d-column-right-max-width: (
+  null: 460px,
+  1150px: 100%,
+);
+$in-relative-products-in-pro-col-max-width: (
+  null: null,
+  1250px: 50%,
+  767px: 100%,
+);
+$in-relative-products-col-12-max-width: (
+  null: null,
+  1300px: 33.33%,
+  1100px: 50%,
+  767px: 100%,
+);
+$modal-ten-products-list-cnt-col-12-max-width: (
+  null: 20%,
+  1700px: 25%,
+  1300px: 33.33%,
+  1100px: 50%,
+  991px: 100%,
+);
+$modal-products-list-cnt-col-12-max-width: (
+  null: null,
+  1650px: 33.33%,
+  1200px: 50%,
+  991px: 100%,
+);
+$products-list-cnt-col-12-max-width: (
+  null: null,
+  1650px: 50%,
+  1100px: 100%,
+);
+$local-product-col-12-max-width: (
+  null: null,
+  1300px: 50%,
+  767px: 100%,
+);
+$assign-services-cnt-res-col-12-max-width: (
+  null: null,
+  1200px: 100%,
+);
+$products-column-left-max-width: (
+  null: 350px,
+  991px: 100%,
+);
+$products-column-mid-max-width: (
+  null: calc(100% - 350px),
+  991px: 100%,
+);
+$two-div-section-column-left-max-width: (
+  null: 250px,
+  991px: 100%,
+);
+$two-div-section-column-mid-max-width: (
+  null: calc(100% - 250px),
+  991px: 100%,
+);
+$column-left-max-width: (
+  null: 250px,
+  767px: 100%,
+);
+$column-mid-max-width: (
+  null: calc(100% - 590px),
+  1300px: calc(100% - 530px),
+  1150px: calc(100% - 250px),
+  767px: 100%,
+);
+$column-right-max-width: (
+  null: 350px,
+  1300px: 280px,
+  1150px: 100%,
+);
+$advertisement-column-mid-max-width: (
+  null: calc(100% - 350px),
+  1050px: 100%,
+);
+$advertisement-column-right-max-width: (
+  null: 350px,
+  1050px: 100%,
+);
+$purchase-column-mid-max-width: (
+  null: calc(100% - 270px),
+  767px: 100%,
+);
+$purchase-column-right-max-width: (
+  null: 270px,
+  767px: 100%,
+);
+$chat-collapsed-column-mid-max-width: (
+  null: calc(100% - 350px),
+  1320px: calc(100% - 300px),
+  1100px: 100%,
+);
+$chat-collapsed-column-right-max-width: (
+  null: 350px,
+  1320px: 300px,
+  1100px: 100%,
+);
+$m-w-100-max-width: (
+  null: null,
+  767px: 100% !important,
+);
+
+/* height*/
+$mb-pro-img-height: (
+  null: 41px,
+  767px: 30px,
+);
+$manufacturer-top-pro-img-height: (
+  null: 150px,
+  767px: 100px,
+  575px: 73px,
+);
+$modal-chat-list-height: (
+  null: 100%,
+  1100px: 500px,
+);
+$assign-services-icon-height: (
+  null: 100px,
+  1300px: 80px,
+);
+/* width*/
+$modeler-u-reg-txt-width: (
+  null: null,
+  991px: max-content,
+);
+$u-reg-txt-max-width: (
+  null: null,
+  767px: 250px,
+);
+$modeler-u-reg-arba-width: (
+  null: null,
+  991px: 100%,
+);
+$designer-single-chat-width: (
+  null: calc(100% - 350px),
+  1200px: calc(100% - 300px),
+);
+$designer-chat-list-width: (
+  null: 350px,
+  1200px: 300px,
+);
+$dec-active-pro-cnt-width: (
+  null: null,
+  767px: 100%,
+);
+$mb-pro-img-width: (
+  null: 41px,
+  767px: 30px,
+);
+$mb-pro-name-link-width: (
+  null: calc(100% - 41px),
+  767px: calc(100% - 30px),
+);
+$mc-btn-width: (
+  null: null,
+  575px: 100%,
+);
+$manufacturer-top-pro-name-link-width: (
+  null: calc(100% - 150px),
+  767px: calc(100% - 100px),
+  575px: calc(100% - 73px),
+);
+$manufacturer-top-pro-img-width: (
+  null: 150px,
+  767px: 100px,
+  575px: 73px,
+);
+$designer-settings-form-group-width: (
+  null: 250px,
+  1500px: 100%,
+  991px: 100%,
+);
+$m-w-100-width: (
+  null: null,
+  767px: 100% !important,
+);
+$mobile-100-width: (
+  null: max-content,
+  767px: 100%,
+);
+$navbar-brand-img-width: (
+  null: null,
+  767px: 80px,
+);
+$purchase-section-width: (
+  null: 85%,
+  1200px: 100%,
+);
+$assign-services-icon-width: (
+  null: 100px,
+  1300px: 80px,
+);
+$comments-list-comment-info-width: (
+  null: 60%,
+  1200px: 100%,
+);
+$comments-list-pro-cnt-width: (
+  null: 40%,
+  1200px: 100%,
+);
+$assign-services-btn-txt-width: (
+  null: calc(100% - 100px),
+  1300px: calc(100% - 80px),
+);
+$search-input-width: (
+  null: 100%,
+  767px: auto,
+);
+$step-2-lg-txt-cnt-width: (
+  null: 100%,
+  991px: auto,
+);
+/* float*/
+$discount-price-set-float: (
+  null: right,
+  1300px: none,
+);
+$program-tlt-d-btn-float: (
+  null: right,
+  1100px: none,
+);
+$blog-price-btn-float: (
+  null: right,
+  1360px: none,
+);
+$reply-all-btn-float: (
+  null: right,
+  1600px: none,
+);
+/* margin-bottom*/
+$local-product-col-12-margin-bottom: (
+  null: null,
+  1300px: 20px,
+);
+$col-img-margin-bottom: (
+  null: null,
+  1700px: 70px,
+);
+$row-upload-margin-bottom: (
+  null: 80px,
+  1700px: 0,
+);
+$reviews-img-btn-margin-bottom: (
+  null: null,
+  1250px: 15px,
+);
+/* margin*/
+
+$modeler-u-reg-txt-margin: (
+  null: null,
+  991px: auto,
+);
+$modeler-u-reg-arba-margin: (
+  null: null,
+  991px: 15px 0,
+);
+$u-reg-arba-margin: (
+  null: 0 30px,
+  767px: 15px 0,
+);
+$m-zero-margin: (
+  null: null,
+  767px: 0 !important,
+);
+$designer-chat-cnt-margin: (
+  null: null,
+  1100px: 30px 0 30px,
+);
+$reply-all-btn-margin: (
+  null: null,
+  1600px: 5px,
+);
+
+/* padding-right*/
+$reviews-img-padding-right: (
+  null: 110px,
+  767px: 15px,
+);
+
+$m-zero-padding-right: (
+  null: null,
+  767px: 0 !important,
+);
+
+$column-right-manufacturer-padding-right: (
+  null: 7px,
+  767px: 0,
+);
+$pro-cnt-al-padding-right: (
+  null: 220px,
+  1250px: 0,
+  991px: 220px,
+  575px: 0,
+);
+/* padding-left*/
+$column-left-manufacturer-padding-left: (
+  null: 7px,
+  1150px: 0,
+);
+$m-zero-padding-left: (
+  null: null,
+  767px: 0 !important,
+);
+
+$advertisement-column-right-padding-left: (
+  null: 15px,
+  1050px: 0,
+);
+/* display*/
+$designer-chat-cnt-display: (
+  null: flex,
+);
+$noti-m-txt-display: (
+  null: null,
+  1050px: none,
+);
+$cart-n-display: (
+  null: none,
+  1050px: inline-block,
+);
+$comments-list-comment-display: (
+  null: flex,
+  1200px: block,
+);
+$user-reg-txt-btn-display: (
+  null: flex,
+  767px: inherit,
+);
+$purchas-user-reg-txt-btn-display: (
+  null: flex,
+  600px: initial,
+);
+
+$discount-price-set-display: (
+  null: null,
+  1300px: block,
+);
+/* font-size*/
+$reviews-tlt-font-size: (
+  null: 20px,
+  767px: 14px,
+);
+$pop-txt-2-font-size: (
+  null: 15px,
+  767px: 14px,
+);
+$pop-txt-1-font-size: (
+  null: 20px,
+  767px: 17px,
+);
+$blog-tlt-font-size: (
+  null: 16px,
+  1400px: 14px,
+);
+$menu-font-size: (
+  null: 15px,
+  1400px: 14px,
+  1250px: 12px,
+);
+$pr-tlt-font-size: (
+  null: 30px,
+  1250px: 25px,
+  1100px: 30px,
+);
+$local-txt-font-size: (
+  null: 16px,
+  1400px: 14px,
+  1050px: 16px,
+);
+$assign-services-txt-font-size: (
+  null: 18px,
+  1400px: 16px,
+  1250px: 14px,
+);
+$home-reg-txt1-font-size: (
+  null: 40px,
+  1250px: 30px,
+  991px: 20px,
+);
+$home-reg-txt2-font-size: (
+  null: 18px,
+  1250px: 16px,
+  991px: 14px,
+);
+$step-2-tlt-font-size: (
+  null: 36px,
+  767px: 20px,
+);
+$add-photo-txt-font-size: (
+  null: 20px,
+  1450px: 17px,
+  1250px: 16px,
+);
+/* padding*/
+$review-mod-btn-padding: (
+  null: 7px 35px,
+  1480px: 5px 20px,
+);
+$collection-edit-tlt-padding: (
+  null: 0 110px 0 0,
+  767px: 0 15px,
+);
+$dec-pro-cnt-padding: (
+  null: 10px 15px,
+  767px: 10px 0 0,
+);
+$m-zero-padding: (
+  null: null,
+  767px: 0 !important,
+);
+$my-col-blog-padding: (
+  null: 10px 0 10px 10px,
+  767px: 20px 10px 20px 20px,
+);
+$reviews-blog-padding: (
+  null: 10px 15px,
+  767px: 20px,
+);
+$s-log-reg-padding: (
+  null: 40px 5%,
+  767px: 10px 5% 110px,
+);
+$comment-padding: (
+  null: 5px,
+  767px: 5px,
+);
+$menu-nav-link-padding: (/* null: 0 20px,*/ 1250px: 0 10px, 767px: 0 2px);
+$menu-noti-padding: (
+  null: 6px,
+  1250px: 6px 5px,
+);
+$menu-btn-padding: (
+  null: null,
+  575px: 5px 20px,
+);
+$menu-btn-font-size: (
+  null: null,
+  1400px: 15px,
+  1250px: 14px,
+  575px: 13px,
+);
+$comments-list-pro-cnt-padding: (
+  null: 0 0 0 20px,
+  1200px: 20px 0 0 0,
+);
+$designer-req-pro-name-link-padding: (
+  null: 0 80px 0 10px,
+  1400px: 0 45px 0 10px,
+);
+$designer-section-padding: (
+  null: 0,
+  1100px: 20px,
+);
+$manufacturer-top-cnt-padding: (
+  null: 40px 100px,
+  1400px: 40px 5%,
+);
+$product-col-right-padding: (
+  null: null,
+  1100px: (
+    15px 0 0 0,
+  ),
+);
+$mt-modal-body-padding: (
+  null: 40px 30px 0,
+  991px: 30px 15px 0,
+);
+$designer-body-cnt-padding: (
+  null: 25px 40px 25px 12.7%,
+  1800px: 25px 40px 25px 8%,
+  1450px: 25px 30px 25px 5%,
+  1300px: 25px 30px 25px 50px,
+  1200px: 25px 30px 25px 30px,
+  1100px: 0,
+);
+$designer-wallet-body-cnt-padding: (
+  null: 45px 5% 45px 12.7%,
+  1800px: 45px 4% 45px 8%,
+  1450px: 30px 30px 30px 5%,
+  1300px: 30px 30px 30px 50px,
+  1200px: 30px 30px 30px 30px,
+  1100px: 0,
+);
+$manufacturer-top-section-profile-padding: (
+  null: 0 12.47%,
+  1800px: 0 10%,
+  1500px: 0 8%,
+  1450px: 0 5%,
+);
+$manufacturer-top-section-padding: (
+  null: 40px 12.47% 0,
+  1800px: 40px 10% 0,
+  1500px: 40px 8% 0,
+  1450px: 40px 5% 0,
+);
+$blog-section-manufacturer-padding: (
+  null: 20px 12.47% 0,
+  1800px: 20px 10% 0,
+  1500px: 20px 8% 0,
+  1450px: 20px 5% 0,
+);
+$header-section-padding: (
+  null: 0 12.47%,
+  1800px: 0 10%,
+  1500px: 0 8%,
+  1450px: 0 5% 0 0,
+);
+$header-cat-list-width: (
+  null: calc(100% - calc(13%)),
+);
+$manufacturer-tab-padding: (
+  null: 15px 12.47%,
+  1800px: 5px 23.8%,
+  1500px: 5px 9.5%,
+  1450px: 5px 8.3%,
+  767px: 5px 20px,
+);
+
+$advertisement-section-padding: (
+  null: 50px 12.47%,
+  1800px: 50px 10%,
+  1500px: 50px 8%,
+  1450px: 50px 5%,
+);
+$advance-search-form-cnt-padding: (
+  null: 50px 30px 30px,
+  575px: 50px 20px 30px,
+);
+$home-register-section-padding: (
+  null: 90px 12.47%,
+  1800px: 90px 10%,
+  1500px: 90px 8%,
+  1450px: 90px 5%,
+  767px: 35px 5%,
+);
+$cons-register-section-padding: (
+  null: 150px 12.47%,
+  1800px: 150px 10%,
+  1500px: 150px 8%,
+  1450px: 150px 5%,
+  767px: 25px 5%,
+);
+$log-reg-padding: (
+  null: 40px 12.47%,
+  1800px: 20px 10%,
+  1500px: 20px 8%,
+  1450px: 20px 5%,
+  1250px: 20px 5%,
+);
+$form-cnt-padding: (
+  null: 70px 30px,
+  1050px: 50px 30px,
+  767px: 70px 30px,
+  500px: 50px 30px,
+  420px: 40px 30px,
+  380px: 40px 20px,
+);
+$column-left-padding: (
+  null: null,
+  767px: 0,
+);
+
+$column-right-padding: (
+  null: null,
+  1150px: 0,
+);
+$popular-section-padding: (
+  null: 30px 12.47%,
+  1800px: 30px 10%,
+  1500px: 30px 8%,
+  1450px: 30px 5%,
+);
+$reg-step-4-padding: (
+  null: 40px 12.47%,
+  1800px: 40px 10%,
+  1500px: 40px 8%,
+  1450px: 40px 5%,
+  1250px: 25px 5%,
+);
+$assign-services-padding: (
+  null: 40px,
+  1600px: 30px,
+  1300px: 20px,
+);
+$reg-step-4-form-cnt-padding: (
+  null: 30px,
+  767px: 20px,
+);
+
+/* margin-left*/
+
+$similar-manufacturers-section-margin-left: (
+  null: 260px,
+  1150px: 0,
+);
+
+$m-zero-padding-top: (
+  null: null,
+  767px: 0 !important,
+);
+$m-zero-padding-bottom: (
+  null: null,
+  767px: 0 !important,
+);
+$m-zero-margin-top: (
+  null: null,
+  767px: 0 !important,
+);
+$m-zero-margin-bottom: (
+  null: null,
+  767px: 0 !important,
+);
+
+$modeler-sent-btn-width: (
+  null: null,
+  576px: 100%,
+);
+
+$modeler-tlt-btn-position: (
+  null: absolute,
+  991px: static,
+);
+$modeler-tlt-btn-width: (
+  null: null,
+  576px: 100%,
+);
+
+$payment-amnt-date-width: (
+  null: 200px,
+  767px: 110px,
+);
+
+$payment-pro-img-min-width: (
+  null: null,
+  767px: 26px,
+);
+$payment-pro-img-width: (
+  null: null,
+  767px: 26px,
+);
+$payment-pro-img-height: (
+  null: null,
+  767px: 26px,
+);
+$payment-pro-name-link-width: (
+  null: null,
+  767px: calc(100% - 26px),
+);
+
+$payment-active-q-blog-padding-right: (
+  null: 50px,
+  767px: 20px,
+);
+
+$modeler-reviews-txt1-font-size: (
+  null: null,
+  767px: 14px,
+);
+
+$modeler-m-tlt-count-padding: (
+  null: null,
+  576px: 5px 10px,
+);
+$modeler-aq-cart-btn-padding: (
+  null: 3px 25px,
+  576px: 3px 18px,
+);
+
+$modeler-tlt-font-size: (
+  null: null,
+  767px: 14px,
+);
+
+$m-payment-history-cnt-padding: (
+  null: 30px,
+  767px: 30px 20px,
+);
+
+$m-payment-history-cnt-border-radius: (
+  null: 5px,
+  767px: 0,
+);
+
+$m-payment-history-cnt-max-width: (
+  null: 510px,
+  767px: 100%,
+);
+$modeler-log-reg-max-width: (
+  null: 710px,
+  767px: 100%,
+);
+
+$modeler-log-reg-inq-max-width: (
+  null: 468px,
+  767px: 100%,
+);
+$modeler-designer-body-cnt-inq-padding: (
+  null: 15% 5%,
+  767px: 50px 0,
+);
+$modeler-inq-top-padding: (
+  null: 30px,
+  767px: 20px,
+);
+
+$modeler-inq-top-pro-img-width: (
+  null: null,
+  575px: 34px,
+);
+$modeler-inq-top-pro-img-height: (
+  null: null,
+  575px: 34px,
+);
+
+$modeler-inq-top-pro-name-link-width: (
+  null: null,
+  575px: calc(100% - 34px),
+);
+
+$modeler-inq-top-currently-pro-name-link-width: (
+  null: null,
+  575px: 100%,
+);
+
+$modeler-chat-cnt-scrl-width: (
+  null: null,
+  767px: 100%,
+);
+$modeler-chat-cnt-scrl-max-width: (
+  null: null,
+  767px: 100%,
+);
+
+$modeler-chat-sl-width: (
+  null: null,
+  767px: 100%,
+);
+
+$modeler-currently-btn-left: (
+  null: null,
+  767px: 0,
+);
+$modeler-currently-placeholder-color: (
+  null: #a5a5a5,
+  767px: #2fdb57,
+);
+$modeler-chat-list-all-wop-height: (
+  null: null,
+  767px: calc(100vh - 340px),
+);
+$modeler-chat-list-all-wp-height: (
+  null: null,
+  767px: calc(100vh - 270px),
+);
+
+$modeler-blog-review-col-max-width: (
+  null: null,
+  1700px: 100%,
+);
+
+$modeler-blog-review-col-flex: (
+  null: null,
+  1700px: 0 0 100%,
+);
+$pur-th-purchase-col3-price-single-max-width: (
+  null: null,
+  767px: 50%,
+);
+
+$pur-th-purchase-col3-price-single-flex: (
+  null: null,
+  767px: 0 0 50%,
+);
+
+$modeler-blog-reviews-img-cnt-margin-bottom: (
+  null: null,
+  1700px: 15px,
+);
+
+$modeler-reviews-img-cnt-pro-img-width: (
+  null: null,
+  1480px: 35px,
+  575px: 27px,
+);
+$modeler-reviews-img-cnt-pro-img-height: (
+  null: null,
+  1480px: 35px,
+  575px: 27px,
+);
+
+$modeler-reviews-img-cnt-pro-name-link-width: (
+  null: null,
+  1480px: calc(100% - 35px),
+  575px: calc(100% - 27px),
+);
+
+$m-home-rw-img-display: (
+  null: flex,
+  991px: block,
+);
+$m-reviews-pro-1-margin-bottom: (
+  null: null,
+  991px: 15px,
+);
+
+$mod-col-pay-max-width: (
+  null: null,
+  1700px: 50%,
+  767px: 100%,
+);
+$mod-col-pay-flex: (
+  null: null,
+  1700px: 0 0 50%,
+  767px: 0 0 100%,
+);
+
+$mod-q-pre-designer-body-cnt-flex: (
+  null: 0 0 calc(100% - 350px),
+  1200px: 0 0 calc(100% - 300px),
+  767px: 0 0 100%,
+);
+$mod-q-pre-designer-body-cnt-max-width: (
+  null: calc(100% - 350px),
+  1200px: calc(100% - 300px),
+  767px: 100%,
+);
+$designer-header-section-padding: (
+  null: null,
+  991px: 0 15px,
+);
+$designer-header-section-btn-padding: (
+  null: null,
+  991px: 3px 15px,
+);
+$designer-header-nav-link-padding: (
+  null: null,
+  991px: 0 5px,
+);
+
+$designer-header-nav-padding: (
+  null: null,
+  767px: 15px 55px 15px 0,
+);
+
+$designer-m-top-btn-font-size: (
+  null: null,
+  1450px: 14px,
+);
+
+$slider-col-flex: (
+  null: 0 0 50%,
+  1400px: 0 0 100%,
+);
+$slider-col-max-width: (
+  null: 50%,
+  1400px: 100%,
+);
+$slider-col-margin-top: (
+  null: null,
+  1400px: 15px,
+  767px: 0,
+);
+
+$designer-order-purchase-col1-flex: (
+  null: 0 0 385px,
+  1650px: 0 0 35%,
+  767px: 0 0 100%,
+);
+$designer-order-purchase-col1-max-width: (
+  null: 385px,
+  1650px: 35%,
+  767px: 100%,
+);
+$designer-order-purchase-col2-flex: (
+  null: 0 0 calc(100% - 385px),
+  1650px: 0 0 65%,
+  767px: 0 0 100%,
+);
+$designer-order-purchase-col2-max-width: (
+  null: calc(100% - 385px),
+  1650px: 65%,
+  767px: 100%,
+);
+$designer-product-des-pro-cnt-border-bottom: (
+  null: none,
+  767px: 1px solid #eaeaea,
+);
+
+$designer-manufacturer-top-cnt-padding: (
+  null: 50px 100px,
+  1550px: 50px 10%,
+  1400px: 50px 8%,
+  1300px: 50px 5%,
+);
+$designer-manufacturer-top-cnt-ctm-btn-padding: (
+  null: null,
+  1050px: 7px 30px,
+);
+$manufacturer-top-pro-name-font-size: (
+  null: 25px,
+  767px: 20px,
+);
+
+$designer-product-col-flex: (
+  null: null,
+  1550px: 0 0 50%,
+  576px: 0 0 100%,
+);
+$designer-product-col-max-width: (
+  null: null,
+  1550px: 50%,
+  576px: 100%,
+);
+$m-z-border: (
+  null: null,
+  767px: none !important,
+);
+$new-project-designer-section-padding: (
+  null: null,
+  767px: 30px 20px,
+);
+$new-project-form-cnt-padding: (
+  null: 30px,
+  767px: 20px,
+);
+
+$designer-manufacturer-top-cnt-padding: (
+  null: null,
+  767px: 40px 25px,
+);
+$designer-m-top-btn-position: (
+  null: absolute,
+  767px: relative,
+);
+$designer-m-top-btn-margin-top: (
+  null: null,
+  767px: 40px,
+);
+$designer-m-top-btn-top: (
+  null: null,
+  767px: 0,
+);
+$designer-m-top-btn-left: (
+  null: null,
+  767px: 0,
+);
+
+$designer-payout-statement-padding: (
+  null: 15px 30px,
+  767px: 20px,
+);
+
+$designer-consultations-all-height: (
+  null: calc(100vh - 205px),
+  767px: calc(100vh - 75px),
+);
+
+$designer-chat-list-all-height: (
+  null: calc(100vh - 238px),
+  767px: calc(100vh - 162px),
+);
+
+$designer-chat-cnt-scrl-all-background: (
+  null: #3a3055,
+  767px: #2a233b,
+);
+$designer-search-input-form-control-background: (
+  null: #2a233b,
+  767px: #3a3055,
+);
+$designer-chat-top-background: (
+  null: transparent,
+  767px: #3a3055,
+);
+$user-setting-save-btn-position: (
+  null: absolute,
+  767px: static,
+);
+$user-settings-section-background: (
+  null: null,
+  767px: #fff,
+);
+$user-settings-log-reg-padding: (
+  null: 40px,
+  767px: 25px 0,
+);
+$m-zero-border-radius: (
+  null: null,
+  767px: 5px !important,
+);
+$designer-setting-ul-min-height: (
+  null: 480px,
+  767px: auto,
+);
+
+$designer-basket-txt-all-width: (
+  null: calc(100% - 410px),
+  767px: calc(100% - 80px),
+);
+$designer-basket-txt-all-flex: (
+  null: 0 0 calc(100% - 410px),
+  767px: 0 0 calc(100% - 80px),
+);
+$designer-basket-cntrl-width: (
+  null: 330px,
+  767px: 100%,
+);
+$designer-basket-cntrl-flex: (
+  null: 0 0 330px,
+  767px: 0 0 100%,
+);
+$reg-step-3-reg-step-3-padding: (
+  null: 55px 40px 40px,
+  767px: 30px,
+  576px: 30px 20px,
+);
+$reg-step-itm-font-size: (
+  null: 15px,
+  767px: 14px,
+);
+$advertisement-cnt-padding: (
+  null: 30px,
+  767px: 20px,
+);
+$advertisement-back-li-top: (
+  null: -38px,
+  767px: 16px,
+);
+$advertisement-back-li-left: (
+  null: 0px,
+  767px: 15px,
+);
+$advertisement-back-li-font-size: (
+  null: 18px,
+  767px: 14px,
+);
+
+$assign-services-cnt-max-width: (
+  null: calc(100% - 200px),
+  767px: 100%,
+);
+$assign-services-cnt-flex: (
+  null: 0 0 calc(100% - 200px),
+  767px: 0 0 100%,
+);
+
+$post-add-cnt-max-width: (
+  null: 200px,
+  767px: 100%,
+);
+$post-add-cnt-flex: (
+  null: 0 0 200px,
+  767px: 0 0 100%,
+);
+$services-tlt-font-size: (
+  null: 26px,
+  1450px: 22px,
+  767px: 20px,
+);
+
+$advertisement-4-warning-cnt-padding: (
+  null: 30px,
+  767px: 20px,
+);
+$point-gift-cnt-padding: (
+  null: 30px 40px,
+  767px: 25px 20px,
+);
+$get-txt-font-size: (
+  null: 18px,
+  767px: 14px,
+);
+$gift-txt-font-size: (
+  null: 36px,
+  767px: 20px,
+);
+
+$warning-txt-font-size: (
+  null: 18px,
+  767px: 17px,
+);
+$warning-txt3-font-size: (
+  null: 16px,
+  767px: 14px,
+);
+$ad-pro-col-padding: (
+  null: 0,
+  767px: 10px 20px 30px,
+);
+$profile-p-padding: (
+  null: 30px 70px,
+  767px: 30px,
+);
+$ad4-advertisement-4-cnt-background: (
+  null: #fff,
+  767px: #f5f5f6,
+);
+$category-nav-nav-link-width: (
+  null: 190px,
+  767px: 100%,
+);
+$category-nav-nav-link-padding: (
+  null: 0 10px,
+  767px: 0 2px,
+);
+$category-nav-nav-link-font-size: (
+  null: 15px,
+  767px: 14px,
+  500px: 13px,
+);
+$category-nav-nav-item-width: (
+  null: null,
+  767px: 33.33%,
+);
+$category-nav-nav-item-margin-right: (
+  null: null,
+  767px: 5px,
+);
+$category-nav-nav-flex-wrap: (
+  null: wrap,
+  767px: unset,
+);
+$category-table-th-border-bottom: (
+  null: null,
+  767px: none,
+);
+$categories-modal-body-padding: (
+  null: 35px 30px 30px,
+  767px: 40px 15px,
+);
+$categories-close-top: (
+  null: 10px,
+  767px: 6px,
+);
+$refresh-btn-txt-tlt-font-size: (
+  null: null,
+  767px: 15px,
+);
+$cl-cons-txt-font-size: (
+  null: null,
+  767px: 14px,
+);
+$cons-txt-all-tlt-font-size: (
+  null: null,
+  767px: 17px,
+);
+
+$switch-input-font-size: (
+  null: 17px,
+  767px: 14px,
+);
+$switch-input-padding: (
+  null: 10px,
+  767px: 7px,
+);
+$switch-input-cnt-max-width: (
+  null: 360px,
+  767px: 232px,
+);
+$cons-close-modal-left: (
+  null: null,
+  767px: 15px,
+);
+$cons-close-modal-top: (
+  null: null,
+  767px: -35px,
+);
+$discount-price-txt-all-padding: (
+  null: 0 30px,
+  767px: 0 20px,
+);
+$int-assign-post-tlt-font-size: (
+  null: 18px,
+  767px: 15px,
+);
+$int-assign-post-txt-font-size: (
+  null: 16px,
+  767px: 14px,
+);
+$m-as-p-tlt-font-size: (
+  null: 20px,
+  767px: 15px,
+);
+$pc-tlt-font-size: (
+  null: 20px,
+  767px: 17px,
+);
+$interactive-program-created-padding: (
+  null: 35px 30px 30px,
+  767px: 30px 20px,
+);
+$user-loyalty-pro-cnt-border-right: (
+  null: 1px solid #d9d9d9,
+  767px: none,
+);
+$user-loyalty-last-child-pro-cnt-border-bottom: (
+  null: none,
+  767px: 1px solid #d9d9d9,
+);
+$pc-tlt-margin: (
+  null: 30px 0,
+  767px: 20px,
+);
+$program-tlt-font-size: (
+  null: 22px,
+  767px: 20px,
+);
+$loyalty-product-margin: (
+  null: 0 7px 15px 7px,
+  500px: 0 0 15px,
+);
+$normal-chat-section-width: (
+  null: 450px,
+  1500px: 380px,
+  1300px: 320px,
+  767px: 100%,
+);
+$purse-section-padding: (
+  null: null,
+  767px: 40px 20px 80px,
+);
+
+$relative-col-flex: (
+  null: null,
+  1100px: 0 0 100%,
+);
+$relative-col-max-width: (
+  null: null,
+  1100px: 100%,
+);
+
+$purchase-col1-max-width: (
+  null: 210px,
+  991px: 100%,
+);
+$purchase-col1-flex: (
+  null: 210px,
+  991px: 0 0 100%,
+);
+$purchase-col2-max-width: (
+  null: calc(100% - 625px),
+  991px: 50%,
+  767px: 100%,
+);
+$purchase-col2-flex: (
+  null: calc(100% - 625px),
+  991px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$purchase-col3-max-width: (
+  null: 415px,
+  991px: 50%,
+  767px: 100%,
+);
+$purchase-col3-flex: (
+  null: 415px,
+  991px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$price-single-padding-right: (
+  null: 30px,
+  500px: 15px,
+);
+$purchase-price-font-size: (
+  null: 20px,
+  991px: 18px,
+  767px: 16px,
+);
+$pr-ur-tlt-font-size: (
+  null: 14px,
+  500px: 12px,
+);
+$manufacturer-tab-btn-width: (
+  null: null,
+  767px: 100%,
+);
+$img-td-img-width: (
+  null: 60px,
+  1100px: 34px,
+);
+$img-td-img-min-width: (
+  null: 60px,
+  1100px: 34px,
+);
+$cat-table-td-width: (
+  null: 14.5%,
+  1100px: auto,
+);
+$cat-td-ctm-btn-font-size: (
+  null: 16px,
+  767px: 14px,
+);
+$cat-td-ctm-btn-padding: (
+  null: 2px 15px,
+  767px: 2px 10px,
+);
+$cat-table-td-padding: (
+  null: null,
+  767px: 10px,
+);
+$table-commission-cnt-background: (
+  null: #fff,
+  767px: #f5f5f6,
+);
+$table-commission-cnt-margin-bottom: (
+  null: 15px,
+  767px: 0,
+);
+$table-commission-cnt-form-control-background: (
+  null: #f5f5f6,
+  767px: #fff,
+);
+$pur-m-tlt-font-size: (
+  null: 25px,
+  767px: 20px,
+);
+$pur-m-tlt-img-width: (
+  null: null,
+  767px: 100px,
+);
+$pur-th-purchase-col2-max-width: (
+  null: calc(100% - 300px),
+  991px: 100%,
+);
+$pur-th-purchase-col2-flex: (
+  null: 0 0 calc(100% - 300px),
+  991px: 0 0 100%,
+);
+$pur-th-purchase-col3-max-width: (
+  null: 300px,
+  991px: 100%,
+);
+$pur-th-purchase-col3-flex: (
+  null: 0 0 300px,
+  991px: 0 0 100%,
+);
+$share-post-cnt-padding: (
+  null: 5%,
+  767px: 5% 0,
+);
+$share-box-textarea-height: (
+  null: 110px,
+  767px: 80px,
+);
+$user-carts-basket-txt-all-width: (
+  null: calc(100% - 185px),
+  767px: calc(100% - 145px),
+);
+$user-carts-basket-txt-all-flex: (
+  null: calc(100% - 185px),
+  767px: 0 0 calc(100% - 145px),
+);
+$user-carts-basket-cntrl-width: (
+  null: 110px,
+  767px: 70px,
+);
+$user-carts-basket-cntrl-flex: (
+  null: 110px,
+  767px: 0 0 70px,
+);
+$user-carts-basket-cntrl-edit-width: (
+  null: null,
+  767px: 25px,
+);
+$user-carts-basket-cntrl-edit-height: (
+  null: null,
+  767px: 25px,
+);
+$user-carts-basket-cntrl-edit-min-width: (
+  null: null,
+  767px: 25px,
+);
+$user-carts-basket-cntrl-edit-img-width: (
+  null: null,
+  767px: 15px,
+);
+$comments-list-comment-info-border-right: (
+  null: 1px solid #c6c6c7,
+  1200px: none,
+);
+$commission-inputform-group-width: (
+  null: null,
+  767px: 50%,
+);
+$commission-inputform-group-width: (
+  null: null,
+  767px: 50%,
+);
+$notifications-cnt-padding: (
+  null: 20px 30px,
+  767px: 20px 15px,
+);
+
+$notifications-pro-img-width: (
+  null: 60px,
+  767px: 45px,
+);
+$notifications-pro-img-height: (
+  null: 60px,
+  767px: 45px,
+);
+$notifications-pro-name-link-width: (
+  null: calc(100% - 60px),
+  767px: calc(100% - 45px),
+);
+$category-add-modal-modal-wrapper-width: (
+  null: 70% !important,
+  991px: 100% !important,
+);
+$category-add-modal-modal-wrapper-t-height: (
+  null: calc(100vh - 45px) !important,
+  991px: 100vh !important,
+);
+$category-add-modal-modal-wrapper-height: (
+  null: 80vh !important,
+  767px: 100vh !important,
+);
+$categories-modal-body-overflow-y: (
+  null: null,
+  991px: auto,
+);
+$categories-materials-list-list-height: (
+  null: calc(100vh - 330px),
+  991px: 250px,
+);
+$mat-popup-ion-content-height: (
+  null: calc(80vh - 165px),
+  767px: calc(100vh - 265px),
+);
+
+$normal-chat-top-padding: (
+  null: 5px 15px,
+  1300px: 5px 10px,
+);
+$normal-chat-top-pro-img-width: (
+  null: null,
+  1300px: 35px,
+);
+$normal-chat-top-pro-img-height: (
+  null: null,
+  1300px: 35px,
+);
+$normal-chat-top-pro-name-link-width: (
+  null: null,
+  1300px: calc(100% - 35px),
+);
+$normal-chat-top-pro-name-link-padding: (
+  null: 0 140px 0 10px,
+  1300px: 0 140px 0 5px,
+);
+$normal-chat-top-pro-name-font-size: (
+  null: null,
+  1300px: 14px,
+);
+$cart-section-left: (
+  null: null,
+  767px: 0 !important,
+);
+$cart-item-list-max-height: (
+  null: calc(100vh - 200px),
+  767px: calc(100vh - 220px),
+);
+$normal-chat-list-height: (
+  null: calc(100% - 100px),
+);
+
+$normal-chat-list-height-call: (
+  null: calc(50% - 50px),
+);
+
+$order-column-left-max-width: (
+  null: 350px,
+  1150px: 100%,
+);
+$order-column-mid-max-width: (
+  null: calc(100% - 350px),
+  1150px: 100%,
+);
+$order-column-left-flex: (
+  null: 0 0 350px,
+  1150px: 0 0 100%,
+);
+$order-column-mid-flex: (
+  null: 0 0 calc(100% - 350px),
+  1150px: 0 0 100%,
+);
+$order-purchase-col2-max-width: (
+  null: 330px,
+  767px: 350px,
+  420px: 100%,
+);
+$order-purchase-col2-flex: (
+  null: 0 0 330px,
+  767px: 0 0 350px,
+  420px: 0 0 100%,
+);
+$order-purchase-col3-max-width: (
+  null: calc(100% - 330px),
+  767px: 100%,
+);
+$order-purchase-col3-flex: (
+  null: 0 0 calc(100% - 330px),
+  767px: 0 0 100%,
+);
+$order-purchase-price-justify-content: (
+  null: flex-end,
+  767px: center,
+);
+$order-ar-order-right: (
+  null: 25px,
+  767px: 10px,
+);
+$order-single-purchase-padding: (
+  null: 25px 70px 25px 25px,
+  767px: 20px 40px 20px 20px,
+);
+$order-back-btn-left: (
+  null: null,
+  767px: 15px,
+);
+$user-order-purchase-tlt-font-size: (
+  null: null,
+  767px: 17px,
+);
+$cart-pop-min-width: (
+  null: 400px,
+  767px: 100%,
+);
+$view-tlt-btn-right: (
+  null: 0,
+  767px: 15px,
+);
+$product-margin: (
+  null: 0 14px 15px 0px,
+  767px: 0 0 15px 0,
+);
+$product-tlt-font-size: (
+  null: 17px,
+  1400px: 15px,
+);
+$pr-tlt-font-size: (
+  null: 24px,
+  1400px: 20px,
+);
+$pr-tlt-span-font-size: (
+  null: 18px,
+  1400px: 16px,
+);
+$type-money-font-size: (
+  null: 14px,
+  1400px: 13px,
+);
+$money-font-size: (
+  null: 17px,
+  1400px: 15px,
+);
+$product-cart-btn-padding: (
+  null: 5px 22px,
+  1400px: 4px 20px,
+);
+$d-btn-padding: (
+  null: 6px 30px,
+  1400px: 4px 25px,
+);
+$cart-btn-padding: (
+  null: 7px 30px,
+  1400px: 6px 25px,
+);
+$description-input-textarea-height: (
+  null: 90px,
+  767px: 200px,
+);
+$manufacturer-top-pro-name-link-padding-left: (
+  null: 30px,
+  767px: 15px,
+);
+$designer-rep-txt-font-size: (
+  null: 20px,
+  1400px: 17px,
+  767px: 14px,
+);
+$add-photo-img-width: (
+  null: 40px,
+  1450px: 30px,
+);
+$add-photo-txt-width: (
+  null: calc(100% - 40px),
+  1450px: calc(100% - 30px),
+);
+$tlt-font-size: (
+  null: 20px,
+  1450px: 17px,
+);
+$tlt1-font-size: (
+  null: 17px,
+  1450px: 15px,
+);
+$blog-money-font-size: (
+  null: 25px,
+  1450px: 22px,
+);
+$designer-reviews-delet-i-width: (
+  null: 42px,
+  1450px: 35px,
+);
+$designer-reviews-delet-i-height: (
+  null: 42px,
+  1450px: 35px,
+);
+$designer-reviews-delet-i-img-width: (
+  null: null,
+  1450px: 20px,
+);
+$reg-step-4-reg-tlt-font-size: (
+  null: 26px,
+  1450px: 22px,
+);
+$reg-step-4-reg-tlt-margin-bottom: (
+  null: 30px,
+  1450px: 20px,
+);
+$setting-li-font-size: (
+  null: 17px,
+  1450px: 15px,
+);
+$manu-alp-blog-padding: (
+  null: 20px,
+  1450px: 15px,
+);
+$designer-cart-pop-min-width: (
+  null: 600px,
+  767px: 100%,
+);
+$review-mod-btn-font-size: (
+  null: 15px,
+  1480px: 14px,
+);
+$reg-step-4-form-cnt-label-h6-font-size: (
+  null: 16px,
+  1550px: 14px,
+);
+$more-div-height: (
+  null: calc(100% - 15px),
+  1100px: 100px,
+);
+$materials-list-all-height: (
+  null: calc(100vh - 200px),
+  991px: calc(100vh - 255px),
+);
+$materials-mat-form-field-infix-width: (
+  null: 180px,
+  500px: 130px,
+);
+$request-popover-mobile-popover-content-width: (
+  null: 580px,
+  767px: 100%,
+);
+$request-popover-mobile-popover-content-left: (
+  null: null,
+  767px: 0 !important,
+);
+$request-popover-modal-body1-height: (
+  null: calc(80vh - 64px),
+  767px: calc(100vh - 64px),
+);
+$purchase-price-justify-content: (
+  null: flex-end,
+  991px: flex-start,
+);
+$purchase-price-tlt-margin-bottom: (
+  null: 20px,
+  991px: 10px,
+);
+$purchase-list-single-purchase-padding: (
+  null: 0px 0px 0px 20px,
+  991px: 10px,
+);
+$purchase-list-purchase-col1-max-height: (
+  null: null,
+  991px: 350px,
+);
+$pur-mid-s-txt-font-size: (
+  null: 18px,
+  991px: 16px,
+);
+$pur-mid-img-width: (
+  null: 30px,
+  991px: 20px,
+);
+$pur-mid-img-height: (
+  null: 30px,
+  991px: 20px,
+);
+$advance-search-popover-content-width: (
+  null: 650px !important,
+  767px: 100% !important,
+);
+$advance-search-popover-content-height: (
+  null: 35vh !important,
+  767px: 90vh !important,
+);
+$advance-search-popover-content-overflow: (
+  null: hidden !important,
+  767px: auto !important,
+);
+$advance-search-cat-ul-max-height: (
+  null: 220px,
+  /*767px: calc(60vh - 400px)*/
+);
+$advance-search-col-height: (
+  null: 100%,
+  767px: auto,
+);
+
+$designer-chat-cnt-scrl-all-width: (
+  null: 715px,
+  1450px: 705px,
+  1320px: 655px,
+  1200px: 605px,
+);
+$ask-btn-all-btn-margin: (
+  null: 5px,
+  767px: 5px 0,
+);
+$single-pur-reviews-delet-i-top: (
+  null: 15px,
+  991px: -7px,
+);
+$single-pur-reviews-delet-i-right: (
+  null: 15px,
+  991px: -7px,
+);
+
+$product-catalog-li-img-width: (
+  null: 25px,
+  1300px: 20px,
+  1200px: 25px,
+);
+$product-catalog-li-img-height: (
+  null: 25px,
+  1300px: 20px,
+  1200px: 25px,
+);
+$designer-product-img-p-padding-bottom: (
+  null: 100%,
+  767px: 70%,
+);
+
+$search-cat-width: (
+  null: calc(100% - 330px),
+  1200px: 100%,
+);
+$popover-arrow-after-background: (
+  null: #202766,
+  767px: #fff,
+);
+$share-li-width: (
+  null: 55px,
+  450px: 40px,
+);
+$share-li-height: (
+  null: 55px,
+  450px: 40px,
+);
+$share-li-img-width: (
+  null: null,
+  450px: 18px,
+);
+$share-li-margin-right: (
+  null: 15px,
+  500px: 10px,
+);
+$share-ul-tlt-font-size: (
+  null: 20px,
+  767px: 18px,
+  450px: 16px,
+);
+$search-tcm-flex-wrap: (
+  null: null,
+  1700px: wrap,
+);
+$search-tci-flex: (
+  null: null,
+  1700px: 0 0 50%,
+  767px: 0 0 100%,
+);
+$search-tci-width: (
+  null: null,
+  1700px: 50%,
+  767px: 100%,
+);
+$search-tc-flex: (
+  null: null,
+  1700px: 0 0 calc(50% - 18px),
+  767px: 0 0 100%,
+);
+$search-tc-width: (
+  null: null,
+  1700px: calc(50% - 18px),
+  767px: 100%,
+);
+$designer-search-input-group-max-width: (
+  null: null,
+  1700px: 100%,
+  767px: 100%,
+);
+// $video-popover-content-width:(767px: 100% !important,
+//   800px: 90% !important, 1000px: 70% !important,
+//   1366px: 500px !important,
+//   1920px: 500px !important);
+// $video-popover-content-height:(767px: 40% !important,
+//   800px: 35% !important,
+//   1000px: 40% !important,
+//   1366px: 300px, 1920px: 300px !important);

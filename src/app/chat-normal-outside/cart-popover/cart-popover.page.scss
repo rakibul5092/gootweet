@@ -1,0 +1,7 @@
+@import "./../../../theme/mixins/mixins";
+// @import "./../../../theme/popup/cart-list-popup";
+.cart-section {
+  .item-list {
+    max-height: calc(100vh - 240px);
+  }
+}

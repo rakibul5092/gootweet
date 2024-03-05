@@ -1,0 +1,110 @@
+@import "./../../../theme/mixins/mixins";
+.col-manu {
+  @include max-width-p-map($col-manu-max-width);
+  @include flex-p-map($col-manu-flex);
+}
+.sending-request-cnt {
+  .form-cnt {
+    h6 {
+      font-size: 15px;
+      color: #000000;
+      font-weight: 700;
+    }
+    .form-input {
+      .form-control {
+        height: 65px;
+        padding: 15px;
+        resize: none;
+      }
+    }
+    &.form-cnt-apie {
+      .form-input {
+        height: calc(100% - 42px);
+      }
+    }
+  }
+  .req-represent-cnt {
+    .blog {
+      background: #6a7bff;
+      color: #fff;
+      padding: 40px 30px;
+      .row {
+        align-items: center;
+      }
+      .pro-cnt {
+        width: max-content;
+        margin: auto;
+        .pro-img {
+          box-shadow: none;
+        }
+        .pro-name-link {
+          .pro-link {
+            color: #fff;
+            .pub-t:after {
+              background: #fff;
+            }
+          }
+        }
+      }
+      .rep-txt {
+        position: relative;
+        @include font-size-p-map($designer-rep-txt-font-size);
+        color: #ffffff;
+        font-weight: 700;
+        .i-bal {
+          position: absolute;
+          right: 0;
+          top: 0;
+          display: inline-flex;
+          height: 100%;
+          align-items: center;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .blog-cnt {
+    .user-show {
+      @include background-p-map($ad4-advertisement-4-cnt-background);
+    }
+  }
+  .blog {
+    margin-bottom: 30px;
+    .pro-cnt {
+      padding-bottom: 15px;
+    }
+    .s-m {
+      display: inline-block;
+      font-size: 15px;
+      color: #6a7bff;
+      font-weight: 400;
+      cursor: pointer;
+      margin: 15px 0 10px;
+    }
+    &.form-blog {
+      padding: 30px 20px 20px 20px;
+    }
+  }
+  .img-cnt-all {
+    .tlt {
+      margin-bottom: 30px;
+    }
+    .cart-btn {
+      padding: 6px 40px;
+    }
+    .img-cnt-txt {
+      margin-bottom: 25px;
+      font-size: 15px;
+      color: #6a6975;
+      font-weight: 400;
+    }
+    .img-cnt {
+      margin-bottom: 20px;
+      .user-reg-txt-btn {
+        padding: 5%;
+        background: #fff;
+      }
+    }
+  }
+}

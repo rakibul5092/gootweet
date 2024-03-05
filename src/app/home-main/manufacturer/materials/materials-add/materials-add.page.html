@@ -1,0 +1,129 @@
+<ion-content style="--background: #f5f5f6">
+  <div class="main-wrapper  interactive">
+
+
+    <section class="interactive-section-2 advertisement-section mp-0">
+      <div class="row m-0">
+        <div class="col-12 column-mid p-0">
+          <a (click)="back()" style="display: inline-flex;align-items:center" class="back-li T_underLine">
+            <ion-icon name="chevron-back" style="font-size: 17px;" class="icon_h"></ion-icon>
+            Sugrįžti
+          </a>
+          <div class="advertisement-cnt pr-info-cnt m-radius-0 mt-5 mt-md-0">
+            <div class="tlt">Audinio</div>
+
+            <div class="form-cnt p-0 border-0">
+              <div class="row">
+                <div class="col-lg-10">
+                  <div class="form-group">
+                    <label>
+                      <h6 class="">Pavadinimas</h6>
+                    </label>
+                    <div class="form-input">
+                      <input [(ngModel)]="name" [style]="checked && (!name || name ==='')?'border:1px solid red':''"
+                        type="text" name="railing_furniture" class="form-control textIn" placeholder="Pavadinimas"
+                        value="Pavadinimas" />
+                      <ion-label *ngIf="checked && !name && name ===''" style="font-size: 10px;color: red;">Required
+                        field</ion-label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center" style="margin-top: 15px">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select class="custom-select" [(ngModel)]="categoryName" (click)="selectedCategory()">
+                      <option value="" selected disabled>--Kategorija--</option>
+                      <option *ngFor="let category of categories" [value]="category?.data?.category">
+                        {{category?.data?.category}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select class="custom-select" [(ngModel)]="subCategoryName" (click)="selectedSubCategory()">
+                      <option value="" selected disabled>--Sub Kategorija--</option>
+                      <option *ngFor="let subCategory of subCategories" [value]="subCategory?.data?.sub_category">
+                        {{subCategory?.data?.sub_category}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="row align-items-center">
+                      <div (click)="openAddCategoryPopover()" class="col-12" style="cursor: pointer">
+                        <a class="cat-link Tbold_underLine"><img class="remove_icon"
+                            src="./../../assets/img/add-box.svg" alt="img" />
+                          Pridėti papildomą kategoiją</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>
+                      <h6 onclick="document.getElementById('browsemain').click()" style="cursor: pointer"
+                        id="Td_underLine">
+                        Nuotrauka
+                        <img class="remove_icon" src="./../../assets/img/add-box.svg" alt="img" />
+                      </h6>
+                      <input id="browsemain" type="file" style="display: none" accept="image/*"
+                        (change)="onBrowseImage($event)" multiple />
+                    </label>
+
+
+                    <div class="form-input">
+                      <ion-row>
+                        <div *ngFor="let image of imagesDatas; let i=index" class="form-group">
+                          <img class="pi-info-photo" [src]="image?.imageForView" alt="img" />
+                          <div class="form-input pi-info-photo" style="margin-top: 5px;">
+                            <input
+                              [style]="checked && (!code || code.length == 0)?'border:1px solid red;font-size:12px':'font-size:12px'"
+                              type="text" name="railing_furniture" class="form-control textIn" placeholder="Kodas"
+                              [(ngModel)]="code[i]" />
+                            <ion-label *ngIf="checked && !code && code.length == 0" style="font-size: 10px;color: red;">
+                              Required
+                              field</ion-label>
+                          </div>
+                        </div>
+                      </ion-row>
+                    </div>
+
+
+                    <ion-label *ngIf="checked && images.length==0" style="font-size: 10px;color: red;">Image
+                      required
+                    </ion-label>
+                  </div>
+                </div>
+              </div>
+
+
+              <ion-row>
+                <ion-col size="12" class="ion-text-end">
+                  <div>
+                    <svg (click)="save()" style="cursor: pointer" xmlns="http://www.w3.org/2000/svg" width="200"
+                      height="40" viewBox="0 0 279 40" class="saveInfo">
+                      <g id="Group_261" data-name="Group 261" transform="translate(-680 -2595)">
+                        <rect id="button_body" data-name="button body" width="200" height="40" rx="20"
+                          transform="translate(680 2595)" fill="#6a7bff" />
+                        <text id="Klausti_meistrų_darbų_kainos" data-name="Klauskite meistrų darbų kainos"
+                          transform="translate(820 2622)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI">
+                          <tspan x="-77.831" y="0">Papildyti</tspan>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

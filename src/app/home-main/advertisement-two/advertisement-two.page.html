@@ -1,0 +1,216 @@
+<ion-content>
+  <div class="main-wrapper">
+    <section class="blog-section advertisement-section advertisement-section-1 mp-0">
+      <div class="row m-0">
+        <div class="col-12 column-mid-advertisement p-0">
+          <div (click)="back()" class="back-li Td_underLine" style="display: inline-flex; align-items: center">
+            <ion-icon name="chevron-back" style="font-size: 17px"></ion-icon>
+            Sugrįžti
+          </div>
+          <div class="advertisement-cnt m-radius-0 mt-5 mt-md-0">
+            <div class="post-box">
+              <div class="post-tlt tlt d-none d-md-block">
+                <span>Skelbti sienoje</span>
+                <div class="pro-cnt">
+                  <span class="cnr-txt">Pagrindinis</span>
+                  <div class="pro-img">
+                    <img class="cover" src="./../../assets/img/flag.svg" alt="img" />
+                  </div>
+                  <div class="pro-name-link">Lietuva</div>
+                </div>
+              </div>
+
+              <!--************************************** Post description input here *********************************** -->
+              <div class="description-input">
+                <textarea [(ngModel)]="wallPost.description" class="form-control textIn"
+                  placeholder="Įrašykite skelbimo aprašymą..." (input)="onDescriptionChange($event)"></textarea>
+
+                <app-social-preview *ngIf="wallPost.metaData" [title]="wallPost?.metaData?.title"
+                  [img]="wallPost?.metaData?.img" [description]="wallPost?.metaData?.description"
+                  [siteName]="wallPost?.metaData?.siteName">
+                </app-social-preview>
+                <div *ngIf="apiCalled" class="pt-2 w-100">
+                  <ion-skeleton-text animated="true" class="w-100" style="height: 200px;"></ion-skeleton-text>
+                  <div class=" w-100 p-2">
+                    <ion-skeleton-text class=" d-block font-weight-bold"></ion-skeleton-text>
+                    <ion-skeleton-text style="font-size:14px"></ion-skeleton-text>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- for desktop 1  viršelio nuotrauką -->
+
+            <div class="product-show-all">
+              <!-- <app-cover-container [wallPost]="wallPost"></app-cover-container> -->
+              <app-file-container *ngIf="filesData && filesData.length>0" [fileData]="filesData"
+                [wallPost]="wallPost"></app-file-container>
+              <div *ngIf="wallPost?.products?.length>0" class="product-show-tlt tlt">
+                Pasirinkite įrašo struktūrą
+              </div>
+              <!--************************************** Image tab selection here *********************************** -->
+              <div *ngIf="wallPost?.products?.length>0" class="row ml-0">
+                <div class="col-md-8 pl-0">
+                  <div class="product-show-cnt mb-5 mb-md-0">
+                    <!--************************************ One image tab *************************************-->
+                    <div class="product-show product-show-one">
+                      <div class="row m-0">
+                        <div *ngFor="let product of wallPost?.products; let i = index" [class]="length == 1 ? 'col-12 p-1' : length == 2 ? 'col-6 p-1' : 
+      (length == 3 && i == 0) ? 'col-12 p-1' : (length == 3 && i >= 0) ? 'col-6 p-1' : 
+      (length == 4 && i == 0) ? 'col-12 p-1' : (length == 4 && i > 0) ? 'col-4 p-1' :
+      (length == 5 && i <= 1) ? 'col-6 p-1' : 'col-6 col-lg-4 p-1'">
+                          <div class="show-img-p">
+                            <div class="show-img wh-100 flex-box">
+                              <img class="img-center imgHovr"
+                                [src]="wallPost?.products?.length>0?(wallPost?.products[i]?.main_images|getImage):'assets/image_placeholder.webp'"
+                                alt="img" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--************************************** Image right side list here *********************************** -->
+                <div class="col-10 col-sm-8 col-md-4">
+                  <div class="product-show-list-all">
+                    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+                      <div class="product-show-list" *ngFor="let product of wallPost?.products;let i =index">
+                        <span class="pro-num">{{'#'+i}}</span>
+                        <span class="pro-line">
+                          <ion-reorder class="remove_icon"> </ion-reorder>
+                        </span>
+                        <div class="row m-0">
+                          <div class="col-8 p-0">
+                            <div class="show-img-p">
+                              <div class="show-img wh-100">
+                                <img class="cover radius-5" [src]="product.main_images|getImage" alt="img" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4 p-0">
+                            <div class="show-img-delete h-100 d-flex">
+                              <!-- <span (click)="removeImage(i)" class="d-icon"><img class=""
+                                src="./../../assets/img/delete-w.svg" alt="img" /></span> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ion-reorder-group>
+                  </div>
+                </div>
+              </div>
+              <!-- <ion-label *ngIf="checked && wallPost?.products?.length == 0" style="font-size: 10px; color: red">Image required</ion-label> -->
+            </div>
+            <!-- for desktop 1 -->
+          </div>
+
+          <!--************************************** Final bottom part *********************************** -->
+
+          <div class="assign-services-all mx-3 mx-md-0">
+            <div class="row m-0">
+              <div class="col-12 p-0">
+                <div class="row m-0">
+                  <div class="col-12 pl-0 mb-3 mp-0">
+                    <app-buttons [wallPost]="wallPost" [isManufacturer]="true" style="display: grid;"></app-buttons>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 p-0 mb-3 center">
+                <div class="post-add-btn-all">
+                  <div class="post-add-btn-continue">
+                    <button style="max-width: 50%" (click)="saveWallPost()" class="btn ctm-btn cart-btn w-100 btnNav">
+                      Tęsti
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--************************************** Right side bar image selection *********************************** -->
+
+        <div class="col-12 column-right pr-0">
+          <div class="right-sidebar">
+            <div class="img-cnt d-block">
+              <app-image-upload [uid]="me?.uid" (onUploaded)="onFileSelection($event)"></app-image-upload>
+            </div>
+
+            <!--************************************** Right side bar country selection *********************************** -->
+            <!--************************************** Right side bar product/product selection *********************************** -->
+
+            <div class="img-cnt local-img-cnt local-img-cnt1 d-block" *ngIf="me && me.rule === 'manufacturer'">
+              <div class="user-reg-txt-btn d-block text-center">
+                <span class="w-100 u-reg-txt mb-3">
+                  <span class="add-photo"><img src="./../../assets/img/local_mall.svg" alt="img" /></span>
+                  <span class="add-photo-txt">Pasirinkite prekes iš katalogo</span>
+                </span>
+
+                <span class="w-100 d-block u-reg-btn"><button (click)="openProductAddModal()"
+                    class="btn ctm-btn cart-btn btnNav">
+                    <img class="postText" src="./../../assets/img/add-circle-w.svg" alt="img" />
+                    Priskirti prekes iš katalogo
+                  </button></span>
+
+                <div class="local-product-list-all">
+                  <div class="row mx-0 local-product-list" *ngFor="let product of wallPost?.products; let i=index">
+                    <span class="d-icon" (click)="removeProduct(i)"><img class="remove_icon"
+                        src="./../../assets/img/delete-w.svg" alt="img" /></span>
+                    <div class="local-img col-12 p-0">
+                      <div class="local-img-p h-100">
+                        <img class="cover radius-5"
+                          [src]="product?.main_images && product?.main_images.length>0? (product?.main_images|getImage):''"
+                          alt="img" />
+                      </div>
+                    </div>
+                    <div class="local-price-txt col-12 pr-0">
+                      <div class="local-txt">{{product?.title}}</div>
+                      <div class="local-price-tlt">Kaina</div>
+                      <div class="local-price">
+                        {{'€'+(product?.good|getPrice)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--**************************** related products ***************************-->
+            <div class="img-cnt local-img-cnt local-img-cnt1 d-block"
+              *ngIf="me && me.rule === 'manufacturer' && relatedProducts.length>0">
+              <div class="user-reg-txt-btn d-block text-center">
+                <span class="w-100 u-reg-txt mb-3">
+                  <span class="add-photo"><img src="./../../assets/img/local_mall.svg" alt="img" /></span>
+                  <span class="add-photo-txt">Susijusį prekes iš katalogą</span>
+                </span>
+
+                <div class="local-product-list-all">
+                  <div class="row mx-0 local-product-list" *ngFor="let product of relatedProducts; let i=index">
+                    <div style="position: absolute; right: 0; top: 0; padding: 5px">
+                      <div (click)="addRelatedToSelectedProduct(product, i)" class="add-btn">
+                        <ion-icon name="add-circle" class="remove_icon" style="font-size: 18px"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="local-img col-12 p-0">
+                      <div class="local-img-p h-100">
+                        <img class="cover radius-5" [src]="(product?.main_images|getImage)" alt="img" />
+                      </div>
+                    </div>
+                    <div class="local-price-txt col-12 pr-0">
+                      <div class="local-txt">{{product?.title}}</div>
+                      <div class="local-price-tlt">Kaina</div>
+                      <div class="local-price">
+                        {{'€'+(product?.good|getPrice)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

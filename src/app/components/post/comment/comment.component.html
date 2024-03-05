@@ -1,0 +1,19 @@
+<div [id]="comment.id" class="comment">
+  <app-comment-content [me]="me" [comment]="comment" (onMenuClick)="openCommentMenu($event, wallPost, comment)"
+    (onReply)="setReply(comment, wallPost)"></app-comment-content>
+</div>
+<!--************************************* Reply section here ************************************** -->
+<div *ngIf="wallPost.isCommentAll" class="reply-all">
+  <div class="reply-txt mb-3">
+    <div [id]="replyComment.id" class="comment reply" style="margin-bottom: 15px"
+      *ngFor="let replyComment of comment?.reply_comments">
+      <app-comment-content [me]="me" [comment]="replyComment" (onMenuClick)="openCommentMenu($event, wallPost, comment)"
+        (onReply)="setReply(comment, wallPost)" [isReplyComment]="true">
+      </app-comment-content>
+    </div>
+
+    <app-write-box *ngIf="me && comment.replyTo !== null" class="write-comment-box" [me]="me" [comment]="comment"
+      (onSendReplyComment)="sendReplyComment(wallPost, me?.uid, comment?.replyTo)" [isReply]="true"
+      [text]="comment.replyCommentText"></app-write-box>
+  </div>
+</div>

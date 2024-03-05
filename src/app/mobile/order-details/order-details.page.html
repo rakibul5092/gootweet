@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="image-wrapper">
+      <div class="review-image"
+        style="background-image: url('https://storage.googleapis.com/furniin-d393f.appspot.com/product_photos/lucduI5syaMFOntVOGuPOjSpCx33_product_photo_1618859748560.webp');">
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <div>
+      <div class="container pt-1">
+        <ion-row>
+          <ion-col size="6" class="price d-flex align-items-center">
+            <ion-icon name="logo-euro" class="price mr-2"></ion-icon>
+            <span class="price"> 0.95</span>
+          </ion-col>
+          <ion-col size="6">
+            <div class="d-flex justify-content-end">
+              <div>
+                <span class="d-block" style="font-size: 18px; color: #d1c23e;">Dalintis Chat</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col class="info">
+            <ion-row class="medioum-text">Preke sandelye <span style="font-size: 28px; color: blue;" class="ml-2"> YRA -
+                <span class="text-danger">nera</span></span></ion-row>
+            <ion-row class="medioum-text">Estimated delevery</ion-row>
+            <ion-row class="medioum-text">on 9 september</ion-row>
+            <ion-row class="medioum-text">Ships to Lithunia</ion-row>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-row>
+        <ion-col>
+          <ion-row class="footer-buttons">
+            <button type="button" class="reset-button"
+              style="display: flex; justify-content: center; align-items: center;">
+              <ion-icon name="cart-outline" style="font-size: 25px; color:black; margin-right: 4px;"></ion-icon>
+              Į krepšelį
+            </button>
+            <button (click)=(gotoPaymentMethod()) type="button" class="done-button">Mokėti dabar
+            </button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <div class="container mt-1">
+      <!-- <div style="height: 5px; width: 100%; background-color: black;" class="mt-4 mb-4"></div> -->
+
+      <ion-row class="d-flex justify-content-center mt-1">
+        <ion-col (click)="selected= 1" size="4.5" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">Ismatavimai /</span>
+          <div style="height: 4px; width: 100%; background-color: black;"></div>
+          <ion-icon name="crop-outline" class="price"></ion-icon>
+        </ion-col>
+        <ion-col (click)="selected= 2" size="3.5" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">spalvos /</span>
+          <div style="height: 4px; width: 100%; background-color: rgb(126, 183, 236);"></div>
+          <ion-icon name="color-filter-outline" class="price"></ion-icon>
+        </ion-col>
+        <ion-col (click)="selected= 3" size="4" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">savybes</span>
+          <div style="height: 4px; width: 100%; background-color: rgb(228, 40, 40);"></div>
+          <ion-icon name="folder-outline" class="price"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div style="height: 7px; width: 100%; background-color: rgb(238, 230, 230);" class="mt-1"></div>
+
+    <div class="container" *ngIf="selected === 1">
+
+      <ion-row class="d-flex justify-content-center mt-1">
+        <ion-col size="6" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">Plotis</span>
+        </ion-col>
+        <ion-col size="6" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">234</span>
+        </ion-col>
+      </ion-row>
+      <div style="height: 1px; width: 100%; background-color: rgb(238, 230, 230);"></div>
+
+      <ion-row class="d-flex justify-content-center mt-1">
+        <ion-col size="6" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">Ilgis</span>
+        </ion-col>
+        <ion-col size="6" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">234</span>
+        </ion-col>
+      </ion-row>
+      <div style="height: 1px; width: 100%; background-color: rgb(238, 230, 230);"></div>
+
+      <ion-row class="d-flex justify-content-center mt-1">
+        <ion-col size="6" class="d-flex flex-column align-items-center">
+          <span class="medioum-text">Dydis</span>
+        </ion-col>
+        <ion-col size="6" class="d-flex flex-column align-items-center">
+          <ion-row class="medioum-text">M</ion-row>
+          <ion-row class="medioum-text">S</ion-row>
+
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="selected === 1" style="height: 4px; width: 100%; background-color: rgb(126, 183, 236);" class="mt-3">
+    </div>
+    <ion-row *ngIf="selected === 2" class="d-flex justify-content-center mt-3">
+      <ion-col size="6" class="d-flex flex-column align-items-center">
+        <span class="medioum-text">Pasirinkti</span>
+      </ion-col>
+      <ion-col size="6" class="d-flex flex-column align-items-center">
+        <ion-row class="medioum-text">Black</ion-row>
+        <ion-row class="medioum-text">White</ion-row>
+        <ion-row class="medioum-text">Blue</ion-row>
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="selected === 2" style="height: 4px; width: 100%; background-color: rgb(228, 40, 40);" class="mt-1">
+    </div>
+
+    <ion-row class="d-flex justify-content-center mt-1" style="font-weight: bold;">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, reprehenderit voluptatibus explicabo aperiam sunt
+      optio eveniet hic, commodi laborum repellat dolores sint voluptas, accusantium ducimus? Reprehenderit, quasi.
+    </ion-row>
+
+  </div>
+</ion-content>

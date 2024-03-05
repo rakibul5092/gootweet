@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add {{isColor? 'Color':'Size'}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid style="height: 100%; width: 100%;">
+    <ion-row class="ion-text-center input-row">
+      <ion-input [(ngModel)]="item" [placeholder]="isColor? 'Color name':'Size name'"></ion-input>
+      <ion-button mode="md" (click)="add()" color="primary">Add</ion-button>
+    </ion-row>
+    <ion-row class="item-list">
+      <div class="item" *ngFor="let item of isColor? colors: sizes; let i = index">{{item.name}} <ion-icon name="trash"
+          (click)="delete(item, i)"></ion-icon></div>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

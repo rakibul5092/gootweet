@@ -1,0 +1,20 @@
+<div class="d-flex flex-column justify-content-center align-items-center wrapper-caller-info">
+  <audio id="ringing-sound" loop src="assets/sounds/cellphone-ringing-6475.mp3"></audio>
+  <section class="caller-info d-flex flex-column justify-content-center align-items-center flex-auto">
+    <div class="circle avatar-caller mb4">
+      <div class="ripple-wave">
+        <div class="ripple-wave-2"></div>
+      </div>
+      <img class="circle" [src]="data?.callerInfo?.profile_photo| sanitizeImage: ''" alt="">
+    </div>
+    <h1 class="mb2">{{ data?.callerInfo?.full_name| join_name }}</h1>
+  </section>
+  <section class="call-buttons d-flex w-100 justify-content-center">
+    <ion-button (click)="cancel()" class="reject">
+      <ion-icon name="call"></ion-icon>
+    </ion-button>
+    <ion-button (click)="accept()" class="accept">
+      <ion-icon name="call"></ion-icon>
+    </ion-button>
+  </section>
+</div>

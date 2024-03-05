@@ -1,0 +1,118 @@
+<ion-content [scrollEvents]="true" (ionScroll)="initScroll($event)">
+  <div class="main-wrapper" style="background: #fafafa">
+    <ion-progress-bar *ngIf="!loaded" style="height: 1.5px" type="indeterminate"></ion-progress-bar>
+
+    <section class="two-div-section search-result-section pb-5 mt-3 mp-0">
+      <div class="row ml-0">
+        <div *ngIf="me && me.rule !== 'designer'" class="col-12 column-left pl-0 d-none d-md-block">
+          <div class="left-side-bar" id="leftBar">
+            <app-my-info [userTypeInNumber]="userTypeInNumber" [wallet]="wallet">
+            </app-my-info>
+          </div>
+        </div>
+
+        <!-- ==========================catalogs starts ================================= -->
+        <div class="col-12 column-mid pl-0" id="myHeader">
+          <div class="d-block d-xl-flex align-items-center mb-3 px-4 px-md-2" *ngIf="searchResult.length>0">
+            <div class="mb-3 mb-xl-0 search-cat" *ngIf="search_query">
+              <ion-label style="font-size: 16px">{{'Paieškos rezultatas: '}}</ion-label>
+              <ion-label style="font-weight: bolder; font-size: 16px">{{'"'+search_query+'"'}}</ion-label>
+            </div>
+            <div *ngIf="!isUserSearch" class="search-filter" style="width: 280px">
+              <div class="row mr-0 align-items-center price-input">
+                <div class="col-5 form-group" style="margin-bottom: 0px">
+                  <div class="form-input">
+                    <span class="input-group-txt1">€</span>
+                    <input type="text" [(ngModel)]="searchPopupService.min" name="min-price" id="min-price"
+                      class="form-control" placeholder="Min" />
+                    <span class="r-ar">
+                      <ion-icon name="chevron-forward" style="font-size: 20px"></ion-icon>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-5 pr-0 form-group" style="margin-bottom: 0px">
+                  <div class="form-input">
+                    <span class="input-group-txt2">€</span>
+                    <input type="text" [(ngModel)]="searchPopupService.max" name="max-price" id="max-price"
+                      class="form-control" placeholder="Max" />
+                  </div>
+                </div>
+                <div class="col-2 pr-0 form-group" style="margin-bottom: 0px">
+                  <button (click)="initSearch()" style="text-transform: none"
+                    class="btn ctm-btn cart-btn log-reg-btn btnNav">
+                    Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- For user list -->
+          <div *ngIf="isUserSearch" class="blog-cnt user-list">
+            <div class="row mr-0" style="padding-left: 25px;">
+              <app-profile-card [profile]="user" *ngFor="let user of searchResult" [me]="me" style="padding: 5px 3px;">
+              </app-profile-card>
+            </div>
+          </div>
+          <!-- For user list -->
+
+          <div *ngIf="!isUserSearch" class="product-list mx-3 mx-md-0">
+            <div class="row m-0">
+              <div *ngFor="let product of searchResult" class="product-col col-12 col-md-4 col-xl-3 p-0"
+                (click)="openSingleProduct(product.uid, product.objectID)">
+                <div class="product m-radius-0" style="height: calc(100% - 15px)">
+                  <div class="product-img-p">
+                    <div class="product-img wh-100">
+                      <img class="img-center imgHovr" [src]="product.image | getSingleImage" />
+                    </div>
+                  </div>
+                  <div class="product-txt">
+                    <div class="product-tlt">{{product.title}}</div>
+                    <div class="product-price">
+                      <span class="price-all">
+                        <span class="current-price">
+                          <span class="type-money">€</span>
+                          <span class="money">{{" "+product.price}}</span>
+                        </span>
+                      </span>
+                      <span class="product-btn"><button class="btn ctm-btn cart-btn btnNav">
+                          <img src="./../../assets/img/add-cart.svg" alt="img" />
+                          Užsakyti
+                        </button></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span *ngIf="searchType == 'search' ">
+              <ion-infinite-scroll
+                (ionInfinite)="this.onSearchProductByKeyword(this.search_query, page+1, $event, 'scroll')">
+                <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </span>
+            <span *ngIf="searchType == 'filter' ">
+              <ion-infinite-scroll (ionInfinite)="categoryFilter(this.category, page+1, $event, 'scroll')">
+                <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </span>
+            <span *ngIf="searchType == 'filter2' ">
+              <ion-infinite-scroll
+                (ionInfinite)="categoryAndSubCategoryFilter(this.subcategory, page+1, $event, 'scroll')">
+                <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </span>
+
+            <h3 *ngIf="searchResult.length < 1 && nodata">
+              Nerastas produktas..
+            </h3>
+            <h3 *ngIf="searchResponse && searchResponse?.page >= searchResponse?.nbPages && !nodata">
+              Nebėra produktų..
+            </h3>
+          </div>
+        </div>
+
+        <!-- ==========================catalogs ends ================================= -->
+      </div>
+    </section>
+  </div>
+</ion-content>

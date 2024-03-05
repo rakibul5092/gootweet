@@ -1,0 +1,95 @@
+<ion-content>
+  <div class="main-wrapper">
+    <section
+      class="blog-section advertisement-section advertisement-section-2 mp-0"
+    >
+      <div class="advertisement-cnt m-radius-0 pb-0 pb-md-5">
+        <div
+          routerLink="/add-post"
+          style="display: inline-flex; align-items: center"
+          class="back-li"
+        >
+          <ion-icon name="chevron-back" style="font-size: 17px"></ion-icon>
+          Sugrįžti
+        </div>
+        <div class="advertisement-4-cnt">
+          <div class="advertisement-4-warning-cnt m-radius-0">
+            <div class="row m-0">
+              <div class="col-12 col-lg-6 pl-0 mb-3 mb-lg-0">
+                <div class="assign-services-cnt w-100">
+                  <div class="row m-0">
+                    <div class="col-12 p-0 mb-3">
+                      <div class="assign-services">
+                        <div class="assign-services-icon">
+                          <img
+                            src="./../../assets/img/design-services-w.svg"
+                            alt="img"
+                          />
+                        </div>
+                        <div class="assign-services-btn-txt">
+                          <div class="assign-services-txt">Klauskite</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 d-none p-0">
+                      <div class="assign-services assign-services-1">
+                        <div class="assign-services-icon">
+                          <img
+                            src="./../../assets/img/architecture.svg"
+                            alt="img"
+                          />
+                        </div>
+                        <div class="assign-services-btn-txt">
+                          <div class="assign-services-txt">
+                            Meistrų darbų kaina
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 pr-0 pl-lg-3 pl-0">
+                <div class="warning-cnt-2">
+                  <div class="warning-txt">
+                    <img src="./../../assets/img/warning-w.svg" alt="img" />
+                    Jūsų piniginė nėra aktyvi
+                  </div>
+                  <div class="warning-txt warning-txt2">
+                    Dizainerių ir meistrų paslaugoms reikalinga aktyvi piniginė
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 pl-0">
+                <div class="warning-cnt-2">
+                  <div class="warning-txt3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="point-gift-cnt m-radius-0">
+            <div class="row ml-0">
+              <div class="col-12 col-lg-6 pl-0 text-center text-md-left">
+                <div class="get-txt">Įsidėkite į pinginę €1 ir gaukite</div>
+                <div class="gift-txt mb-4 mb-md-0">100 taškų dovanų!</div>
+              </div>
+              <div class="col-12 col-lg-6 pl-0 text-center">
+                <button (click)="skipToProfile()" class="btn ctm-btn pro-btn">
+                  Praleisti
+                </button>
+                <button
+                  (click)="makeWalletAndGoPayment()"
+                  class="btn ctm-btn cart-btn"
+                >
+                  Aktyvuoti piniginę
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

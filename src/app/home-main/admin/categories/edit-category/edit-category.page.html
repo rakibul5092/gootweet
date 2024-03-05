@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit category</ion-title>
+    <ion-buttons (click)="close()" slot="end" style="margin-right: 15px;">
+      <ion-icon name="close"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="width: 100%;">
+    <ion-row style="width: 100%;">
+      <ion-col size="12">
+        <ion-input style="background-color: rgb(236, 236, 236);border-radius: 5px;" class="ion-text-center"
+          [(ngModel)]="inputText">
+        </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row style="width: 100%;">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button (click)="update()" mode="md" color="primary">Update</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

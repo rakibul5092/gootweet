@@ -1,0 +1,69 @@
+<ion-content [scrollY]="false">
+  <div *ngIf="liveVideo">
+    <ng-container *ngIf="(selectedTab|async)!==1">
+      <div class="d-flex detail-header p-2">
+        <div class="d-flex align-items-center">
+          <app-profile-photo size="40" [user]="liveVideo.owner"></app-profile-photo>
+          <div class="d-flex align-items-center mb-0">
+            <span class="user-name">{{liveVideo.owner.full_name|join_name}}</span>
+            <ion-icon name="checkmark-circle" class="checkmark-circle"></ion-icon>
+          </div>
+        </div>
+        <span expand="block" fill="clear" shape="round" style="background: #e11b3f" class="header-item">
+          Irasas/live
+        </span>
+        <span expand="block" fill="clear" shape="round"
+          class="d-flex justify-content-center align-items-center header-item" style="background: #6a7bff">
+          <ion-icon name="eye-outline" style="font-size: 20px; margin-right: 4px; color: white"></ion-icon>
+          256
+        </span>
+      </div>
+
+      <div class="image-wrapper" [style]="isPortrait? 'height: 80vh':'35vh'">
+        <div id="live-player-container" class="review-image">
+          <app-video-player [url]="videoBase + liveVideo.fileList[0].fileName"></app-video-player>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="bottom-container" [style]="(selectedTab|async)===1? 'height: 100vh':'height: 59vh'">
+      <ion-row style="border-bottom: 2px solid #d6d6d6; padding: 4px; margin-bottom: 5px;">
+        <ion-segment (ionChange)="onSegmentChange($event)" value="2" mode="ios">
+          <ion-segment-button value="1" (click)="selectedTab.next(1)">
+            <ion-icon name="folder" class="mr-2"></ion-icon>
+            <span class="options">Katalogas</span>
+          </ion-segment-button>
+          <ion-segment-button value="2" (click)="selectedTab.next(2)">
+            <ion-icon name="repeat" class="mr-2"></ion-icon>
+            <span class="options">Ruošiniai</span>
+          </ion-segment-button>
+          <ion-buttons>
+            <ion-button [routerLink]="['/live-chat/'+liveVideo.id+'/3']">
+              <div class="button-container">
+                <ion-icon name="chatbox-ellipses" class="mr-2"></ion-icon>
+                <span class="options">Live chat</span>
+              </div>
+            </ion-button>
+            <!-- <ion-button>
+              <div class="button-container d-flex">
+                <ion-icon src="assets/img/share.svg" class="mr-2"></ion-icon>
+                <span class="options">Dalintis</span>
+              </div>
+            </ion-button> -->
+          </ion-buttons>
+        </ion-segment>
+      </ion-row>
+      <!-- product section -->
+      <div [ngSwitch]="(selectedTab|async)" *ngIf="me" style="height: calc(100% - 58px);">
+        <app-live-products *ngSwitchCase="1" [menuVisible]="contextMenuVisible" [editableProduct]="selectedProduct"
+          (onEdit)="onProductEdit($event)" [allProducts]="allProducts" [isGalary]="true"></app-live-products>
+        <app-live-products *ngSwitchCase="2" [menuVisible]="contextMenuVisible" [editableProduct]="selectedProduct"
+          (onEdit)="onProductEdit($event)" [liveProducts]="liveProducts" [isGalary]="false"></app-live-products>
+      </div>
+      <!-- another product section -->
+
+    </div>
+  </div>
+  <app-edit-product [me]="me" (onDone)="selectedProduct = null" [openEditModal]="selectedProduct !== null"
+    [product]="selectedProduct"></app-edit-product>
+</ion-content>

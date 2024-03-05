@@ -1,0 +1,115 @@
+@import "./../../../../theme/mixins/mixins";
+.left-side-cnt {
+  margin-bottom: 15px;
+  .ul-tlt {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  .loading-btn {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eaeaea;
+    .ul-tlt {
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+  }
+  .importation-btn {
+    .ul-tlt {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .pro-btn {
+      padding: 8px 20px;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+  }
+  &.filter-cnt {
+    .ul-tlt {
+      margin-bottom: 20px;
+    }
+    .form-group {
+      h6 {
+        font-size: 14px;
+        color: #000000;
+        font-weight: 700;
+      }
+      .form-input {
+        .form-control {
+          padding: 0 0px 0 40px;
+        }
+        .search-input {
+          border-radius: 50px;
+        }
+        .input-group-txt {
+          top: 47%;
+        }
+        .r-ar {
+          position: absolute;
+          right: -19px;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          display: inline-flex;
+          align-items: center;
+          font-size: 14px;
+          color: #a3a3a3;
+          font-weight: 400;
+        }
+        .ctm-container {
+          color: #6a6975;
+          .checkmark {
+            &:after {
+              left: 8px;
+              top: -13px;
+              height: 18px;
+            }
+          }
+        }
+      }
+    }
+    .cat-ul {
+      max-height: 250px;
+      overflow-y: auto;
+      .cat-li {
+        .ctm-container {
+          color: #6a6975;
+          .b-ar,
+          .count-li {
+            color: #6a6975;
+          }
+          .b-ar {
+            margin-left: 4px;
+          }
+        }
+        .in-cat-ul {
+          display: none;
+          padding-left: 20px;
+          border-left: 2px solid #eaeaea;
+          margin-bottom: 15px;
+          .in-cat-li {
+          }
+        }
+        &.active {
+          .cat-li-ch {
+            color: #6a7bff;
+            .b-ar {
+              i {
+                transform: rotate(180deg);
+              }
+            }
+          }
+          .in-cat-ul {
+            display: block;
+          }
+        }
+        .in-cat-ul {
+          .in-cat-li {
+          }
+        }
+      }
+    }
+  }
+}

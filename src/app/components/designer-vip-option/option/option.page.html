@@ -1,0 +1,5 @@
+<ion-list>
+  <ion-item *ngIf="vipOption" button mode="md" (click)="changeVip(!vip)">{{vip?'Pašalinti VIP':'Padaryti VIP'}}
+  </ion-item>
+  <ion-item button lines="none" mode="md" (click)="removeDesigner()">Pašalinti</ion-item>
+</ion-list>

@@ -1,0 +1,28 @@
+<div class="sent-req-normal sent-req-item " style="width: 100%;">
+  <span (click)="close()" class="req-close"><img src="./../../assets/img/close.svg" alt="img" /></span>
+
+  <div class="pro-cnt req-pro-cnt1">
+    <div class="pro-img border-0">
+      <img class="cover" [defaultImage]="default" [lazyLoad]="(product.data.main_images|getImage)" alt="img" />
+
+    </div>
+    <div class="pro-name-link">
+      <div button class="pro-name">
+        {{product?.data?.title}}
+      </div>
+
+      <div class="product-txt">
+        <div class="product-price">
+          <span class="current-price">
+            <img *ngIf="product?.data?.good && product?.data?.good?.images"
+              [src]="product?.data?.good?.images | getMaterialImage" />
+            <span class="type-money">€</span>
+            <span class="money">{{(product?.data?.good|getPrice)}}</span>
+          </span>
+          <span class="price-set">{{(product?.data?.good|getUnit)}}</span>
+          <!-- <span class="products-id">ID:CT-9090</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

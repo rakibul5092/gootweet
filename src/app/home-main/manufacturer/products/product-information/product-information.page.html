@@ -1,0 +1,580 @@
+<ion-content>
+  <div class="main-wrapper interactive">
+    <section class="interactive-section-2 advertisement-section pb-5 mp-0 m-radius-0">
+      <div class="row m-0">
+        <div class="col-12 column-mid p-0">
+          <div (click)="back()" class="back-li T_underLine" style="display: inline-flex; align-items: center">
+            <ion-icon name="chevron-back" style="font-size: 17px"></ion-icon>
+            Sugrįžti
+          </div>
+          <div class="advertisement-cnt pr-info-cnt mt-5 mt-md-0 mb-0 mb-md-0">
+            <div class="tlt">Prekės įkėlimas</div>
+
+            <div class="form-cnt p-0 border-0">
+              <!-- Product id field -->
+              <app-long-text-field class="row" label="Produkto ID" [value]="product_id"
+                (valueEmitter)="product_id = $event" placeholder="Produkto ID" [checked]="checked">
+              </app-long-text-field>
+              <!-- Product title field -->
+              <app-long-text-field class="row" label="Pavadinimas" [value]="title" (valueEmitter)="title = $event"
+                placeholder="Minkštas kampelis svetainėje" [checked]="checked"></app-long-text-field>
+
+              <!--************************************** Category subcategory and innercategory ***************************************** -->
+              <div class="row">
+                <app-custom-select class="col-lg-4" [value]="category" placeholder="Category" [list]="categories"
+                  [isCategory]="true" (onSelect)="selectedCategory($event)"></app-custom-select>
+
+                <app-custom-select class="col-lg-4" [value]="subCategory" placeholder="None" [list]="subCategories"
+                  [isSubCategory]="true" (onSelect)="selectedSubCategory($event)"></app-custom-select>
+
+                <app-custom-select class="col-lg-4" [value]="innerCategory" placeholder="None" [list]="innerCategories"
+                  [isInnerCategory]="true" (onSelect)="selectedInnerCategory($event)"></app-custom-select>
+                <!--**************************************Category Section ends here ***************************************** -->
+              </div>
+              <div class="row mb-4">
+                <div class="col-lg-6 text-center text-md-left"></div>
+              </div>
+
+              <!-- for desktop1 start -->
+              <div class="form-group ">
+                <div class="form-input">
+                  <div class="relative-products-all">
+                    <div class="relative-products">
+                      <div [style]="checked && (!isNormal && variationGoods.length==0)?'border:1px solid red':''"
+                        class="product-input-all w-100">
+                        <div class="product-input-tlt">
+                          <span *ngIf="mode == 'add'" class="rel-ch" (click)="changeProductType(false)">
+                            <label class="ctm-container">
+                              Prekė su variacijomis
+                              <input disabled type="checkbox" [checked]="!isNormal" />
+                              <span class="checkmark checkIn"></span>
+                            </label>
+                          </span>
+                          <span *ngIf="mode == 'add'" (click)="changeProductType(true)" class="rel-ch">
+                            <label class="ctm-container">
+                              Paprasta prekė
+                              <input disabled type="checkbox" [checked]="isNormal" />
+                              <span class="checkmark checkIn"></span>
+                            </label>
+                          </span>
+                        </div>
+
+                        <!--*************************************** Variation good *********************************************** -->
+                        <div *ngIf="!isNormal; else normal" class="in-relative-products-cnt">
+                          <div class="in-relative-products-all" *ngFor="let good of variationGoods; let i=index">
+                            <div class="relative-products in-relative-products">
+                              <div class="product-no-de">
+                                <svg (click)="deleteVariationGood(i)" style="cursor: pointer" id="delete-24px_1_"
+                                  data-name="delete-24px (1)" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                  viewBox="0 0 20 20">
+                                  <path id="Path_111" data-name="Path 111" d="M0,0H20V20H0Z" fill="none" />
+                                  <path id="Path_112" data-name="Path 112"
+                                    d="M5.714,15.444A1.5,1.5,0,0,0,7.143,17h5.714a1.5,1.5,0,0,0,1.429-1.556V6.111H5.714ZM15,3.778H12.5L11.786,3H8.214L7.5,3.778H5V5.333H15Z"
+                                    transform="translate(0 0)" fill="#c6c7d4" />
+                                </svg>
+
+                                {{'#'+(i+1)}}
+                              </div>
+                              <div class="product-input-all in-product-input-all w-100">
+                                <div class="row in-product-row1">
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Medžiaga</h6>
+                                      </label>
+                                      <div class="form-input">
+                                        <div class="ctm-select" ctm-slt-n="cat_name">
+                                          <div class="ctm-select-txt pad-l-10">
+                                            <span class="select-icon"><img
+                                                [src]="good?.imagesData?.length>0? good?.imagesData[0]?.imageForView: 'https://unctad.org/sites/default/files/inline-images/ccpb_workinggroup_productsafety_800x450.jpg'"
+                                                alt="img" /></span>
+                                            <span class="select-txt">{{good.material}}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Kaina</h6>
+                                      </label>
+                                      <div class="form-input with-icon-cnt">
+                                        <span class="input-group-txt">€</span>
+                                        <ion-input [(ngModel)]="good.price"
+                                          (ionChange)="onMaterialPriceInput(good.price, good.code,i)" debounce="2000"
+                                          type="number" name="price" class="form-control with-icon textIn"></ion-input>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Mato vienetas</h6>
+                                      </label>
+                                      <div class="form-input with-icon-cnt">
+                                        <ion-input [(ngModel)]="good.unit"
+                                          (ionChange)="onMaterialUnitInput(good.unit, good.code,i)" debounce="2000"
+                                          type="text" name="price" class="form-control"></ion-input>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Kiekis pakuotėje</h6>
+                                      </label>
+                                      <div class="form-input with-icon-cnt">
+                                        <ion-input [(ngModel)]="good.quantity"
+                                          (ionChange)="onMaterialQuantityInput(good.quantity, good.code,i)"
+                                          debounce="2000" type="number" name="quantity" class="form-control textIn">
+                                        </ion-input>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Sandėlyje</h6>
+                                      </label>
+                                      <div class="form-input">
+                                        <ion-input [(ngModel)]="good.inStock"
+                                          (ionChange)="onMaterialStockInput(good.inStock, good.code,i)" debounce="2000"
+                                          type="text" name="cat" class="form-control textIn"></ion-input>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Pagaminimo laikotarpis</h6>
+                                      </label>
+                                      <div class="form-input">
+                                        <ion-input [(ngModel)]="good.expectedStock"
+                                          (ionChange)="onMaterialFutureInput(good.expectedStock, good.code,i)"
+                                          debounce="2000" type="text" name="cat" class="form-control textIn">
+                                        </ion-input>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Nuotrauka</h6>
+                                      </label>
+
+                                      <div class="form-input in-input-img">
+                                        <img style="margin-right: 6px" *ngFor="let img of good.imagesData"
+                                          class="in-add-img" [src]="img.imageForView" alt="img" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-lg-4 in-pro-col">
+                                    <div class="form-group">
+                                      <label>
+                                        <h6 class="">Pagal nutylejima</h6>
+                                      </label>
+
+                                      <div class="form-input in-input-img">
+                                        <input type="checkbox" [checked]="defaultMat && defaultMat-1 == i"
+                                          (click)="setDefaultMat(i)" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="form-input">
+                                        <textarea [(ngModel)]="good.description" class="form-control"
+                                          (ngModelChange)="onMaterialDesInput(good.description, good.code,i)"
+                                          debounce="2000" placeholder="Aprašymas"></textarea>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div (click)="addVariationMaterials();" class="text-right">
+                            <button class="btn ctm-btn cart-btn btnNav">
+                              <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+                              Pridėti variaciją
+                            </button>
+                          </div>
+                        </div>
+
+                        <!--*************************************** Normal good *********************************************** -->
+                        <ng-template #normal>
+                          <div class="in-relative-products-cnt">
+                            <div class="in-relative-products-all">
+                              <div class="relative-products in-relative-products">
+                                <div class="product-input-all in-product-input-all w-100">
+                                  <div class="row in-product-row2">
+                                    <div class="col-12 col-lg-4 in-pro-col">
+                                      <div class="form-group">
+                                        <label>
+                                          <h6 class="">Kaina</h6>
+                                        </label>
+                                        <div class="form-input with-icon-cnt">
+                                          <span class="input-group-txt">€</span>
+                                          <input [(ngModel)]="normalGood.price" type="number" name="price"
+                                            [style]="checked && (!normalGood.price || normalGood.price ==='')?'border:1px solid red':''"
+                                            class="form-control with-icon textIn" />
+                                          <ion-label *ngIf="checked && (!normalGood.price || normalGood.price ==='')"
+                                            style="font-size: 10px; color: red">Required field</ion-label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <ng-container
+                                      *ngIf="subCategory.data.sub_category === 'Plytelės ir priemonės' || subCategory.data.sub_category === 'Grindinės dangos'">
+                                      <div class="col-12 col-lg-4 in-pro-col">
+                                        <div class="form-group">
+                                          <label>
+                                            <h6 class="">Mato vienetas</h6>
+                                          </label>
+                                          <div class="form-input with-icon-cnt">
+                                            <input [(ngModel)]="normalGood.unit" type="text" name="price"
+                                              class="form-control textIn" />
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div *ngIf="innerCategory.data.inner_category !== 'Sportinė avalynė'"
+                                        class="col-12 col-lg-4 in-pro-col">
+                                        <div class="form-group">
+                                          <label>
+                                            <h6 class="">Kiekis pakuotėje</h6>
+                                          </label>
+                                          <div class="form-input with-icon-cnt">
+                                            <input [(ngModel)]="normalGood.quantity" type="number" name="quantity"
+                                              class="form-control Mato vienetas textIn" />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </ng-container>
+                                    <div class="col-12 col-lg-4 in-pro-col">
+                                      <div class="form-group">
+                                        <label>
+                                          <h6 class="">Sandėlyje</h6>
+                                        </label>
+                                        <div class="form-input">
+                                          <ion-input [(ngModel)]="normalGood.inStock" type="text" name="cat"
+                                            class="form-control Mato vienetas textIn"></ion-input>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-4 in-pro-col">
+                                      <div class="form-group">
+                                        <label>
+                                          <h6 class="">
+                                            Pagaminimo laikotarpis
+                                          </h6>
+                                        </label>
+                                        <div class="form-input">
+                                          <ion-input [(ngModel)]="normalGood.expectedStock" type="text" name="cat"
+                                            class="form-control Mato vienetas textIn"></ion-input>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                  </div>
+                                  <div class="row" *ngIf="me">
+                                    <div class="col-12 col-lg-4 in-pro-col">
+                                      <app-colors [normalGood]="normalGood" [ownerUid]="me.uid"></app-colors>
+                                    </div>
+                                    <div class="col-12 col-lg-4 in-pro-col">
+                                      <app-sizes [normalGood]="normalGood" [ownerUid]="me.uid"></app-sizes>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- for desktop end -->
+
+              <!-- *************main video ******************** -->
+              <div class="row">
+                <div class="col-12 col-lg-3 pr-0 col-upload">
+                  <div class="img-cnt d-block mb-4 mb-md-0">
+                    <div class="user-reg-txt-btn d-block text-center">
+                      <span class="w-100 u-reg-txt">
+                        <span class="add-photo"><img src="./../../assets/img/add-photo.svg" alt="img" /></span>
+                        <span class="add-photo-txt">Įkelti vaizdo įrašą</span>
+                      </span>
+                      <span class="w-100 d-block u-reg-btn"><button [disabled]="mainImagesData.length>= 3"
+                          onclick="document.getElementById('browsemainvideo').click()"
+                          class="btn ctm-btn cart-btn btnNav">
+                          Įkelkite iš failų
+                        </button></span>
+                      <input id="browsemainvideo" type="file" style="display: none" accept="video/*"
+                        (input)="onBrowseMainVideo($event)" multiple />
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="mainVideoData?.base64" class="col-12 col-lg-3 pr-0 col-upload">
+                  <span class="d-icon" (click)="deleteVideo()">
+                    <img src="./../../assets/img/delete-w.svg" />
+                  </span>
+                  <video class="cover" controls>
+                    <source [src]="testVideo|async" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+
+              <!--********************************************* Main images ********************************************************************************* -->
+              <div class="row w-100 row-upload mb-3">
+                <div class="col-12">
+                  <div class="form-group mb-0">
+                    <label>
+                      <h6 class="">Nuotrauka</h6>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-12 col-lg-3 pr-0 col-upload">
+                  <div [style]="checked && mainImagesData.length==0?'border:1px solid red':''"
+                    class="img-cnt d-block mb-4 mb-md-0">
+                    <div class="user-reg-txt-btn d-block text-center">
+                      <span class="w-100 u-reg-txt">
+                        <span class="add-photo"><img src="./../../assets/img/add-photo.svg" alt="img" /></span>
+                        <span class="add-photo-txt">Įtempkite ir paleiskite nuotraukas</span>
+                      </span>
+                      <span class="w-100 d-block u-reg-arba">arba</span>
+                      <span class="w-100 d-block u-reg-btn"><button [disabled]="mainImagesData.length>= 3"
+                          onclick="document.getElementById('browselogomain').click()"
+                          class="btn ctm-btn cart-btn btnNav">
+                          Įkelkite iš failų
+                        </button></span>
+                      <input id="browselogomain" type="file" style="display: none" accept="image/*"
+                        (change)="onBrowseMainImage($event)" multiple />
+                    </div>
+                  </div>
+                  <ion-label *ngIf="checked && mainImagesData.length==0" style="font-size: 10px; color: red">Required
+                    field</ion-label>
+                </div>
+                <div *ngFor="let image of mainImagesData; let i =index" class="col-12 col-lg-3 pr-0 col-img">
+                  <div class="col-img-cnt wh-100">
+                    <div class="show-img-p wh-100">
+                      <div class="show-img wh-100" style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        ">
+                        <span class="d-icon" (click)="removeMain(i)"><img class="remove_icon"
+                            src="./../../assets/img/delete-w.svg" alt="img" /></span><img class="imgHovr"
+                          [src]="image.imageForView" alt="img" />
+                      </div>
+                    </div>
+                    <div *ngIf="i==0" class="show-img-btn text-center">
+                      <button class="btn ctm-btn pro-btn active btnNav">
+                        Pagrindinė
+                      </button>
+                    </div>
+                    <div *ngIf="i>0" class="show-img-btn text-center">
+                      <button (click)="swapMainImage(i)" class="btn ctm-btn pro-btn active btnNav">
+                        Padaryti pagridine
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--********************************************* Description of product ********************************************************************************* -->
+              <div class="row mb-2">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>
+                      <h6 class="">Aprašymas</h6>
+                    </label>
+                    <div class="form-input">
+                      <!-- <angular-editor [config]="editor" [(ngModel)]="productDetails">
+                      </angular-editor> -->
+                      <textarea style="width: 100%; height: 150px; padding: 10px"
+                        [(ngModel)]="productDetails"></textarea>
+
+                      <ion-label *ngIf="checked && (!productDetails || productDetails==='')"
+                        style="font-size: 10px; color: red">Required field</ion-label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>
+                      <h6 class="">
+                        Specifikacijos
+                        <button (click)="addMeasure()" class="btn ml-2 ctm-btn cart-btn btnNav">
+                          <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+                          Pridėti specifikaciją
+                        </button>
+                      </h6>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+                <div class="row mb-3" *ngFor="let measure of measures; let i=index">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <div class="form-input">
+                        <ion-input type="text" [(ngModel)]="measure.name" class="form-control textIn"
+                          placeholder="Plotis (cm)">
+                        </ion-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <div class="form-input" style="width: calc(100% - 75px)">
+                        <ion-input type="text" [(ngModel)]="measure.measure" class="form-control textIn"
+                          placeholder="0">
+                        </ion-input>
+                        <span (click)="removeMeasure(i)" class="mi-icon btnHovr">
+                          <ion-icon name="remove" class="remove_icon"></ion-icon>
+                        </span>
+                        <span class="mi-reorder">
+                          <ion-reorder>
+                            <ion-icon name="move-outline" class="remove_icon"></ion-icon>
+                          </ion-reorder>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ion-reorder-group>
+
+              <!-- for desktop start 2 -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="m-0">
+                      <h6 class="m-0">Pristatymo informacija</h6>
+                    </label>
+                  </div>
+                </div>
+                <!-- *ngFor="let deliveryType of deliveryTypes;let i=index" (click)="selectDelivery(i)" -->
+                <!--***************************** Lithuania ******************************** -->
+                <ion-row style="width: 100%">
+                  <div class="col-12 col-lg-3" style="margin-right: 10px">
+                    <div class="form-group del-group">
+                      <select class="custom-select">
+                        <option [value]="deliveryTypes[0].destination">
+                          {{deliveryTypes[0].destination}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3">
+                    <div class="form-group del-group">
+                      <select class="custom-select" [(ngModel)]="deliveryTypes[0].delivery_info.option"
+                        (change)="deliveryChanged()">
+                        <option value="free">Nemokamas</option>
+                        <option value="charge">Kainuoja</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3">
+                    <div class="form-group del-group" [hidden]="deliveryTypes[0].delivery_info.option==='free'">
+                      <div class="form-input with-icon-cnt">
+                        <span class="input-group-txt">€</span>
+                        <input [(ngModel)]="deliveryTypes[0].delivery_info.price" type="text" name="price"
+                          class="form-control with-icon textIn" placeholder="0" />
+                      </div>
+                    </div>
+                  </div>
+                </ion-row>
+                <ion-row>
+                  <div class="col-12 col-lg-12">
+                    <div class="form-group del-group">
+                      <div class="form-input with-icon-cnt">
+                        <input [(ngModel)]="deliveryTypes[0].delivery_info.delivery_time"
+                          (input)="onDeliveryTimeChange()" type="text" name="time" class="form-control textIn"
+                          placeholder="Delivery time" />
+                      </div>
+                    </div>
+                  </div>
+                </ion-row>
+
+                <!--******************************** Nida ****************************** -->
+                <ion-row style="width: 100%">
+                  <div class="col-12 col-lg-3" style="margin-right: 10px">
+                    <div class="form-group del-group">
+                      <select class="custom-select">
+                        <option [value]="deliveryTypes[1].destination">
+                          {{"Kuršių neriją"}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3">
+                    <div class="form-group del-group">
+                      <select class="custom-select" [(ngModel)]="deliveryTypes[1].delivery_info.option"
+                        (change)="deliveryChanged1()">
+                        <option value="free">Nemokamas</option>
+                        <option value="charge">Kainuoja</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3">
+                    <div class="form-group del-group" [hidden]="deliveryTypes[1].delivery_info.option==='free'">
+                      <div class="form-input with-icon-cnt">
+                        <span class="input-group-txt">€</span>
+                        <input [(ngModel)]="deliveryTypes[1].delivery_info.price" type="text" name="price"
+                          class="form-control with-icon textIn" placeholder="0" />
+                      </div>
+                    </div>
+                  </div>
+                </ion-row>
+                <ion-row>
+                  <div class="col-12 col-lg-12">
+                    <div class="form-group del-group">
+                      <div class="form-input with-icon-cnt">
+                        <input [(ngModel)]="deliveryTypes[1].delivery_info.delivery_time" disabled="true" type="text"
+                          name="time" class="form-control textIn" placeholder="Delivery time" />
+                      </div>
+                    </div>
+                  </div>
+                </ion-row>
+
+                <div class="col-12 d-none">
+                  <div class="form-group">
+                    <button class="btn ctm-btn cart-btn">
+                      <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+                      Pridėti pristatymo būdą
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- for desktop start 3 -->
+            <div class="text-right saveInfo">
+              <svg (click)="save()" style="cursor: pointer" xmlns="http://www.w3.org/2000/svg" width="222" height="40"
+                viewBox="0 0 222 40">
+                <rect id="Rectangle_136" data-name="Rectangle 136" width="222" height="40" rx="20" fill="#6a7bff" />
+                <text x="40%" y="65%" fill="white">Save</text>
+              </svg>
+            </div>
+            <!-- for desktop end 3 -->
+          </div>
+
+          <!-- for mobile start all -->
+
+          <!-- for mobile end all-->
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

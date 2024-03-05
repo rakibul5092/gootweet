@@ -1,0 +1,37 @@
+<div class="left-side-cnt filter-cnt">
+  <h4 class="ul-tlt">Katalogo filtravimas <span (click)="close()" class="float-right"><img
+        src="./../../assets/img/close.svg" alt="img" /></span></h4>
+  <div class="form-cnt p-0 border-0">
+    <form method="post" action="">
+      <div>
+        <div class="form-group">
+          <div class="form-input">
+            <span class="input-group-txt"><img src="./../../assets/img/search.svg" alt="img" /></span>
+            <ion-input name="search" id="search" class="form-control search-input" placeholder="Įveskite frazę"
+              style="--padding-start: 40px;" [(ngModel)]="service.searchText"
+              (keyup.enter)="service.onSearchByKeyword(service.searchText, 0, $event,'call')" debounce="1000"
+              type="text">
+            </ion-input>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>
+            <h6 class="">Kategorijos</h6>
+          </label>
+          <div class="cat-ul">
+            <div *ngFor="let cat of service.categories" class="cat-li active">
+              <div class="form-input" *ngIf="cat?.products?.length>0">
+                <label class="ctm-container cat-li-ch">
+                  {{cat?.category}}
+                  <input type="checkbox" [checked]="service.categoryName != '' && service.categoryName == cat?.category"
+                    (click)="service.filterWithCategory(cat.category, $event)" />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

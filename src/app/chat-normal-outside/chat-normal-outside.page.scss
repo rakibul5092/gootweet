@@ -1,0 +1,19 @@
+@import "./../../theme/mixins/mixins";
+.chat-section {
+  .chat-top {
+    padding: 8px 25px;
+  }
+}
+
+.lds-ring {
+  display: flex;
+  position: relative;
+  width: 20;
+  height: 20px;
+}
+.lds-ring div {
+  width: 14px;
+  height: 14px;
+  margin: 3px;
+  border: 2px solid rgb(117, 117, 117);
+}

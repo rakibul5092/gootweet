@@ -1,0 +1,39 @@
+@import "./../../../theme/mixins/_mixins";
+.tracking-section {
+  @include padding-p-map($blog-section-manufacturer-padding);
+  .reviews-tlt {
+    font-size: 22px;
+    color: #303030;
+    margin-bottom: 15px;
+  }
+  .right-sidebar {
+    .reviews-delet-i {
+      width: 25px;
+      height: 25px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+    .review-cnt {
+      span {
+        cursor: pointer;
+      }
+    }
+    .pro-cnt {
+      position: relative;
+      padding: 10px 0;
+      border-bottom: 1px solid #eaeaea !important;
+      margin-bottom: 10px;
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+    .tlt {
+      font-size: 17px;
+      color: #000000;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  }
+}

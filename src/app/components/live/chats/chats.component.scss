@@ -1,0 +1,78 @@
+.live-messages::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.live-messages {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.live-messages {
+  overflow-y: auto;
+  height: calc(100% - 50px);
+  padding: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.live-message {
+  display: flex;
+  padding: 5px;
+  // transform: rotate(180deg);
+  img:nth-child(1) {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+  }
+  img:nth-child(2) {
+  }
+  .name-and-message {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 20px;
+    background: #eceaea;
+    gap: 5px;
+    border-radius: 20px;
+    margin-left: 10px;
+    max-width: 85%;
+    .name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .message {
+      font-size: 13px;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .live-messages {
+    height: 86%;
+  }
+}
+.write-box-container {
+  height: 50px;
+  padding-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  .write-box {
+    height: 40px;
+    display: flex;
+    background: rgb(230, 230, 230);
+    border-radius: 5px;
+    ion-input {
+      height: 40px;
+      --padding-start: 20px;
+      --padding-top: 5px;
+      --padding-bottom: 5px;
+      --padding-end: 15px;
+    }
+    ion-buttons {
+      ion-button {
+        ion-icon {
+          padding: 5px 5px;
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}

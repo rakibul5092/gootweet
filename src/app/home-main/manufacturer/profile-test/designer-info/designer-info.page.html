@@ -1,0 +1,55 @@
+<div class="blog-cnt w-100">
+    <div class="apie-cnt">
+        <div class="tlt tlt1">
+            Apie mane
+            <button *ngIf="editAbout === false" class="btn ctm-btn pro-btn btnDWU" (click)="editAbout = true">
+                <img src="./../../assets/img/edit.svg" alt="img" /> Keisti
+            </button>
+            <button *ngIf="editAbout === true" class="btn ctm-btn pro-btn btnDWU" (click)="saveAbout()">
+                <img src="./../../assets/img/edit.svg" alt="img" /> sutaupyti
+            </button>
+        </div>
+        <div class="apie-txt">
+            <p *ngIf="editAbout !== true">{{productOwner?.about}}</p>
+            <textarea *ngIf="editAbout === true" [(ngModel)]="productOwner.about" class="form-control h-100 textIn m-4"
+                placeholder="Apie mane ...">
+            </textarea>
+        </div>
+    </div>
+    <div class="blog apie-blog" *ngIf="isDesigner">
+        <div class="tlt tlt1 pro-count mb-3">
+            Atstovaujami gamintojai
+            <span style="background-color: #6A7BFF; border-radius: 45%; padding-left: 8px; padding-right: 8px;">
+                {{designerManufacturerAlphabeticallyService.items.length || 0}}
+            </span>
+        </div>
+        <div class="row mr-0">
+            <div *ngFor="let item of designerManufacturerAlphabeticallyService.items"
+                class="col-12 col-md-6 user-wall-col pr-0 mb-3">
+                <div class="pro-cnt border-0"
+                    style="background-color: #F5F5F6; padding: 10px; border-radius: 5px; cursor: pointer"
+                    (click)="gotoProfile(item?.manufacturerInfo)">
+                    <div class="pro-img">
+                        <img class="cover" alt="img" [src]="(item?.manufacturerInfo?.profile_image|sanitizeImage:'')"
+                            style="cursor: pointer" />
+                    </div>
+                    <div class="pro-name-link">
+                        <div button class="pro-name">
+                            {{item?.manufacturerInfo?.full_name|join_name}}
+                            <img src="./../../assets/img/verified.svg" alt="img" />
+                        </div>
+                        <div button class="pro-link">
+                            <span>Gamintojas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" *ngIf="designerManufacturerAlphabeticallyService.items.length > 9">
+            <button class="btn ctm-btn pro-btn position-static">
+                <ion-icon name="chevron-down"></ion-icon>
+                Išskleisti
+            </button>
+        </div>
+    </div>
+</div>

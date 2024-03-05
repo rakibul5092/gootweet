@@ -1,0 +1,27 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  .combined {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+}
+ion-button {
+  height: 50px;
+  text-transform: capitalize;
+  background: none;
+  padding: none;
+  --border-radius: 50px;
+}
+
+@media screen and (max-width: 800px) {
+  .form-container > .combined {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,13 @@
+@import "./../shared.scss";
+.form-container > .combined > .field-container {
+  position: relative;
+  width: 100%;
+  .eye-icon {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    z-index: 999;
+    color: #6a7bff;
+    font-size: 20px;
+  }
+}

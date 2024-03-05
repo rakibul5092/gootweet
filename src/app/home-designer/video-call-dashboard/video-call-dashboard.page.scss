@@ -1,0 +1,65 @@
+.players {
+  height: calc(50% - 50px);
+  width: 100%;
+  position: relative;
+
+  .timer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #640000;
+    color: white;
+    font-size: 16px;
+    padding: 2px;
+    border-radius: 0px 0px 0px 0px;
+    z-index: 99999;
+  }
+  #local-player {
+    cursor: pointer;
+  }
+  .big-player {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+  }
+  .small-player {
+    background-color: #353535;
+    position: absolute;
+    height: 100px;
+    width: 120px;
+    bottom: 10px;
+    left: 5px;
+    z-index: 9999;
+  }
+  .hang-up {
+    width: 90px;
+    height: 35px;
+    position: absolute;
+    bottom: 0px;
+
+    ion-icon {
+      transform: rotate(136deg);
+    }
+  }
+}
+.enable-buttons {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  right: 5px;
+  align-items: center;
+  z-index: 99999;
+  ion-button {
+    height: 45px;
+    --background: #4d4d4d61;
+    --background-hover: none;
+    --background-activated: none;
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+  .off {
+    --background: var(--ion-color-danger);
+  }
+}

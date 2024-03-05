@@ -1,0 +1,15 @@
+<section class="category-slider">
+  <div (click)="prevSlide()" *ngIf="screen.width.value > 768" class="downArrow bounce">
+    <ion-icon style="font-size: 24px; color: gray" name="chevron-back-circle-outline"></ion-icon>
+  </div>
+
+  <swiper #swiper [config]="config" style="height: 244px">
+    <ng-template swiperSlide *ngFor="let profile of profiles">
+      <app-profile-card [profile]="profile" [me]="me"></app-profile-card>
+    </ng-template>
+  </swiper>
+  <div (click)="nextSlide()" *ngIf="screen.width.value > 768" class="downArrow bounce1" style="margin-left: 10px">
+    <ion-icon style="font-size: 24px; color: gray" name="chevron-forward-circle-outline"></ion-icon>
+  </div>
+  <!--  -->
+</section>

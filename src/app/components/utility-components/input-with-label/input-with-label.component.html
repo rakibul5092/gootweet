@@ -1,0 +1,17 @@
+<!-- <div class="col-lg-4"> -->
+<div class="form-group" [formGroup]="form">
+  <label>
+    <h6 class="dark-text f-20 weaker">{{label}}</h6>
+  </label>
+  <div class="form-input">
+    <input [readonly]="disabled" [formControlName]="control" style="padding: 0 15px;
+      font-size: 16px;
+      color: #000000;
+      font-weight: 400" type="text" [name]="control" [id]="control" class="form-control textIn"
+      [placeholder]="placeholder" [appInvalid]="hasError()" />
+    <!-- <ion-label *ngIf="checked && (!value || value=='')" style="font-size: 12px; color: red;" class="ion-text-center">
+      Required field
+    </ion-label> -->
+  </div>
+</div>
+<!-- </div> -->

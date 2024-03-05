@@ -1,0 +1,71 @@
+.icon-container {
+  background: #6a7bff;
+  border-radius: 100px;
+  min-width: 109px;
+  padding: 4px 15px;
+  color: white;
+  min-height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  // box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
+  img {
+    height: 24px;
+  }
+}
+
+.new-wallpost-noti {
+  right: 7px;
+  top: 11px;
+}
+
+.tab {
+  padding: 6px;
+  position: relative;
+
+  span {
+    font-size: 14px;
+    font-weight: bold;
+    color: dimgray;
+  }
+
+  .nav-icon {
+    font-size: 24px;
+    color: dimgray;
+    padding: 8px;
+    border-radius: 50%;
+  }
+
+  &[selected="true"] {
+    span {
+      font-weight: bolder;
+    }
+
+    .nav-icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &[selected="false"] {
+    span {
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      background: unset;
+    }
+  }
+}
+
+.tabs {
+  bottom: 0px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  background: var(--dark-background);
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+}

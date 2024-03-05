@@ -1,0 +1,23 @@
+<div class="image-wrapper" [style]="isQuickView? 'height: 280px':''">
+  <div class="review-image" [style]="isQuickView? 'height: 280px':''">
+    <ion-icon name="chevron-back" (click)="decrease()"></ion-icon>
+    <ion-icon name="chevron-forward" (click)="increase()"></ion-icon>
+    <video *ngIf="viewProduct?.video && viewProduct?.video !== '' && viewImages &&
+      viewImages.length === 0;
+    else photo" class="prod-img" controls>
+      <source [src]="productVideoBase + viewProduct.video" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <ng-template #photo>
+      <swiper #swiper [style]="isQuickView? 'height: 280px':''" [config]="config" (slideChange)="onSlideChange($event)"
+        [tabIndex]="selectedImageSlide">
+        <ng-template swiperSlide *ngFor="let image of viewImages">
+          <img class="prod-img" [defaultImage]="default" [lazyLoad]="[image] | getImage" />
+        </ng-template>
+      </swiper>
+    </ng-template>
+    <img id="productDetailsGif" (load)="onAnimationLoad()" class="animation" *ngIf="showAnimation"
+      src="assets/02.gif" />
+  </div>
+</div>

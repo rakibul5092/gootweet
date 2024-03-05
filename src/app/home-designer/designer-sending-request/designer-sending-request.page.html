@@ -1,0 +1,206 @@
+<ion-content>
+	<div class="main-wrapper">
+		<div class="designer-section mp-0">
+			<div class="row m-0">
+				<div class="designer-body-cnt col-12">
+					<div class="sending-request-cnt">
+						<div class="blog-cnt req-represent-cnt mb-0 mb-md-4">
+							<div class="blog m-3 m-md-0">
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<div class="rep-txt text-center text-md-right pr-0 pr-md-4">Atstovavimo
+											užklausos siuntimas <span class="i-bal d-none d-md-inline-flex">
+												<ion-icon name="chevron-forward"></ion-icon>
+											</span>
+										</div>
+
+										<div class="rep-txt d-block d-md-none my-2 text-center">
+											<span class="i-bal position-static">
+												<ion-icon name="chevron-down"></ion-icon>
+											</span>
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="pro-cnt pb-0 border-0 m-md-0">
+											<div class="pro-img">
+												<img class="cover"
+													[src]="(manufacturer_info?.profile_image|sanitizeImage:'150_150_')"
+													alt="img" />
+											</div>
+											<div class="pro-name-link position-relative">
+												<div class="pro-name">
+													{{ manufacturer_info?.name|join_name }}
+												</div>
+												<div class="pro-link">
+													<span>Gamintojas</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="blog-cnt">
+							<div class="tlt pb-2 d-none d-md-block">Apie mane</div>
+							<div class="blog form-blog">
+								<div class="row mr-0">
+									<div class="col-12 col-md-5 pr-0">
+										<div class="pro-cnt border-0">
+											<div class="pro-img">
+												<img class="cover" [src]="(me?.profile_image|sanitizeImage:'150_150_')"
+													alt="img" />
+											</div>
+											<div class="pro-name-link position-relative">
+												<div class="pro-name">
+													{{ me?.full_name|join_name }}
+												</div>
+												<div class="pro-link"><span>Interjero Konsultantas</span></div>
+											</div>
+										</div>
+										<div class="form-cnt border-0 p-0">
+											<!-- <div class="tlt mb-4 mt-2">Apie mane</div> -->
+											<div class="form-group">
+												<label class="mb-0">
+													<h6 class="">Mano veikla</h6>
+												</label>
+												<div class="form-input">
+													<textarea
+														[style]="checked &&(activity === '') ? 'border:1px solid red' : '' "
+														[(ngModel)]="activity" class="form-control textIn"
+														placeholder="Mano veikla ..."></textarea>
+													<p ion-text class="text04" *ngIf="checked && (activity === '')">
+														<ion-label style="font-size: 12px; color: red">
+															Mano veikla is required!
+														</ion-label>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-md-7 pr-0">
+										<div class="form-cnt form-cnt-apie h-100 border-0 p-0">
+											<div class="form-group h-100">
+												<label class="mb-0">
+													<h6 class="">Apie mane</h6>
+												</label>
+												<div class="form-input">
+													<textarea
+														[style]="checked &&(aboutMe === '') ? 'border:1px solid red' : '' "
+														[(ngModel)]="aboutMe" class="form-control h-100 textIn"
+														placeholder="Apie mane ..."></textarea>
+													<p ion-text class="text04" *ngIf="checked && (aboutMe === '')">
+														<ion-label style="font-size: 12px; color: red">
+															Apie mane is required!
+														</ion-label>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="blog-cnt">
+							<div class="tlt pb-3  mx-3 mx-md-0">Mano atstovaujami gamintojai</div>
+							<div class="blog user-show p-3 p-md-3 m-border-0 mb-0 mb-md-4">
+								<div class="row mr-0" *ngIf="manufacturerService.items">
+
+									<div *ngFor="let item of manufacturerService.items;" class="col-md-4 col-manu pr-0">
+										<div class="blog p-3 mb-3" (click)="gotoProfile(item?.manufacturerInfo)"
+											style="cursor: pointer;">
+											<div class="pro-cnt border-0 pb-0">
+												<div class="pro-img">
+													<img class="cover"
+														[src]="(item?.manufacturerInfo?.profile_image|sanitizeImage:'150_150_')"
+														alt="img" />
+												</div>
+												<div class="pro-name-link">
+													<div class="pro-name postText">
+														{{item?.manufacturerInfo?.full_name|join_name}}
+														<img src="./../../assets/img/verified.svg" alt="img" />
+													</div>
+													<div class="pro-link">
+														<span>Gamintojas</span>
+														<!-- <span class="pub-t">3h</span> -->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- <ion-infinite-scroll (ionInfinite)="findNext($event)">
+											<ion-infinite-scroll-content>
+											</ion-infinite-scroll-content>
+										</ion-infinite-scroll> -->
+
+								</div>
+								<div *ngIf="manufacturerService.items.length > 1 ? true : false" class="text-center">
+									<span class="s-m">Išskleisti</span>
+								</div>
+								<div *ngIf="manufacturerService.items.length < 1 ? true : false" class="text-center">
+									<span class="s-m">No Data Found...</span>
+								</div>
+							</div>
+						</div>
+						<div class="tlt mb-3 mx-3 mx-md-0">Sutartis ir taisyklės</div>
+						<div _ngcontent-tfr-c171="" class="form-cnt form-cnt-1 p-3 p-md-4 m-3 m-md-0">
+
+							<div class="text-right download-txt pb-2 navNoti">
+								<a (click)="downloadTermsAndCondition()" style="cursor: pointer;"><img class="checkIn"
+										src="./../../assets/img/launch.svg" alt="img" /> Parsisiųsti
+									sutartį</a>
+							</div>
+							<div class="rules-cnt"
+								style="border: 8px dashed #eaeaea; overflow-y: scroll; height:200px; padding: 20px;">
+
+								<ion-textarea class="textIn">{{terms}}</ion-textarea>
+
+							</div>
+							<div class="rules-btn text-right">
+								<div class="rules-btn text-right">
+									<div class="form-group pt-2 mb-0">
+										<label class="ctm-container mb-0 navNoti">
+											Sutinku su <a>taisyklėmis</a>
+											<input [(ngModel)]="termsAccepted" type="checkbox" />
+											<span class="checkmark checkIn"></span>
+										</label>
+										<p ion-text class="text04" *ngIf="checked && !termsAccepted">
+											<ion-label style="font-size: 12px; color: red">
+												Please accept terms and conditions.
+											</ion-label>
+										</p>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+						<!-- <div class="rules-btn text-right">
+								<div class="rules-btn text-right">
+									<div class="form-group pt-2">
+										<label class="ctm-container">
+											Sutinku su <a href="#">taisyklėmis</a>
+											<input [(ngModel)]="termsAccepted" type="checkbox" />
+											<span class="checkmark"></span>
+										</label>
+										<p ion-text class="text04" *ngIf="notAccepted">
+											<ion-label style="font-size: 12px; color: red">
+												Please accept terms and conditions.
+											</ion-label>
+										</p>
+									</div>
+			
+								</div>
+			
+							</div> -->
+						<div class="text-md-right text-center mb-5 mb-md-3 mt-3">
+							<button [disabled]="isRequested" (click)="sendRequestToManufacturer()"
+								class="btn ctm-btn cart-btn btnDWU">Siųsti
+								užklausą</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</ion-content>

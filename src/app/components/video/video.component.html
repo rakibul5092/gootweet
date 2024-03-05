@@ -1,0 +1,14 @@
+<ion-icon name="close" *ngIf="isMobile" class="close" (click)="close()"></ion-icon>
+<button [routerLink]="['/all-live-stream']" *ngIf="isMobile" type="button" class="btn btn-danger all_live">
+  <ion-icon name="videocam"></ion-icon>{{'('+(video?.serial||0)+')'}}
+</button>
+<div class="all_video_live_strem">
+
+  <div class="video_gal_img" [style]="isMobile? 'height: 350px;':''">
+    <iframe [src]="video?.url|sanitizeVideo:autoplay:width+'':height" width="100%" height="100%" allowfullscreen
+      loading="lazy" scrolling="no" frameborder="0"></iframe>
+  </div>
+  <div *ngIf="!isMobile" class="video_title">
+    {{video.title}}
+  </div>
+</div>

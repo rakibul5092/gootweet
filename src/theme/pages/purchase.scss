@@ -1,0 +1,126 @@
+.purchase-back {
+  position: relative;
+  top: -12px;
+  span {
+    cursor: pointer;
+  }
+  .back-li {
+    color: #95949f;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    i {
+      margin-right: 4px;
+      font-size: 14px;
+    }
+  }
+}
+.form-cnt {
+  .form-input {
+    .form-control {
+      padding: 0 15px !important;
+      &.sc-ion-input-md-h {
+        padding: 0 7px !important;
+      }
+    }
+  }
+}
+.remove_icon {
+  position: absolute;
+  cursor: pointer;
+  top: -9px;
+  right: -9px;
+  border: 1px solid #d3d0d0;
+  border-radius: 50%;
+  padding: 0px 6px 3px 6px;
+  background: #e1e1e1;
+  box-shadow: 3px 2px 5px #d7d7d7;
+}
+.log-reg {
+  background: transparent;
+  .purchase-cnt {
+    max-width: 790px;
+    .pur-m-tlt {
+      margin-bottom: 20px;
+      .bank-infos {
+        font-size: 14px;
+        img {
+          height: 25px;
+          width: 61px;
+        }
+        img:nth-child(2) {
+          margin-left: 30px;
+        }
+
+        img:nth-child(1) {
+          height: unset;
+          width: 120px;
+        }
+        img:nth-child(4),
+        img:nth-child(5),
+        img:nth-child(6) {
+          margin-right: 10px;
+        }
+      }
+      @include font-size-p-map($pur-m-tlt-font-size);
+      .step-no {
+        color: #b1b1b1;
+      }
+      .cur {
+        color: #6a7bff;
+      }
+      img {
+        @include width-p-map($pur-m-tlt-img-width);
+      }
+    }
+    .pur-des {
+      font-size: 17px;
+      color: #5a5a5a;
+      font-weight: 400;
+    }
+  }
+}
+.purchase-list-cnt {
+  .purchase-list {
+    margin-bottom: 15px;
+    .single-purchase {
+      @include padding-p-map($purchase-list-single-purchase-padding);
+      .purchase-col1 {
+        @include max-height-p-map($purchase-list-purchase-col1-max-height);
+      }
+
+      .tlt {
+        width: 225px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        @include margin-bottom-p-map($purchase-price-tlt-margin-bottom);
+      }
+    }
+    .pro-cnt {
+      margin-bottom: 20px;
+      .pro-img {
+        width: 55px;
+        height: 55px;
+        box-shadow: 0 2px 12px #dedede;
+      }
+      .pro-name-link {
+        width: calc(100% - 55px);
+        padding: 0 0 0 10px;
+      }
+    }
+    .pur-mid-s-txt {
+      @include font-size-p-map($pur-mid-s-txt-font-size);
+      color: #6a6975;
+      .pur-mid-img {
+        img {
+          @include width-p-map($pur-mid-img-width);
+          @include height-p-map($pur-mid-img-height);
+        }
+      }
+      .type-pr-t {
+        font-weight: 600;
+      }
+    }
+  }
+}

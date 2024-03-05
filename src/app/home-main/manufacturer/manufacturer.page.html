@@ -1,0 +1,42 @@
+<ion-content [scrollEvents]="true">
+  <!-- appHideHeader -->
+  <div class="main-wrapper">
+    <div class="manufacturer-tab d-none d-md-block" *ngIf="isMyProfile && isManufacturerLoggedIn">
+      <button class="btn ctm-btn pro-btn btnNav" (click)="onActivatePage('profile')"
+        [class.active]="activePage == 'profile'">
+        <img class="img-m" src="./../../assets/img/article-b.svg" alt="img" />
+        <img class="img-w" src="./../../assets/img/article-white.svg" alt="img" />
+        Siena
+      </button>
+      <button routerLink="/profile/products" class="btn ctm-btn pro-btn btnNav" (click)="onActivatePage('products')"
+        [class.active]="activePage == 'products'">
+        <img class="img-m" src="./../../assets/img/mall.svg" alt="img" />
+        <img class="img-w" src="./../../assets/img/mall-w.svg" alt="img" />
+        Prekės
+      </button>
+      <!-- <button routerLink="/profile/categories" class="btn ctm-btn pro-btn btnNav" (click)="onActivatePage('categories')"
+        [class.active]="activePage == 'categories'">
+        <img class="img-m" src="./../../assets/img/category.svg" alt="img" />
+        <img class="img-w" src="./../../assets/img/category-w.svg" alt="img" />
+        Kategorijos
+      </button> -->
+      <button routerLink="/profile/materials" class="btn ctm-btn pro-btn btnNav" (click)="onActivatePage('materials')"
+        [class.active]="activePage == 'materials'">
+        <img class="img-m" src="./../../assets/img/colors.svg" alt="img" />
+        <img class="img-w" src="./../../assets/img/colors-w.svg" alt="img" />
+        Medžiagos
+      </button>
+      <!-- <button routerLink="/profile/manufacturer-order" class="btn ctm-btn pro-btn btnNav"
+        (click)="onActivatePage('manufacturer-order')" [class.active]="activePage == 'manufacturer-order'">
+        <img class="img-m" src="./../../assets/img/mall.svg" alt="img" />
+        <img class="img-w" src="./../../assets/img/mall-w.svg" alt="img" />
+        Užsakymai
+      </button> -->
+      <button routerLink="/profile/connected-designer" class="btn ctm-btn pro-btn btnNav"
+        (click)="onActivatePage('connected-designer')" [class.active]="activePage == 'connected-designer'">
+        Mano konsultantai
+      </button>
+    </div>
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
+</ion-content>

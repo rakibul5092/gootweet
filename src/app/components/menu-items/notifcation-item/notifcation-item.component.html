@@ -1,0 +1,8 @@
+<span id="navNoti" (click)="openNotification($event)"
+  [class]="isNotifiPopoverOpened? 'noti navNoti noti_hover':'noti navNoti'">
+  <span class="noti-i">
+    <img class="inactive-i icon_h" src="assets/img/notifications.svg" alt="img" />
+    <span class="n-count">{{unseenNotificationCount !== 0 ? unseenNotificationCount :
+      ''}}</span>
+  </span>
+</span>

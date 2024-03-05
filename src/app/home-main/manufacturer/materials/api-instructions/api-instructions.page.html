@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Product import API</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="padding: 20px">
+    <ion-row>
+      <ion-col>
+        <ion-label
+          style="font-weight: bold; font-size: 14px; color: rgb(15, 13, 43)"
+          >API URL</ion-label
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>This url can be used for api post request.</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-textarea
+          cols="1"
+          rows="1"
+          disabled="true"
+          mode="ios"
+          style="
+            width: 100%;
+            --background: rgb(236, 236, 236);
+            margin-top: 15px;
+          "
+        >
+          https://api.gootweet.com/api/v1/products/add-materials-collection</ion-textarea
+        >
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px">
+      <ion-col>
+        <ion-label
+          style="font-weight: bold; font-size: 14px; color: rgb(15, 13, 43)"
+          >API key</ion-label
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>This key have to provide in the field 'api_key'.</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-textarea
+          cols="1"
+          rows="1"
+          disabled="true"
+          mode="ios"
+          style="
+            width: 100%;
+            --background: rgb(236, 236, 236);
+            margin-top: 15px;
+          "
+          >{{me.uid}}</ion-textarea
+        >
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px">
+      <ion-col>
+        <ion-label
+          style="font-weight: bold; font-size: 14px; color: rgb(15, 13, 43)"
+          >Post data</ion-label
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label
+          >Have to follow this JSON format data structure for successful api
+          request.</ion-label
+        >
+        <ion-textarea
+          cols="1"
+          rows="1"
+          disabled="true"
+          mode="ios"
+          style="
+            width: 100%;
+            --background: rgb(236, 236, 236);
+            margin-top: 15px;
+          "
+          >{{structure}}</ion-textarea
+        >
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 25px">
+      <ion-col>
+        <ion-label
+          style="font-weight: bold; font-size: 14px; color: rgb(15, 13, 43)"
+          >Response</ion-label
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>If request success, then will get this response</ion-label>
+        <ion-textarea
+          cols="1"
+          rows="1"
+          disabled="true"
+          mode="ios"
+          style="
+            width: 100%;
+            --background: rgb(236, 236, 236);
+            margin-top: 15px;
+          "
+          >{{responseSuccess}}</ion-textarea
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>If request failed, then will get this response</ion-label>
+        <ion-textarea
+          cols="1"
+          rows="1"
+          disabled="true"
+          mode="ios"
+          style="
+            width: 100%;
+            --background: rgb(236, 236, 236);
+            margin-top: 15px;
+          "
+          >{{responseFailed}}</ion-textarea
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

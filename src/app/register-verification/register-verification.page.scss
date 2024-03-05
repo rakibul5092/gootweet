@@ -1,0 +1,10 @@
+@import "./../../theme/mixins/_mixins";
+@import "./../../theme/pages/register";
+.log-reg {
+  .log-reg-cnt {
+    max-width: 950px;
+  }
+}
+.reg-step-2 {
+  padding: 12% 5%;
+}

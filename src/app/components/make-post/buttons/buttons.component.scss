@@ -1,0 +1,24 @@
+.btn-primary-selected {
+  background-color: #1e66b4;
+  color: white;
+}
+.btn {
+  width: 100%;
+}
+
+.tlt {
+  padding-left: 15px;
+  font-size: 25px;
+}
+
+.icon-text {
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-left: 4px;
+  ion-icon {
+    font-size: 26px;
+    color: black;
+  }
+}

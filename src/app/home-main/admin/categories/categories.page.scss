@@ -1,0 +1,13 @@
+@import "./../../../../theme/mixins/mixins";
+@import "./../../../../theme/pages/categories";
+.cat-img {
+  width: 70px;
+  height: 70px;
+  border: 1px solid gray;
+  border-radius: 100px;
+}
+ion-row {
+  ion-col {
+    background-color: #fafafa;
+  }
+}

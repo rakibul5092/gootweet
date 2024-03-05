@@ -1,0 +1,137 @@
+.blog-section-product {
+  .column-left {
+    @include flex-p-map($reviews-column-left-flex);
+    @include max-width-p-map($reviews-column-left-max-width);
+    @include padding-right-p-map($column-right-manufacturer-padding-right);
+  }
+  .column-mid {
+    @include flex-p-map($reviews-column-mid-flex);
+    @include max-width-p-map($reviews-column-mid-max-width);
+  }
+}
+
+.product-list {
+  .product-col {
+    @include flex-p-map($product-col-flex);
+    @include max-width-p-map($product-col-max-width);
+  }
+}
+
+.mobile-m-btn {
+  flex-wrap: wrap;
+}
+.conver-count {
+  display: inline-block;
+  background: #25d62b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 2px;
+  padding: 1px 3px;
+  margin-left: 5px;
+}
+.ul-tlt {
+  font-size: 18px;
+  color: #000000;
+  font-weight: 700;
+}
+.left-side-cnt {
+  .cart-btn {
+    padding: 7px 20px;
+  }
+  .nav {
+    flex-wrap: initial;
+  }
+  .pro-ul {
+    .pro-cnt {
+      .pro-img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .nav-item {
+      line-height: normal;
+    }
+    .nav-link {
+      &.dis-link {
+        border-top: 2px solid #eaeaea;
+        padding-top: 15px;
+        margin-top: 7px;
+      }
+    }
+    .noti {
+      .noti-i {
+        .n-count {
+          right: -5px;
+          top: 2px;
+          padding: 1px 5px;
+        }
+      }
+    }
+    .management-l {
+      color: #6a7bff;
+    }
+  }
+}
+
+.pro-link-pro {
+  font-size: 18px;
+  color: #ffffff;
+}
+.user-statistics {
+  .ul-tlt {
+    span {
+      font-size: 16px;
+      color: #6a6975;
+      font-weight: 400;
+      margin-left: 10px;
+    }
+  }
+  .statistics-ul-cnt {
+    background: #f5f5f6;
+    padding: 15px;
+    border-radius: 5px;
+    .statistics-tlt {
+      font-size: 16px;
+      color: #000000;
+      font-weight: 700;
+    }
+    .statistics-ul {
+      .statistics-li {
+        padding: 5px 0;
+        .sta-li-txt {
+          width: max-content;
+          font-size: 16px;
+          color: #6a6975;
+          font-weight: 400;
+        }
+        .sta-li-per {
+          width: 100%;
+          text-align: right;
+          font-size: 16px;
+          color: #000000;
+          font-weight: 700;
+          span {
+            margin-left: 5px;
+            font-weight: 400;
+          }
+          .red-per {
+            color: #d62525;
+          }
+          .green-per {
+            color: #25d62b;
+          }
+        }
+      }
+    }
+  }
+}
+
+.m-pro-link-btn {
+  position: relative;
+  z-index: 9;
+
+  .btn {
+    color: #333;
+  }
+}

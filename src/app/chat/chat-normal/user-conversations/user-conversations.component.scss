@@ -1,0 +1,40 @@
+@import "./../../../../theme/mixins/mixins";
+.chat-minimized {
+  position: absolute;
+  top: 56px;
+  right: 10px;
+  z-index: 99999;
+}
+.normal-chat-section {
+  position: absolute;
+  top: 55px;
+  right: 17px;
+  z-index: 999;
+  @include width-p-map($normal-chat-section-width);
+  @include left-p-map($cart-section-left);
+  border: 2px solid #6a7bff;
+  .chat-top {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+    background: var(--dark-background);
+    color: white;
+    ion-buttons {
+      ion-button {
+        color: white;
+      }
+      ion-button:nth-child(3) {
+        font-size: 22px;
+      }
+    }
+  }
+  .chat-list {
+    @include height-p-map($normal-chat-list-height);
+    max-height: none;
+  }
+  .chat-list-with-call {
+    @include height-p-map($normal-chat-list-height-call);
+  }
+}

@@ -1,0 +1,127 @@
+.main-container {
+  z-index: 9999;
+  background: white;
+  border: 1px solid gray;
+  width: 370px;
+  /* background-color: white; */
+  position: absolute;
+  left: 99999;
+  right: 0px;
+  top: 50px;
+  box-shadow: 0 15px 15px -3px rgb(0 0 0 / 20%),
+    0 18px 30px 30px rgb(0 0 0 / 10%), 0 13px 25px 2px rgb(0 0 0 / 12%);
+}
+
+.inner-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+ion-button {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.buttons {
+  justify-content: center;
+  display: flex;
+}
+
+ion-icon {
+  margin-right: 6px;
+}
+
+.medium-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+
+.container {
+  background: white;
+}
+
+.close {
+  position: absolute;
+  z-index: 1029;
+  background: #b11818;
+  color: white;
+  padding: 2px;
+  top: 0px;
+}
+
+.regular-text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgb(49, 46, 46);
+}
+
+.image-wrapper {
+  height: 280px;
+  width: 100%;
+}
+
+.next-image {
+  height: 100%;
+  width: 20%;
+  position: absolute;
+  right: 0;
+  background-size: 20em 100%;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  z-index: 999;
+}
+
+.image-qunatity {
+  background-color: rgb(32, 23, 23);
+  position: absolute;
+  left: 0px;
+  bottom: 2px;
+  color: white;
+  padding: 2px 5px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ef5841;
+}
+
+.product-details-button {
+  padding: 15px 0px;
+  width: 100%;
+  background-color: #f48e59;
+  font-size: 22px;
+}
+
+.footer-buttons {
+  justify-content: center;
+  height: 87%;
+  margin-top: 5px;
+}
+
+.done-button {
+  padding: 10px 0px;
+  width: 50%;
+  background-color: rgb(248, 116, 116);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.reset-button {
+  padding: 10px 0px;
+  width: 50%;
+  color: rgb(248, 116, 116);
+  background-color: #ebebeb;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+::ng-deep {
+  .swiper-pagination-fraction {
+    bottom: 20px;
+    font-weight: bold;
+  }
+}

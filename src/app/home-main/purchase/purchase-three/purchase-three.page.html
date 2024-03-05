@@ -1,0 +1,77 @@
+<ion-content>
+	<ion-progress-bar style="height: 1px;" *ngIf="!isLoaded" type="indeterminate"></ion-progress-bar>
+	<div class="main-wrapper ">
+		<div class="log-reg reg-step-4">
+			<div class="purchase-cnt">
+				<div class="purchase-back">
+					<span (click)="onBack()" class="back-li" style="display: inline-flex;align-items:center">
+						<ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+					</span>
+				</div>
+				<div class="tlt pur-m-tlt">
+					<span class="step-no">
+						<span class="cur">3</span>/
+						<span class="total">3</span>
+					</span>
+					Apmokėjimas
+					<div class="bank-infos">{{'Tęsiant mokėjimą '}}<img [src]="bankLogos+'paysera.svg'" alt="img" /> {{'
+						būsite sujungti su visais jums palankiais bankais'}}
+						<img [src]="bankLogos+'swedbank.svg'" />
+						<img [src]="bankLogos+'seb.svg'" />
+						<img [src]="bankLogos+'luminor.svg'" />
+						<img [src]="bankLogos+'revolut.svg'" />
+						<img [src]="bankLogos+'siauliu.svg'" />
+						<img [src]="bankLogos+'citadele.svg'" />
+						<img [src]="bankLogos+'medicinos.svg'" />
+					</div>
+				</div>
+				<div class="purchase-list-cnt">
+					<div class="purchase-list">
+						<app-order *ngFor="let cartItem of finalUnPaidSortedItems; let i = index"
+							(onDeleteEvent)="askPermissionForDelete($event, 1, i)"
+							(onDeleteProduct)="askPermissionForDelete($event, 2)"
+							(makePaymentEvent)="makePayment($event)" [cartItem]="cartItem"></app-order>
+						<br />
+						<hr />
+						<br />
+						<span *ngFor="let cartItem of finalPaidSortedItems">
+							<div *ngIf="cartItem.isCompleted && cartItem.isPaid" class="single-purchase"
+								style="position: relative;">
+								<div class="row ml-0">
+									<div class="col-12 purchase-col2 pl-0 mm-w-100">
+										<div class="pro-cnt mb-0">
+											<div class="pro-img border-0">
+												<img class="cover"
+													[src]="cartItem.owner.profile_photo|sanitizeImage:'150_150_'"
+													alt="img" />
+											</div>
+											<div class="pro-name-link">
+												<div class="pro-name">
+													{{cartItem?.owner?.full_name|join_name}}
+													<img src="./../../assets/img/verified.svg" alt="img" />
+												</div>
+												<div class="pro-link">Gamintojas</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 purchase-col3 pl-0 mm-w-100">
+										<div class="purchase-price mt-2 mt-md-0">
+											<div class="price-single">
+												<span class="pr-ur-tlt">Iš viso</span>
+												<span class="price">{{'€'+cartItem.totalPrice.toFixed(2)}}</span>
+											</div>
+											<div class="price-single">
+												<button *ngIf="cartItem.isPaid;" [disabled]="true"
+													class="btn ctm-btn cart-btn approve-btn btnNav">Apmokėta</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,9 @@
+@import "./../../../../theme/mixins/_mixins";
+.modal-body1 {
+  overflow-y: auto;
+  @include height-p-map($request-popover-modal-body1-height);
+}
+
+.modal-body1 {
+  padding: 15px 40px;
+}

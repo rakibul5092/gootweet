@@ -1,0 +1,7 @@
+<span class="noti navNoti" (click)="navigateRoot()" style="position: relative;">
+  <span class="noti-i">
+    <img class="inactive-i icon_h" src="assets/img/home.svg" alt="img" />
+  </span>
+  <ion-icon *ngIf="(newPostService.haveNewWallPost|async)=== true" name="ellipse" class="new-wallpost-noti">
+  </ion-icon>
+</span>

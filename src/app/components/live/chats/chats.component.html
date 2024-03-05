@@ -1,0 +1,20 @@
+<div id="live-messages-container" class="live-messages">
+  <div class="live-message" *ngFor="let message of messages">
+    <img [src]="message.from.profile_photo|sanitizeImage" />
+    <div class="name-and-message">
+      <div class="name">{{message.from.full_name|join_name}}</div>
+      <div class="message">{{message.body}}</div>
+      <img *ngIf="message.product" style="width: 100px; height: 100px; margin-left: 5px;object-fit: contain;"
+        [src]="liveProductPhotoBaseUrl + message?.product?.photo" />
+    </div>
+  </div>
+</div>
+<div class="write-box-container">
+  <div class="write-box" *ngIf="me">
+    <ion-input placeholder="Write your comment..." (keyup.enter)="onSendMessage()"
+      [(ngModel)]="messageText"></ion-input>
+    <ion-buttons>
+      <ion-button (click)="onSendMessage()"><ion-icon name="send"></ion-icon></ion-button>
+    </ion-buttons>
+  </div>
+</div>

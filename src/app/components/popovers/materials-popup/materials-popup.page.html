@@ -1,0 +1,110 @@
+<!-- Modal -->
+<div class="custom-modal-body h-100">
+  <button (click)="close()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <img src="./../../assets/img/close.svg" alt="img" />
+  </button>
+  <div class="materials-list-cnt">
+    <div class="category-nav">
+      <div class="log-reg search-cat-input reg-step-4 p-0">
+        <div class="form-cnt form-cnt-1 sub-category-input p-0 border-0">
+          <div class="row w-100">
+            <div class="col-12 col-md-4">
+              <div class="search-input form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><img src="./../../assets/img/search.svg" alt="img" /></span>
+                  </div>
+                  <ion-input style="--padding-start: 40px;" [(ngModel)]="searchText"
+                    (ionChange)="onSearchByKeyword($event,0,'call')" debounce="1000" type="text" class="form-control"
+                    placeholder="Medžiagų paieška"></ion-input>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <select class="custom-select" [(ngModel)]="categoryName" (change)="onSelectCategory()">
+                  <option value="disabled" selected disabled>Choose category</option>
+                  <option value="">None</option>
+                  <option *ngFor="let category of categories" [value]="category?.data?.category">
+                    {{category?.data?.category}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <select class="custom-select" [(ngModel)]="subCategoryName" (change)="onSelectedSubCategory()">
+                  <option value="disabled" selected disabled>Choose sub-category</option>
+                  <option value="">None</option>
+                  <option *ngFor="let subCategory of subCategories" [value]="subCategory?.data?.sub_category">
+                    {{subCategory?.data?.sub_category}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ion-content>
+          <div class="materials-list-all">
+            <div class="materials">
+              <div class="row mr-0">
+                <div *ngFor="let material of  matService.materials; let i=index" class="col-12 pr-0">
+                  <div style="width: 100;font-size: 12px;display: flex;justify-content: center;align-content: center;">
+                    {{material?.code}}</div>
+                  <div [class]="material.selected?'single-materials active':'single-materials' ">
+
+                    <span class="products-check">
+                      <label class="ctm-container">
+                        <input (click)="checkMaterial(i, material.selected, material.id)" type="checkbox"
+                          [checked]="material.selected" />
+                        <span class="checkmark"></span>
+                      </label>
+                    </span>
+                    <div (click)="checkMaterial(i, material.selected, material.id)" class="show-img-p">
+                      <div class="show-img wh-100">
+                        <img class="cover" [src]="material?.images | getMImage" />
+                      </div>
+                    </div>
+                    <div class="nt-txt-all">
+                      <div class="tlt">{{material?.name}}</div>
+                      <div class="search-input">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">€</span>
+                          </div>
+                          <input [(ngModel)]="material.price" type="text" class="form-control" placeholder="0" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <span *ngIf="type != 'search'">
+              <ion-infinite-scroll (ionInfinite)="findNext($event)">
+                <ion-infinite-scroll-content>
+                </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </span>
+            <span *ngIf="type == 'search'">
+              <ion-infinite-scroll (ionInfinite)="onSearchByKeyword($event, page+1, 'scroll')">
+                <ion-infinite-scroll-content>
+                </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </span>
+          </div>
+        </ion-content>
+
+
+        <div class="pagination-cnt mt-3">
+
+          <div class="mat-btn text-right">
+            <button (click)="addMaterials()" class="btn ctm-btn cart-btn">
+              <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti pasirinktus
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>

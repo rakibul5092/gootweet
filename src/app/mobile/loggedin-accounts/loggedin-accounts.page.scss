@@ -1,0 +1,32 @@
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.text-reg {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.user-profile-avater {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #2f81ce;
+    color: #fff;
+    position: relative;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label {
+    position: absolute;
+    top: 0px;
+    left: 37px;
+    background-color: rgb(224, 49, 49);
+}

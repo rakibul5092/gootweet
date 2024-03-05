@@ -1,0 +1,14 @@
+<ion-content>
+  <ion-menu menuId="inner-category" id="inner-category" contentId="secondary-menu-content">
+    <ion-content class="ion-padding">
+      <div class="inner-item ion-activatable ripple-parent rounded-rectangle " (click)="onSearch(inner.id)"
+        *ngFor="let inner of selectedInnerCategories">
+        {{inner.data.inner_category}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet>
+
+  </ion-router-outlet>
+</ion-content>

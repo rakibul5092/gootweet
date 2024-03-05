@@ -1,0 +1,47 @@
+.portfolio-cnt {
+  .portfolio-tlt {
+    .count-porf {
+      color: #6a6975;
+    }
+    .cart-btn {
+      padding: 0 20px;
+      margin-left: 30px;
+      font-size: 15px;
+    }
+  }
+  .pro-btn {
+    padding: 3px 50px;
+  }
+  .blog {
+    position: relative;
+    padding: 25px;
+    margin-bottom: 30px;
+    .portfolio-img {
+      position: relative;
+      .more-img-show {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        font-weight: 700;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.7);
+        left: 0;
+      }
+    }
+    .reviews-delet-i {
+      right: -16px;
+      top: -16px;
+      background: #c6c7d4;
+      height: 33px;
+      width: 33px;
+      img {
+        width: 14px;
+      }
+    }
+  }
+}

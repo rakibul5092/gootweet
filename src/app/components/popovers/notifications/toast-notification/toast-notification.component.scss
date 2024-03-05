@@ -1,0 +1,123 @@
+.toaster-container {
+  cursor: pointer;
+  width: 100%;
+  max-width: 349px;
+  height: 75px;
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  padding: 18px 10px 10px 26px;
+  box-shadow: 0px 8px 24px rgb(0 0 0 / 15%);
+  border-radius: 5px;
+  .profile-container {
+    position: relative;
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      z-index: 10;
+      margin-right: 8px;
+      filter: brightness(0.5);
+    }
+    ion-icon {
+      position: absolute;
+      font-size: 20px;
+      z-index: 11;
+      color: white;
+      top: 10px;
+      left: 10px;
+    }
+  }
+  .text-container {
+    font-size: 13px;
+    flex-grow: 100;
+    display: flex;
+    flex-direction: column;
+    .sender-status {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 16px;
+      color: #a7a6ad;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      div {
+        background: #a7a6ad;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.name,
+.chat-name {
+  display: flex;
+  color: #323743;
+  .text {
+    margin-left: 5px;
+    color: gray;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 165px;
+  }
+}
+
+.chat-toaster-container {
+  padding: 8px 10px 10px 10px;
+  background: transparent;
+  box-shadow: unset;
+  height: 60px;
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    img {
+      height: 57px;
+      width: 57px;
+      filter: unset;
+      box-shadow: 11px 3px 15px #00000076;
+    }
+  }
+  .text-container {
+    display: flex;
+    flex-grow: unset;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-right: 16px;
+    height: 60px;
+    box-shadow: 5px 5px 15px #00000076;
+  }
+  .text-container::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-bottom: 15px solid transparent;
+    top: 62%;
+    right: 85px;
+  }
+}
+
+.chat-name {
+  display: flex;
+  flex-direction: column;
+  font-weight: bolder;
+  font-size: 14px;
+  .message {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 210px;
+    color: gray;
+    font-size: 12px;
+  }
+}

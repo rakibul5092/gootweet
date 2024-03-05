@@ -1,0 +1,48 @@
+<ion-progress-bar type="indeterminate" *ngIf="!liveVideo"></ion-progress-bar>
+<ion-content [scrollY]="false">
+  <div class="live-container">
+    <div class="part part-video" [style]="liveVideo?.wasLive?'width:33.33%':'width:66.6%'">
+      <div class="profile-info d-none">
+        <div class="buttons">
+          <ion-button color="danger"><ion-icon name="videocam" style="margin-right: 5px;"></ion-icon>Transliacoiju
+            45</ion-button>
+          <ion-button><ion-icon name="eye" style="margin-right: 5px;"></ion-icon>256</ion-button>
+        </div>
+      </div>
+      <div id="live-player-container" class="video-player-container">
+        <app-video-player *ngIf="liveVideo && !liveVideo.live" [autoplay]="true" [controls]="false" [loop]="true" [url]="productVideoBase +
+          this.liveVideo?.fileList[0]?.fileName"></app-video-player>
+      </div>
+    </div>
+    <div *ngIf="liveVideo?.wasLive" class="part part-products">
+      <app-live-products [me]="me" [liveProducts]="liveProducts"></app-live-products>
+    </div>
+    <div class="part" *ngIf="liveVideo">
+      <div class="live-owner-info" style="height: 26%;max-height: 30%;">
+        <app-profile-photo [user]="liveVideo.owner" size="50" [nameWidth]="'150px'"
+          [nameVisible]="true"></app-profile-photo>
+        <div class="live-details p-2">
+          {{liveVideo.about}}
+        </div>
+        <div class="like-follow-share-container">
+          <ion-buttons>
+            <ion-button>
+              <ion-icon src="assets/img/like.svg"></ion-icon>
+              136
+            </ion-button>
+            <ion-button>
+              Follow
+            </ion-button>
+            <ion-button>
+              <ion-icon src="assets/img/share.svg"></ion-icon>
+              Dalintis
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+      <div class="chat-box">
+        <app-chats [liveId]="liveVideo.id" [me]="me"></app-chats>
+      </div>
+    </div>
+  </div>
+</ion-content>

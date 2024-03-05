@@ -1,0 +1,18 @@
+@import "./../../../theme/mixins/_mixins";
+@import "./../../../theme/pages/purchase";
+@import "./../../../theme/pages/purchase-three";
+@import "./../../../theme/pages/manufacturer-order";
+.back-btn {
+  @include left-p-map($order-back-btn-left);
+}
+.status {
+  font-size: 16px;
+  color: #a3a3a3;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.purchase-list {
+  .tlt {
+    @include font-size-p-map($user-order-purchase-tlt-font-size);
+  }
+}

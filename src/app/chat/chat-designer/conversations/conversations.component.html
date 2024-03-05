@@ -1,0 +1,265 @@
+<div *ngIf="visibility.minimized.value" (click)="maximized()" class="minimized">
+  <ion-icon class="icon_h" style="position: relative; color: #fff" name="scan"></ion-icon>
+</div>
+<div *ngIf="
+    screen.width.value < 768 ||
+    (screen.width.value > 767 &&
+      !visibility.minimized.value)" [style]="
+    screen.width.value < 768
+      ? 'height:100%'
+      : 'position: absolute;top: 70px;right: 0; z-index: 9999;'
+  " [class]="
+    screen.width.value > 768 && service.selectedContact
+      ? 'designer-chat-cnt-scrl-all mm-w-100 m-w-100 designer-chat-cnt-scrl-all-width'
+      : 'designer-chat-cnt-scrl-all mm-w-100 m-w-100 designer-chat-cnt-scrl-all-max-width'
+  ">
+  <ion-icon *ngIf="screen.width.value > 767" name="remove" (click)="minimize()" class="remove_icon">
+  </ion-icon>
+  <div *ngIf="screen.width.value > 767 && service.selectedContact" class="designer-single-chat m-w-100">
+    <div class="chat-section">
+      <div class="user-chat chat-top1">
+        <span class="close-m d-inline-block d-md-none" style="top: 20px">
+          <img src="./../../assets/img/close.svg" alt="img" />
+        </span>
+        <div class="chat-top">
+          <div class="pro-cnt border-0">
+            <div class="pl-0 pro-name-link">
+              <div class="pro-name mb-0 mb-md-2 Td_underLine d-flex align-items-center">
+                <span class="d-inline-block d-md-none back-btn ml-0" style="display: inline-flex; align-items: center">
+                  <ion-icon name="chevron-back" style="font-size: 17px"></ion-icon>
+                </span>
+                {{ service?.selectedContact?.full_name | join_name: 18 }}
+                <ion-buttons mode="ios">
+                  <ion-button (click)="makeCall()"><ion-icon color="white" name="call"></ion-icon></ion-button>
+                </ion-buttons>
+              </div>
+
+              <div class="pro-link"></div>
+              <div class="chat-ss d-none d-md-block">
+
+                <span (click)="service.openCartPopover($event)" style="
+                    background: rgb(70, 70, 189);
+                    cursor: pointer;
+                    padding-bottom: 5px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    margin-right: 15px;
+                    border-radius: 10%;
+                  ">
+                  <img class="inactive-i" src="./../../assets/img/shopping-w.svg" alt="img" />
+                  <span *ngIf="service.cartLength > 0" class="n-count">{{
+                    service.cartLength
+                    }}</span>
+                </span>
+                <span class="" (click)="service.closeMessage()">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="currently-review d-none d-md-block">
+            <span class="cr-txt">Šiuo metu peržiūri</span>
+            <span style="cursor: pointer" (click)="
+                service.navigateToManufacturerCatalog(
+                  service?.selectedContact?.manufacturer_uid
+                )
+              " class="cr-txt1">{{ "katalogas" }}
+              <img src="./../../assets/img/launch.svg" alt="img" /></span>
+          </div>
+        </div>
+        <!-- for mobile -->
+        <div class="currently-review p-3 m-0 border-0 d-inline-block d-md-none">
+          <span class="cr-txt">Šiuo metu peržiūri</span>
+          <span (click)="
+              service.navigateToManufacturerCatalog(
+                service?.selectedContact?.manufacturer_uid
+              )
+            " class="cr-txt1">{{ "katalogas" }}
+            <img src="./../../assets/img/launch.svg" alt="img" /></span>
+        </div>
+        <!-- for mobile -->
+      </div>
+      <div #scrollToMe (scroll)="service.onScroll($event)" class="chat-list-all" (drop)="drop($event)"
+        (dragover)="allowDrop($event)" id="drop1">
+        <div *ngIf="service.tempMsgs.length > 9" style="display: flex; justify-content: center; margin-top: 5px">
+          <ion-button style="--background: rgb(107, 107, 107)" mode="ios" (click)="service.loadMoreMessage()">More
+          </ion-button>
+        </div>
+        <div class="chat-list">
+          <!-- Message main container -->
+
+          <app-message-container *ngFor="let msg of service.tempMsgs; let i = index" [message]="msg"
+            [selectedContact]="service.selectedContact" [me]="service.me" [isOutside]="false" [isDesigner]="true">
+          </app-message-container>
+        </div>
+        <!-- <div #scrollToMe></div> -->
+      </div>
+      <div *ngIf="service.friendTyping" id="writing" style="position: absolute; left: 0px; bottom: 50px; z-index: 999">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- Sharing product component -->
+      <app-share-product *ngIf="service.selectedProduct" (onClose)="service.closePost()"
+        [product]="service.selectedProduct"></app-share-product>
+
+      <app-chat-input [isUploading]="service.isUploading" [selectedProduct]="service.selectedProduct"
+        [isTyping]="service.isTyping" (onMessageSend)="sendMessage($event)"
+        (onMessageChanged)="service.messageTextChanged($event)" (onBrowseImg)="service.onBrowseImage($event)">
+      </app-chat-input>
+    </div>
+  </div>
+
+  <div class="designer-chat-list m-w-100">
+    <div class="chat-section user-list-section">
+      <div class="chat-top1 user-list-top">
+        <div class="chat-top">
+          <div class="pro-cnt d-none d-md-flex border-0">
+            <div class="pro-img border-0">
+              <img class="cover" alt="img" [src]="service.me?.profile_photo | sanitizeImage: '40_40_'"
+                (click)="gotoProfile()" style="cursor: pointer" />
+            </div>
+            <div class="pro-name-link">
+              <div style="cursor: pointer">
+                <span class="pro-name mr-2" (click)="gotoProfile()">
+                  {{ me?.full_name | join_name: 20 }}</span>
+                <span class="chat-setting">
+                  <ion-icon class="remove_icon" name="settings" (click)="navigateToSetting()"></ion-icon>
+                </span>
+              </div>
+              <div class="pro-link Tbold_underLine">
+                <a style="cursor: pointer" (click)="gotoProfile()">
+                  Mano profilis
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="currently-review d-none d-md-block mt-0 border-0">
+            <span class="cr-txt"><img src="./../../assets/img/account-balance-d.svg" alt="img" />
+              {{
+              (walletInfo?.balance ? walletInfo?.balance : 0).toFixed(2) +
+              " tšk."
+              }}
+            </span>
+            <span class="cr-txt1 T_underLine" style="cursor: pointer" (click)="navigateToWallet()">išklotinė</span>
+
+            <button *ngIf="service.isOnline" (click)="service.setIsAvailable(false)"
+              class="btn ctm-btn cart-btn btnHovr">
+              <img src="./../../assets/img/notifications-online.svg" alt="img" />
+              online
+            </button>
+
+            <button *ngIf="!service.isOnline" (click)="service.setIsAvailable(true)"
+              class="btn ctm-btn cart-btn offline-btn btnHovr">
+              <img src="./../../assets/img/notifications-off.svg" alt="img" />
+              offline
+            </button>
+          </div>
+
+          <!-- for mobile start -->
+          <div class="currently-review d-flex d-md-none align-items-center p-0 mt-0 border-0">
+            <span class="cr-txt d-inline-flex align-items-center">
+              <ion-icon (click)="gotoHome()" style="font-size: 28px" name="chevron-back"></ion-icon>
+            </span>
+            <button *ngIf="service.isOnline" (click)="service.setIsAvailable(false)"
+              class="btn ctm-btn cart-btn position-static">
+              <img src="./../../assets/img/notifications-online.svg" alt="img" />
+              online
+            </button>
+            <button *ngIf="!service.isOnline" (click)="service.setIsAvailable(true)"
+              class="btn ctm-btn cart-btn offline-btn position-static">
+              <img src="./../../assets/img/notifications-off.svg" alt="img" />
+              offline
+            </button>
+          </div>
+          <!-- for mobile start -->
+        </div>
+      </div>
+      <div class="search-input d-none">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text logoImg"><img src="./../../assets/img/search.svg" alt="img" /></span>
+          </div>
+          <input type="text" class="form-control searchIn" placeholder="Pokalbių paieška" />
+        </div>
+      </div>
+
+      <div class="consultations-all">
+        <!--**************************** all request ***************************************-->
+        <div class="sent-req-cnt">
+          <div (click)="requestCollapse()" class="tlt req-tlt">
+            Užklausos
+            <span class="req-tlt-span">
+              {{ service?.requestList?.length }}
+              <ion-icon [name]="isAllShowing ? 'chevron-up' : 'chevron-down'"></ion-icon>
+            </span>
+          </div>
+          <app-request *ngFor="
+              let req of service.requestList | slice: 0:sliceEnd;
+              let i = index
+            " [request]="req" (onAccept)="service.requestAccept($event)" (onCancel)="service.cancelRequest($event)">
+          </app-request>
+        </div>
+
+        <div class="consultations active-consultations">
+          <div class="tlt">Aktyvios konsultacijos</div>
+          <div class="user-list p-0" *ngFor="let contact of service.contacts.value">
+            <div class="user d-flex active dgSidemenu" (click)="service.openMessage(contact)">
+              <div class="pro-cnt border-0">
+                <div class="pro-img">
+                  <img class="cover" [src]="contact?.profile_photo | sanitizeImage: '40_40_'" alt="img" />
+                </div>
+                <div class="pro-name-link">
+                  <div class="pro-name">
+                    {{ contact?.full_name | join_name: 20 }}
+                  </div>
+                  <div *ngIf="
+                      !contact?.lastMessage?.isRead &&
+                        contact?.lastMessage?.from == contact?.uid;
+                      else other_content
+                    ">
+                    <div *ngIf="contact?.lastMessage?.type == 1; else attatch1" class="pro-link"
+                      style="font-weight: bolder; color: rgb(238, 234, 255)">
+                      {{ contact?.lastMessage?.body | shorten: 20:"..." }}
+                    </div>
+
+                    <ng-template #attatch1>
+                      <div class="pro-link" *ngIf="contact?.lastMessage?.type > 1"
+                        style="font-weight: bolder; color: rgb(238, 234, 255)">
+                        Attachment
+                      </div>
+                    </ng-template>
+                  </div>
+                  <ng-template #other_content>
+                    <div *ngIf="contact?.lastMessage?.type == 1; else attatch2" class="pro-link"
+                      style="color: rgb(182, 179, 197)">
+                      {{ contact?.lastMessage?.body | shorten: 20:"..." }}
+                    </div>
+                    <ng-template #attatch2>
+                      <div class="pro-link" *ngIf="contact?.lastMessage?.type > 1" style="color: rgb(182, 179, 197)">
+                        Attachment...
+                      </div>
+                    </ng-template>
+                  </ng-template>
+                  <!-- <div class="pro-link">{{contact?.lastMessage?.body}}</div> -->
+                </div>
+              </div>
+              <ion-icon *ngIf="
+                  !contact?.lastMessage?.isRead &&
+                  contact?.lastMessage?.from == contact?.uid
+                " style="
+                  color: rgb(72, 72, 255);
+                  font-size: 15px;
+                  margin-right: 5px;
+                " name="radio-button-on"></ion-icon>
+              <div class="active-time">
+                {{ contact?.lastMessage?.timeStamp | dateAgo }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

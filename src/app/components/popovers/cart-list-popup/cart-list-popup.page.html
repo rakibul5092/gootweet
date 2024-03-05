@@ -1,0 +1,33 @@
+<div class="chat-section mm-w-100">
+  <div class="cart-product" *ngFor="let cartItem of cartItems">
+    <div class="prod-data-container">
+      <div class="img-container">
+        <img [src]="([cartItem?.data?.selectedImage]|getImage)" />
+      </div>
+      <div class="prod-info-container">
+        <div class="prod-title title">{{cartItem?.data?.title||'Dėja, ši prekė aprašymo neturi.'}}</div>
+        <!-- <div class="prod-id">{{cartItem?.data?.product_id}}</div> -->
+        <div class="prod-price">€{{cartItem?.data?.cart_price}}</div>
+        <div class="prod-size" *ngIf="cartItem?.data?.good?.sizes && cartItem.data.good.sizes.length>0">
+          <span>Dydis:</span>{{' '+cartItem?.data?.good?.sizes[0]}}
+        </div>
+        <div class="prod-color" *ngIf="cartItem?.data?.good?.colors && cartItem.data.good.colors.length>0">
+          <span>Spalva:</span>{{' '+cartItem?.data?.good?.colors[0]}}
+        </div>
+        <div class="prod-quantity"><span>Kiekis:</span>{{' '+cartItem?.data?.quantity}}</div>
+      </div>
+    </div>
+    <div *ngIf="cartItem?.data?.good?.material" class="material-container">
+      <img [src]="cartItem.data.good | getMaterialImageForCartList" />
+      <div class="mat-code">Kodas: {{' '+cartItem.data.good.code}}</div>
+    </div>
+  </div>
+  <div *ngIf="isEmpty" class="empty-message">
+    Krepšelis tuščias
+  </div>
+</div>
+<div class="text-center btn-footer" style="border-top: 1px solid #eaeaea">
+  <button (click)="gotoFullCart()" class="btn ctm-btn cart-btn btnHovr">
+    Peržiūrėti pilną krepšelį
+  </button>
+</div>

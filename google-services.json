@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "629139033631",
+    "firebase_url": "https://furniin-d393f.firebaseio.com",
+    "project_id": "furniin-d393f",
+    "storage_bucket": "furniin-d393f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629139033631:android:ddbd657bb2f211692c4f2a",
+        "android_client_info": {
+          "package_name": "lt.igonet.furniin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629139033631-b7r3gom16mrcsdbu53t4ubo6elcgm5mq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2CuankE8bhk0zaJX9R35x2PGCVQCTBmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629139033631-b7r3gom16mrcsdbu53t4ubo6elcgm5mq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

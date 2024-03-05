@@ -1,0 +1,12 @@
+<ion-button mode="md" (click)="onVideoBtnClick()"
+  [style]="'margin-bottom: 10px;cursor:pointer;'+(countVisible? '':'margin-right: 10px; margin-left: 10px;')"
+  expand="block" fill="solid" size="default" color="danger">
+  <ion-item style="--background:transparent">
+    <div class="pointer">
+      <ion-icon name="videocam" style="color:white;font-size: 18px;"></ion-icon>
+    </div>
+    <label style="font-family: Arial, Helvetica, sans-serif;text-transform: unset;color: white;cursor: pointer;"
+      class="mb-0">
+      {{'Gyvos transiliacijos'+(countVisible? ' ('+count+')':'') }}</label>
+  </ion-item>
+</ion-button>

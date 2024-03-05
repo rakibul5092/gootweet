@@ -1,0 +1,93 @@
+.my-container {
+  padding: 0 5px;
+}
+
+.ship-sec {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ship-content {
+  height: 30px;
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebebeb;
+}
+
+.min-max-wraper {
+  width: 45%;
+}
+
+.min-max {
+  background-color: #fff;
+  border: 0.2px solid #d5cdcd;
+  width: 99%;
+  height: 30px;
+  padding-left: 5px;
+}
+
+.discount-chosen {
+  background-color: #ebebeb;
+  width: 30%;
+  text-align: center;
+  padding: 3px 0px;
+}
+
+.range-text {
+  font-size: 15px;
+  margin: 2px;
+  font-weight: bold;
+}
+
+.chosen-text {
+  font-size: 13px;
+  color: gray;
+  font-weight: 300;
+  margin: 2px;
+}
+
+.title-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+.sized-box {
+  height: 10px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.footer-buttons {
+  justify-content: center;
+  height: 87%;
+  margin-top: 5px;
+}
+
+.done-button {
+  padding: 12px 18px;
+  width: 50%;
+  background-color: rgb(248, 116, 116);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.reset-button {
+  padding: 12px 18px;
+  width: 50%;
+  color: rgb(248, 116, 116);
+  background-color: #ebebeb;
+  font-size: 17px;
+  font-weight: bold;
+}

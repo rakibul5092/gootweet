@@ -1,0 +1,26 @@
+<div class="d-flex searchbox-container h-100 w-100">
+  <div [class]="'contacts w-100 '+ (inHeader? 'contacts-desktop':'contacts-mobile')">
+    <div class="user-search" [style]="inHeader? 'position: relative;':''">
+      <img src="assets/img/search.svg" />
+      <ion-input (onblur)="headerService.showSearchBar.next(false)" placeholder="Paieška" [(ngModel)]="searchText"
+        (ionChange)="onSearchByKeyword($event)" (click)="onSearchByKeyword($event)"
+        (keyup.enter)="searchOnEnter($event)" (keyup.esc)="showResult = false" type="text"></ion-input>
+      <ion-icon *ngIf="inHeader" (click)="headerService.showSearchBar.next(false)" name="close"></ion-icon>
+
+      <div class="search-box" *ngIf="showResult && suggestionOpen">
+        <div *ngFor="let hit of searchResult" (click)="gotoProfile(hit)" class="search-item">
+          <div class="search-item-cnt">
+            <div class="search_img">
+              <img [src]="hit.profile_photo|sanitizeImage:''" alt="" />
+            </div>
+            <div class="search-item-tlt">
+              {{hit.first_name+' '+hit.last_name}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </ng-template> -->

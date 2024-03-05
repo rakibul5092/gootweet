@@ -1,0 +1,87 @@
+.purchase-list-cnt {
+  .purchase-list {
+    .single-purchase {
+      padding: 0px 25px 0px 25px;
+      .row {
+        align-items: center;
+      }
+      .delivery-form {
+        padding-top: 15px;
+        margin-top: 15px;
+        border-top: 1px solid #eaeaea;
+        .row {
+          align-items: flex-start;
+        }
+        .delivery-price {
+          font-size: 17px;
+          font-weight: 700;
+          color: #6a7bff;
+        }
+        .ctm-container {
+          padding-left: 25px;
+          font-size: 14px;
+          .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #eaeaea;
+            &:after {
+              top: -3px;
+              width: 6px;
+              height: 12px;
+              border-color: #6a7bff;
+            }
+          }
+        }
+      }
+
+      .purchase-col2 {
+        @include max-width-p-map($pur-th-purchase-col2-max-width);
+        @include flex-p-map($pur-th-purchase-col2-flex);
+      }
+      .purchase-col3 {
+        @include max-width-p-map($pur-th-purchase-col3-max-width);
+        @include flex-p-map($pur-th-purchase-col3-flex);
+        max-width: 300px;
+        flex: 0 0 300px;
+      }
+
+      .cart-btn {
+        border-radius: 20px;
+      }
+      .approve-btn {
+        background: #2fdb57;
+      }
+    }
+  }
+  &.product-cl-show {
+    .purchase-list {
+      .single-purchase {
+        .row {
+          align-items: unset;
+        }
+        .purchase-col1 {
+          max-width: 210px;
+          flex: 0 0 210px;
+          @include max-width-p-map($purchase-col1-max-width);
+          @include flex-p-map($purchase-col1-flex);
+        }
+        .purchase-col2 {
+          @include max-width-p-map($purchase-col2-max-width);
+          @include flex-p-map($purchase-col2-flex);
+        }
+
+        .purchase-col3 {
+          @include max-width-p-map($purchase-col3-max-width);
+          @include flex-p-map($purchase-col3-flex);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .purchase-list-cnt {
+    margin-top: 10px;
+  }
+}

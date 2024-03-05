@@ -1,0 +1,53 @@
+.user {
+  .pro-img {
+    width: 32px;
+    height: 32px;
+  }
+  .pro-cnt {
+    align-items: none;
+  }
+  .pro-name-link {
+    .pro-name {
+      font-style: normal;
+      font-weight: bolder;
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--ion-color-dark);
+      display: flex;
+      div {
+        padding-left: 19px;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          top: 47%;
+          left: 17%;
+          background: #a7a6ad;
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+        }
+      }
+    }
+    .pro-link {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      color: #696f8c;
+    }
+    .missed-call {
+      color: var(--ion-color-danger);
+      ion-button {
+        width: 70px;
+        font-size: 12px;
+        height: 2em;
+      }
+    }
+    .comment {
+      border-left: 2px solid blue;
+      padding: 5px;
+      margin-top: 5px;
+    }
+  }
+}

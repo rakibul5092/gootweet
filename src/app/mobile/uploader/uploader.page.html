@@ -1,0 +1,71 @@
+<ion-header class="minimized-header" *ngIf="modal && minimized">
+  <ion-toolbar>
+    <ion-title>{{(uploadService.progress|async).toFixed(0)}}% Uploaded.</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onMaximize(videoModal)" [strong]="true"><ion-icon name="chevron-up"></ion-icon></ion-button>
+      <ion-button [disabled]="uploadStarted" (click)="close()" [strong]="true"><ion-icon
+          name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-modal #videoModal [backdropDismiss]="false" [isOpen]="modal && !minimized" [animated]="true" mode="ios"
+  [initialBreakpoint]="0.85" [breakpoints]="[0.85]" class="uploader-modal">
+  <!-- [class]="minimized?'custom-modal':''" -->
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Ikelti video įrašą</ion-title>
+        <ion-buttons slot="end">
+          <ion-button *ngIf="uploadStarted" (click)="onMinimize(videoModal)" [strong]="true"><ion-icon
+              name="chevron-down"></ion-icon></ion-button>
+          <ion-button [disabled]="uploadStarted" (click)="close()" [strong]="true"><ion-icon
+              name="close"></ion-icon></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="--background:white" class="ion-padding">
+      <div class="container d-flex flex-column">
+
+        <div class="input-container d-flex">
+          <div class="input-group mb-3 mt-3" onclick="document.getElementById('recordedVideothumb').click()">
+            <img *ngIf="videoThumb.imageData;else icon1" (click)="videoThumb" [src]="videoThumb?.imageData" />
+            <ng-template #icon1>
+              <div class="inner-text-icon">
+                <ion-icon name="images"></ion-icon>
+                <span>Koverio foto</span>
+              </div>
+            </ng-template>
+            <input id="recordedVideothumb" type="file" placeholder="Choose thumbnail" accept="image/*"
+              class="form-control" (change)="onBrowseVideoThumb($event)">
+          </div>
+          <div class="input-group mb-3 mt-3" onclick="document.getElementById('recordedVideo').click()">
+            <video controls muted *ngIf="videoFile.uri; else icon2" [src]="videoFile.uri"></video>
+            <ng-template #icon2>
+
+              <div class="inner-text-icon">
+                <ion-icon name="videocam"></ion-icon>
+                <span>Video</span>
+              </div>
+            </ng-template>
+            <input id="recordedVideo" type="file" accept="video/*" name="Video" placeholder="Choose video"
+              class="form-control" (change)="onBrowseVideo($event)">
+          </div>
+        </div>
+        <textarea class="form-control" placeholder="Aprašyti šį video iki (40 simboliu)..."
+          [(ngModel)]="videoInfo.about" maxlength="40" minlength="5" id="exampleFormControlTextarea1"
+          rows="2"></textarea>
+
+        <div class="progress mt-2" *ngIf="(uploadService.progress|async).toFixed(0) as progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0"
+            aria-valuemax="100" [style]="'width:'+ progress+'%'">{{progress}}%</div>
+        </div>
+
+        <button [disabled]="videoInfo.about==='' || !videoFile.file || !videoThumb.imageFile || uploadStarted"
+          (click)="onSave()" class="btn btn-primary mt-3" style="width: 50%; margin-left: auto;margin-right: auto;"
+          type="button">
+          Ikelti
+        </button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

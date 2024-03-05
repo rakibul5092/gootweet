@@ -1,0 +1,47 @@
+<div>
+  <div class="border-0 sent-req sent-req-item position-static">
+    <div class="pro-cnt req-pro-cnt">
+      <div class="pro-img border-0">
+        <img class="cover" [src]="
+            request?.data?.manufacturer?.profile_photo | sanitizeImage: '40_40_'
+          " alt="img" />
+      </div>
+      <div class="pro-name-link">
+        <div (click)="
+            navigateToManufacturerCatalog(request?.data?.manufacturer?.uid)
+          " button class="pro-name Td_underLine pr-2" style="cursor: pointer">
+          {{
+          request?.data?.manufacturer?.full_name|join_name
+          }}
+          <span class="pro-span">{{ request?.data?.commission + "%" }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="pro-cnt req-pro-cnt1">
+      <div class="pro-img border-0">
+        <img class="cover" [src]="request?.data?.user?.profile_photo | sanitizeImage: '40_40_'" alt="img" />
+      </div>
+      <div class="pro-name-link">
+        <div button class="pro-name">
+          {{
+          request?.data?.user?.full_name|join_name
+          }}
+        </div>
+        <div *ngIf="request?.shortened" [innerHTML]="request?.data?.text | shorten: 40" class="pro-txt"></div>
+        <div *ngIf="!request?.shortened" [innerHTML]="request?.data?.text" class="pro-txt"></div>
+        <ion-label (click)="request.shortened = !request?.shortened" *ngIf="request?.data?.text.length > 39"
+          style="font-weight: bolder">
+          {{ request.shortened ? "more" : "less" }}</ion-label>
+        <div class="close-save-btn">
+          <button (click)="requestAccept()" class="btn ctm-btn save-btn p-0">
+            <img src="./../../assets/img/done.svg" alt="img" />
+          </button>
+          <br />
+          <button (click)="cancelRequest()" class="btn ctm-btn close-btn p-0">
+            <img src="./../../assets/img/close-w.svg" alt="img" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

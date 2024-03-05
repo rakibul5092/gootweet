@@ -1,0 +1,27 @@
+.left-side-cnt {
+	margin-bottom: 0;
+	.body-cnt {
+		background: #F4F4F7;
+		padding: 20px;
+		border-radius: 5px;
+		margin-bottom: 450px;
+	}
+	.pro-ul {
+		.nav-link{
+			&.cart-link {
+				margin-top: 15px;
+				border-bottom: none;
+				border-top: 2px solid #eaeaea;
+			}
+		}
+	}
+	.close-m {
+		cursor: pointer;
+	}
+	.menu-cnt-n {
+		background: #F4F4F7;
+		padding: 20px;
+		border-radius: 5px;
+		margin-bottom: 250px;
+	}
+}

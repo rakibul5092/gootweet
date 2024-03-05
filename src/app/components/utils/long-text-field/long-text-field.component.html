@@ -1,0 +1,16 @@
+<div class="col-lg-12">
+  <div class="form-group">
+    <label>
+      <h6 class="">{{label}}</h6>
+    </label>
+
+    <div class="form-input col-lg-6 col-md-12 p-0">
+      <ion-input [style]="checked && (!value || value ==='')?'border:1px solid red':''"
+        (ionChange)="valueEmitter.emit(value)" [(ngModel)]="value" type="text" name="railing_furniture"
+        class="form-control textIn pl-2" [placeholder]="placeholder"></ion-input>
+      <ion-label *ngIf="checked && !value && value ===''" style="font-size: 10px;color: red;">
+        Required
+        field</ion-label>
+    </div>
+  </div>
+</div>

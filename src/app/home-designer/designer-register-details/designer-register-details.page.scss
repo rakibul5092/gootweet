@@ -1,0 +1,12 @@
+@import "./../../../theme/mixins/mixins";
+@import "./../../../theme/pages/register";
+.ctm-container {
+  margin-right: 15px;
+  .checkmark {
+    &:after {
+      top: -14px;
+      right: -8px;
+      height: 20px;
+    }
+  }
+}

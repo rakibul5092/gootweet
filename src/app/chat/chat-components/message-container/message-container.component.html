@@ -1,0 +1,65 @@
+<div style="padding-bottom: 10px">
+  <!--********************************************** other's messages starts here ******************************************** -->
+  <div [ngSwitch]="message?.data?.type" *ngIf="message?.data?.from === selectedContact?.uid; else mychat"
+    class="chat self-chat d-flex">
+    <div class="pro-cnt border-0" *ngIf='message?.data?.type!=5'>
+      <div class="pro-img">
+        <img class="cover" style="cursor: pointer" (click)="gotoProfile(selectedContact)"
+          [src]="(selectedContact?.profile_photo|sanitizeImage:'40_40_')" alt="img" />
+      </div>
+    </div>
+    <div class="chat-img-txt" [style]="message?.data?.type == 5?'width:100%':''">
+
+      <app-message-text *ngSwitchCase="1" [text]="message?.data?.body"></app-message-text>
+
+      <app-message-image *ngSwitchCase="2" [id]="message.id" [url]="message?.data?.body">
+      </app-message-image>
+
+      <app-message-video *ngSwitchCase="3" [videoUrl]="message?.data?.body"></app-message-video>
+
+      <app-message-file *ngSwitchCase="4" [mime]="message?.data?.mime" [url]="message?.data?.body">
+      </app-message-file>
+
+      <app-message-product [product]="message?.data?.product"
+        (click)="openProduct(message?.data?.product, message?.data?.productOwnerUid)"
+        *ngSwitchCase="5"></app-message-product>
+
+      <app-message-images *ngSwitchCase="7" [images]="message?.data?.images" [id]="message?.id">
+      </app-message-images>
+
+      <app-message-cart *ngSwitchCase="8" (click)="openUrl(message?.data?.body)"></app-message-cart>
+    </div>
+    <app-time [timeStamp]="message?.data?.timeStamp"></app-time>
+
+  </div>
+  <!--********************************************** My messages starts here ******************************************** -->
+  <ng-template #mychat>
+    <div [ngSwitch]="message?.data?.type" class="chat other-chat d-flex">
+      <app-time [timeStamp]="message?.data?.timeStamp"></app-time>
+
+      <div class="chat-img-txt" [style]="message?.data?.type == 5?'width:100%':''">
+        <app-message-text *ngSwitchCase="1" [text]="message?.data?.body"></app-message-text>
+
+        <app-message-image *ngSwitchCase="2" [id]="message.id" [url]="message?.data?.body">
+        </app-message-image>
+
+        <app-message-video *ngSwitchCase="3" [videoUrl]="message?.data?.body"></app-message-video>
+
+        <app-message-file *ngSwitchCase="4" [mime]="message?.data?.mime" [url]="message?.data?.body">
+        </app-message-file>
+
+        <app-message-product style="width: 100%;padding: 5px;" [product]="message?.data?.product" *ngSwitchCase="5"
+          (click)="openProduct(message?.data?.product, message?.data?.productOwnerUid)">
+        </app-message-product>
+
+        <app-message-images *ngSwitchCase="7"></app-message-images>
+
+        <app-message-cart *ngSwitchCase="8" (click)="openUrl(message?.data?.body)"></app-message-cart>
+
+      </div>
+    </div>
+  </ng-template>
+
+
+
+</div>

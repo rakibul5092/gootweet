@@ -1,0 +1,9 @@
+@import "./../../../theme/mixins/mixins";
+@import "./../../../theme/pages/manufacturer";
+
+.manufacturer-tab {
+    position: fixed;
+    background-color: #fafafa;
+    z-index: 9999;
+    width: 100%;
+}

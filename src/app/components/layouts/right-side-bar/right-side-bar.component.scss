@@ -1,0 +1,112 @@
+.right-sidebar {
+    .right_middle {
+      width: 321px;
+      max-height: 374px;
+      background: #75be16;
+      padding: 3px;
+      border-radius: 5px;
+      overflow-y: auto;
+      .right-tlt {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        color: #ffffff;
+        padding: 10px 0px 10px 15px;
+      }
+      .blog-cnt {
+        padding: 11px;
+        background: #fff;
+        border-radius: 5px;
+        .blog {
+          height: 98px;
+          width: 100%;
+          border-radius: 5px;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          padding: 0px;
+          .pro-cnt {
+            height: 100%;
+            align-items: end;
+            padding-left: 8px;
+            margin-bottom: 0px;
+            padding-bottom: 11px !important;
+            background: linear-gradient(
+              360deg,
+              rgba(0, 0, 0, 0.87) 0%,
+              rgba(0, 0, 0, 0) 59.9%,
+              rgba(0, 0, 0, 0) 59.9%
+            );
+            .pro-img {
+              box-shadow: none;
+            }
+            .pro-name-link {
+              margin-bottom: -7px;
+              .pro-name {
+                font-style: normal;
+                font-weight: bold;
+                font-size: 15px;
+                line-height: 16px;
+                color: #ffffff;
+                &:hover {
+                  color: #fff;
+                  filter: contrast(100%) brightness(100%) opacity(100%);
+                }
+              }
+              .title {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 13px;
+                line-height: 16px;
+                color: #dfdfdf;
+              }
+            }
+          }
+        }
+      }
+    }
+    .right_popular {
+      background: #fff;
+      border-radius: 5px;
+      margin-top: 16px;
+      padding: 16px 0px 16px 14px;
+      .right-tlt {
+        h2 {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 15px;
+          line-height: 16px;
+          color: #7c7b86;
+        }
+      }
+      .popular_slide {
+        margin-bottom: 14px;
+        .img-center {
+          width: 84px;
+          height: 100%;
+          border-radius: 5px;
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
+        }
+        .pro-name-link {
+          .pro-name {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 16px;
+            color: #323743;
+            padding-bottom: 8px;
+          }
+          .title {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 16px;
+            color: #7c7b86;
+          }
+        }
+      }
+    }
+  }

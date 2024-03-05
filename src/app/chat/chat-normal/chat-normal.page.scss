@@ -1,0 +1,26 @@
+@import "./../../../theme/mixins/mixins";
+.normal-chat-section {
+  @include width-p-map($normal-chat-section-width);
+  @include left-p-map($cart-section-left);
+  border: 2px solid #6a7bff;
+  .chat-top {
+    .pro-cnt {
+      .pro-img {
+        @include width-p-map($normal-chat-top-pro-img-width);
+        @include height-p-map($normal-chat-top-pro-img-height);
+        border: 0;
+      }
+      .pro-name-link {
+        @include width-p-map($normal-chat-top-pro-name-link-width);
+        @include padding-p-map($normal-chat-top-pro-name-link-padding);
+        padding: 0 140px 0 5px;
+        .pro-name {
+          @include font-size-p-map($normal-chat-top-pro-name-font-size);
+        }
+      }
+    }
+  }
+  .chat-list {
+    @include height-p-map($normal-chat-list-height);
+  }
+}

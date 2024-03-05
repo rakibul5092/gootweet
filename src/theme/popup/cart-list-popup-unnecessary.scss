@@ -1,0 +1,123 @@
+.cart-section {
+  max-width: 400px;
+  min-width: 370px;
+  margin: auto;
+  box-shadow: 0 4px 20px #ddd;
+  height: 100%;
+  .cart-btn {
+    padding: 8px 30px;
+    margin: 15px 10px;
+  }
+  .mobile-chat-top {
+    padding: 20px 20px 0 20px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .chat-top {
+    padding: 10px 25px;
+    .pro-cnt {
+      .pro-name-link {
+        .pro-name {
+          font-size: 15px;
+          font-weight: 700;
+          padding-right: 165px;
+          color: #fff;
+          .total-price {
+            font-size: 20px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .d-btn {
+      padding: 5px 30px;
+      border: 0;
+      font-size: 14px;
+      color: #6a6975;
+    }
+  }
+
+  .item-list {
+    padding: 5px 0px 10px;
+    @include max-height-p-map($cart-item-list-max-height);
+    height: auto;
+    overflow-y: auto;
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eaeaea;
+      gap: 10px;
+      position: relative;
+      .reviews-delet-i {
+        position: absolute;
+        top: 48%;
+        right: 15px;
+      }
+      .item-img {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        img {
+          border-radius: 10px;
+        }
+      }
+      .item-tlt {
+        width: 100%;
+        padding: 0 35px 0px 15px;
+        display: flex;
+        gap: 10px;
+        .item-txt {
+          display: flex;
+          padding-top: 10px;
+          color: #6a6975;
+          .item-txt-s {
+            padding-right: 8px;
+            margin-bottom: 8px;
+            img {
+              width: 25px;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+      .item-modify {
+        font-size: 17px;
+        color: #6a6975;
+        font-weight: 700;
+        display: flex;
+        width: 100%;
+        padding: 0px 15px;
+        justify-content: space-between;
+        .quantity-container {
+          width: 50%;
+          display: flex;
+          justify-content: space-evenly;
+        }
+        .date-txt {
+          color: #b1b1b1;
+          font-weight: 500;
+          margin-right: 8px;
+        }
+        .total-item {
+          padding: 0 8px;
+          color: #6a7bff;
+        }
+        .id-item {
+          cursor: pointer;
+        }
+        .item-price {
+          width: 50%;
+          text-align: end;
+          color: #6a6975;
+          padding: 0 25px;
+        }
+      }
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import "./../../../theme/mixins/_mixins";
+@import "./../../../theme/pages/purchase";
+
+.img-center {
+  height: auto;
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+.title-part {
+  display: flex;
+  align-items: center;
+}
+
+.remove_icon {
+  padding: 3px 6px 3px;
+}
+
+.pr-ur-tlt {
+  text-align: center;
+}

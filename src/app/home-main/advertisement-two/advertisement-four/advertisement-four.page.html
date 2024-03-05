@@ -1,0 +1,106 @@
+<ion-content>
+  <div class="main-wrapper">
+    <section class="blog-section advertisement-section advertisement-section-2 mp-0">
+      <div class="advertisement-cnt pb-0 pb-md-5">
+        <div routerLink="/advertisement-three" class="back-li" style="display: inline-flex;align-items:center">
+          <ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+        </div>
+        <div class="advertisement-4-cnt">
+          <div class="row m-0">
+            <div class="col-12 col-lg-6 ad-pro-col">
+              <div class="profile-pp m-radius-5">
+                <div class="profile-p m-radius-5">
+                  <div class="pro-cnt m-w-100">
+                    <div class="pro-img">
+                      <img class="cover" [src]="(this.me?.details?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+                    </div>
+                    <div class="pro-name-link">
+                      <div *ngIf='this.me' class="pro-name">
+                        {{this.me?.full_name|join_name}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="price m-w-100">
+                    <div class="price-icon">
+                      <img src="./../../assets/img/wallet.svg" alt="img" />
+                    </div>
+                    <div class="price-am">
+                      <div class="">Piniginė</div>
+                      <div *ngIf="this.wallet" class="pr-tlt"> {{(wallet?.balance.toFixed(2))+' tšk.'}}</div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button (click)="topUpMoney()" class="btn w-100 ctm-btn">
+                      Pildyti mano piniginę
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 p-0">
+              <div class="point-gift-cnt upload-post form-cnt border-0">
+                <div class="tlt upload-post-tlt">Iškelkite savo įrašą</div>
+                <div class="row mx-0 align-items-center">
+                  <div class="col-12 pl-0">
+                    <label class="mb-0">
+                      <h6>Pasirinkite dienos biudžetą</h6>
+                    </label>
+                  </div>
+                  <div class="col-6 pl-0 form-group">
+                    <div class="form-input">
+                      <span class="input-group-txt">Taškai</span>
+                      <input type="text" name="point" id="point" class="form-control point-input" placeholder="25" />
+                    </div>
+                  </div>
+                  <div class="col-6 form-group">
+                    <button class="btn ctm-btn d-btn">Patvirtinti</button>
+                  </div>
+                </div>
+                <div class="row ml-0 align-items-center">
+                  <div class="col-12 pl-0">
+                    <label>
+                      <h6>Aktyvus skelbimo iškėlimo laikotarpis</h6>
+                    </label>
+                  </div>
+                  <div class="col-6 pl-0 form-group">
+                    <div class="form-input">
+                      <span class="input-group-txt"><img src="./../../assets/img/calendar.svg" alt="img" /></span>
+                      <input type="text" name="date-f" id="date-f" class="form-control" placeholder="20-08-2020" />
+                      <span class="r-ar">
+                        <ion-icon name="chevron-forward"></ion-icon>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6 form-group">
+                    <div class="form-input">
+                      <span class="input-group-txt"><img src="./../../assets/img/calendar.svg" alt="img" /></span>
+                      <input type="text" name="date-l" id="date-l" class="form-control" placeholder="20-08-2020" />
+                    </div>
+                  </div>
+                </div>
+                <div class="post-seen-txt">
+                  <div class="post-s-icon">
+                    <img src="./../../assets/img/warning.svg" alt="img" />
+                  </div>
+                  <div class="post-s-txt">
+                    <div class="post-s-txt1">
+                      Jūsų įraša pamatys vidutiniškai
+                    </div>
+                    <div class="post-s-txt2">100 000 vatotojų</div>
+                  </div>
+                </div>
+                <div class="total-point"><span>Iš viso: </span>125 taškai</div>
+                <div class="text-md-right text-center mt-4 mt-md-0">
+                  <button (click)="skipToProfile()" class="btn ctm-btn pro-btn">Praleisti</button>
+                  <button (click)="updateWallPostPaid()" class="btn ctm-btn cart-btn">
+                    Užsakyti
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

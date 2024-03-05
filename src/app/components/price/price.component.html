@@ -1,0 +1,7 @@
+<span class="price-all">
+  <span class="current-price">
+    <span class="type-money-prod">€</span>
+    <span *ngIf="searched" class="money-prod">{{ price }}</span>
+    <span *ngIf="!searched" class="money-prod">{{ good | getPrice }}</span>
+  </span>
+</span>

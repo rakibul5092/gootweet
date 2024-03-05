@@ -1,0 +1,21 @@
+.main-wrapper {
+  display: flex;
+  padding-top: 65px;
+  padding-left: 15px;
+  padding-bottom: 130px;
+}
+.close-m {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+@media screen and (max-width: 320px) {
+  .main-wrapper {
+    padding-left: 10px;
+    padding-top: 40px;
+  }
+  .close-m {
+    top: 10px;
+    right: 10px;
+  }
+}

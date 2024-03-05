@@ -1,0 +1,16 @@
+<ng-container *ngIf="file.type==='image';else videoTag">
+  <img *ngIf="file.dataForView;else liveImage" (click)="openPhoto('image-' + wallId)" [class]="class"
+    [src]="file|getFileSrc: wallId" alt="img" />
+  <ng-template #liveImage>
+    <img (click)="openPhoto('image-' + wallId)" [class]="class" [defaultImage]="default"
+      [lazyLoad]="file|getFileSrc:wallId" alt="img" />
+  </ng-template>
+</ng-container>
+<ng-template #videoTag style="position: relative;">
+  <vg-player>
+    <video muted [controls]="controls" class="cover" [poster]="isLiveVideo?'': isLive? thumnailUrl:file.thumbnail"
+      [vgMedia]="media" #media [id]="'post-video-'+wallId" preload="auto">
+      <source [src]="file|getFileSrc: wallId:isLiveVideo" type="video/mp4">
+    </video>
+  </vg-player>
+</ng-template>

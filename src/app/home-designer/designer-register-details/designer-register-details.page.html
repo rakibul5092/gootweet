@@ -1,0 +1,313 @@
+<ion-content>
+	<div class="main-wrapper">
+		<div class="log-reg reg-step-4">
+			<div class="reg-tlt">Klauskite registracija</div>
+			<div class="form-cnt form-cnt-1">
+				<div class="row align-items-center">
+					<div class="col-12 col-lg-5">
+						<div class="row">
+							<div class="col-12 col-lg-6">
+								<div class="form-group">
+									<label>
+										<h6 class="dark-text f-20 weaker">
+											Vardas
+										</h6>
+									</label>
+									<div class="form-input">
+										<input [style]="checked && (!name || name ==='') ? 'border:1px solid red' : '' "
+											type="text" class="form-control textIn" placeholder="Vytaras"
+											[(ngModel)]="name" />
+										<p ion-text class="text04" *ngIf="checked && (!name || name === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Name is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="form-group">
+									<label>
+										<h6 class="dark-text f-20 weaker">
+											Pavardė
+										</h6>
+									</label>
+									<div class="form-input">
+										<input
+											[style]="checked && (!sureName || sureName ==='') ? 'border:1px solid red' : '' "
+											type="text" class="form-control textIn" placeholder="Urbonas"
+											[(ngModel)]="sureName" />
+										<p ion-text class="text04" *ngIf="checked && (!sureName || sureName === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Surename is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-7">
+						<div class="img-cnt d-block d-md-flex mm-0">
+							<div *ngIf="!isImageAdded" class="user-reg-logo mx-auto mb-3 mb-md-0"
+								[style]="checked && !isImageAdded ? 'border:1px solid red;' : '' ">Logo</div>
+							<div *ngIf="isImageAdded" class="user-reg-logo mb-3 mb-md-0">
+								<img [src]="dom.bypassSecurityTrustUrl(imageData)" />
+							</div>
+							<div class="user-reg-txt-btn mm-0 m-w-100">
+								<span class="u-reg-txt">
+									<span class="add-photo"><img src="./../../assets/img/add-photo.svg"
+											alt="img" /></span>
+									<span class="add-photo-txt">Įtempkite ir paleiskite profilio nuotrauką</span>
+								</span>
+
+								<span class="u-reg-arba">arba</span>
+								<span class="u-reg-btn"><button onclick="document.getElementById('browselogo').click()"
+										class="btn ctm-btn cart-btn btnNav">
+										Įkelkite iš failų
+									</button></span>
+								<input id="browselogo" type="file" style="display: none" accept="image/*"
+									(change)="onBrowseImage($event)" />
+
+							</div>
+
+						</div>
+						<p style="margin-left: 70px;" ion-text class="text04" *ngIf="checked && !isImageAdded">
+							<ion-label style="font-size: 12px; color: red">
+								Logo is required!
+							</ion-label>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="tlt mb-2">Klauskite informacija</div>
+			<div class="form-cnt form-cnt-1">
+				<div class="row">
+
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Telefono numeris</h6>
+							</label>
+							<div class="form-input">
+								<input
+									[style]="checked && (!telephone_no || telephone_no ==='') ? 'border:1px solid red' : '' "
+									[(ngModel)]="telephone_no" type="text" class="form-control textIn"
+									placeholder="+370 6 381 6819" />
+								<p ion-text class="text04" *ngIf="checked && (!telephone_no || telephone_no === '')">
+									<ion-label style="font-size: 12px; color: red">
+										Telephone no is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">El. paštas</h6>
+							</label>
+							<div class="form-input">
+								<input [style]="checked && (!email || email ==='') ? 'border:1px solid red' : '' "
+									[value]="me?.email" type="email" class="form-control textIn"
+									placeholder="Info@magre.lt" disabled />
+								<p ion-text class="text04" *ngIf="checked && (!email || email === '')">
+									<ion-label style="font-size: 12px; color: red">
+										E-mail is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tlt mb-2">Veiklos informacija</div>
+			<div class="form-cnt form-cnt-1">
+				<div class="row">
+					<div class="col-12">
+						<div class="form-group">
+							<label class="ctm-container">
+								Juridinis asmuo
+								<input (click)="selectCompany($event)" [checked]="legalPerson" type="checkbox" />
+								<span class="checkmark checkIn"></span>
+
+							</label>
+							<label class="ctm-container">
+								Fizinis asmuo
+								<input (click)="selectPerson($event)" [checked]="individualPerson" type="checkbox" />
+								<span class="checkmark checkIn"></span>
+
+							</label>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Bankas</h6>
+							</label>
+							<div class="form-input">
+								<input [style]="checked && (!bankName || bankName ==='') ? 'border:1px solid red' : '' "
+									[(ngModel)]="bankName" type="text" name="bank" id="bank" class="form-control textIn"
+									placeholder="Swedbank" />
+								<p ion-text class="text04" *ngIf="checked && (!bankName || bankName === '')">
+									<ion-label style="font-size: 12px; color: red">
+										Bank name is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Banko sąskaita (IBAN)</h6>
+							</label>
+							<div class="form-input">
+								<input [(ngModel)]="bankAccount" type="text" name="ac_number" id="ac_number"
+									class="form-control textIn" placeholder="LT1354165941813294835" />
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4" *ngIf="legalPerson">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Įmonės pavadinimas</h6>
+							</label>
+							<div class="form-input">
+								<input
+									[style]="checked && (!companyName || companyName ==='') ? 'border:1px solid red' : '' "
+									[(ngModel)]="companyName" type="text" name="railing_furniture"
+									id="railing_furniture" class="form-control textIn" placeholder="Margės baldai" />
+								<p ion-text class="text04" *ngIf="checked && (!companyName || companyName === '')">
+									<ion-label style="font-size: 12px; color: red">
+										Company name is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4" *ngIf="legalPerson">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Įmonės kodas</h6>
+							</label>
+							<div class="form-input">
+								<input [(ngModel)]="companyCode" type="text" name="company_code" id="company_code"
+									class="form-control textIn" placeholder="1535497" />
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4" *ngIf="legalPerson">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">PVM kodas</h6>
+							</label>
+							<div class="form-input">
+								<input [(ngModel)]="pvmCode" type="text" name="pvm_code" id="pvm_code"
+									class="form-control textIn" placeholder="4899813548" />
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Adresas</h6>
+							</label>
+							<div class="form-input">
+								<ion-input
+									[style]="checked && (!address || address ==='') ? 'border:1px solid red' : '' "
+									id="googlePlaces" (click)="onFocus($event)" (ionChange)="addressChanged()"
+									[(ngModel)]="address" type="text" class="form-control textIn"
+									placeholder="Plytelių g, 12-1" autocomplete="off"></ion-input>
+
+								<p ion-text class="text04" *ngIf="checked && (!address || address === '')">
+									<ion-label style="font-size: 12px; color: red">
+										Address is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">Telefono numeris</h6>
+							</label>
+							<div class="form-input">
+								<input
+									[style]="checked && (!telephone_no || telephone_no ==='') ? 'border:1px solid red' : '' "
+									[(ngModel)]="telephone_no" type="text" class="form-control textIn"
+									placeholder="+370 6 381 6819" />
+								<p ion-text class="text04" *ngIf="checked && (!telephone_no || telephone_no === '')">
+									<ion-label style="font-size: 12px; color: red">
+										Telephone no is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label>
+								<h6 class="dark-text f-20 weaker">El. paštas</h6>
+							</label>
+							<div class="form-input">
+								<input [style]="checked && (!email || email ==='') ? 'border:1px solid red' : '' "
+									[value]="me?.email" type="email" class="form-control textIn"
+									placeholder="Info@magre.lt" disabled />
+								<p ion-text class="text04" *ngIf="checked && (!email || email === '')">
+									<ion-label style="font-size: 12px; color: red">
+										E-mail is required!
+									</ion-label>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="tlt mb-2">Sutartis ir taisyklės</div>
+			<div class="form-cnt form-cnt-1">
+				<div class="text-right download-txt ">
+					<a class="navNoti"><img class="icon_h" src="./../../assets/img/launch.svg" alt="img" /> Parsisiųsti
+						sutartį</a>
+				</div>
+				<div class="rules-cnt textIn" style="border: 8px dashed #eaeaea;">
+					<ion-textarea>{{terms}}</ion-textarea>
+				</div>
+				<div class="rules-btn text-right">
+					<div class="rules-btn text-right">
+						<div class="form-group pt-2">
+							<label class="ctm-container">
+								Sutinku su <a>taisyklėmis</a>
+								<input [(ngModel)]="termsAccepted" type="checkbox" />
+								<span class="checkmark checkIn"></span>
+							</label>
+							<p ion-text class="text04" *ngIf="checked && !termsAccepted">
+								<ion-label style="font-size: 12px; color: red">
+									Please accept terms and conditions.
+								</ion-label>
+							</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="sent-btn text-right">
+				<button (click)="finalUpload()" class="btn ctm-btn cart-btn btnNav">
+					Tęsti
+				</button>
+			</div>
+		</div>
+	</div>
+</ion-content>

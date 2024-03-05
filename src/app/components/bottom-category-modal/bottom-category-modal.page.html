@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-icon (click)="close()" style="font-size: 30px;" name="remove"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="padding-left: 10px;">
+    <ion-row style="padding-top: 5px;padding-bottom: 5px;"
+      *ngFor="let cat of searchPopupService.categoriesForShow;let i=index">
+      <ion-row style="width: 100%;">
+        <ion-col size="1" class="ion-text-center">
+          <ion-icon name="ellipse" style="font-size: 8px;"></ion-icon>
+        </ion-col>
+        <ion-col button style="font-size:18px;" (click)="filterWithCategory(cat,true)" size="9">
+          {{cat.data.category|shorten:30:'...'}}
+        </ion-col>
+        <ion-col (click)="openSub();cat.isSelected = !cat.isSelected" class="ion-text-center" size="2">
+          <ion-icon
+            style="border: 1px solid rgb(124, 124, 124);border-radius: 50%;padding: 1px;background-color: #e0e0e0;"
+            *ngIf="cat.subCategories.length>0" [name]="cat.isSelected? 'chevron-up':'chevron-down'"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row id="sub-items" *ngIf="cat.isSelected" style="width: 100%;">
+        <div *ngFor="let subCat of cat.subCategories" style="width: 80%;margin: auto;margin-bottom: 3px;">
+          <ion-col size="2" class="ion-text-center">
+            <ion-icon name="ellipse" style="font-size: 8px;"></ion-icon>
+          </ion-col>
+          <ion-col button (click)="filterWithCategory(subCat,false)" size="10">
+            {{subCat.data.sub_category|shorten:30:'...'}}</ion-col>
+
+        </div>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

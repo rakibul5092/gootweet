@@ -1,0 +1,11 @@
+<div class="reel-card-container rounded" [style]="'height: '+height+'px;width:'+width+'px'">
+  <div class="info-container">
+    <ion-icon name="play"></ion-icon>
+    <div class="views">{{reel?.likeCount}}</div>
+  </div>
+  <img *ngIf="!playable;else player" class="rounded h-100 w-100 img-zoom-hover" [src]="thumbnailUrl" />
+  <ng-template #player>
+    <video class="rounded h-100 w-100 img-zoom-hover" [src]="reel.asset.secure_url" muted="false" loop></video>
+  </ng-template>
+  <ion-icon class="delete" *ngIf="isMyReel" (click)="onDelete($event)" name="trash"></ion-icon>
+</div>

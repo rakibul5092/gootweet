@@ -1,0 +1,19 @@
+<ion-content>
+  <ion-row>
+    <ion-col size-md="12" size-lg="7" size-xl="6" offset-lg="2.5" offset-xl="3" [ngSwitch]="wallPostNotFound">
+      <div class="blog-cnt mb-5">
+        <!-- ************************************** Normal product post ************************************* -->
+        <div *ngSwitchCase="1">
+          <app-post *ngIf="wallPost" [wallPost]="wallPost" [me]="me" [isLoggedin]="isLoggedin.value"
+            [isAllComment]="true">
+          </app-post>
+        </div>
+        <div *ngSwitchCase="2" style="display: flex;justify-content: center;align-content: center;">
+          Not found!
+        </div>
+
+      </div>
+      <app-post-skeleton *ngSwitchCase="0"></app-post-skeleton>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,33 @@
+<form *ngIf="bankForm else loading" (ngSubmit)="onSubmit()" class="form-container" [formGroup]="bankForm">
+  <div class="combined">
+    <gootweet-input-field type="text" formControlName="Bank_name" [label]="'Bankas'"></gootweet-input-field>
+    <gootweet-input-field type="text" formControlName="account_no" [label]="'Banko sąskaita'"></gootweet-input-field>
+  </div>
+  <div class="combined">
+    <gootweet-input-field type="text" formControlName="project_id"
+      [label]="'Paysera projekto ID'"></gootweet-input-field>
+    <gootweet-input-field type="text" formControlName="password"
+      [label]="'Projekto slaptažodis'"></gootweet-input-field>
+  </div>
+
+
+  <gootweet-input-field type="text" formControlName="meta_tag"
+    [label]="'Paysera projekto metažyma'"></gootweet-input-field>
+
+  <ion-radio-group class="radio-group" (ionChange)="onCheckChange($event)" [value]="testAccount">
+    <ion-item>
+      <ion-label>Test</ion-label>
+      <ion-radio slot="start" value="1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Live</ion-label>
+      <ion-radio slot="start" value="0"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-button mode="md" type="submit" [disabled]="!(bankForm.valid && bankForm.dirty && enabled)" color="primary"
+    id="login_submit" class="">išsaugoti</ion-button>
+</form>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

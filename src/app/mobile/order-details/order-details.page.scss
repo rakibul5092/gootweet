@@ -1,0 +1,104 @@
+.medioum-text {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 34px;
+    color: #000000;
+}
+
+ion-toolbar {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    height: 34vh;
+}
+
+.regular-text {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgb(49, 46, 46);
+}
+
+.image-wrapper {
+    height: 34vh;
+    width: 100%;
+}
+
+.review-image {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.review-image img {
+    height: 100%;
+
+}
+
+
+
+.price {
+    font-size: 32px;
+    font-weight: bolder;
+    color: #000000;
+
+}
+
+.product-details-button {
+    padding: 7px;
+    width: 60%;
+    background-color: #6a7bff;
+    font-size: 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+// .avatar {
+//     vertical-align: middle;
+//     width: 30px;
+//     height: 30px;
+//     border-radius: 50%;
+// }
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+}
+
+.footer-buttons {
+    justify-content: center;
+    height: 87%;
+    // margin-top: 5px;
+}
+
+.done-button {
+    padding: 10px 0px;
+    width: 50%;
+    background-color: rgb(248, 116, 116);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.reset-button {
+    padding: 10px 0px;
+    width: 50%;
+    color: rgb(248, 116, 116);
+    background-color: #ebebeb;
+    font-size: 17px;
+    font-weight: bold;
+}

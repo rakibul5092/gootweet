@@ -1,0 +1,29 @@
+<!-- <div class="col-12 col-sm-6 col-lg-4 mbc-col pr-0"> -->
+<div class="blog mb-3">
+  <div class="pro-cnt user-cnt border-0">
+    <div class="pro-img">
+      <img class="cover" [src]="(manufacturer?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+    </div>
+    <div class="pro-name-link position-relative">
+      <div class="pro-name postText" (click)="gotoProfile(manufacturer)" style="cursor: pointer;">
+        {{manufacturer?.full_name|join_name}}
+        <img src="./../../assets/img/verified.svg" alt="img" />
+      </div>
+      <div class="pro-link"><span>Gamintojas</span>
+        <!-- <span class="pub-t">3h</span> -->
+      </div>
+
+    </div>
+  </div>
+  <div class="abg-com position-static">
+    <span class="avg-txt">{{'Vidutinis komisinis: '}}</span>
+    <span class="avg-com-m">{{manufacturer?.averageCommission &&
+      manufacturer?.averageCommission.toFixed(2) || 0}}%</span>
+  </div>
+  <div class="text-center">
+    <button [disabled]="manufacturer.isRequested" (click)="askRequest(manufacturer.uid)"
+      class="btn ctm-btn cart-btn w-100 btnDWU">{{manufacturer.isRequested ?
+      'atstovybės paprašė' : 'Prašyti atstovavimo'}}</button>
+  </div>
+</div>
+<!-- </div> -->

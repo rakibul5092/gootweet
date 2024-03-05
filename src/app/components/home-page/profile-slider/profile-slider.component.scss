@@ -1,0 +1,15 @@
+.category-slider {
+  display: flex;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 5px;
+  max-height: 245px;
+  justify-content: space-around;
+}
+
+.downArrow {
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+}

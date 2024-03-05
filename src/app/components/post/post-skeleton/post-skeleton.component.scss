@@ -1,0 +1,108 @@
+@import "./../../../../theme/mixins/mixins";
+@import "./../../../../theme/advertisement.page.scss";
+.purchase-section {
+  @include width-p-map($purchase-section-width);
+  .column-mid {
+    @include flex-p-map($purchase-column-mid-flex);
+    @include max-width-p-map($purchase-column-mid-max-width);
+  }
+  .column-right {
+    @include flex-p-map($purchase-column-right-flex);
+    @include max-width-p-map($purchase-column-right-max-width);
+  }
+
+  .tlt1 {
+    margin: 5px 0 15px;
+  }
+  .blog-cnt {
+    .blog {
+      .pro-btn {
+        padding: 5px 28px;
+      }
+      .pro-cnt {
+        .pro-img {
+          background: #6a7bff;
+        }
+        .pro-name {
+          span {
+            height: 16px;
+            width: 88px;
+            background: #a4a5b4;
+            display: inline-block;
+          }
+        }
+        .pro-link {
+          span {
+            height: 10px;
+            width: 63px;
+            background: #6a6975;
+            display: inline-block;
+          }
+        }
+      }
+      .blog-tlt {
+        height: 16px;
+        // background: #a4a5b4;
+        margin-bottom: 8px;
+        width: 50%;
+      }
+      .blog-txt {
+        height: 10px;
+        // background: #c6c7d4;
+        margin-bottom: 8px;
+      }
+      .blog-img-all {
+        .blog-img-p {
+          padding-bottom: 65%;
+          margin: 0;
+          background: #ececec;
+        }
+      }
+      .blog-price {
+        padding: 26px;
+        background: #f5f5f6;
+        border: none;
+        position: relative;
+        .btn {
+          position: absolute;
+          margin: 0;
+          height: 31px;
+          right: 27px;
+          top: 11px;
+          width: 128px;
+        }
+      }
+      .blog-price.add-all-btn {
+        background: transparent;
+        border-bottom: 1px solid #eaeaea;
+        border-radius: 0;
+        padding: 15px;
+        .btn {
+          width: 25%;
+          right: 0;
+          top: 9px;
+        }
+        span {
+          display: inline-block;
+          height: 10px;
+          background: #c6c7d4;
+          width: 20%;
+        }
+      }
+      .write-comment-box {
+        .input-group {
+          .input-group-text {
+            background: #a4a5b4;
+          }
+        }
+      }
+    }
+  }
+
+  .ad-p {
+    margin-bottom: 10px;
+  }
+  .ad-p.ad-p1 {
+    background: #6a7bff;
+  }
+}

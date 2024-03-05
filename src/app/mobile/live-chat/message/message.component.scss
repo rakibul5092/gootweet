@@ -1,0 +1,14 @@
+.chat-message {
+  color: #fff;
+  width: fit-content;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.message-content {
+  padding: 0px 5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACN,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;EACX,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "post-products.component.scss"
+    ],
+    "names": [],
+    "file": "post-products.component.css"
+}

@@ -1,0 +1,14 @@
+<ion-fab vertical="top" style="position: absolute;top: 0px;" (click)="addVideo()" horizontal="end" edge slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<div class="row pl-2 pr-2" style="padding-top: 60px;">
+  <div class="video-container" *ngFor="let video of videos">
+
+    <ion-icon name="trash" class="delete" (click)="deleteVideo(video.id)"></ion-icon>
+    <ion-icon name="create" class="edit" (click)="editVideo(video)"></ion-icon>
+    <app-video [video]="video"></app-video>
+  </div>
+</div>

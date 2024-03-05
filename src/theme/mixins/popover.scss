@@ -1,0 +1,46 @@
+.popover-notification {
+  --background: none !important;
+}
+.popover-notification::part(content) {
+  overflow: none !important;
+  margin-left: 0px;
+  padding-left: 0px;
+  min-width: auto !important;
+  @include width-p-map($notification-popover-content-width);
+  min-height: 70% !important;
+  overflow: unset !important;
+  margin-top: -9px;
+}
+.popover-notification::part(arrow) {
+  overflow: none !important;
+}
+.popover-notification::part(arrow):after {
+  @include background-p-map($popover-arrow-after-background);
+}
+
+// Chat popover
+.chat-pop::part(content) {
+  @include width-p-map($notification-popover-content-width);
+}
+.chat-pop-share::part(content) {
+  @include width-p-map($notification-popover-content-width);
+  right: 30px;
+  left: unset;
+}
+
+// Cart popover
+.cart-pop::part(content) {
+  --width: 95%;
+  max-width: 350px;
+  --box-shadow: none;
+  --background: none !important;
+  margin-left: 0px;
+  padding-left: 0px;
+  border-radius: 5px !important;
+  background: white;
+  --height: 80% !important;
+  overflow: unset !important;
+  border: none;
+  left: unset;
+  right: 10px;
+}

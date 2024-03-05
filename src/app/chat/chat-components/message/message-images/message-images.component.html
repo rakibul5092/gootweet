@@ -1,0 +1,15 @@
+<div class="chat-img">
+  <ion-grid>
+    <ion-row [id]="id + 'n-m-images'">
+      <ion-col *ngFor="let img of images">
+        <img
+          (click)="openPhotoFromArray(id + 'n-m-images')"
+          class="cover"
+          [defaultImage]="default"
+          [lazyLoad]="'https://gootweet.com/chat_request_photo/' + img"
+          alt="img"
+        />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

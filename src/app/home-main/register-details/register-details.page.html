@@ -1,0 +1,260 @@
+<ion-content>
+  <div class="main-wrapper">
+    <form class="log-reg reg-step-4" [formGroup]="detailsForm">
+      <div class="reg-tlt">Registracija</div>
+      <div class="form-cnt form-cnt-1">
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <app-input-with-label
+              [label]="'Prekinio ženklo pavadinimas'"
+              [control]="'brand_name'"
+              [checked]="checked"
+              [placeholder]="'Margės baldai'"
+            ></app-input-with-label>
+          </div>
+          <div class="col-12 col-lg-8">
+            <div class="img-cnt d-block d-md-flex mm-0">
+              <div *ngIf="!isImageAdded" class="user-reg-logo mb-3 mb-md-0">
+                Logo
+              </div>
+              <div *ngIf="isImageAdded" class="user-reg-logo mb-3 mb-md-0">
+                <img [src]="imageData" />
+              </div>
+              <div class="user-reg-txt-btn mm-0 m-w-100">
+                <span class="u-reg-txt">
+                  <span class="add-photo"
+                    ><img src="./../../assets/img/add-photo.svg" alt="img"
+                  /></span>
+                  <span class="add-photo-txt"
+                    >Įtempkite ir paleiskite profilio nuotrauką</span
+                  >
+                </span>
+                <span class="u-reg-arba">arba</span>
+                <span class="u-reg-btn"
+                  ><button
+                    style="white-space: nowrap"
+                    onclick="document.getElementById('browselogo').click()"
+                    class="btn ctm-btn cart-btn btnNav"
+                  >
+                    Įkelkite iš failų
+                  </button></span
+                >
+                <input
+                  id="browselogo"
+                  type="file"
+                  style="display: none"
+                  accept="image/*"
+                  (change)="onBrowseImage($event)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tlt mb-2">Įmonės veiklos informacija</div>
+      <div class="form-cnt form-cnt-1" style="z-index: 99">
+        <div class="row">
+          <div class="col-lg-4">
+            <!-- <label>
+              <h6 class="dark-text f-20 mb-0 weaker">
+                Šalys <img src="./../../assets/img/info.svg" alt="img" />
+              </h6>
+            </label> -->
+
+            <!-- <div class="ctm-select country-select" ctm-slt-n="cat_name"
+              [style]="checked && selectedCountries.length==0?'border:1px solid red':'' ">
+              <div class="country-add dgSidemenu">
+                <div class="flag-i">
+                  <img src="./../../assets/img/flag-i.svg" />
+                </div>
+                <select class="custom-select" [(ngModel)]="cIndex" (change)="countrySelect()">
+                  <option value="" selected disabled>None</option>
+                  <option *ngFor="let c of countryList; let i = index" [value]="i">
+                    {{c?.name}}
+                  </option>
+                </select>
+
+              </div>
+             
+            </div> -->
+            <!-- <ion-label *ngIf="checked && detailsForm.selected_countries.length==0" style="font-size: 12px; color: red;"
+              class="ion-text-center">
+              Required field
+            </ion-label> -->
+
+            <div
+              class="country-list"
+              *ngFor="let country of detailsForm.get('selected_countries').value; let i = index"
+            >
+              <div class="country-add">
+                <div class="list-num">{{i+1+'#'}}</div>
+                <div class="country-img ml-0">
+                  <img [src]="country?.flag" />
+                </div>
+                <div class="country-txt">{{country?.name}}</div>
+                <!-- <div (click)="removeCountry(i)" class="add-btn remove_icon">
+                  <img class="remove_icon" src="./../../assets/img/delete.svg" alt="img" />
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tlt mb-2">Įmonės informacija</div>
+      <div class="form-cnt form-cnt-1">
+        <div class="row">
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'Įmonės pavadinimas'"
+              [control]="'company_name'"
+              [checked]="checked"
+              [placeholder]="'Margės baldai'"
+            ></app-input-with-label>
+          </div>
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'Įmonės kodas'"
+              [control]="'company_code'"
+              [checked]="checked"
+              [placeholder]="1535497"
+            ></app-input-with-label>
+          </div>
+
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'PVM kodas'"
+              [control]="'pvm_code'"
+              [checked]="checked"
+              [placeholder]="4899813548"
+            >
+            </app-input-with-label>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label>
+                <h6 class="dark-text f-20 weaker">Adresas</h6>
+              </label>
+              <div class="form-input">
+                <input
+                  id="googlePlaces"
+                  (click)="onFocus($event)"
+                  [appInvalid]="detailsForm.controls['address'].errors"
+                  (input)="addressChanged()"
+                  formControlName="address"
+                  type="text"
+                  class="form-control textIn"
+                  placeholder="Plytelių g, 12-1"
+                  autocomplete="off"
+                />
+                <!-- <ion-label *ngIf="checked && (!detailsForm.address || detailsForm.address=='')"
+                  style="font-size: 12px; color: red;" class="ion-text-center">
+                  Required field
+                </ion-label> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'Telefono numeris'"
+              [control]="'telephone_no'"
+              [checked]="checked"
+              [placeholder]="'+370...'"
+            ></app-input-with-label>
+          </div>
+
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'El. paštas'"
+              [disabled]="true"
+              [control]="'email'"
+              [checked]="checked"
+              [placeholder]="'Info@magre.lt'"
+            ></app-input-with-label>
+          </div>
+        </div>
+      </div>
+
+      <div class="tlt mb-2">Banko sąskaita</div>
+      <div class="form-cnt form-cnt-1">
+        <div class="row">
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'Bankas'"
+              [control]="'bank_name'"
+              [placeholder]="'Swedbank'"
+            >
+            </app-input-with-label>
+          </div>
+          <div class="col-lg-4">
+            <app-input-with-label
+              [label]="'Banko sąskaita (IBAN)'"
+              [control]="'iban'"
+              [placeholder]="'LT1354165941813294835'"
+            ></app-input-with-label>
+          </div>
+        </div>
+      </div>
+
+      <div class="tlt mb-2">Sutartis ir taisyklės</div>
+      <div class="form-cnt form-cnt-1">
+        <div
+          (click)="downloadTermsAndCondition()"
+          class="text-right download-txt"
+        >
+          <a class="navNoti"
+            ><img
+              class="icon_h"
+              src="./../../assets/img/launch.svg"
+              alt="img"
+            />
+            Parsisiųsti sutartį</a
+          >
+        </div>
+        <div class="rules-cnt">
+          <ion-textarea class="textIn">{{terms}}</ion-textarea>
+        </div>
+        <div class="rules-btn text-right">
+          <div class="form-group pt-2">
+            <label class="ctm-container">
+              Sutinku su <a style="color: rgb(63, 63, 248)">taisyklėmis</a>
+              <input formControlName="terms" type="checkbox" />
+              <span class="checkmark checkIn"></span>
+            </label>
+            <p ion-text class="text04" style="height: 15px">
+              <ion-label
+                *ngIf="!detailsForm.controls['terms'].value"
+                style="font-size: 12px; color: red"
+              >
+                Please accept terms and conditions.
+              </ion-label>
+            </p>
+          </div>
+          <!-- <ion-label>{{documentName}}</ion-label>
+          <button
+            onclick="document.getElementById('browsedoc').click()"
+            class="btn ctm-btn d-btn"
+          >
+            Įkelti pasirašytą sutartį
+          </button>
+          <input
+            id="browsedoc"
+            type="file"
+            style="display: none"
+            accept="application/pdf"
+            (change)="onBrowseDocument($event)"
+          />
+          <button class="btn ctm-btn cart-btn">Pasirašyti el. parašu</button> -->
+        </div>
+      </div>
+
+      <div class="sent-btn text-right">
+        <button (click)="finalUpload()" class="btn ctm-btn cart-btn btnNav">
+          Tęsti
+        </button>
+      </div>
+    </form>
+  </div>
+</ion-content>

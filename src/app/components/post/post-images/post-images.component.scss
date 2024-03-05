@@ -1,0 +1,74 @@
+@import "../../create-post/file-container/file-container.component.scss";
+.pr-1 {
+  padding-right: 0.15rem !important;
+}
+.pl-1 {
+  padding-left: 0.15rem !important;
+}
+.pt-1 {
+  padding-top: 0.15rem !important;
+}
+.pb-1 {
+  padding-bottom: 0.15rem !important;
+}
+
+.post-img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.bm {
+  padding-bottom: 1px;
+}
+.rm {
+  padding-right: 1px;
+}
+
+.cover {
+  max-height: 320px;
+}
+
+.play-icon {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  font-size: 40px;
+  color: white;
+}
+
+.live-indicator-block {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  .live-indicator {
+    font-family: "Roboto", sans-serif;
+    background: #ea2429;
+    color: white;
+    padding: 6px 7px;
+    line-height: 1;
+    border-radius: 6px;
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: bold;
+    width: auto;
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    .blink {
+      animation: blinker 0.5s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
+      font-size: 18px;
+      margin-right: 5px;
+      vertical-align: baseline;
+    }
+  }
+}
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,38 @@
+<div *ngIf="product" class="sent-req-message sent-req-item " style="padding: 5px;">
+
+  <div class="show-img-p">
+    <div class="show-img flex-box wh-100">
+      <img class="img-center imgHovr" [defaultImage]="default" [lazyLoad]="(product?.main_images|getImage)" alt="img" />
+    </div>
+  </div>
+
+  <div class="pro-cnt req-pro-cnt1">
+    <div class="pro-name-link w-100" style="margin-top: 10px;">
+      <div class="pro-name">
+        {{product?.title}}
+      </div>
+      <div *ngIf="product?.good && product.good.images" class="catalog-cnt border-0 p-0 m-0">
+        <div class="catalog-ul">
+          <span class="catalog-li">
+            <div class='col-12 p-0 cat-div'>
+              <img [src]="product?.good.images | getMaterialImage" alt="" style="width: 25px;height: 25px;">
+            </div>
+          </span>
+          {{product?.good.code}}
+
+        </div>
+      </div>
+      <div class="product-txt">
+
+        <div class="product-price">
+          <span class="current-price">
+            <span class="type-money">€</span>
+            <span class="money">{{(product?.good|getPrice)}}</span>
+          </span>
+          <span class="price-set">{{(product?.good|getUnit)}}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="tlt services-tlt">Priskirk paslaugas</div>
+<div class="row">
+  <div [class]="isManufacturer? 'col-6':'col-12'">
+    <div class="icon-text"><ion-icon name="chatbox-ellipses"></ion-icon>Žinutės gootweet</div>
+    <button *ngFor="let button of buttons.slice(0,5)"
+      [class]="'btn m-1 '+(wallPost.button1Text === button? 'btn-primary-selected':'btn-primary')"
+      (click)="wallPost.button1Text = button">{{button}}</button>
+  </div>
+  <div class="col-6" *ngIf="isManufacturer">
+    <div class="icon-text"><ion-icon name="mail"></ion-icon>Użklausos forma</div>
+    <button *ngFor="let button of buttons.slice(5, 10)"
+      [class]="'btn m-1 '+(wallPost.button2Text===button? 'btn-primary-selected':'btn-primary')"
+      (click)="wallPost.button2Text=button">{{button}}</button>
+  </div>
+</div>

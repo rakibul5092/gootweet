@@ -1,0 +1,26 @@
+<div class="chat-input">
+  <div class="input-group">
+    <ion-textarea rows="1" [disabled]="isUploading || selectedProduct" (keyup.enter)="sendMessage(null, null, true)"
+      (ionChange)="messageTextChanged()" [(ngModel)]="messageText" inputmode="text" mode="ios"
+      style="--padding-bottom: 15px;--padding-top: 15px;--padding-start: 15px;--padding-end: 15px;resize: none;font-size: 14px !important;height: 50px;"
+      placeholder="Pradėkite rašyti..."></ion-textarea>
+    <div class="input-group-append">
+      <span *ngIf="isUploading" class="input-group-text" id="basic-addon2">
+        <div class="chat-img">
+          <img style="width: 20px; height: 20px;" src="assets/loading-messenger.svg" alt="img" />
+        </div>
+      </span>
+      <span *ngIf="!isUploading" class="input-group-text" id="basic-addon2">
+        <span *ngIf="!isTyping && !selectedProduct" onclick="document.getElementById('browselogo').click()"
+          class="file-u" title="file">
+          <img src="./../../assets/img/attach-file.svg" alt="img" />
+        </span>
+        <input id="browselogo" type="file" multiple style="display: none" (change)="onBrowseImage($event)" />
+        <span (click)="sendMessage(null, null, true)" *ngIf="isTyping || selectedProduct" class="felling-u"
+          title="felling">
+          <ion-icon style="color: rgb(52, 116, 255); font-size: 20px" name="send"></ion-icon>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>

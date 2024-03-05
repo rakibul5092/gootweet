@@ -1,0 +1,91 @@
+// @import "./../purchase-three.page.scss";
+@import "./../../../../../theme/mixins/_mixins";
+@import "./../../../../../theme/pages/purchase";
+@import "./../../../../../theme/pages/purchase-three";
+.img-center {
+  height: auto;
+  max-height: 100%;
+  width: auto;
+  max-width: 30%;
+}
+
+.remove_icon {
+  padding: 0px 9px 3px;
+}
+
+.single-purchase {
+  padding: 25px;
+  .pro-cnt .pro-img {
+    box-shadow: 0 2px 12px #dedede;
+  }
+  .row {
+    align-items: center;
+  }
+  .delivery-form {
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #eaeaea;
+    .row {
+      align-items: flex-start;
+    }
+    .delivery-price {
+      font-size: 17px;
+      font-weight: 700;
+      color: #6a7bff;
+    }
+    .ctm-container {
+      padding-left: 25px;
+      font-size: 14px;
+      .checkmark {
+        height: 20px;
+        width: 20px;
+        background-color: #fff;
+        border: 2px solid #eaeaea;
+        &:after {
+          top: -3px;
+          width: 6px;
+          height: 12px;
+          border-color: #6a7bff;
+        }
+      }
+    }
+  }
+
+  .purchase-col2 {
+    @include max-width-p-map($pur-th-purchase-col2-max-width);
+    @include flex-p-map($pur-th-purchase-col2-flex);
+  }
+  .purchase-col3 {
+    @include max-width-p-map($pur-th-purchase-col3-max-width);
+    @include flex-p-map($pur-th-purchase-col3-flex);
+    max-width: 300px;
+    flex: 0 0 300px;
+  }
+  .purchase-price {
+    @include flex-wrap-p-map($pur-th-purchase-col3-purchase-price-flex-wrap);
+    .price-single {
+      white-space: nowrap;
+      @include max-width-p-map($pur-th-purchase-col3-price-single-max-width);
+      @include flex-p-map($pur-th-purchase-col3-price-single-flex);
+      .pr-ur-tlt {
+        padding-right: 7px;
+      }
+    }
+  }
+  .cart-btn {
+    border-radius: 20px;
+  }
+  .approve-btn {
+    background: #2fdb57;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .single-purchase {
+    padding: 0px 0px;
+  }
+}
+
+.bottom-border {
+  border-bottom: 1px solid #dbdbdb;
+}

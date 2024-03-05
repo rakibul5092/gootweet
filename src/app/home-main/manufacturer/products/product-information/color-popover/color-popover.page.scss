@@ -1,0 +1,29 @@
+.item-list {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 10px;
+  .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    ion-icon {
+      padding: 5px;
+      background-color: #d3d3d3;
+      color: red;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}
+.input-row {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  ion-input {
+    background-color: rgb(218, 218, 218);
+    flex-grow: 100;
+  }
+}

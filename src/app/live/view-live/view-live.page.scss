@@ -1,0 +1,76 @@
+.container {
+  margin-top: 15px;
+  padding-bottom: 50px;
+}
+
+.live-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-top: 15px;
+}
+
+.part {
+  width: 33.33%;
+  height: 100%;
+  &-video {
+    align-items: center;
+    display: flex;
+    background: black;
+    padding: 5px;
+  }
+  &-products {
+    display: flex;
+    flex-direction: column;
+  }
+  &-chat {
+  }
+}
+
+ion-button {
+  height: 2em;
+  font-size: 12px;
+}
+
+.profile-info {
+  justify-content: space-between;
+  .buttons {
+    gap: 10px;
+  }
+}
+.video-player-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-info,
+.buttons {
+  display: flex;
+}
+
+.live-owner-info {
+  .like-follow-share-container {
+    padding: 10px 0px;
+    margin: 0px 15px;
+    border-top: 1px solid rgb(235, 235, 235);
+    border-bottom: 1px solid rgb(235, 235, 235);
+    ion-buttons {
+      width: 100%;
+      justify-content: space-around;
+      ion-icon {
+        margin-right: 5px;
+      }
+      ion-button {
+        width: 30%;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.chat-box {
+  height: 74%;
+}

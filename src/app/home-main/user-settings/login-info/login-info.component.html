@@ -1,0 +1,27 @@
+<form class="form-container" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <div class="combined">
+    <div class="field-container">
+      <gootweet-input-field [icon]="'lock-closed'" [type]="currentPasswordVisibility? 'text':'password'"
+        formControlName="currentPassword" [label]="'Dabartinis slaptažodis'"></gootweet-input-field>
+      <ion-icon class="eye-icon" (click)="currentPasswordVisibility = !currentPasswordVisibility"
+        [name]="currentPasswordVisibility? 'eye-off':'eye'"></ion-icon>
+    </div>
+  </div>
+  <div class="combined">
+    <div class="field-container">
+      <gootweet-input-field [icon]="'lock-closed'" [type]="newPasswordVisibility? 'text':'password'"
+        formControlName="newPassword" [label]="'Slaptažodis'"></gootweet-input-field>
+      <ion-icon class="eye-icon" (click)="newPasswordVisibility = !newPasswordVisibility"
+        [name]="newPasswordVisibility? 'eye-off':'eye'"></ion-icon>
+    </div>
+    <div class="field-container">
+      <gootweet-input-field [icon]="'lock-closed'" [type]="confirmPasswordVisibility? 'text':'password'"
+        formControlName="confirmPassword" [label]="'Pakartokite slaptažodį'"></gootweet-input-field>
+      <ion-icon class="eye-icon" (click)="confirmPasswordVisibility = !confirmPasswordVisibility"
+        [name]="confirmPasswordVisibility? 'eye-off':'eye'"></ion-icon>
+
+    </div>
+  </div>
+  <ion-button mode="md" [disabled]="!(loginForm.valid && newPassword.value === confirmPassword.value)" type="submit"
+    color="primary" id="login_submit" class="">išsaugoti</ion-button>
+</form>

@@ -1,0 +1,61 @@
+<ion-content id="secondary-menu-content">
+  <div class="ais-InstantSearch">
+    <ion-buttons slot="start">
+      <ion-button [disabled]="isInnerMenu && selectedInnerCategories.length===0" (click)="toggleMenu()" class="btn-menu"
+        menu="inner-category">
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ais-instantsearch class="inner-searchbar" [config]="config">
+      <ais-configure [searchParameters]="{ hitsPerPage: 5 }"></ais-configure>
+      <div class="all-container">
+        <div class="bar-container">
+          <ais-search-box (input)="onInput($event)" (blur)="onBlur()"></ais-search-box>
+          <!-- <ais-voice-search class="ais-voice-search"></ais-voice-search> -->
+        </div>
+        <ion-buttons>
+          <ion-button (click)="onSearch(searchText)" style="padding: 7px 7px;height: 40px;">Go</ion-button>
+        </ion-buttons>
+      </div>
+      <ais-hits *ngIf="suggestions">
+        <ng-template let-hits="hits">
+          <ol class="ais-Hits-list">
+            <li class="ais-Hits-item" *ngIf="hits.length === 0">
+              No results found...
+            </li>
+            <li (click)="onSearch(hit.title, 'products_title')" *ngFor="let hit of hits" class="ais-Hits-item">
+              <div class="hit-name">
+                <ais-highlight attribute="title" [hit]="hit"></ais-highlight>
+              </div>
+            </li>
+          </ol>
+        </ng-template>
+      </ais-hits>
+    </ais-instantsearch>
+  </div>
+  <div class="container">
+    <div class="mobile-product m-0" *ngIf="!(productFilterService.noProductFound|async); else noProductMessage">
+      <ng-container *ngIf="!productFilterService.loadingNextPage; else loading">
+        <div *ngFor="let product of (results|async); let i=index">
+          <app-product [id]="'product-' + product.product_id" [isWeb]="false" [index]="i" [searched]="false"
+            [product]="product" [productOwner]="{uid: product.uid}">
+          </app-product>
+        </div>
+      </ng-container>
+      <ng-template #loading>
+        <ion-skeleton-text style="height: 30vh;" animated="true"
+          *ngFor="let skeleton of [1,2,3,4,5,6]"></ion-skeleton-text>
+      </ng-template>
+
+      <ion-infinite-scroll (ionInfinite)="findNextPage($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <ng-template #noProductMessage>
+      <div class="no-product-message">
+        Atsiprašome šiuo metu prekių pagal šia kategorija kol kas nėra
+      </div>
+    </ng-template>
+  </div>
+</ion-content>

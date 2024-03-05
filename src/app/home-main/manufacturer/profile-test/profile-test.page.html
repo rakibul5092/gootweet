@@ -1,0 +1,138 @@
+<div class="container-fluid" [style]="screenWidth>786? '':'padding-left:0px; padding-right:0px'">
+  <div class="row">
+
+  </div>
+  <div class="row" [style]="isMyProfile && me.rule=='manufacturer'?'margin-top:68px':''">
+    <div *ngIf="screenWidth>910" class="col-3 d-flex justify-content-end ">
+      <div class="sticky-bar-left"
+        [style]="isMyProfile && me.rule=='manufacturer'?'top:68px; height: 98%; overflow-y: auto;':'height: 98%; overflow-y: auto;'">
+        <!-- <app-my-info (activeType)="activeType = $event" [createPost]="true" [isLoggedIn]="isLoggedIn"
+          [userTypeInNumber]="userTypeInNumber" [me]="me" [wallet]="wallet">
+        </app-my-info> -->
+
+        <div class="left-side-cnt filter-cnt mt-2"
+          *ngIf="activeType=='catalog' && (!isNormalUser && !isDesignerProfile)" id="leftBar">
+          <div class="form-group">
+            <app-inner-category-list [me]="me" [ownerUid]="ownerUid"></app-inner-category-list>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="screenWidth>990 && productOwner?.rule==='manufacturer'" class="manufacturer-info"
+      [style]="'position: absolute; right: 10px;'+(me?.uid === productOwner?.uid?'top: 70px;':'top: 0px;')">
+      <app-manufacturer-info [owner]="productOwner"></app-manufacturer-info>
+    </div>
+
+    <div [class]="activeType ==='catalog'? 'col-md-auto col-lg-9 col-xl-9':'col-md-auto col-lg-5 col-xl-5'"
+      [style]="screenWidth<768?'padding-left:0px; padding-right:0px':''">
+      <div [style]="activeType !=='catalog'? 'max-width: 589.9px;':''" class="profile-container">
+        <ion-icon (click)="openInfoModal()" *ngIf="screenWidth<990 && productOwner?.rule==='manufacturer'"
+          name="information" class="information-icon"></ion-icon>
+        <ion-button mode="md" *ngIf="activeType==='wall'" class="follow-btn">Sekti</ion-button>
+        <img class="smooth-hover" id="coverPhoto" (click)="openPhoto('coverPhoto')"
+          [src]="productOwner?.cover_photo | getCoverImage" />
+
+        <app-browse-photo *ngIf="isMyProfile && activeType !=='catalog'" (onBrowse)="onBrowseCoverPhoto($event)"
+          [right]="'18px'" [top]="'5px'">
+        </app-browse-photo>
+
+        <div id="profile-container" class="profile-container-bottom d-flex">
+          <div class="profile-img-container">
+            <img class="smooth-hover" id="profilePhoto" (click)="openPhoto('profilePhoto')"
+              [src]="productOwner?.profile_photo ? (productOwner?.profile_photo|sanitizeImage:'') : './../../assets/profile.png'" />
+            <app-browse-photo *ngIf="isMyProfile" (onBrowse)="onBrowseProfileImage($event)" [bottom]="'0px'"
+              [right]="'0px'"></app-browse-photo>
+          </div>
+          <div class="pro-name w-100" [title]="productOwner?.full_name|join_name">
+            {{productOwner?.full_name|join_name:20}}
+            <img *ngIf="!isDesignerProfile" src="./../../assets/img/verified.svg" alt="img" />
+          </div>
+          <div class="btns d-flex">
+            <img (click)="openMessage()" class="send-msg-btn smooth-hover" src="assets/img/profile/send-message.svg" />
+            <img (click)="openSharePopup()" class="share-btn smooth-hover" src="assets/img/share.svg" />
+          </div>
+        </div>
+
+        <!-- profile tabs starts here -->
+        <app-tabs-and-search (onManufacturerTabClick)="changeType($event)" [activeType]="activeType"
+          (onDesignerNavigation)="onDesignerNavigation($event)" class="row tab-bar d-flex"
+          style="position: relative;max-width: 589.9px" [isUser]="isDesignerProfile || isNormalUser">
+        </app-tabs-and-search>
+        <!--tabs end ***************** -->
+
+        <!-- wallpost starts here -->
+        <div class="w-100" *ngIf="activeType == 'wall'">
+          <div class="blog-cnt mb-5 mt-2" *ngIf="wallPosts.length>0; else skeleton">
+            <!-- ************************************** Normal product post ************************************* -->
+            <div *ngFor="let wallPost of wallPosts;">
+              <app-post [wallPost]="wallPost" (action)="actionListener($event)" [me]="me" [isLoggedin]="isLoggedIn">
+              </app-post>
+            </div>
+            <ion-infinite-scroll threshold="15%" (ionInfinite)="findNext($event)">
+              <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </div>
+
+          <ng-template #skeleton>
+            <div class="no-data" *ngIf="noPost else data">
+              No data available...
+            </div>
+
+            <ng-template #data>
+              <app-post-skeleton> </app-post-skeleton>
+            </ng-template>
+          </ng-template>
+        </div>
+
+
+        <!-- other router starts here -->
+        <div class="product-list pt-2 pl-2 pr-2 mx-md-0"
+          [style]="activeType === 'reels' || activeType === 'lives'?'background:black;min-height:200%':'none'">
+          <router-outlet></router-outlet>
+          <div class="row m-0">
+            <div class="col">
+              <ion-infinite-scroll threshold="0px" [disabled]="profileService.products.length<=19"
+                (ionInfinite)="findNext($event)">
+                <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+    <!-- <div *ngIf="activeType !== 'catalog'" class="col-lg-4 col-xl-4 d-lg-block d-xl-block d-none ">
+      <app-right-side-bar class="sticky-bar-right" [style]="isMyProfile && me.rule=='manufacturer'?'top:68px':''">
+      </app-right-side-bar>
+    </div> -->
+  </div>
+</div>
+<ion-modal class="image-cropper-modal" [isOpen]="profileImageModal" [canDismiss]="true">
+  <ng-template>
+    <ion-header mode="ios">
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button (click)="close()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Resize your Photo</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <div
+        style="display: flex;flex-direction: column;width: 100%; height: 100%; justify-content: space-evenly;align-items: center;">
+        <image-cropper style="max-height: 360px;" [imageChangedEvent]="profileImageEvent" [maintainAspectRatio]="true"
+          [aspectRatio]="imageType === 1? 4/4:2.6/1" imageQuality="100" format="webp"
+          (imageCropped)="onCropped($event)"></image-cropper>
+        <ion-button (click)="onProfileImageCropped()">Save</ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

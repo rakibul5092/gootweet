@@ -1,0 +1,34 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <div class="noti-title">Pranešimai <div class="d-flex justify-content-center align-items-center ml-1">
+        {{unseenNotifications||0}}</div>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="notificationService.loaded" class="chat-section user-list-section notifications-section"
+    style="height: auto">
+    <div class="notifications-cnt">
+      <div class="new-notifications notifications-all">
+        <div class="user-list">
+          <app-notification (onSeen)="onSeen($event)" (onGotoRequest)="gotoDesignerRequestPage($event)"
+            [style]="notification?.data?.seen? '':'background-color:#f3f3f3'"
+            *ngFor="let notification of (notificationService.notifications|async)||[] " [notification]="notification">
+          </app-notification>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-list *ngIf="!notificationService.loaded" id="skeleton">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </ion-list>
+</ion-content>

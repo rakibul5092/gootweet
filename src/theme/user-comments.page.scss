@@ -1,0 +1,45 @@
+@import "./../theme/mixins/_mixins";
+.loyalty-program-all {
+  .wh-loyalty-program {
+    padding: 30px 0 20px;
+    border-top: 1px solid #c6c7d4;
+  }
+}
+.comments-list {
+  .blog {
+    .comment {
+      @include display-p-map($comments-list-comment-display);
+      margin-bottom: 15px;
+      .comment-info {
+        @include width-p-map($comments-list-comment-info-width);
+        @include border-right-p-map($comments-list-comment-info-border-right);
+        padding-right: 20px;
+      }
+      .pro-cnt {
+        @include width-p-map($comments-list-pro-cnt-width);
+        @include padding-p-map($comments-list-pro-cnt-padding);
+        align-items: self-start;
+        .pro-img {
+          width: 80px;
+          height: 100%;
+          border: 2px solid #6a7bff;
+          border-radius: 5px;
+          img {
+            border-radius: 5px;
+          }
+        }
+        .pro-name-link {
+          width: calc(100% - 80px);
+          .comment-link {
+            margin-top: 20px;
+            a {
+              font-size: 14px;
+              color: #6a7bff;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}

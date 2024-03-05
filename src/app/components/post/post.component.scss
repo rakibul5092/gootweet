@@ -1,0 +1,279 @@
+@import "src/app/components/post/products-slider/products-slider.component.scss";
+.blog {
+  .owner-info-container {
+    margin: 0px 20px;
+    // .owner-info {
+    //   font-size: 12px;
+    //   color: #1e1e1e;
+    //   font-weight: 400;
+    //   gap: 15px;
+    //   border-bottom: 1px solid #f1f1f1;
+    //   padding: 0px 0px 10px;
+    //   .owner-text-info {
+    //   }
+    //   .status {
+    //     font-size: 10px;
+    //     color: black;
+    //     width: 98px;
+    //     height: 30px;
+    //     border-radius: 6px;
+    //     background-color: rgba(0, 0, 0, 0.05);
+    //   }
+    // }
+    .contact-buttons {
+      gap: 20px;
+      ion-button {
+        --background: black;
+        font-size: 12px;
+        letter-spacing: unset;
+        height: 30px;
+        ion-icon {
+          margin-left: 8px;
+        }
+      }
+      ion-button:nth-child(2) {
+        --background: white;
+        color: black;
+      }
+    }
+  }
+}
+.blog,
+.post-container {
+  background-color: #d9d9d9;
+}
+.post-container {
+  border-radius: 6px;
+  padding: 10px 0px;
+  gap: 15px;
+  margin-bottom: 10px;
+  // .left-container {
+  //   width: calc(100% - 180px);
+  // }
+}
+.right-container {
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px 10px 0px 10px;
+  .profile-rating {
+    app-profile-photo {
+      --name-color: black;
+      --text-shadow: none;
+      --name-width: none;
+    }
+  }
+  .follow {
+    gap: 15px;
+    .info-box {
+      gap: 2px;
+      font-size: 10px;
+      color: #8f8f99;
+      :nth-child(1) {
+        font-size: 14px;
+        color: #1e1e1e;
+      }
+    }
+    ion-button {
+      height: 30px;
+      font-size: 12px;
+      width: 88px;
+      ion-icon {
+        font-size: 12px;
+        color: white;
+      }
+    }
+    ion-icon {
+      color: #6a6975;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
+}
+
+.first-category {
+  width: 200px;
+  background: white;
+  border-radius: 6px;
+  height: 248px;
+  max-height: 248px;
+  cursor: pointer;
+  img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+  span:nth-child(1) {
+    font-size: 20px;
+  }
+  span {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.extra-btn {
+  width: 168px;
+  height: 32px;
+  color: white;
+  margin-bottom: 0px;
+  --border-radius: 100px;
+  border: unset;
+  padding: unset;
+  margin: 6px 2px 0px 2px;
+  text-transform: capitalize;
+  ion-icon {
+    margin-right: 10px;
+  }
+}
+
+ion-input {
+  padding-left: 15px !important;
+  padding-right: 10px !important;
+}
+
+.pro-name {
+  line-height: 16px;
+}
+
+input {
+  padding-left: 15px !important;
+  padding-right: 10px !important;
+}
+.count-container {
+  padding: 7px 0px 7px 10px;
+  gap: 5px;
+  font-weight: bold;
+  img {
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    border-radius: 50%;
+  }
+  img:nth-child(2),
+  img:nth-child(3),
+  img:nth-child(4),
+  img:nth-child(5),
+  img:nth-child(6) {
+    margin-left: -10px;
+  }
+}
+.like-comment-count {
+  display: flex;
+  position: relative;
+  border-top: 1px solid rgb(240, 240, 240);
+  .reaction-container {
+    position: absolute;
+    width: 300px;
+    height: 50px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 25px;
+    top: -50px;
+    left: 0;
+    background: white;
+    display: none;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    img {
+      height: 35px;
+      width: 35px;
+      cursor: pointer;
+      filter: drop-shadow(0px 0px 3px #908f8f);
+    }
+    img:hover {
+      transform: scale(1.5, 1.5);
+      transition: all ease-in-out 0.2s;
+    }
+  }
+  .reaction-icons {
+    span:nth-child(1),
+    span:nth-child(2),
+    span:nth-child(3) {
+      display: flex;
+      justify-content: center;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.8s;
+      gap: 5px;
+      align-items: center;
+      font-weight: bold;
+    }
+    span:hover {
+      background: rgb(240, 240, 240);
+    }
+    span {
+      ion-icon {
+        color: #393939;
+        font-size: 20px;
+        padding-top: 2px;
+      }
+    }
+
+    .like_cnt {
+      position: relative;
+      .react-text[type="1"] {
+        color: rgb(102 135 196);
+      }
+      .react-text[type="2"] {
+        color: #ef5368;
+      }
+      .react-text[type="3"] {
+        color: #ffd872;
+      }
+      .react-text[type="4"] {
+        color: #ffd872;
+      }
+      .react-text[type="5"] {
+        color: #ffd872;
+      }
+      .react-text[type="6"] {
+        color: #ec5049;
+      }
+      .like-img-react {
+        width: 25px;
+        height: 25px;
+      }
+      .like-img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .comment-count {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .like-comment-count {
+    display: flex;
+    justify-content: space-evenly;
+    span:nth-child(1),
+    span:nth-child(2),
+    span:nth-child(3) {
+      width: unset;
+      display: flex;
+      flex-grow: 100;
+    }
+  }
+}
+
+.with-log- -txt-cnt {
+  .with-log-blog-txt-all {
+    .blog-price {
+      background: #6a7bff;
+    }
+  }
+}
+
+// responsive start
+
+@media (max-width: 1366px) and (min-width: 1024px) {
+  .blog-section .column-mid {
+    flex: 0 0 calc(100% - 509px);
+    max-width: calc(100% - 509px);
+  }
+}

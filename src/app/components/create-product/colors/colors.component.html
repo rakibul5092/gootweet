@@ -1,0 +1,21 @@
+<div class="color-size-container form-group">
+  <label>
+    <h6 class="">Spalvos</h6>
+  </label>
+  <div class="selector">
+    <select class="custom-select" [(ngModel)]="selectedColor" (change)="addColor(selectedColor)">
+      <option *ngFor="let color of colors" [value]="color.name">
+        {{color.name}}
+      </option>
+    </select>
+    <ion-button (click)="addToCollection()" mode="md" color="success"><ion-icon slot="icon-only"
+        name="add"></ion-icon></ion-button>
+  </div>
+
+  <div class="selected-colors">
+    <ion-buttons>
+      <ion-button (click)="removeColor(i)" *ngFor="let color of normalGood.colors; let i = index">{{color}}<ion-icon
+          name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </div>
+</div>

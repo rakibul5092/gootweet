@@ -1,0 +1,52 @@
+<div *ngIf="notification && visible" (click)="onClick()">
+  <div *ngIf="isChat; else others" class="toaster-container chat-toaster-container">
+    <div class="text-container">
+      <div class="chat-name">
+        {{ (notification.data.senderInfo.full_name | join_name) + " " }}
+        <div class="message">
+          {{
+          notification?.data?.comment_data?.comment_text}}
+        </div>
+      </div>
+    </div>
+    <div class="profile-container">
+      <img [src]="notification.data.senderInfo.profile_photo | sanitizeImage" />
+    </div>
+  </div>
+
+  <ng-template #others>
+    <div class="toaster-container">
+      <div class="profile-container">
+        <img [src]="notification.data.senderInfo.profile_photo | sanitizeImage" />
+        <ion-icon [src]="
+                notification?.data?.type == 2
+                  ? 'assets/img/liked.svg'
+                  : 'assets/img/comment.svg'
+              "></ion-icon>
+      </div>
+      <div class="text-container">
+        <div class="sender-status">
+          {{
+          notification.data.senderInfo.rule === "manufacturer"
+          ? "Gamintojas"
+          : "Dalintis"
+          }}
+          <div>.</div>
+          Dabar
+        </div>
+        <div class="name">
+          {{ (notification.data.senderInfo.full_name | join_name) + " " }}
+          <div class="text">
+            {{
+            notification?.data?.type == 1
+            ? notification?.data?.comment_data?.comment_text
+            : notification?.data?.type == 2
+            ? "patinka jūsų įrašas"
+            : "Konsultantasatsiunte užklausą"
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

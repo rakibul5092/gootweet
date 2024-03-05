@@ -1,0 +1,77 @@
+@import "src/theme/mixins/mixins";
+@import "./header-tab.scss";
+
+.header-container {
+  background-color: var(--dark-background);
+  height: 50px;
+
+  .right-buttons {
+    gap: 6px;
+  }
+
+  .search-container {
+    width: 33.33%;
+    .logo {
+      width: 180px;
+      padding: 10px 0px;
+      font-size: 25px;
+      font-weight: bolder;
+      cursor: pointer;
+    }
+    flex-grow: 1; /* Takes the remaining space */
+    flex-shrink: 1;
+    background-color: transparent;
+  }
+  main {
+    width: 33.33%;
+  }
+  .navbar-nav {
+    width: 33.33%;
+    .nav-item {
+      gap: 5px;
+    }
+  }
+}
+
+.menu-icon {
+  position: relative;
+  cursor: pointer;
+  ion-icon {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    color: white;
+    background: gray;
+    border-radius: 50%;
+    padding: 1px;
+    border: 1px solid white;
+    height: 14px;
+    width: 14px;
+  }
+}
+ion-button {
+  --overflow: visible;
+  height: 35px;
+}
+.n-count,
+.noti-count {
+  position: absolute;
+  font-size: 10px;
+  background: red;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 5px;
+  color: white;
+}
+
+.n-count {
+  top: 0px;
+  right: -5px;
+}
+
+.noti-count {
+  margin-left: 5px;
+}
+.noti {
+  padding: 6px;
+}

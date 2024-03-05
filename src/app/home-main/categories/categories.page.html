@@ -1,0 +1,11 @@
+<ion-content>
+  <div class="main-container">
+    <div class="categories">
+      <app-category (categoryClicked)="homeService.onCategoryClicked($event)"></app-category>
+    </div>
+    <div class="sub-categories">
+      <app-sub-category *ngIf="homeService.categorySubject.value" [categorySubject]="homeService.categorySubject"
+        [me]="me"></app-sub-category>
+    </div>
+  </div>
+</ion-content>

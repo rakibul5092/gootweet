@@ -1,0 +1,54 @@
+<div id="g_id_onload" data-client_id="629139033631-b7r3gom16mrcsdbu53t4ubo6elcgm5mq.apps.googleusercontent.com"
+  data-cancel_on_tap_outside="false"></div>
+<ion-app id="ion-app">
+  <!--  -->
+  <ion-menu *ngIf="screen.width.value < 768" menuId="main-menu" id="main-menu" side="start" type="push"
+    contentId="main">
+    <ion-content>
+      <app-user-mobile-menu></app-user-mobile-menu>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main">
+    <app-header *ngIf="!hideHeader" (checkIsAdminEvent)="admin($event)" [class]="isAdmin ? 'd-none' : ''"></app-header>
+
+    <app-conversations *ngIf="(visibility.isVisible|async)===true"></app-conversations>
+    <app-user-conversations></app-user-conversations>
+
+    <ion-router-outlet animated="true" id="nested-router" mode="ios"
+      [class]="isAdmin ? '' : screen.width.value < 768 ? '' : hideHeader?'':'main-router'">
+    </ion-router-outlet>
+    <app-bottom-nav *ngIf="!isAdmin && screen.width.value < 1100">
+    </app-bottom-nav>
+  </ion-router-outlet>
+  <app-uploader [modal]="modal"></app-uploader>
+  <app-reel-uploader></app-reel-uploader>
+  <app-quick-view></app-quick-view>
+
+  <!-- <div *ngIf="showAppNotification" class="notification-msg">
+    <div class="pro-cnt align-items-start mb-2 pb-2">
+      <div class="pro-img border-0">
+        <img alt="img" class="cover" src="./../assets/ic_launcher.png" />
+      </div>
+      <div class="pro-name-link">
+        <div class="pro-name mb-1">Furniin</div>
+        <div class="pro-link">Soc - Market place</div>
+      </div>
+    </div>
+    <div class="row ml-0">
+      <div class="col-6 pl-0">
+        <button (click)="showAppNotification=false" class="btn ctm-btn cart-btn tran-bg w-100">Cancel</button>
+      </div>
+      <div class="col-6 pl-0">
+        <button (click)="openAppUrl()" class="btn ctm-btn cart-btn w-100">Install app</button>
+      </div>
+    </div>
+  </div> -->
+  <!-- <app-scroll-up></app-scroll-up> -->
+  <div class="call d-flex w-100 h-100 justify-content-center align-items-center">
+    <app-incoming-call *ngIf="incomingCall && !incomingCall.accepted" [data]="incomingCall"></app-incoming-call>
+    <app-outgoing-call *ngIf="outgoingCall" [data]="outgoingCall"></app-outgoing-call>
+  </div>
+
+  <app-toast-notification></app-toast-notification>
+</ion-app>

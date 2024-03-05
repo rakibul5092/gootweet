@@ -1,0 +1,7 @@
+<div class="live-message">
+  <img [src]="comment.from.profile_photo|sanitizeImage" />
+  <div class="name-and-message">
+    <div class="name">{{comment.from.full_name|join_name}}</div>
+    <div class="message">{{comment.body}}</div>
+  </div>
+</div>

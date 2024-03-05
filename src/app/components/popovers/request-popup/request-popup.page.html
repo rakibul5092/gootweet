@@ -1,0 +1,61 @@
+<ion-content>
+  <div *ngIf="isLoggedIn" style="height: 100%" class="chat-section">
+    <div class="chat-top">
+      <div class="pro-cnt pb-2 border-0">
+        <div class="pro-img">
+          <img class="cover" [src]="(productOwner?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+        </div>
+        <div class="pro-name-link">
+          <div class="pro-name">
+            {{productOwner?.full_name|join_name}}
+            <img src="./../../../../assets/img/verified-w.svg" alt="img" />
+            <span>Gamintojas</span>
+          </div>
+        </div>
+        <ion-icon (click)="dismiss()" style="font-size: 27px" name="close"></ion-icon>
+      </div>
+    </div>
+
+    <div class="modal-body1">
+      <div class="blog-cnt">
+        <div class="row mr-0">
+          <div *ngFor="let designer of previousConversations;" class="col-12 col-sm-6 pr-0">
+            <div style="cursor: pointer; padding: 15px; margin-bottom: 15px" class="blog">
+              <div class="pro-cnt border-0">
+                <div class="pro-img">
+                  <img class="cover" [src]="(designer?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+                </div>
+                <div class="pro-name-link">
+                  <div (click)="openMessage(designer)" class="pro-name postText">
+                    {{designer?.full_name|join_name}}
+                    <img src="./../../assets/img/verified.svg" alt="img" />
+                  </div>
+                  <div class="pro-link">
+                    <span>Konsultantas</span>
+                    <!-- <span class="pub-t">3h</span> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sec1">
+        <ion-textarea [(ngModel)]="chatRequest.text" style="width: 100%; background-color: #f1f1f1; padding: 15px"
+          rows="4" placeholder="Jūsų komentaras...">
+        </ion-textarea>
+        <!-- <angular-editor [config]="editor" [(ngModel)]="chatRequest.text">
+        </angular-editor> -->
+      </div>
+
+      <div style="width: 100%; margin-top: 30px">
+        <button *ngIf="!sending" (click)="sendRequest()" class="btn ctm-btn cart-btn w-100">
+          Siųsti
+        </button>
+        <button [disabled]="sending" *ngIf="sending" class="btn ctm-btn cart-btn w-100">
+          Prašau palauk...
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-content>

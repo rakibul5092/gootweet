@@ -1,0 +1,54 @@
+@import "./../../../theme/mixins/mixins";
+
+.home-register-section {
+  position: relative;
+  @include padding-p-map($home-register-section-padding);
+  margin-bottom: 30px;
+  .bg {
+    background-image: linear-gradient(
+      to right,
+      rgba(106, 123, 255, 0.1),
+      rgba(0, 0, 0, 0.9)
+    );
+  }
+  .form-cnt {
+    position: relative;
+    padding: 40px 30px 30px 30px;
+    max-width: 400px;
+    background: #fff;
+    border: 1px solid #e3e3e6;
+    border-radius: 5px;
+    z-index: 9;
+    margin-left: 25px;
+    label h6 {
+      font-size: 14px;
+      color: #6a6975;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+  .home-reg-txt-all {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+    min-height: 280px;
+    .home-reg-txt {
+      .home-reg-txt1 {
+        @include font-size-p-map($home-reg-txt1-font-size);
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+      .home-reg-txt2 {
+        @include font-size-p-map($home-reg-txt2-font-size);
+        color: #ffffff;
+        font-weight: 400;
+      }
+    }
+  }
+}

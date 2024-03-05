@@ -1,0 +1,46 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Resize your image</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid>
+    <ion-row style="border: 1px dotted rgb(201, 201, 201);">
+      <ion-col size="12" size-lg="8">
+        <image-cropper style="max-height: 360px;" [imageChangedEvent]="imageEvent" [maintainAspectRatio]="true"
+          [aspectRatio]="ratioY == 0? ratioX:ratioX/ratioY" imageQuality="70" format="webp"
+          (imageCropped)="imageCropped($event)"></image-cropper>
+      </ion-col>
+      <ion-col size="12" size-lg="4">
+        <img [src]="croppedImage" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-end">
+        <div>
+          <svg (click)="save()" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="200" height="40"
+            viewBox="0 0 279 40">
+            <g id="Group_261" data-name="Group 261" transform="translate(-680 -2595)">
+              <rect id="button_body" data-name="button body" width="200" height="40" rx="20"
+                transform="translate(680 2595)" fill="#6a7bff" />
+              <text id="Klausti_meistrų_darbų_kainos" data-name="Klauskite meistrų darbų kainos"
+                transform="translate(820 2622)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI">
+                <tspan x="-77.831" y="0">Papildyti</tspan>
+              </text>
+            </g>
+          </svg>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

@@ -1,0 +1,105 @@
+ion-content {
+  --keyboard-offset: 0px !important;
+}
+.cam-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: black;
+
+  .switch-camera {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    --background: none;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    font-size: 25px;
+  }
+  .text-area {
+    position: absolute;
+    bottom: 84px;
+    margin: 0px 10px;
+    width: calc(100% - 20px) !important;
+  }
+  img,
+  video {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    object-fit: contain;
+  }
+  ion-buttons {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px 20px;
+    .time {
+      background: red;
+      color: white;
+      padding: 5px 10px;
+      font-size: 15.86px;
+      font-weight: bolder;
+      border-radius: 4px;
+    }
+
+    ion-button {
+      background: white;
+      border-radius: 50%;
+      height: unset;
+      --padding-top: 2px;
+      --padding-bottom: 2px;
+      --padding-start: 2px;
+      --padding-end: 2px;
+      ion-icon {
+        color: #202766;
+        border-radius: 50%;
+        font-size: 40px;
+      }
+
+      .stop,
+      .start {
+        border: 4px solid black;
+        background: black;
+        font-size: 50px;
+      }
+      .stop {
+        font-size: 45px;
+        padding: 3px;
+      }
+    }
+    .attach-container {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      ion-button {
+        .attach {
+          background: white;
+        }
+      }
+      input {
+        left: 0px;
+        right: 0px;
+        z-index: 999;
+        opacity: 0;
+        position: absolute;
+      }
+    }
+    .save {
+      background: #202766;
+      font-size: 16px;
+      border-radius: 4px;
+      padding: 5px;
+      color: white;
+    }
+  }
+}

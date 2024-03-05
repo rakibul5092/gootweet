@@ -1,0 +1,19 @@
+@import "./../../../theme/mixins/mixins";
+
+.catalog-cnt {
+  .catalog-ul {
+    display: flex;
+
+    .catalog-li {
+      border: 2px solid #eaeaea;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+
+      img {
+        @include width-p-map($product-catalog-li-img-width);
+        @include height-p-map($product-catalog-li-img-height);
+      }
+    }
+  }
+}

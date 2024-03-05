@@ -1,0 +1,158 @@
+<ion-content>
+	<div class="main-wrapper">
+		<section class="blog-section advertisement-section pb-5 mp-0">
+			<div class="row m-0">
+				<div class="col-12 p-0">
+					<span (click)="back()" class="back-li Td_underLine" style="display: inline-flex;align-items:center">
+						<ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+					</span>
+					<div class="advertisement-cnt p-0 border-0 mt-5 mt-md-0">
+						<div class="tlt view-tlt mx-3 mx-md-0">
+							<span>Užklausa</span>
+						</div>
+						<div class="sending-request-cnt">
+							<div class="row">
+								<div class="col-12 col-lg-5">
+									<div class="blog-cnt req-represent-cnt">
+										<div class="blog mb-0 ">
+											<div class="row">
+												<div class="col-12">
+													<div class="pro-cnt-al">
+														<div class="pro-cnt border-0 m-0">
+															<div class="pro-img">
+																<img class="cover"
+																	[src]="(designerRequestService?.senderData?.profile_photo|sanitizeImage:'150_150_')"
+																	alt="img" />
+															</div>
+															<div class="pro-name-link position-relative">
+																<div class="pro-name">
+																	{{designerRequestService.senderData?.full_name
+																	|join_name
+																	}}
+																</div>
+																<div class="pro-link"><span>Gamintojas</span>
+																	<!-- <span class="pub-t">3h</span> -->
+																</div>
+															</div>
+														</div>
+														<button
+															(click)="gotoSenderProfile(designerRequestService.senderData.uid)"
+															class="btn ctm-btn btnNav mb-0 mt-3 mt-sm-0">Peržiūrėti
+															profilį <img class="ml-2 mr-0"
+																src="./../../assets/img/launch.svg"
+																alt="img" /></button>
+													</div>
+													<div class="d-txt">Designer area of Activity :
+														{{designerRequestService.request ?
+														designerRequestService.request.designer_activity.charAt(0).toUpperCase()
+														+ designerRequestService.request.designer_activity.slice(1) : '
+														'}}
+													</div>
+													<div class="d-txt1">About Designer :
+														{{designerRequestService.request ?
+														designerRequestService.request.designer_about.charAt(0).toUpperCase()
+														+ designerRequestService.request.designer_about.slice(1) : ' '}}
+													</div>
+												</div>
+
+
+											</div>
+
+
+										</div>
+
+
+									</div>
+
+
+								</div>
+								<div class="col-12 col-lg-7">
+									<div class="blog-cnt h-100 p-3 p-md-0">
+										<div class="blog mb-0 h-100">
+											<div class="row mr-0">
+												<div *ngFor="let designer of designerRequestService?.connectedDesigner;let i=index"
+													class="col-12 col-sm-6  pr-0">
+													<div class="pro-cnt"
+														style="margin-bottom: 15px; border: 1px solid rgb(233, 228, 228); padding: 10px; ">
+														<div (click)="gotoProfile(designer.designerInfo)"
+															class="pro-img" style="cursor: pointer;">
+															<img class="cover"
+																[src]="(designer?.designerInfo?.profile_image|sanitizeImage:'150_150_')"
+																alt="img" />
+														</div>
+														<div class="pro-name-link position-relative">
+															<div (click)="gotoProfile(designer.designerInfo)"
+																class="pro-name postText" style="cursor: pointer;">
+																{{designer.designerInfo?.full_name|join_name}}
+																<img src="./../../assets/img/verified.svg" alt="img" />
+
+															</div>
+															<div (click)="gotoProfile(designer.designerInfo)"
+																class="pro-link" style="cursor: pointer;">
+																<span>Gamintojas</span>
+																<!-- <span class="pub-t">3h</span> -->
+															</div>
+															<div (click)="openOption($event, designer.id,i)"
+																style="position: absolute;right: 0px;top:0px; transform: rotate(90deg);color: rgb(48, 48, 184);font-weight: bolder;font-size: 22px; cursor: pointer;"
+																class="dr_postOption">
+																...</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div *ngIf="designerRequestService?.connectedDesigner?.length > 10"
+												class="text-center more-s-btn"><span class="s-m">Išskleisti</span>
+											</div>
+
+											<div _ngcontent-tfr-c171="" class="form-cnt form-cnt-1 p-0 border-0">
+
+												<div class="text-right download-txt pb-2 navNoti">
+													<a style="cursor: pointer;"><img class="likeDislike"
+															src="./../../assets/img/launch.svg" alt="img" /> Parsisiųsti
+														sutartį</a>
+												</div>
+												<div class="rules-cnt"
+													style="border: 8px dashed #eaeaea; overflow-y: scroll; height:200px; padding: 20px;">
+
+													<ion-textarea class="textIn">{{terms}}</ion-textarea>
+
+												</div>
+												<div class="rules-btn text-right">
+													<div class="rules-btn text-right">
+														<div class="form-group pt-3 mb-0">
+															<label class="ctm-container mb-0">
+																Sutinku su <span>taisyklėmis</span>
+																<input [(ngModel)]="termsAccepted" type="checkbox" />
+																<span class="checkmark checkIn"></span>
+															</label>
+															<p ion-text class="text04" *ngIf="notAccepted">
+																<ion-label style="font-size: 12px; color: red">
+																	Please accept terms and conditions.
+																</ion-label>
+															</p>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="text-right sent-re-btn mb-4 mt-0 mt-md-3 mx-3 mx-md-0">
+							<button class="btn ctm-btn d-btn btnNav">Atmesti</button>
+							<button [disabled]="isConnected" (click)="acceptRequest()"
+								class="btn ctm-btn cart-btn btnNav">
+								<img src="./../../assets/img/how-to-reg.svg" alt="img" />
+								{{isConnected === false ? 'Priimti užklausą' : 'Prisijungta'}}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</ion-content>

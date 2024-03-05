@@ -1,0 +1,36 @@
+.add-video{
+    
+}
+
+.video-container{
+    position: relative;
+    max-width: 300;
+    .edit{
+        top: 8px;
+        right: 60px;
+        background: #00ce67;
+        &:hover{
+            background-color: #058a47;
+        }
+    }
+    .delete{
+        top: 8px;
+        right: 25px;
+        background: #e51818;
+        &:hover{
+            background-color: #6d1414;
+        }
+    }
+    ion-icon{
+        position: absolute;
+        z-index: 999;
+        font-size: 16px;
+        padding: 5px;
+        border-radius: 50%;
+        border: 1px solid #c1c1c1;
+        color: white;
+        cursor: pointer;
+        
+
+    }
+}

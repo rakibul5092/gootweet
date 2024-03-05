@@ -1,0 +1,157 @@
+<div class="product-show-tlt tlt">
+  Pasirinkite įrašo struktūrą
+</div>
+
+
+
+<!--************************************** Image tab selection here *********************************** -->
+<div id="image-1234" class="row m-0">
+  <ion-buttons class="layout-tabs col-12">
+    <ion-button [disabled]="fileData.length<3" (click)="onLayoutClick(layouts[0].type)" slot="icon-only" class="tab">
+      <ion-icon id="icon" [src]="layouts[0].icon"></ion-icon>
+    </ion-button>
+    <ion-button [disabled]="fileData.length<4" (click)="onLayoutClick(layouts[1].type)" slot="icon-only" class="tab">
+      <ion-icon id="icon" [src]="layouts[1].icon"></ion-icon>
+    </ion-button>
+    <ion-button [disabled]="fileData.length<4" (click)="onLayoutClick(layouts[2].type)" slot="icon-only" class="tab">
+      <ion-icon id="icon" [src]="layouts[2].icon"></ion-icon>
+    </ion-button>
+    <ion-button [disabled]="fileData.length<5" (click)="onLayoutClick(layouts[3].type)" slot="icon-only" class="tab">
+      <ion-icon id="icon" [src]="layouts[3].icon"></ion-icon>
+    </ion-button>
+    <ion-button [disabled]="fileData.length<5" (click)="onLayoutClick(layouts[4].type)" slot="icon-only" class="tab">
+      <ion-icon id="icon" [src]="layouts[4].icon"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <div class="col-md-8 pl-0 mp-0 product-show-cnt">
+    <div class="product-show-cnt mb-5 mb-md-0">
+      <!--************************************ One image tab *************************************-->
+      <div *ngIf="fileData.length === 1" class="product-show product-show-one">
+        <div class="row m-0">
+          <div class="col-12 p-0">
+            <div class="show-img-p">
+              <div class="show-img wh-100" style="max-height: 666px;">
+                <app-file [controls]="false" [isLive]="false" [file]="fileData[0]"></app-file>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--************************************** Two image tab ******************************************-->
+      <div *ngIf="fileData.length === 2" class="product-show product-show-two">
+        <div class="row m-0">
+          <div *ngFor="let file of fileData;" class="col-12 col-md-6 p-0">
+            <div class="show-img-p">
+              <div class="show-img wh-100">
+                <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="fileData.length>2">
+        <ng-container [ngSwitch]="wallPost.layout">
+          <!--************************************** three image tab ******************************************-->
+          <div *ngSwitchCase="1" class="product-show product-show-one">
+            <div class="row m-0">
+              <div *ngFor="let file of fileData|slice:0:3; let i = index"
+                [class]="i===0? 'col-12 p-0': 'col-12 col-md-6 col-lg-6 p-0'">
+                <div class="show-img-p">
+                  <div class="show-img wh-100">
+                    <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+                    <div *ngIf="fileData.length>3 && i === 2" class="img-extra">+{{fileData.length-3}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--************************************** Four image tab here *********************************** -->
+          <div *ngSwitchCase="2" class="product-show product-show-one">
+            <div class="row m-0">
+              <div *ngFor="let file of fileData|slice:0:4; let i = index" class=" col-6 p-0">
+                <div class="show-img-p">
+                  <div class="show-img wh-100">
+                    <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+                    <div *ngIf="fileData.length>4 && i === 3" class="img-extra">+{{fileData.length-4}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--************************************** Five image tab here *********************************** -->
+          <div *ngSwitchCase="3" class="product-show product-show-two">
+            <div class="row m-0">
+              <div *ngFor="let file of fileData|slice:0:4; let i = index" [class]="i === 0? 'col-12 p-0':'col-4 p-0'">
+                <div class="show-img-p">
+                  <div class="show-img wh-100">
+                    <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+                    <div *ngIf="fileData.length>4 && i === 3" class="img-extra">+{{fileData.length-4}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--************************************** Six and more image tab here *********************************** -->
+          <div *ngSwitchCase="4" class="product-show product-show-three">
+            <div class="row m-0">
+              <div *ngFor="let file of fileData|slice:0:5;let i = index" [class]="i<2? 'col-6 p-0':'col-4 p-0'">
+                <div class="show-img-p">
+                  <div class="show-img wh-100">
+                    <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+                    <div *ngIf="fileData.length>5 && i === 4" class="img-extra">+{{fileData.length-5}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--************************************** Six and more image tab here *********************************** -->
+          <div *ngSwitchCase="5" class="product-show product-show-three">
+            <div class="row m-0">
+              <div class="col-6 p-0">
+                <div *ngFor="let file of fileData|slice:0:2;" class="h-50 padding-1">
+                  <app-file [controls]="false" [file]="file"></app-file>
+                </div>
+              </div>
+              <div class="col-6 p-0">
+                <div *ngFor="let file of [fileData[2],fileData[3],fileData[4]];let i = index"
+                  class="h-33 padding-1 relative">
+                  <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+                  <div *ngIf="fileData.length>5 && i === 2" class="img-extra">+{{fileData.length-5}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+    </div>
+  </div>
+  <!--************************************** Image right side list here *********************************** -->
+  <div class="col-md-4 pr-0 mp-0">
+    <div class="product-show-list-all">
+      <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+        <div class="product-show-list" *ngFor="let file of fileData;let i =index">
+          <span class="pro-num">{{'#'+i}}</span>
+          <span class="pro-line">
+            <ion-reorder> </ion-reorder>
+          </span>
+          <div class="row m-0">
+            <div class="col-8 p-0">
+              <div class="show-img-p">
+                <div class="show-img wh-100">
+                  <app-file [controls]="false" [isLive]="false" [file]="file"></app-file>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 p-0">
+              <div class="show-img-delete h-100 d-flex">
+                <span (click)="removeImage(i)" class="d-icon remove_icon"><img id="icon" class="remove_icon"
+                    src="./../../assets/img/delete-w.svg" alt="img" /></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-reorder-group>
+    </div>
+  </div>
+</div>

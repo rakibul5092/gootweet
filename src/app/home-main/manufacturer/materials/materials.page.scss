@@ -1,0 +1,9 @@
+@import "./../../../../theme/mixins/mixins";
+@import "./../../../../theme/pages/manufacturer";
+.header-section {
+  .navbar-light {
+    .navbar-nav {
+      width: max-content;
+    }
+  }
+}

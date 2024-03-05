@@ -1,0 +1,10 @@
+<div class="reels reels-container-autoplay">
+  <div class="title"><ion-icon name="videocam"></ion-icon>Reels and Shorts
+  </div>
+  <swiper #swiper [config]="config" [style]="'height:'+ height+'px;margin-bottom: 6px;'">
+    <ng-template swiperSlide *ngFor="let reel of reelsService.reels; let i = index">
+      <app-reel-card [reel]="reel" [height]="height" [width]="width" (click)="onReelCardClick(i)"
+        [playable]="i===0"></app-reel-card>
+    </ng-template>
+  </swiper>
+</div>

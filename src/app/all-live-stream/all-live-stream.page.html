@@ -1,0 +1,14 @@
+<ion-content>
+  <div class="video_gal_part">
+    <div class="main-wrapper">
+      <h4>Šiuo metu vykstančios transiliacijos</h4>
+      <div class="row m-0">
+
+        <div style="max-width: 300;" *ngFor="let video of videos$ | async">
+          <app-video [video]="video" [autoplay]="false" [width]="'300'" [height]="232"></app-video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ion-content>

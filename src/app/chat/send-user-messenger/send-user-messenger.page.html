@@ -1,0 +1,54 @@
+<ion-content #content>
+
+  <div *ngIf="!chatsService.isLoading;else loading" class="chat-section user-list-section pb-0"
+    style="height: 100%; z-index: 999">
+    <div class="chat-top1 user-list-top">
+      <div class="mobile-chat-top pb-0">
+        <div class="pro-cnt mb-0">
+          <div class="pro-name-link px-0">
+
+            <div class="chat-ss">
+              <span
+                (click)="dismiss();chatsService.selectedProduct = null; chatsService.selectedContact=null;chatsService.contactsForShare.next([])"
+                class="close-m m-0 "><img class="remove_icon" src="./../../assets/img/close.svg" alt="img" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="chatsService.contactsForShare.value.length==0"
+      style="width: 100%;display: flex; justify-content: center;align-items: center; color: rgb(155, 155, 155);">
+      Empty conversations
+    </div>
+
+    <div *ngIf="chatsService.contactsForShare.value.length>0" class="user-list" style="width: 100%;">
+      <div *ngFor="let contact of chatsService.contactsForShare.value" class="user d-flex active noti_item"
+        style="cursor: pointer">
+        <div class="pro-cnt border-0 ">
+          <div class="pro-img">
+            <img class="cover" [src]="(contact?.user?.profile_photo|sanitizeImage:'40_40_')" alt="img" />
+          </div>
+          <div class="pro-name-link ">
+            <div class="pro-name">
+              {{contact?.user?.full_name|join_name}}
+              <img src="./../../assets/img/verified.svg" alt="img" />
+
+            </div>
+          </div>
+        </div>
+        <ion-button [disabled]="contact?.sent" (click)="send(contact)" mode="ios" style="--padding:0px; height: 2em;">
+          {{contact?.sent?'Sent':'Send'}}</ion-button>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </ng-template>
+</ion-content>

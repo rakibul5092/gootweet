@@ -1,0 +1,64 @@
+<ion-content>
+  <div class="main-wrapper  products">
+
+    <section class="two-div-section-d py-5 mp-0">
+      <div class="row m-0">
+        <div class="col-12 column-mid mt-5 mt-md-0 p-0">
+          <div class="back-btn">
+            <span style="display: inline-flex;align-items:center" class="T_underLine" routerLink="/">
+              <ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+            </span>
+          </div>
+          <div class="purchase-list-cnt order-purchase-list-cnt ">
+            <div class="purchase-list">
+              <div class="tlt mb-3 mx-3 mx-md-0">Neįvykdyti užsakymai</div>
+              <div *ngFor="let order of orders" class="single-purchase m-radius-0">
+                <div
+                  style="position: absolute;cursor: pointer;top: -9px;right: -9px;border: 1px solid #d3d0d0;border-radius: 50%;padding: 0px 6px 3px 6px;background: #e1e1e1;box-shadow: 3px 2px 5px #d7d7d7;"
+                  (click)="askPermissionForDelete(order.id)" class="add-btn remove_icon">
+                  <img class="remove_icon" src="./../../assets/img/delete.svg" alt="img" />
+                </div>
+                <div class="row ml-0">
+                  <div class="col-12 purchase-col2 pl-0" style="cursor: pointer;" (click)="gotoOrderProduts(order.id)">
+                    <div class="pro-cnt mb-0">
+                      <div class="pro-name-link pl-0">
+                        <div class="pro-name pb-1">
+                          {{'Užsakymas #'+order.id}}</div>
+                        <div class="pro-link">{{order?.timestamp?.toDate()|date:'yyyy-MM-dd'}}
+                        </div>
+                      </div>
+                      <div class="price"><span class="type-m">€</span>{{order.totalPrice}}</div>
+                    </div>
+                  </div>
+                  <div class="col-12 purchase-col3 pl-0">
+                    <div *ngIf="order.inProgress && !order.sent" class="status-txt text-center mt-3 mt-md-0">
+                      <span class="status">
+                        <ion-label style="font-weight: bolder;">{{'Statusą: '}}</ion-label> Vykdomas
+                      </span>
+
+                    </div>
+                    <div *ngIf="order.sent" class="status-txt text-center mt-3 mt-md-0">
+                      <span class="status">
+                        <ion-label style="font-weight: bolder;">{{'Statusą: '}}</ion-label> Išsiųstas
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div (click)="gotoOrderProduts(order.id)" class="ar-order" style="cursor:pointer">
+                  <span class="ex-m"><img class="img-m remove_icon" src="./../../assets/img/expand.svg"
+                      alt="img" /></span>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

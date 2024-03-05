@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-icon (click)="close()" style="font-size: 30px;" name="remove"></ion-icon>
+  </ion-toolbar>
+  <ion-progress-bar *ngIf="innerCategories.length==0 && profileService.subCatLoaded==0" type="indeterminate">
+  </ion-progress-bar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="padding-left: 10px;" *ngIf="profileService.subCatLoaded==1">
+    <ion-row style="padding-top: 5px;padding-bottom: 5px;" *ngFor="let subcat of innerCategories;let i=index">
+      <ion-row style="width: 100%;">
+        <ion-col size="1" class="ion-text-center">
+          <ion-icon name="ellipse" style="font-size: 8px;"></ion-icon>
+        </ion-col>
+        <ion-col button style="font-size:18px;" (click)="onSelectSubCat(subcat.id)" size="9">
+          {{subcat?.inner_category|shorten:30:'...'}}
+        </ion-col>
+
+      </ion-row>
+
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="profileService.subCatLoaded==2" style="text-align: center;
+  margin-top: 50%;">Not available</div>
+
+
+</ion-content>

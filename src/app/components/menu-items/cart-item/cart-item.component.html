@@ -1,0 +1,34 @@
+<!-- *ngIf="isBottom else headerCart" -->
+<span (click)="openCartPopover($event)"
+  [class]="(cartListPopupService.isCart?  'noti active':'noti')+(isProductMore?' product-more':'')" id="navNoti">
+  <span class="noti-i" [style]="isProductMore?'display: flex;font-size: 24px;':''">
+    <img *ngIf="!isProductMore else ionCart" [class]="cartListPopupService.isCart? 'active-i':'inactive-i' "
+      src="assets/img/shopping-w.svg" alt="img" id="icon_h" />
+    <ng-template #ionCart>
+      <ion-icon slot="icon-only" name="cart"></ion-icon>
+    </ng-template>
+
+    <span *ngIf="me && unseenCartItem>0" class="cart_count--mobile">
+      {{unseenCartItem || ''}}
+    </span>
+    <span *ngIf="!me && cartListPopupService?.cartItems?.length>0" class="cart_count--mobile">
+      {{cartListPopupService?.cartItems?.length || ''}}
+    </span>
+  </span>
+</span>
+
+<!-- <ng-template #headerCart>
+  <div *ngIf="!me || (me && me?.rule != 'designer')" (click)="openCartPopover($event)"
+    class="header-cat-menu d-none d-md-inline-block cart_count_part">
+    <button class="btn ctm-btn">
+      <img src="assets/img/Vector.svg" alt="img" />
+      <span class="pr-2">Prekių krepšelis</span>
+      <span *ngIf="me && unseenCartItem>0" class="cart_count--desktop">
+        {{unseenCartItem || ''}}
+      </span>
+      <span *ngIf="!me && cartListPopupService?.cartItems?.length>0" class="cart_count--desktop">
+        {{cartListPopupService?.cartItems?.length || ''}}
+      </span>
+    </button>
+  </div>
+</ng-template> -->

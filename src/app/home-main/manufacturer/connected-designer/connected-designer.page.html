@@ -1,0 +1,49 @@
+<!-- for mobile -->
+<div class="manufacturer-tab d-block d-md-none">
+  <button class="btn ctm-btn pro-btn w-100">Mano prekiniai ženklai</button>
+  <button class="btn ctm-btn pro-btn w-100">Prekių įkėlimas</button>
+</div>
+<!-- for mobile -->
+
+<section class="blog-section mp-0">
+  <h1 class="tlt mb-3 mx-3 mx-md-0">Mano konsultantai</h1>
+  <div class="blog-cnt">
+    <div class="row mr-0" style="padding-top: 68px;">
+      <div *ngFor="let designer of connectedDesigners;let i=index" class="col-12 col-sm-6 col-md-4 col-lg-3 pr-0">
+        <div style="cursor: pointer;padding: 15px;margin-bottom: 15px;position: relative;" class="blog">
+          <div *ngIf="designer?.vip" class="vip">VIP</div>
+          <div class="pro-cnt border-0">
+            <div class="pro-img">
+              <img class="cover" [src]="(designer?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+            </div>
+            <div class="pro-name-link">
+              <div (click)="gotoProfile(designer)" [title]="designer?.full_name|join_name" class="pro-name postText">
+                {{designer?.full_name|join_name:16}}
+                <ion-icon name="ellipse"
+                  [style]="designer.isOnline? 'font-size:10px; color:green':'font-size:10px; color:red'">
+                </ion-icon>
+              </div>
+              <div class="pro-link">
+                <span>Konsultantas</span>
+                <!-- <span class="pub-t">3h</span> -->
+              </div>
+
+              <div (click)="openOption($event, designer?.uid,designer?.vip, i)" class="elips-i">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="connectedDesigners?.length==0">
+        <div *ngIf="isLoading; else noData">
+          Loading...
+        </div>
+        <ng-template #noData>
+          <span>No connected designer available.</span>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+</section>

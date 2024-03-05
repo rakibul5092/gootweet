@@ -1,0 +1,200 @@
+<ion-content>
+	<div class="main-wrapper">
+		<div class="designer-section">
+			<div class="row m-0">
+				<div class="designer-body-cnt col-12">
+					<section class="blog-section advertisement-section advertisement-section-2 p-0">
+						<div class="advertisement-cnt p-0">
+							<div class="advertisement-4-cnt" style="overflow: hidden;">
+								<div class="row m-0">
+									<div class="col-12 col-lg-6 p-0">
+										<div class="profile-pp m-radius-0">
+											<div class="profile-p">
+												<div class="pro-cnt">
+													<div class="pro-img border-0">
+														<img class="cover"
+															[src]="(me?.profile_photo|sanitizeImage:'150_150_')"
+															alt="img" />
+													</div>
+													<div class="pro-name-link">
+														<div class="pro-name">
+															{{me?.full_name|join_name}}
+														</div>
+													</div>
+												</div>
+												<div class="price m-border-0">
+													<div class="price-icon">
+														<img src="./../../assets/img/wallet.svg" alt="img" />
+													</div>
+													<div class="price-am">
+														<div class="">Piniginė</div>
+														<div class="pr-tlt">{{(walletInfo.balance).toFixed(2)+' tšk.'}}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-lg-6 p-0">
+										<div class="point-gift-cnt upload-post form-cnt border-0">
+											<div class="tlt upload-post-tlt">Vykdyti išmokėjima</div>
+											<div class="row mx-0 align-items-center">
+												<div class="col-12 p-0">
+													<label class="mb-0">
+														<h6>Pasirinkite dienos biudžetą</h6>
+													</label>
+												</div>
+												<div class="col-12 p-0 form-group d-flex align-items-center d-md-block">
+													<span class="form-input">
+														<span class="input-group-txt">Taškai</span>
+														<input [(ngModel)]="cashoutAmount" type="number" name="point"
+															id="point" class="form-control point-input textIn"
+															placeholder="0" />
+													</span>
+													<button
+														[disabled]="!me || !cashoutAmount || cashoutAmount<100 || walletInfo.balance<100"
+														(click)="cashout()" class="btn ctm-btn d-btn btnDWU"
+														style="cursor: pointer;">Patvirtinti</button>
+												</div>
+												<ion-label *ngIf="cashoutAmount && cashoutAmount<100"
+													style="color: red;font-size: 10px;font-weight: bold;">
+													Minimalus išgryninimas 100€.</ion-label>
+												<ion-label
+													*ngIf="cashoutAmount && cashoutAmount>=100 && walletInfo.balance < cashoutAmount"
+													style="color: red;font-size: 10px;font-weight: bold;">
+													Nepakanka pinigų.</ion-label>
+											</div>
+											<div class="balance-ac">
+												<span class="li-bal">100 taškai</span>
+												<span class="i-bal">
+													<ion-icon name="chevron-forward"></ion-icon>
+												</span>
+												<span class="eu-bal">100 EUR</span>
+											</div>
+											<div class="post-seen-txt">
+												<div class="post-s-icon">
+													<img src="./../../assets/img/warning.svg" alt="img" />
+												</div>
+												<div class="post-s-txt">
+													<div class="post-s-txt1">
+														Minimali išmoka
+													</div>
+													<div class="post-s-txt2">100 taškų</div>
+												</div>
+											</div>
+											<div class="sent-b text-center text-lg-left">
+												<button (click)="gotoProfile()"
+													class="btn ctm-btn cart-btn d-none btnHovr">Išmokėti</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="manufacturer-tab px-0">
+							<button (click)="changeType(1)"
+								[class]="activeType == 1 ? 'btn ml-0 ctm-btn pro-btn active' : 'btn ml-0 ctm-btn pro-btn'"
+								id="btnDW">Išmokėjimų
+								išklotinė</button>
+							<button [disabled]="!me" (click)="changeType(2)"
+								[class]="activeType == 2 ? 'btn ml-0 ctm-btn pro-btn active' : 'btn ml-0 ctm-btn pro-btn'"
+								id="btnDw">Gautų
+								taškų išklotinė</button>
+						</div>
+						<div *ngIf="activeType == 1" class="payout-statement-all">
+							<div *ngFor="let transaction of transactionInfo" class="payout-statement">
+								<div class="payout">
+									<div class="row mr-0">
+										<div class="col-4 pr-0">
+											<div class="pay-date">
+												{{transaction?.timestamp?.toDate() | date: 'yyyy-MM-dd'}}</div>
+										</div>
+										<div class="col-4 pr-0">
+											<div class="pay-n-bal">
+												{{transaction?.isCredit ? '+' : '-'}}{{transaction?.amount}}
+												taškų</div>
+										</div>
+										<div class="col-4 pr-0">
+											<div [class]="transaction.isCredit? 'pay-eu-bal':'pay-cashout-bal'">
+												€{{(transaction?.amount).toFixed(2)}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- ============================ recive point ======================						 -->
+
+						<div *ngIf="activeType == 2" class="payout-statement-all wallet-two-s">
+							<ion-progress-bar *ngIf="!orderLoaded" type="indeterminate"></ion-progress-bar>
+							<div *ngFor="let order of orders" class="payout-statement">
+								<div class="payout">
+									<div class="row mr-0">
+										<div class="col-6 pr-0">
+											<div class="pay-date">{{order?.timestamp.toDate() |date:'yyyy-MM-dd'}}</div>
+										</div>
+										<div class="col-6 pr-0">
+											<div class="pay-eu-bal text-right">{{order?.commission &&
+												order?.commission}} taškų</div>
+										</div>
+									</div>
+								</div>
+								<div class="blog-cnt">
+									<div class="blog border-0 p-0">
+										<div class="row mr-0">
+											<div *ngFor="let order of orders" class="col-md-5 pr-0">
+												<div class="pro-cnt border-0">
+													<div class="pro-img">
+														<img class="cover"
+															[src]="(order?.owner?.profile_photo|sanitizeImage:'150_150_')"
+															alt="img" />
+													</div>
+													<div class="pro-name-link">
+														<div class="pro-name">{{order?.owner?.full_name &&
+															order?.owner?.full_name|join_name}}</div>
+
+													</div>
+												</div>
+											</div>
+											<div class="col-md-7 pr-0">
+												<div class="blog-img-all">
+													<div class="row m-0">
+														<div *ngFor="let product of order.products"
+															class="col-6 col-lg-3 p-0">
+															<div class="blog-img-p">
+																<div class="blog-img">
+																	<img class="cover"
+																		[src]="(product.data.main_images|getImage)"
+																		alt="img" />
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</section>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+
+<!-- amount
+23
+(number)
+currency
+"taškų"
+isCredit
+true
+timestamp
+October 27, 2020 at 12:00:00 AM UTC+6 -->

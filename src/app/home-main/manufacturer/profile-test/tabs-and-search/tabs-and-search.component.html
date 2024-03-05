@@ -1,0 +1,49 @@
+<div [class]="'pl-0 pr-0'" style="width: 100%;">
+
+  <ion-segment mode="md" [(ngModel)]="activeType"
+    style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+    <ion-segment-button [style]="isUser? 'width: 25%':'width: 33.33%'" (click)="changeType('wall')" value="wall"
+      layout="icon-start">
+
+      <div class="item d-flex flex-column">
+        <ion-icon name="document-text"></ion-icon>
+        <span>Siena</span>
+      </div>
+    </ion-segment-button>
+    <ion-segment-button [style]="isUser? 'width: 25%':'width: 33.33%'" (click)="changeType('catalog')" *ngIf="!isUser"
+      value="catalog" layout="icon-start">
+      <div class="item d-flex flex-column">
+        <ion-icon name="bag"></ion-icon>
+        <span>Produktai</span>
+      </div>
+    </ion-segment-button>
+
+    <ion-segment-button [style]="isUser? 'width: 25%':'width: 33.33%'" (click)="changeType('reels')" value="reels"
+      layout="icon-start">
+      <div class="item d-flex flex-column">
+        <ion-icon name="camera"></ion-icon>
+        <span class="segment-text">Reels</span>
+      </div>
+    </ion-segment-button>
+
+    <ion-segment-button [style]="isUser? 'width: 25%':'width: 33.33%'" (click)="changeType('lives')" value="lives"
+      layout="icon-start">
+      <div class="item d-flex flex-column">
+        <ion-icon name="videocam"></ion-icon>
+        <span class="segment-text">Lives</span>
+      </div>
+    </ion-segment-button>
+
+    <!-- <ion-segment-button *ngIf="isUser" (click)="changeDesignerNavigation('rating')" value="rating" layout="icon-start">
+      <span>Atsiliepimai</span>
+      <ion-icon name="star-outline"></ion-icon>
+    </ion-segment-button> -->
+
+    <!-- <ion-segment-button *ngIf="isUser" value="portfolio" (click)="changeDesignerNavigation('portfolio')"
+      layout="icon-start">
+      <span>Portfelis</span>
+      <ion-icon name="bag-outline"></ion-icon>
+    </ion-segment-button> -->
+
+  </ion-segment>
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <app-product-search [ownerUid]="ownerUid" (filter)="onSearch($event)" [isWeb]="isWeb"
+    (cancel)="onCancel()"></app-product-search>
+  <div [class]="isWeb? 'row m-0':'mobile-product m-0'" *ngIf="!(noProductFound|async) else noProductMessage">
+    <div *ngFor="let product of productFilterService.searching? (results|async): profileService.products; let i=index"
+      [class]="isWeb? (screen.width | async) >1380? 'product-col col-6 col-md-6 col-lg-4 col-xl-3' : 'product-col col-6 col-md-6 col-lg-4 col-xl-4':''">
+      <app-product [id]="'product-' + product.product_id" [isWeb]="isWeb" [index]="i" [searched]="false"
+        [product]="product" [productOwner]="productOwner" [isDesignerLoggedIn]="isDesignerLoggedIn">
+      </app-product>
+    </div>
+  </div>
+  <ng-template #noProductMessage>
+    <div class="no-product-message">
+      Atsiprašome šiuo metu prekių pagal šia kategorija kol kas nėra
+    </div>
+  </ng-template>
+</div>

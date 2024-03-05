@@ -1,0 +1,339 @@
+<ion-content>
+	<div class="main-wrapper">
+		<div class="designer-section mp-0">
+			<div class="row m-0">
+				<div class="designer-body-cnt col-12">
+					<section class="reviews-section user-settings-section blog-section w-100 px-0 mp-0">
+						<div class="row m-0">
+							<div class="col-12 column-left p-0">
+								<div class="left-side-bar m-3 m-md-0">
+									<div class="left-side-cnt mt-4 mt-md-0 m-radius-5 overflow-hidden">
+										<div class="pro-cnt">
+											<div class="pro-img"><img class="cover"
+													[src]="(me?.profile_photo|sanitizeImage:'150_150_')" alt="img" />
+											</div>
+											<div class="pro-name-link">
+												<div class="pro-name">
+													{{me?.full_name|join_name}}</div>
+											</div>
+										</div>
+										<div class="setting-ul">
+											<div (click)="changeType('general')" class="setting-item"><span
+													[ngClass]="{'active' : settingTyepe == 'general' ? true : false}"
+													class="setting-li dgSidemenu" style="cursor: pointer;">Bendri
+													nustatymai</span>
+											</div>
+											<div (click)="changeType('email')" class="setting-item"><span
+													[ngClass]="{'active' : settingTyepe == 'email' ? true : false}"
+													class="setting-li dgSidemenu" style="cursor: pointer;">El.
+													paštas</span></div>
+											<div (click)="changeType('password')" class="setting-item"><span
+													[ngClass]="{'active' : settingTyepe == 'password' ? true : false}"
+													class="setting-li dgSidemenu"
+													style="cursor: pointer;">Slaptažodis</span></div>
+											<div (click)="changeType('bank')" class="setting-item"><span
+													[ngClass]="{'active' : settingTyepe == 'bank' ? true : false}"
+													class="setting-li dgSidemenu" style="cursor: pointer;">Banko
+													sąskaitos</span>
+											</div>
+											<div (click)="changeType('activity')" class="setting-item"><span
+													[ngClass]="{'active' : settingTyepe == 'activity' ? true : false}"
+													class="setting-li dgSidemenu" style="cursor: pointer;">Apie
+													mane</span>
+											</div>
+											<!-- <div (click)="changeType('about')" class="setting-item"><span
+													[ngClass]="{'active' : settingTyepe == 'about' ? true : false}"
+													class="setting-li" style="cursor: pointer;">Apie mane</span>
+												</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 column-mid-settings p-0">
+								<div class="log-reg mp-0 mt-3 mt-md-0 bg-white">
+									<div class="log-reg-cnt log-reg-cnt-1 m-0">
+										<form method="post" action="" #form="ngForm" class="">
+											<div class="row m-0">
+												<div class="col-12 p-0">
+													<div class="form-cnt p-4 p-md-0 m-radius-0">
+														<div>
+
+															<!-- ====================================== General settings ================================== -->
+
+															<div *ngIf="settingTyepe == 'general' ? true : false"
+																class="row">
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Vardas
+																			</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/account-c.svg"
+																					alt="img" /></span>
+
+																			<input type="text " name="f-name"
+																				id="f-name"
+																				class="form-control email-input textIn"
+																				placeholder="Vardenis"
+																				[(ngModel)]="me.full_name.first_name" />
+																		</div>
+																	</div>
+																</div>
+
+
+
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Pavardė
+																			</h6>
+																		</label>
+																		<div class="form-input">
+																			<input type="text" name="l-name"
+																				class="form-control last-name textIn"
+																				placeholder="Pavardenis"
+																				[(ngModel)]="me.full_name.last_name" />
+																		</div>
+																	</div>
+																</div>
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Adresas
+																			</h6>
+																		</label>
+																		<div class="form-input">
+																			<ion-input id="googlePlaces"
+																				(click)="onFocus($event)" name="address"
+																				(ionChange)="addressChanged()"
+																				[(ngModel)]="me.address" type="text"
+																				class="form-control textIn"
+																				placeholder="Plytelių g, 12-1"
+																				autocomplete="off"></ion-input>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+
+
+															<!-- ====================================== E-mail setting ================================== -->
+
+															<div *ngIf="settingTyepe == 'email' ? true : false"
+																class="row">
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">El. paštas
+																			</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><i
+																					class="far fa-envelope"></i></span>
+																			<input type="email" name="email" disabled
+																				class="form-control email-input textIn"
+																				placeholder="Vardenis@gmail.com"
+																				[(ngModel)]="me.email">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">
+																				Patvirtinti el. paštą</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><i
+																					class="far fa-envelope"></i></span>
+																			<input type="email" name="email" disabled
+																				class="form-control email-input textIn"
+																				placeholder="Vardenis@gmail.com"
+																				[(ngModel)]="me.email">
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+															<!-- ====================================== Password setting ================================== -->
+
+															<div *ngIf="settingTyepe == 'password' ? true : false"
+																class="row">
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">
+																				Dabartinis slaptažodis</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/lock.svg"
+																					alt="img"></span>
+																			<input type="password" name="old-password"
+																				id="old_password"
+																				class="form-control email-input textIn"
+																				placeholder="*********"
+																				[(ngModel)]="current_password">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">
+																				Slaptažodis</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/lock.svg"
+																					alt="img"></span>
+																			<input type="password" name="password"
+																				[disabled]="current_password == undefined ||
+																				current_password.trim() === '' " id="password" class="form-control email-input textIn"
+																				placeholder="*********"
+																				[(ngModel)]="password">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">
+																				Pakartokite slaptažodį</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/lock.svg"
+																					alt="img"></span>
+																			<input type="password"
+																				name="confirm_password" [disabled]="password == undefined ||
+																				password.trim() === '' " id="confirm_password" class="form-control email-input textIn"
+																				placeholder="*********"
+																				[(ngModel)]="confirm_password">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- ====================================== Bank setting ================================== -->
+
+															<div *ngIf="settingTyepe == 'bank' ? true : false"
+																class="row">
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Bankas
+																			</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/bank-ac.svg"
+																					alt="img"></span>
+																			<input type="text"
+																				class="form-control email-input textIn"
+																				placeholder="Bankas" name="bankName"
+																				[(ngModel)]="me.details.bankName">
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Banko
+																				sąskaita</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/bank-ac.svg"
+																					alt="img"></span>
+																			<input type="text"
+																				class="form-control email-input textIn"
+																				placeholder="LT2994181681816685"
+																				name="bankAccount"
+																				[(ngModel)]="me.details.bankAccount">
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+															<!-- ====================================== My activity Setting ================================== -->
+
+															<div *ngIf="settingTyepe == 'activity' ? true : false"
+																class="row">
+																<div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Mano
+																				veikla
+																			</h6>
+																		</label>
+																		<div class="form-input">
+																			<span class="input-group-txt"><img
+																					src="./../../assets/img/account-c.svg"
+																					alt="img" /></span>
+
+																			<input type="text" name="activity"
+																				id="activity"
+																				class="form-control email-input textIn"
+																				placeholder="Mano veikla"
+																				[(ngModel)]="me.activity" />
+																		</div>
+																	</div>
+																</div>
+																<!-- <div class="col-12">
+																	<div class="form-group">
+																		<label>
+																			<h6 class="dark-text f-20 weaker">Apie mane
+																			</h6>
+																		</label>
+																		<div class="form-input">																
+
+																			<textarea cols="24" rows="10" name="about"
+																			[(ngModel)]="me.about" >{{me.about}}</textarea>
+																		</div>
+																	</div>
+																</div> -->
+
+																<div class="col-12 ">
+																	<div
+																		class="form-cnt form-cnt-apie h-100 border-0 p-0">
+																		<div class="form-group h-100">
+																			<label class="mb-0">
+																				<h6 class="">Apie mane</h6>
+																			</label>
+																			<div class="form-input">
+																				<textarea rows="10"
+																					style="padding: 5px;"
+																					[(ngModel)]="me.about" name="about"
+																					class="form-control h-100 textIn"
+																					placeholder="Apie mane ..."></textarea>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+
+
+
+															<!-- ====================================== Setting end ================================== -->
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="save-btn text-center mb-5 mb-md-0">
+												<button type="submit" id="login_submit" (click)="submitForm(form)"
+													class="btn ctm-btn cart-btn btnDWU">išsaugoti</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</ion-content>

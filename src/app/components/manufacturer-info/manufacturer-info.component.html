@@ -1,0 +1,39 @@
+<div *ngIf="owner" class="info-container">
+    <div class="item-container">
+        <ion-icon name="person"></ion-icon>
+        <div class="text" style="font-weight: bolder;font-size: 15px;">{{owner.full_name|join_name}}</div>
+    </div>
+
+    <div class="item-container">
+        <ion-icon name="browsers"></ion-icon>
+        <div class="text">{{owner?.details?.company_name||noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="code"></ion-icon>
+        <div class="text">{{owner?.details?.company_code||noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="code-download"></ion-icon>
+        <div class="text">{{owner?.details?.pvm_code||noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="card"></ion-icon>
+        <div class="text">{{owner?.details?.bank_name||noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="card"></ion-icon>
+        <div class="text">{{owner?.details?.iban||noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="globe"></ion-icon>
+        <div class="text">{{owner?.address || owner?.details?.address || noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="call"></ion-icon>
+        <div class="text">{{owner?.phone|| owner?.details?.telephone_no||noInformation}}</div>
+    </div>
+    <div class="item-container">
+        <ion-icon name="mail"></ion-icon>
+        <div class="text">{{owner?.email||noInformation}}</div>
+    </div>
+</div>

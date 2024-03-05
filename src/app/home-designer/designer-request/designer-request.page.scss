@@ -1,0 +1,95 @@
+@import "./../../../theme/mixins/mixins";
+.advertisement-section {
+  @include padding-p-map($advertisement-section-padding);
+  .back-li {
+    position: absolute;
+    @include top-p-map($advertisement-back-li-top);
+    @include left-p-map($advertisement-back-li-left);
+    @include font-size-p-map($advertisement-back-li-font-size);
+    cursor: pointer;
+    font-size: 18px;
+    color: #6a6975;
+    font-weight: 400;
+    i {
+      font-size: 15px;
+    }
+  }
+  .advertisement-cnt {
+    position: relative;
+    background: transparent;
+    .designer-req-img-cnt {
+      .blog-cnt {
+        .blog {
+          background: transparent;
+        }
+      }
+    }
+    .view-tlt {
+      .btn {
+        top: 0;
+        @include right-p-map($view-tlt-btn-right);
+      }
+    }
+    .sent-re-btn {
+      .d-btn {
+        padding: 6px 30px;
+        border: 2px solid #6a6975;
+        color: #6a6975;
+        margin-right: 10px;
+      }
+    }
+    .sending-request-cnt {
+      .more-s-btn {
+        margin-top: 42px;
+      }
+      .req-represent-cnt {
+        .blog {
+          background: #6a7bff;
+          color: #fff;
+          padding: 30px;
+          .row {
+            align-items: center;
+          }
+          .pro-cnt {
+            width: max-content;
+            margin: auto;
+            .pro-img {
+              box-shadow: none;
+            }
+            .pro-name-link {
+              .pro-link {
+                color: #fff;
+                .pub-t:after {
+                  background: #fff;
+                }
+              }
+            }
+          }
+          .pro-cnt-al {
+            padding-bottom: 15px;
+            @include padding-right-p-map($pro-cnt-al-padding-right);
+            position: relative;
+            .btn {
+              @include position-p-map($pro-cnt-al-btn-position);
+              right: 0;
+              top: 0;
+              width: max-content;
+              margin-bottom: 15px;
+            }
+          }
+          .d-txt {
+            font-size: 17px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 10px;
+          }
+          .d-txt1 {
+            font-size: 15px;
+            color: #ffffff;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

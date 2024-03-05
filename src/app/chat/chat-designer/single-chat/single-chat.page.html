@@ -1,0 +1,74 @@
+<ion-content>
+  <div class="designer-chat-cnt-scrl-all mm-w-100 m-w-100" style="height:100%">
+    <div class="designer-single-chat m-w-100">
+      <div class="chat-section">
+        <div class="user-chat chat-top1">
+          <div class="chat-top">
+            <div class="pro-cnt border-0">
+              <div class="pl-0 pro-name-link">
+                <div class="pro-name mb-0 mb-md-2 d-flex align-items-center">
+                  <ion-icon (click)="back(); service.backFromChat()" style="font-size: 26px;" name="chevron-back">
+                  </ion-icon>
+
+                  {{
+                  service?.selectedContact?.full_name|join_name:18
+                  }}
+                </div>
+
+                <!-- {{service.selectedContact.email}} -->
+                <div class="chat-ss">
+                  <span (click)="service.openCartPopover($event)"
+                    style="background: rgb(70, 70, 189);cursor: pointer;padding-bottom: 5px;padding-left: 10px;padding-right: 10px;margin-right: 15px;border-radius: 10%;">
+                    <img class="inactive-i" src="./../../assets/img/shopping-w.svg" alt="img" />
+                    <span *ngIf="service.cartLength>0" class="n-count"
+                      style="color: red;font-size: 12px;font-weight: bolder;margin-left: 2px; top: -12px;">{{service.cartLength}}</span>
+                  </span>
+
+                  <span class="d-none d-md-block" (click)="service.closeMessage()">
+                    <ion-icon name="chevron-forward"></ion-icon>
+                  </span>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+          <!-- for mobile -->
+          <div class="currently-review p-3 m-0 border-0 d-inline-block d-md-none">
+            <span class="cr-txt color-white">Šiuo metu peržiūri</span>
+            <span (click)="service.navigateToManufacturerCatalog(service?.selectedContact?.manufacturer_uid)"
+              class="cr-txt1">{{'katalogas'}} <img src="./../../assets/img/launch.svg" alt="img" /></span>
+          </div>
+          <!-- for mobile -->
+
+        </div>
+        <div #scrollToMe class="chat-list-all" style="padding-bottom: 40px;" (scroll)="service.onScroll($event)"
+          (drop)="drop($event)" (dragover)="allowDrop($event)" id="drop1">
+          <div *ngIf="service.tempMsgs.length>9" style="display: flex;justify-content: center;margin-top: 5px;">
+            <ion-button style="--background:rgb(107, 107, 107)" mode="ios" (click)="service.loadMoreMessage()">More
+            </ion-button>
+          </div>
+          <div class="chat-list" style="max-height: none;">
+            <!-- Message main container -->
+
+            <app-message-container *ngFor="let msg of service.tempMsgs; let i = index" [message]="msg"
+              [selectedContact]="service.selectedContact" [me]="service.me" [isOutside]="false" [isDesigner]="true">
+            </app-message-container>
+          </div>
+
+          <!-- <div #scrollToMe></div> -->
+        </div>
+        <div *ngIf="service.friendTyping" id="writing" style="position: absolute;left: 0px;bottom: 50px;z-index: 999;">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <app-chat-input [isUploading]="service.isUploading" [selectedProduct]="service.selectedProduct"
+          [isTyping]="service.isTyping" (onMessageSend)="sendMessage($event)"
+          (onMessageChanged)="service.messageTextChanged($event)" (onBrowseImg)="service.onBrowseImage($event)">
+        </app-chat-input>
+      </div>
+    </div>
+  </div>
+</ion-content>

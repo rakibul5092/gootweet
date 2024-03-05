@@ -1,0 +1,213 @@
+<!-- Modal -->
+<div class="custom-modal-body h-100">
+  <button (click)="close()" type="button" class="close remove_icon" data-dismiss="modal" aria-label="Close">
+    <img src="./../../assets/img/close.svg" alt="img" />
+  </button>
+  <div class="materials-list-cnt">
+    <div class="category-nav">
+      <ul class="nav nav-pills border-0 pt-0" id="pills-tab" role="tablist">
+        <li (click)="service.selectTab(1)" class="nav-item addAni">
+          <a [class]="service.selectedTab === 1? 'nav-link active':'nav-link'" id="pills-category-tab"
+            data-toggle="pill" role="tab" style="cursor: pointer" aria-selected="false"
+            aria-controls="pills-category">Kategorijos</a>
+        </li>
+        <li (click)="service.selectTab(2)" class="nav-item addAni">
+          <a [class]="service.selectedTab===2? 'nav-link active':'nav-link'" id="pills-sub-category-tab"
+            data-toggle="pill" role="tab" style="cursor: pointer" aria-controls="pills-sub-category"
+            aria-selected="false">Sub-kategorijos</a>
+        </li>
+        <li (click)="service.selectTab(3)" class="nav-item addAni">
+          <a [class]="service.selectedTab===3? 'nav-link active':'nav-link'" id="pills-inner-category-tab"
+            data-toggle="pill" role="tab" style="cursor: pointer" aria-controls="pills-inner-category"
+            aria-selected="false">Inner-kategorijos</a>
+        </li>
+      </ul>
+
+      <div class="log-reg search-cat-input reg-step-4 p-0">
+        <div *ngIf="service.selectedTab ===1" class="form-cnt form-cnt-1 category-input border-0">
+          <div class="row w-100">
+            <div class="col-8 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Kategorija</h6>
+                </label>
+                <div class="form-input">
+                  <ion-input [(ngModel)]="service.category.data.category" type="text" name="railing_furniture"
+                    id="railing_furniture" class="form-control textIn" placeholder=""></ion-input>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-lg-3">
+              <label>
+                <span style="visibility: hidden" class="">Kategorija</span>
+              </label>
+              <div class="form-group">
+                <button [disabled]="service.category.data.category==''" (click)="service.addCategory()"
+                  class="btn ctm-btn cart-btn btnNav">
+                  <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="service.selectedTab===2" class="form-cnt form-cnt-1 sub-category-input border-0">
+          <div class="row w-100">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Kategorija</h6>
+                </label>
+                <select class="custom-select" [(ngModel)]="service.category"
+                  (change)="service.selectedCategory(service.category)">
+                  <option disabled selected>--select--</option>
+                  <option *ngFor="let category of service.catService.categories" [ngValue]="category?.category">
+                    {{category?.category?.data?.category}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Sub-Kategorija</h6>
+                </label>
+                <div class="form-input">
+                  <ion-input [(ngModel)]="service.subCategory.data.sub_category" type="text" name="railing_furniture"
+                    id="railing_furniture" class="form-control textIn" placeholder="">
+                  </ion-input>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <label>
+                <span style="visibility: hidden" class="">Kategorija</span>
+              </label>
+              <div class="form-group">
+                <button [disabled]="service.subCategory.data.sub_category==''" (click)="service.addSubCategory()"
+                  class="btn ctm-btn cart-btn btnNav">
+                  <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="service.selectedTab===3" class="form-cnt form-cnt-1 sub-category-input border-0">
+          <div class="row w-100">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Kategorija</h6>
+                </label>
+                <select class="custom-select" [(ngModel)]="service.category"
+                  (change)="service.selectedCategory(service.category)">
+                  <option selected disabled>--select--</option>
+                  <option *ngFor="let category of service.catService.categories" [ngValue]="category?.category">
+                    {{category?.category.data?.category}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Sub-Kategorija</h6>
+                </label>
+                <select class="custom-select" [(ngModel)]="service.subCategory"
+                  (change)="service.selectedSubCategory(service.subCategory)">
+                  <option selected disabled>--select--</option>
+                  <option *ngFor="let subCategory of service.subCategories" [ngValue]="subCategory">
+                    {{subCategory?.data?.sub_category}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="form-group">
+                <label>
+                  <h6 class="mb-0">Innner-Kategorija</h6>
+                </label>
+                <div class="form-input">
+                  <ion-input [(ngModel)]="service.innerCategory.data.inner_category" type="text"
+                    name="railing_furniture" id="railing_furniture" class="form-control textIn" placeholder="">
+                  </ion-input>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <label>
+                <span style="visibility: hidden" class="">Kategorija</span>
+              </label>
+              <div class="form-group">
+                <button [disabled]="service.innerCategory.data.inner_category==''" (click)="service.addInnerCategory()"
+                  class="btn ctm-btn cart-btn btnNav">
+                  <img src="./../../assets/img/add-circle-full.svg" alt="img" />Pridėti
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-category" role="tabpanel" aria-labelledby="pills-category-tab">
+          <div class="materials-list-list border-0">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th class="no-th" scope="col">Nr.</th>
+                  <th style="width: 60%" *ngIf="service.selectedTab==1" scope="col">
+                    Kategorija
+                  </th>
+                  <th style="width: 60%" *ngIf="service.selectedTab==2" scope="col">
+                    Sub-Kategorija
+                  </th>
+                  <th style="width: 60%" *ngIf="service.selectedTab==3" scope="col">
+                    Inner-Kategorija
+                  </th>
+                  <!-- <th scope="col" class="d-md-table-cell d-none">Data</th> -->
+                </tr>
+              </thead>
+              <!-- started categories list here -->
+              <tbody *ngIf="service.selectedTab==1">
+                <tr *ngFor="let category of service.catService.categories; let i = index">
+                  <td class="no-th" scope="row">{{'#'+(i+1)}}</td>
+                  <td>{{category?.category?.data?.category}}</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <ion-content *ngIf="service.selectedTab==3">
+              <ion-reorder-group disabled="false" (ionItemReorder)="doInnerOrder($event)">
+                <div class="row" *ngFor="let innercategory of service.innerCategories; let i = index">
+                  <div class="col-2" size="1">{{'#'+(i+1)}}</div>
+                  <div class="col-5">{{innercategory?.data?.inner_category}}</div>
+                  <div class="ion-text-center col-2" size="2"><ion-reorder></ion-reorder></div>
+                  <div class="ion-text-center col-2" size="2"><ion-button
+                      (click)="service.askDeletePermission(innercategory, 3)" mode="md" color="danger"><ion-icon
+                        name="trash"></ion-icon></ion-button></div>
+
+                </div>
+              </ion-reorder-group>
+            </ion-content>
+            <ion-content *ngIf="service.selectedTab==2">
+              <ion-reorder-group disabled="false" (ionItemReorder)="doOrder($event)">
+                <div class="row" *ngFor="let subcategory of service.subCategories; let i = index">
+                  <div class="col-2">{{'#'+(i+1)}}</div>
+                  <div class="col-5">{{subcategory?.data.sub_category}}</div>
+
+                  <div class="ion-text-center col-2"><ion-reorder></ion-reorder></div>
+                  <div class="ion-text-center col-2" size="2"><ion-button
+                      (click)="service.askDeletePermission(subcategory, 2)" mode="md" color="danger"><ion-icon
+                        name="trash"></ion-icon></ion-button></div>
+
+                </div>
+              </ion-reorder-group>
+            </ion-content>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

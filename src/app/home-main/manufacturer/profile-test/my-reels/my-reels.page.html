@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row m-0" style="gap: 5px;" *ngIf="!reelsService.noData else noReelsMessage">
+    <div *ngFor="let reel of reelsService.myReels; let i = index" class="">
+      <app-reel-card [isMyReel]="me && me.uid === ownerUid" [height]="330" [width]="180" [reel]="reel"
+        (click)="onReelCardClick(i)"></app-reel-card>
+    </div>
+  </div>
+  <ng-template #noReelsMessage>
+    <div class="no-product-message" style="color: white;">
+      Atsiprašome šiuo metu prekių pagal šia kategorija kol kas nėra
+    </div>
+  </ng-template>
+</div>

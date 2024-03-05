@@ -1,0 +1,51 @@
+<div class="video-wrapper">
+  <div class="review-image" (click)="onNextPage( video)">
+    <img [src]="video.thumb|cloudinaryThumb:'image'" />
+    <!-- <div class="d-flex justify-content-end pt-2 pr-2">
+      <span class="d-flex justify-content-around align-items-center video-control">
+        <ion-icon name="volume-mute-outline" style="font-size: 30px; color: #fff"></ion-icon>
+        <ion-icon name="logo-closed-captioning" style="font-size: 30px; color: #fff"></ion-icon>
+      </span>
+    </div> -->
+    <!-- top icon end -->
+    <div class="video-bottom-sheet">
+      <ion-row>
+        <ion-col size="3" class="d-flex justify-content-center align-items-center">
+          <span *ngIf="video.live" class="live">Now Live</span>
+        </ion-col>
+        <ion-col size="7"></ion-col>
+        <ion-col size="2" class="d-flex justify-content-center align-items-center">
+          <span class="live text-white">{{duration}}</span>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <!-- video header  -->
+  <ion-row class="video-header">
+    <app-profile-photo (click)="gotoProfileService.gotoProfile(video.owner)" [size]="40"
+      [user]="video.owner"></app-profile-photo>
+    <div (click)="onNextPage( video)" class="text-container">
+      <p class="m-0 h6" style="font-size: 1.1rem;font-weight: bold;">
+        {{video.about}}
+      </p>
+      <label for="" style="font-size: 14px">{{video.owner.full_name|join_name}}</label>
+    </div>
+    <ion-col class="d-flex justify-content-end">
+      <ion-buttons *ngIf="me?.uid === video?.uid">
+        <ion-button [id]="'open-option-'+video.id">
+          <ion-icon name="ellipsis-vertical" style="font-size: 20px"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+  <!-- video header end -->
+</div>
+<ion-popover #option [trigger]="'open-option-'+video.id">
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item [button]="true" (click)="delete(option)" lines="none" mode="md">Ištrinti</ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>

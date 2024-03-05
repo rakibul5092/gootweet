@@ -1,0 +1,48 @@
+<ion-content>
+    <div class="main-wrapper ">
+        <section class="reviews-section user-settings-section mt-3 blog-section pb-5">
+            <div class="row m-0">
+                <div class="col-12 column-left p-0">
+                    <div class="left-side-bar">
+                        <div class="left-side-cnt mb-0">
+                            <div class="pro-cnt">
+                                <div class="pro-img"><img class="cover"
+                                        [src]="(user?.profile_photo)|sanitizeImage:'150_150_'" alt="img" /></div>
+                                <div class="pro-name-link">
+                                    <div class="pro-name">{{user?.full_name|join_name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setting-ul">
+                                <div style="cursor: pointer;" class="setting-item dgSidemenu" (click)="selectedTab=1"><a
+                                        [class]="selectedTab==1? 'setting-li active':'setting-li'">Bendri
+                                        nustatymai</a></div>
+                                <div class="setting-item dgSidemenu" style="cursor: pointer;" (click)="selectedTab=2"><a
+                                        [class]="selectedTab==2? 'setting-li active':'setting-li'">Slaptažodis</a></div>
+                                <div *ngIf="user?.rule == 'manufacturer'" class="setting-item dgSidemenu"
+                                    style="cursor: pointer;" (click)="selectedTab=3"><a
+                                        [class]="selectedTab==3? 'setting-li active':'setting-li'">Banko informacija</a>
+                                </div>
+                                <div *ngIf="user?.rule == 'manufacturer'" class="setting-item dgSidemenu"
+                                    style="cursor: pointer;" (click)="selectedTab=4"><a
+                                        [class]="selectedTab==4? 'setting-li active':'setting-li'">Informacija</a>
+                                </div>
+                                <span (click)="logout()"
+                                    class="disconnect d-none d-md-inline-block proName">Atsijungti</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div [class]="'component-container '+((screen.width | async)<768? 'col-12':'')" style="padding: 20px;">
+                    <ng-container [ngSwitch]="selectedTab">
+                        <app-general-settings *ngSwitchCase="1"></app-general-settings>
+                        <app-login-info *ngSwitchCase="2"></app-login-info>
+                        <app-bank-info *ngSwitchCase="3"></app-bank-info>
+                        <app-manufacturer-info *ngSwitchCase="4"></app-manufacturer-info>
+                    </ng-container>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</ion-content>

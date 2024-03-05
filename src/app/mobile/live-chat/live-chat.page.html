@@ -1,0 +1,108 @@
+<ion-content scrollY="false">
+  <div class="stream-container w-100 h-100">
+    <div class="content-wrapper d-flex flex-column d-none">
+      <!-- <app-video-player *ngIf="((liveType|async)==='3') || ((liveType|async)==='2') ; else camera" [controls]="false"
+        [autoplay]="false" [url]="videoBase+'281888163_421979519375902_5834437945443317263_n.mp4'"></app-video-player>
+      <ng-template #camera> -->
+      <div class="enable-buttons">
+        <ion-button [disabled]="cams.length<2" class="switch-camera" icon-only (click)="switchCamera()"><ion-icon
+            name="camera-reverse"></ion-icon></ion-button>
+      </div>
+      <div class="cam-container" [style]="cameraSwitched?'transform: rotateY(180deg);':''" id="player-container">
+      </div>
+      <!-- </ng-template> -->
+      <div class="d-flex detail-header p-2">
+
+        <app-profile-photo [user]="(video$|async)?.owner" [size]="35" statusVisible="false" [nameWidth]="'150px'"
+          [nameVisible]="true"></app-profile-photo>
+
+        <span expand="block" fill="clear" shape="round"
+          class="d-flex justify-content-center align-items-center header-item" style="background: #6a7bff">
+          <ion-icon name="eye-outline" style="font-size: 20px; margin-right: 4px; color: white"></ion-icon>
+          256
+        </span>
+        <ion-buttons>
+          <ion-button class="icons share">
+            <ion-icon name="paper-plane"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+
+      <div id="liveMessageContainer" class="message-wrapper" (scroll)="onMessageScroll($event)">
+        <ng-container *ngFor="let message of messages; let i = index">
+          <app-message [message]="message" [atTop]="isAtTop" [index]="i"></app-message>
+        </ng-container>
+      </div>
+
+    </div>
+    <div class="write-box" *ngIf="me && (liveType|async)==='3';else chatInputBox">
+      <div class="inputs">
+        <ion-input maxlength="30" placeholder="Rašyti žinutę... max 30 raidžių" (keyup.enter)="onSendMessage()"
+          [(ngModel)]="messageText"></ion-input>
+        <ion-button mode="md" (click)="onSendMessage()"><ion-icon name="send"></ion-icon></ion-button>
+      </div>
+    </div>
+    <ng-template #chatInputBox>
+      <div class="sender-panel" *ngIf="me && (isSelfLive|async)===true">
+        <ion-button *ngIf="(liveType|async)==='2' else anotherType" color="success"
+          (click)="onCreateLiveProducts()"><ion-icon name="camera"></ion-icon></ion-button>
+        <ng-template #anotherType>
+          <ion-button color="danger" *ngIf="isLiveStarted else startbtn" (click)="onBack(null)">
+            <ion-icon name="stop"></ion-icon>
+          </ion-button>
+          <ng-template #startbtn>
+            <ion-button color="danger" (click)="startLiveVideo()">
+              <ion-icon name="play"></ion-icon>
+            </ion-button>
+          </ng-template>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
+  <ion-modal #liveModal [backdropDismiss]="false" [isOpen]="modal" [animated]="true" mode="ios"
+    [initialBreakpoint]="0.85" [breakpoints]="[0.85]" class="implicit-swipe-modal-skip">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Live transliacija</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="onBack(liveModal)" [strong]="true">Atšaukti</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content style="--background:white" class="ion-padding">
+        <div class="input-group mb-3 mt-3" onclick="document.getElementById('liveImage').click()">
+          <img *ngIf="liveInfo.imageForView;else icon1" [src]="liveInfo?.imageForView" />
+          <ng-template #icon1>
+            <div class="inner-text-icon">
+              <ion-icon name="images"></ion-icon>
+              <span>Koverio foto</span>
+            </div>
+          </ng-template>
+          <input id="liveImage" type="file" accept="image/*" class="form-control" (change)="onBrowseImage($event)">
+
+        </div>
+
+        <textarea class="form-control" [(ngModel)]="liveInfo.about" placeholder="Aprašyti šią transliacija"
+          maxlength="100" minlength="5" id="exampleFormControlTextarea1" rows="2"></textarea>
+        <div class="flex-box">
+          <button (click)="onSave()" class="btn btn-primary mt-3"
+            style="width: 50%; margin-left: auto;margin-right: auto;" [disabled]="savingInProgress" type="button"
+            disabled>
+            <span class="spinner-border spinner-border-sm" *ngIf="savingInProgress" role="status"
+              aria-hidden="true"></span>
+            {{savingInProgress? ' Ikelti... ':' Ikelti '}}
+          </button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <ion-list *ngIf="!liveVideoStreamingService.loaded;" id="skeleton" style="height: 100%;z-index: 99999;">
+    <div class="lds-ring" style="height: 100%;background: black;">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </ion-list>
+</ion-content>

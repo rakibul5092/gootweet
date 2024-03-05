@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="cam-container">
+    <div>Reels įrašas</div>
+    <video [style]="!recorded? 'display: flex':'display: none'" *ngIf="!fileSelected;else fileVideo" id="cameraFotage"
+      autoplay="true" [src]="videoUrl"></video>
+    <ng-template #fileVideo>
+      <video [style]="!recorded? 'display: flex':'display: none'" id="fileVideo" autoplay="true"
+        [src]="videoUrl"></video>
+    </ng-template>
+
+    <img [style]="recorded? 'display: flex':'display: none'" [src]="thumbUrl" />
+    <div *ngIf="recorded || file" class="mb-3 text-area">
+      <textarea [(ngModel)]="about" class="form-control" id="exampleFormControlTextarea1"
+        placeholder="Write your about reel..." rows="3"></textarea>
+    </div>
+    <ion-button class="switch-camera" (click)="switchCamera()" *ngIf="mediaDevices.length>1"><ion-icon
+        name="camera-reverse"></ion-icon></ion-button>
+
+    <ion-buttons>
+      <ion-button *ngIf="recorded;else timer" (click)="restart()"><ion-icon class="restart"
+          name="refresh-circle"></ion-icon></ion-button>
+      <ng-template #timer>
+        <div class="time">{{(minutes|number:'2.0')+':'+(seconds|number:'2.0')}}</div>
+      </ng-template>
+      <ion-button *ngIf="!recordStarted && !recorded;else stopButton" (click)="startRecording()"><ion-icon class="start"
+          name="ellipse"></ion-icon></ion-button>
+      <ng-template #stopButton>
+        <ion-button *ngIf="!recorded;else saveButton" (click)="stopRecording()"><ion-icon class="stop"
+            name="stop"></ion-icon></ion-button>
+        <ng-template #saveButton>
+          <ion-button class="save" (click)="saveReel()">Išsaugoti</ion-button>
+        </ng-template>
+      </ng-template>
+      <div class="attach-container">
+        <ion-button *ngIf="!recordStarted && !recorded"><ion-icon class="attach" name="image"></ion-icon></ion-button>
+        <input (change)="onFileSelection($event)" id="browse-reel" type="file" class="w-100 h-100" accept="video/*" />
+      </div>
+      <!--    -->
+    </ion-buttons>
+  </div>
+</ion-content>

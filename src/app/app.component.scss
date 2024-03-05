@@ -1,0 +1,48 @@
+.main-router {
+  margin-top: 50px;
+}
+
+// .main-router-mobile {
+//   margin-top: 130px;
+// }
+
+.notification-msg {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 15px 3px #eaeaea;
+
+  .btn {
+    padding: 8px 25px;
+    border-radius: 5px;
+  }
+
+  .pro-cnt {
+    .pro-img {
+      border-radius: 5px;
+
+      img {
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .tran-bg {
+    background: transparent;
+    border: 1px solid #6a7bff;
+    color: #6a7bff;
+  }
+}
+
+.cookies-font-size {
+  font-size: 1.125em;
+}
+
+.call {
+  app-incoming-call,
+  app-outgoing-call {
+    z-index: 99999;
+  }
+}

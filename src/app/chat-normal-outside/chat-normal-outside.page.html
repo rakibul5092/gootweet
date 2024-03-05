@@ -1,0 +1,183 @@
+<ion-content>
+
+  <div class="chat-section"
+    style="height: 100%;width: 100%;border-width: 2px;border-style: solid;border-color: #6a7bff;padding-bottom: 50px;">
+    <div class="user-chat chat-top1">
+      <div class="mobile-chat-top pb-0 d-block d-md-none">
+        <div class="pro-cnt mb-0">
+          <div class="pro-name-link px-0">
+            <div class="pro-name" *ngIf="service.selectedContact">
+              {{
+              service.selectedContact?.full_name|join_name:18
+              }}
+              <img src="./../../assets/img/verified.svg" alt="img" />
+              <!-- <span class="user-type pl-1" style="font-weight: 400;"></span> -->
+
+              <span (click)="openCartPopover($event)"
+                style="background: rgb(70, 70, 189);cursor: pointer;margin-left: 15px;padding: 10px;margin-left: 15px;border-radius: 10%;">
+                <img class="inactive-i" src="./../../assets/img/shopping-w.svg" alt="img" />
+              </span>
+
+              <ion-icon name="ellipsis-vertical" style="position: absolute; top: 0px; right: -6px; font-size: 20px;"
+                (click)="openMenu($event)"></ion-icon>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-top d-none d-md-block">
+        <div class="pro-cnt pt-2 pb-2 border-0">
+          <div class="pro-img">
+            <img class="cover" [src]="(service.selectedContact?.profile_photo|sanitizeImage:'40_40_')" alt="img" />
+          </div>
+
+          <div class="pro-name-link" style="padding: 0 80px 0 10px">
+            <div class="pro-name">
+              {{
+              service.selectedContact?.full_name|join_name:18
+              }}
+              <img src="./../../assets/img/verified-w.svg" alt="img" />
+              <!-- <span>Gamintojas</span> -->
+            </div>
+
+            <div class="chat-ss">
+              <span (click)="openCartPopover($event)"
+                style="background: rgb(70, 70, 189);cursor: pointer;margin-left: 15px;padding: 10px;margin-left: 15px;border-radius: 10%;">
+                <img class="inactive-i" src="./../../assets/img/shopping-w.svg" alt="img" />
+              </span>
+              <span class="chat-search"><img src="./../../assets/img/search-w.svg" alt="img" /></span>
+              <span class="chat-setting"><img src="./../../assets/img/settings-w.svg" alt="img" /></span>
+              <ion-button (click)="service.blockAndRequestAgain()" color="danger">Block</ion-button>
+              <!-- <span (click)="service.closeMessage()" style="margin-left: 10px" class="chat-setting"><i
+                  class="fas fa-times"></i></span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div #scrollToMe (scroll)="service.onScroll($event)" class="chat-list" id="drop2">
+      <ion-grid *ngIf="service.waitWarning">
+        <ion-row>
+          <ion-row size="6">
+            <div style="width: 100%;height: 100%;text-align: center;">
+              <ion-label>Want to find another designer?</ion-label>
+            </div>
+          </ion-row>
+          <ion-row size="3" style="margin-left: 10px;">
+            <ion-button (click)="service.blockAndRequestAgain()" class="ion-text-center">Yes</ion-button>
+          </ion-row>
+          <ion-row size="3" class="ion-text-center">
+            <ion-button (click)="service.updateWaitTimer()">No</ion-button>
+          </ion-row>
+        </ion-row>
+      </ion-grid>
+      <div style="display: flex;justify-content: center;margin-top: 5px;" *ngIf="service.tempMsgs.length>10">
+        <ion-button style="--background:rgb(107, 107, 107)" mode="ios" (click)="service.loadMoreMessage()">More
+        </ion-button>
+      </div>
+      <!--********************** Main product ******************************* -->
+      <div (click)="openProduct(service.mainProduct.id,service.mainProduct, service.chatRequest.manufacturer.uid)"
+        *ngIf="service.mainProduct && service.tempMsgs.length==0" class="sent-req-message sent-req-item "
+        style="width: 100%;;margin-right: 4px;padding: 5px;">
+        <!-- <div class="pro-img border-0">
+          <img class="cover" [defaultImage]="default" [lazyLoad]="getImage(service.mainProduct?.main_images)"
+            alt="img" />
+        </div> -->
+
+        <div class="show-img-p">
+          <div class="show-img flex-box wh-100">
+            <img class="img-center imgHovr" [defaultImage]="default"
+              [lazyLoad]="(service.mainProduct?.main_images|getImage)" alt="img" />
+          </div>
+        </div>
+        <div class="pro-cnt req-pro-cnt1">
+          <div class="pro-name-link w-100" style="margin-top: 10px;">
+            <div class="pro-name">
+              {{service.mainProduct?.title}}
+            </div>
+            <div *ngIf="(service.mainProduct?.good | getGoodLength) == 1" class="catalog-cnt border-0 p-0 m-0">
+              <div class="catalog-ul">
+                <span class="catalog-li" *ngFor="let material of service.mainProduct?.good | slice:0:4; let i = index">
+                  <div class='col-12 p-0 cat-div'>
+                    <img [src]="material.images | getMaterialImage" alt="" style="width: 25px;height: 25px;">
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div class="product-txt">
+              <div class="product-price">
+                <span class="current-price">
+                  <span class="type-money">€</span>
+                  <span class="money">{{(service.mainProduct?.good|getPrice)}}</span>
+                </span>
+                <span class="price-set">{{(service.mainProduct?.good|getUnit)}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="chat-img-txt"
+        *ngIf="service.chatRequest.text && service.chatRequest.text.trim().length>0 && service.tempMsgs.length==0">
+        <div class="chat-txt">
+          {{ service.chatRequest.text }}
+        </div>
+      </div>
+      <app-message-container *ngFor="let message of service.tempMsgs" [message]="message"
+        [selectedContact]="service.selectedContact" [me]="service.me" [isOutside]="true" [isDesigner]="false">
+      </app-message-container>
+
+    </div>
+
+    <div *ngIf="service.friendTyping" id="writing" style="position: absolute;left: 0px;bottom: 40px;z-index: 999;">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <div class="chat-input">
+      <div *ngIf="!service.isSingleChat"
+        style="width: 100%;height: 50px;display: flex;justify-content: center;align-content: center;align-items: center;">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <ion-row>
+          <ion-label style="margin-left:25px">Luktelkite...</ion-label>
+        </ion-row>
+      </div>
+      <div *ngIf="service.isSingleChat" class="input-group">
+        <ion-textarea rows="1"
+          [disabled]="service.isUploading || service.selectedProduct || service.chatRequest.text.trim().length>0"
+          (keyup.enter)="service.selectedContact? service.sendMessage(null, null, true):service.sendDesignerRequest(service.messageText)"
+          (ionChange)="service.messageTextChanged()" [(ngModel)]="service.messageText" inputmode="text" mode="ios"
+          style="--padding-bottom: 15px;--padding-top: 15px;--padding-start: 15px;--padding-end: 15px;resize: none;font-size: 14px !important;height: 45px;"
+          placeholder="Pradėkite rašyti..."></ion-textarea>
+        <div class="input-group-append">
+          <span *ngIf="service.isUploading" class="input-group-text" id="basic-addon2">
+            <div class="chat-img">
+              <img style="width: 20px; height: 20px; object-fit: cover" src="assets/loading-messenger.svg" alt="img" />
+            </div>
+          </span>
+          <span *ngIf="!service.isUploading" class="input-group-text" id="basic-addon2">
+            <span *ngIf="!service.isTyping && !service.selectedProduct"
+              onclick="document.getElementById('browselogo').click()" class="file-u" title="file">
+              <img src="./../../assets/img/attach-file.svg" alt="img" />
+            </span>
+
+            <input id="browselogo" type="file" multiple style="display: none"
+              (change)="service.onBrowseImage($event)" />
+            <span
+              (click)="service.selectedContact? service.sendMessage(null, null, true):service.sendDesignerRequest(service.messageText)"
+              *ngIf="service.isTyping || service.selectedProduct" class="felling-u" title="felling">
+              <ion-icon style="color: rgb(52, 116, 255); font-size: 20px" name="send"></ion-icon>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

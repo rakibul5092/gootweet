@@ -1,0 +1,190 @@
+<ion-content>
+	<div class="main-wrapper ">
+		<div class="log-reg reg-step-4 ">
+			<form #form="ngForm">
+				<div class="purchase-cnt">
+					<div class="purchase-back">
+						<span (click)="onBack()" class="back-li" style="display: inline-flex;align-items:center">
+							<ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+						</span>
+					</div>
+					<div class="tlt pur-m-tlt"><span class="step-no"><span class="cur">2</span>/<span
+								class="total">3</span></span> Pristatymo informacija</div>
+					<div class="form-cnt form-cnt-1">
+						<div class="row">
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Vardas</h6>
+									</label>
+									<div class="form-input">
+										<input [(ngModel)]="me.full_name.first_name" type="text" name="fname"
+											class="form-control textIn"
+											[style]="checked && (!me?.full_name?.first_name || me?.full_name?.first_name ==='') ? 'border:1px solid red' : '' "
+											placeholder="Vardenis" />
+										<p ion-text class="text04"
+											*ngIf="checked && (!me?.full_name?.first_name || me?.full_name?.first_name === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Vardas is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Pavardė</h6>
+									</label>
+									<div class="form-input">
+										<input [(ngModel)]="me.full_name.last_name" type="text" name="lname"
+											class="form-control textIn"
+											[style]="checked && (!me?.full_name?.last_name || me?.full_name?.last_name ==='') ? 'border:1px solid red' : '' "
+											placeholder="Pavardenis" />
+										<p ion-text class="text04"
+											*ngIf="checked && (!me?.full_name?.last_name || me?.full_name?.last_name === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Pavardė is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Tel. Nr.</h6>
+									</label>
+									<div class="form-input">
+										<ion-input [(ngModel)]="me.details.telephone_no" type="text" name="phone"
+											[style]="checked && (!me?.details.telephone_no || me?.details.telephone_no === '') ? 'border:1px solid red' : '' "
+											class="form-control textIn" placeholder="+370 0000 0000"></ion-input>
+										<p ion-text class="text04"
+											*ngIf="checked && (!me?.details.telephone_no || me?.details.telephone_no === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Miestas is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">El. paštas</h6>
+									</label>
+									<div class="form-input">
+										<input [disabled]="isLoggedIn" [(ngModel)]="me.email" type="text"
+											[style]="checked && (!me?.email || me?.email === '') ? 'border:1px solid red' : '' "
+											class="form-control textIn" name="email" placeholder="email@gmail.com" />
+										<p ion-text class="text04" *ngIf="checked && (!me?.email || me?.email === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Miestas is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Miestas</h6>
+									</label>
+									<div class="form-input">
+										<input [(ngModel)]="me.city" type="text" class="form-control textIn" name="city"
+											[style]="checked && (!me?.city || me?.city ==='') ? 'border:1px solid red' : '' "
+											placeholder="Vilnius" />
+										<p ion-text class="text04" *ngIf="checked && (!me?.city || me?.city === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Miestas is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Adresas</h6>
+									</label>
+									<div class="form-input">
+										<!-- <input [(ngModel)]="me.address" (ionChange)="addressChanged()" type="text"
+											class="form-control" placeholder="Plytelių g, 12-1" /> -->
+										<ion-input id="googlePlaces" (click)="onFocus($event)" name="address"
+											(ionChange)="addressChanged()" [(ngModel)]="me.address" type="text"
+											[style]="checked && (!me?.address || me?.address ==='') ? 'border:1px solid red' : '' "
+											class="form-control textIn" placeholder="Plytelių g, 12-1"
+											autocomplete="off">
+										</ion-input>
+										<p ion-text class="text04"
+											*ngIf="checked && (!me?.address || me?.address === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Adresas is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Pašto kodas</h6>
+									</label>
+									<div class="form-input">
+										<input [(ngModel)]="me.postal_code" type="text" class="form-control textIn"
+											name="postCode"
+											[style]="checked && (!me?.postal_code || me?.postal_code ==='') ? 'border:1px solid red' : '' "
+											placeholder="86466" />
+										<p ion-text class="text04"
+											*ngIf="checked && (!me?.postal_code || me?.postal_code === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Pašto kodas is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 col-md-3">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Namo numeris</h6>
+									</label>
+									<div class="form-input">
+										<input [(ngModel)]="me.house_number" type="text" class="form-control textIn"
+											name="housenumber"
+											[style]="checked && (!me?.house_number || me?.house_number ==='') ? 'border:1px solid red' : '' "
+											placeholder="" />
+										<p ion-text class="text04"
+											*ngIf="checked && (!me?.house_number || me?.house_number === '')">
+											<ion-label style="font-size: 12px; color: red">
+												Namo numeris is required!
+											</ion-label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 col-md-3">
+								<div class="form-group">
+									<label>
+										<h6 class="mb-3">Buto numeris</h6>
+									</label>
+									<div class="form-input">
+										<input [(ngModel)]="me.flat_number" type="text" class="form-control textIn"
+											name="flatnumber" placeholder="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="pur-des mb-4"></div>
+					<div class="sent-btn text-right">
+						<button *ngIf="!form.dirty" [disabled]="!isLoggedIn" style="width: auto;"
+							class="btn ctm-btn cart-btn btnNav" (click)="nextPage()">Tęsti</button>
+						<button *ngIf="form.dirty" style="width: auto;" class="btn ctm-btn cart-btn btnNav"
+							(click)="submitForm()">Tęsti</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</ion-content>

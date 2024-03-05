@@ -1,0 +1,104 @@
+@import "./../../../../theme/mixins/_mixins";
+.custom-modal-body {
+  background: #fff;
+  border-radius: 5px;
+  .custom-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 99;
+  }
+  .post-cnt {
+    /*@include padding-p-map($share-post-cnt-padding);*/
+    padding: 5%;
+    .post-tlt {
+      margin-bottom: 15px;
+    }
+    .share-box {
+      .share-ul-box {
+        .share-ul-tlt {
+          font-size: 14px;
+          color: #6a6975;
+          font-weight: 400;
+          margin-bottom: 15px;
+          text-align: center;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #dadada;
+        }
+        .share-ul-btn {
+          display: flex;
+          .share-ul {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .share-li {
+              cursor: pointer;
+              border-radius: 50%;
+              width: 35px;
+              height: 35px;
+              @include margin-right-p-map($share-li-margin-right);
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 0 15px 3px #ddd;
+              color: #fff;
+              padding: 5px;
+              img {
+                @include width-p-map($share-li-img-width);
+              }
+              &.fb-li {
+                background: #3f62a9;
+              }
+              &.linked-li {
+                background: #026fa7;
+              }
+              &.tw-li {
+                background: #04acee;
+              }
+              &.wh-li {
+                background: #24d366;
+              }
+              &.tel-li {
+                background: #0088cd;
+              }
+              &.pin-li {
+                background: #bd091d;
+                margin-right: 0;
+              }
+            }
+          }
+          .cart-btn {
+            padding: 5px 35px;
+            font-size: 17px;
+            white-space: nowrap;
+          }
+        }
+      }
+      .pro-cnt {
+        align-items: normal;
+        .text-boxt {
+          textarea.form-control {
+            height: auto;
+            background: #f5f5f5;
+            border: none;
+            margin-bottom: 15px;
+            @include height-p-map($share-box-textarea-height);
+            resize: none;
+            padding: 10px 20px;
+          }
+        }
+        .share-img {
+          padding-bottom: 40%;
+          position: relative;
+          margin-bottom: 15px;
+          position: relative;
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<div class="com-pro-d d-flex">
+  <span class="com-pro-img" style="cursor: pointer" (click)="gotoProfile(comment?.commenter_info)">
+    <img class="cover" src="{{
+          comment?.commenter_info?.profile_photo
+            | sanitizeImage: '150_150_'
+        }}" alt="img" />
+  </span>
+  <div class="comment-middle">
+    <span (click)="gotoProfile(comment?.commenter_info)" style="cursor: pointer" class="com-pro-name ">
+      {{ comment?.commenter_info?.full_name | join_name }}
+      <span class="com-pub">{{
+        isReplyComment?comment?.reply_comment_data?.converted_time:
+        comment?.comment_data?.converted_time
+        }}</span>
+    </span>
+
+    <ng-container *ngIf="!isReplyComment;else replySection">
+      <div class="comment-txt" *ngIf="comment?.comment_data?.type === 1;else gif"
+        [innerHTML]="comment?.comment_data?.comment_text| urlify">
+      </div>
+      <ng-template #gif>
+        <img class="gif" style="max-width: 200px;" [src]="comment?.comment_data?.gif" />
+      </ng-template>
+    </ng-container>
+    <ng-template #replySection>
+      <div class="comment-txt" *ngIf="comment?.reply_comment_data?.type ===1;else gif"
+        [innerHTML]="comment?.reply_comment_data?.comment_text| urlify">
+      </div>
+      <ng-template #gif>
+        <img class="gif" style="max-width: 200px;" [src]="comment?.reply_comment_data?.gif" />
+      </ng-template>
+    </ng-template>
+  </div>
+
+  <div class="commnt_right ml-3 d-flex">
+    <span *ngIf="me" (click)="setReply()" class="reply-btn">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </span>
+    <span class="dot_option" *ngIf="me?.uid === comment.commenter_info.uid" (click)="openCommentMenu($event)">
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </span>
+  </div>
+</div>

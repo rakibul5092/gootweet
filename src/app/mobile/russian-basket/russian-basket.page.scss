@@ -1,0 +1,77 @@
+.header-left-image {
+  height: 15em;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.detail-text{
+  font-size: 15px;
+  color: gray;
+  text-align: left;
+  line-height: 18px;
+  margin-bottom: 0px;
+}
+.medioum-text {
+  font-size: 17;
+  font-weight: bold;
+}
+.bottom-btns {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+}
+.done-button {
+  padding: 10px 18px;
+  width: 50%;
+  background-color: rgb(248, 116, 116);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.card-button {
+  padding: 10px 18px;
+  width: 50%;
+  color: rgb(248, 116, 116);
+  background-color: #ebebeb;
+  font-size: 17px;
+  font-weight: bold;
+}
+.buy-button ion-icon {
+  color: red;
+  font-size: 25px;
+  padding-left: 1em;
+}
+
+.product-container {
+  columns: 2;
+  gap: 5px;
+  row-gap: 1px;
+  padding: 5px;
+}
+
+.product {
+  width: 100%;
+  background-color: #fff;
+  border: solid 0.2px #d9d9d9;
+  margin-bottom: 9px;
+  overflow-y: auto;
+  position: relative;
+}
+@media only screen and (max-width: 300px) {
+
+  .done-button {
+    padding: 5px 10px;
+  }
+  
+  .card-button {
+    padding: 5px 10px;
+  }
+  .detail-text{
+    font-size: 16px;
+    text-align: justify;
+    line-height: 15px;
+  }
+}

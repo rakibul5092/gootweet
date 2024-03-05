@@ -1,0 +1,80 @@
+$p: 7px;
+$n: 4;
+$slate: blue;
+$blue: #f7f7f7;
+
+.tab-link {
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  background: transparent;
+  color: white;
+  border-radius: 2px;
+  font-size: 24px;
+  font-weight: bold;
+  // border
+  hr {
+    transition: all 375ms ease-out;
+    // lets the browser know what will happen
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 2px 2px 0px 0px;
+    height: 3px;
+    width: 25%;
+    background: #f7f7f7;
+  }
+
+  div {
+    height: 100%;
+    width: 25%;
+    background: #ffffff1f;
+    position: absolute;
+    border-radius: 6px;
+    transition: all 375ms ease-out;
+  }
+  // links
+  a {
+    display: flex;
+    width: 25%;
+    padding: 14px 0px;
+    text-align: center;
+    text-transform: capitalize;
+    justify-content: center;
+    align-items: center;
+    color: white !important;
+    cursor: pointer;
+
+    &:active {
+      ~ hr {
+        transition: all 350ms ease-out;
+      }
+    }
+    // loop for transforms, needs to be a different percentage for each link
+    @for $i from 1 through $n {
+      &:nth-child(#{$i}) {
+        &.active {
+          ~ hr,
+          ~ div {
+            transform: translateX(#{($i - 1) * 100%});
+          }
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          ~ hr,
+          ~ .active ~ hr {
+            transform: translateX(#{($i - 1) * 100%});
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  background: transparent;
+}

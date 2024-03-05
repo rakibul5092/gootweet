@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true">
+  <div class="main-wrapper ">
+    <section class="blog-section tracking-section pb-5 mp-0">
+      <div class="row m-0">
+        <div class="col-12 column-left pl-0 d-none d-md-block">
+          <div class="left-side-bar">
+            <app-my-info [userTypeInNumber]="userTypeInNumber" [wallet]="wallet">
+            </app-my-info>
+          </div>
+        </div>
+        <div class="col-12 column-mid p-0">
+          <div class="tlt reviews-tlt p-3 p-md-0 mb-0 mb-md-3">Sekamų gamintojų siena</div>
+          <div class="blog-cnt mb-5">
+            <div class="">
+              <div *ngFor="let wallPost of service.wallPosts">
+                <app-post [wallPost]="wallPost" [me]="me" [isLoggedin]="isLoggedIn.value">
+                </app-post>
+              </div>
+              <ion-infinite-scroll (ionInfinite)="findNext($event)">
+                <ion-infinite-scroll-content>
+                </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 column-right pr-0">
+          <div class="right-sidebar">
+            <div class="blog-cnt">
+              <div class="blog mb-3">
+                <div class="tlt">Sekami gamintojai</div>
+                <div class="blog-item" *ngIf="!isViewAllTrackedManufacturer">
+                  <div *ngFor="let follow of follows | slice:0:3; let i = index" class="pro-cnt">
+                    <span (click)="removeFollows(follow?.id, i)" class="reviews-delet-i remove_icon"><img
+                        class="remove_icon" src="./../../assets/img/delete.svg" alt="img" /></span>
+                    <div class="pro-img">
+                      <img class="cover" [src]="follow?.image|sanitizeImage:'150_150_'" alt="img" />
+                    </div>
+                    <div class="pro-name-link">
+                      <div class="pro-name" title="{{follow?.name}}">
+                        {{follow?.name.length > 12 ? follow?.name.substr(0, 12) + '...' : follow?.name}}
+                        <img src="./../../assets/img/verified.svg" alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="blog-item" *ngIf="isViewAllTrackedManufacturer">
+                  <div *ngFor="let follow of follows; let i = index" class="pro-cnt">
+                    <span (click)="removeFollows(follow?.id, i)" class="reviews-delet-i remove_icon"><img
+                        class="remove_icon" src="./../../assets/img/delete.svg" alt="img" /></span>
+                    <div class="pro-img">
+                      <img class="cover" [src]="follow?.image|sanitizeImage:'150_150_'" alt="img" />
+                    </div>
+                    <div class="pro-name-link">
+                      <div class="pro-name" title="{{follow?.name}}">
+                        {{follow?.name.length > 12 ? follow?.name.substr(0, 12) + '...' : follow?.name}}
+                        <img src="./../../assets/img/verified.svg" alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="review-cnt p-0" *ngIf="!isViewAllTrackedManufacturer">
+                  <a (click)="isViewAllTrackedManufacturer = true"><span class="postText">
+                      <ion-icon name="arrow-forward"></ion-icon> Peržiūrėti visus
+                      sekamus gamintojus
+                    </span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>

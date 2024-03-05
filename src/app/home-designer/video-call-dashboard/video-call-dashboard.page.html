@@ -1,0 +1,16 @@
+<div class="players w-100 d-flex justify-content-center align-items-center">
+  <div class="timer">{{time$|async}}</div>
+  <div id="local-player" style="transform: rotateY(180deg);" (click)="switchVideoPosition(1)" class="small-player">
+  </div>
+  <div id="remote-player" (click)="switchVideoPosition(2)" class="big-player"></div>
+  <ion-button class="hang-up" color="danger" (click)="hangupCall()"><ion-icon name="call"></ion-icon></ion-button>
+
+  <div class="enable-buttons">
+    <ion-button [class]="'mic '+ (mic?'':'off')" (click)="micOnOff()"><ion-icon name="mic-off"></ion-icon></ion-button>
+    <ion-button [class]="'camera '+ (videoCam?'':'off')" (click)="camOnOff()"><ion-icon
+        name="videocam-off"></ion-icon></ion-button>
+    <ion-button [disabled]="cams.length<2" class="switch-camera" icon-only (click)="switchCamera()"><ion-icon
+        name="camera-reverse"></ion-icon></ion-button>
+  </div>
+
+</div>

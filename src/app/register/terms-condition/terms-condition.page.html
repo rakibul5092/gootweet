@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{type==1?'PLATFORMOS GOOTWEET NAUDOJIMOSI SĄLYGOS':'UAB Gootweet'}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="term-con-cnt">
+    <ion-textarea style="width: 100%; height: 100%; padding: 25px" [innerHtml]="type==1? terms:termsBottom">
+    </ion-textarea>
+  </div>
+</ion-content>

@@ -1,0 +1,270 @@
+.btnHovr:hover {
+  transform: scaleX(1.04);
+  //   filter: contrast(80%) brightness(106%);
+  //font-size: 17px;
+  transition: 200ms ease-in-out;
+}
+
+.textIn:hover {
+  box-shadow: 0px 0px 2px gray;
+  color: black !important;
+  z-index: 10;
+}
+
+.checkIn:hover {
+  transform: scaleX(1.1);
+  box-shadow: 0px 0px 3px gray;
+  z-index: 1111;
+}
+
+.cartNotific:hover {
+  transform: scaleX(1.3);
+  box-shadow: 0px 0px 3px rgb(209, 205, 205);
+  outline: 2px solid rgb(243, 240, 240);
+}
+
+.T_underLine:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.TNav_underLine:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+//Searchbox hover over the app
+.searchIn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scaleX(1);
+  box-shadow: 0px 0px 3px gray;
+  transition: all ease-in-out 0.5s;
+}
+#icon_h,
+.icon_h {
+  height: 16px;
+  width: 16px;
+}
+#icon_h:hover,
+.icon_h:hover {
+  transform: scale(1.2);
+  transition: 300ms ease-in-out;
+}
+
+// Share PopUp icon
+.SP_icon_h:hover {
+  transform: scale(1.1, 1.1);
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  transition: 100ms ease-in-out;
+}
+
+//furniin logo
+.logoImg:hover {
+  filter: contrast(70%) brightness(106%);
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  transition: 100ms ease-in-out;
+}
+
+//notification icon
+.navNoti:hover {
+  color: #6a7bff;
+  transition: 100ms ease-in-out;
+  cursor: pointer;
+}
+
+//notification icon
+#navNoti:hover {
+  color: #6a7bff;
+  transition: 100ms ease-in-out;
+}
+
+//profile name/logout
+.proName:hover {
+  color: #000000;
+}
+
+.likeDislike:hover {
+  transform: scaleX(1.2);
+  filter: contrast(70%) brightness(106%);
+  transition: 200ms ease-in-out;
+  cursor: pointer;
+}
+
+// hover on the post person name in the post page, and designer also
+.postText:hover {
+  font-weight: bolder;
+  filter: contrast(50%) brightness(20%) opacity(765%);
+}
+
+//for option useing bubble
+.postOption:hover {
+  filter: contrast(50%) brightness(20%) opacity(765%);
+  transform: scaleX(1.2);
+  transition: 200ms ease-in-out;
+}
+
+// Designer Request post option
+.dr_postOption:hover {
+  font-size: 24px;
+  color: #000000;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+
+//sekti button hover
+.btnSekti:hover {
+  transform: scaleX(1.02);
+  filter: contrast(80%) brightness(106%) opacity(90%);
+  transition: 100ms ease-in-out;
+}
+
+//post products (image)
+
+.imgHovr:hover {
+  transform: scale(1.02, 1.02);
+  transition: 1.5s transform;
+  cursor: pointer;
+}
+
+//left&right side recommendation
+.ImgHovr:hover {
+  transform: scale(1.02, 1.02);
+  transition: 1s transform;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+//designer profile name
+
+.Td_underLine:hover {
+  text-decoration: underline;
+  letter-spacing: 0.3px;
+  font-size: 16px;
+}
+
+.Tbold_underLine:hover {
+  text-decoration: underline;
+  letter-spacing: 0.3px;
+  font-weight: bolder;
+}
+
+//my-info(userprofile)
+.t_underLine:hover {
+  font-size: 16px;
+  color: #6a7bff;
+  cursor: pointer;
+  // letter-spacing: 0.3px;
+}
+
+// for material add (Nuotrauka)
+#Td_underLine:hover {
+  letter-spacing: 0.3px;
+  font-weight: bolder;
+}
+
+//delete and other little buttons
+
+.remove_icon:hover {
+  transform: scale(1.05, 1.05);
+  filter: contrast(80%) brightness(106%) opacity(90%);
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  transition: 200ms ease-in-out;
+  color: red !important;
+}
+
+//manufacrurer-order-product(expand button)
+.expand_icon:hover {
+  transform: scale(1.05, 1.05);
+  filter: contrast(80%) brightness(106%) opacity(90%);
+  transition: 200ms ease-in-out;
+  color: black !important;
+}
+
+//designer-wallet button
+
+.btnDWU:hover {
+  transform: scale(1.03, 1);
+  transition: 100ms ease-in-out;
+}
+
+#btnDW:hover {
+  transform: scale(1.03, 1);
+  transition: 100ms ease-in-out;
+}
+
+#btnDw:hover {
+  transform: scale(1.03, 1);
+  transition: 100ms ease-in-out;
+}
+
+//designer-profile-wall
+
+.changePro:hover {
+  transform: scale(1.05, 1.05);
+  transition: 200ms ease-in-out;
+}
+
+//designer general setting page(sidememu hover)
+.dgSidemenu:hover {
+  box-shadow: 0px 0px 2px rgb(197, 194, 194);
+  filter: contrast(80%) brightness(106%);
+  transition: 300ms ease-in-out;
+  cursor: pointer;
+}
+
+//notifications list item
+
+// profile nav button and manufacturer all button
+.btnNav:hover {
+  transform: scaleX(1.04);
+  box-shadow: 0px 0px 2px rgb(197, 194, 194);
+  transition: 200ms ease-in-out;
+}
+
+// product information save button
+
+.saveInfo:hover {
+  transform: scale(1.03, 1);
+  transition: 100ms ease-in-out;
+}
+
+//product-popup-six/ten button
+.btn_six_ten:hover {
+  box-shadow: 0px 0px 2px white;
+  transition: 100ms ease-in-out;
+}
+
+.addAni:hover {
+  transform: scale(0.9, 0.9);
+  background-color: #9dbddd;
+  transition: 100ms ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8, 0.8);
+    background-color: #9dbddd;
+  }
+
+  50% {
+    transform: scale(1.2, 1.1);
+    background-color: #788796;
+  }
+
+  100% {
+    transform: scale(1, 0.1);
+  }
+}
+
+.more_less {
+  height: 25px;
+  width: auto;
+  margin-left: 5px;
+  --border-radius: 10px;
+  --background: #6a7bff;
+  display: inline-block;
+  align-self: center;
+  text-align: center;
+  text-transform: none;
+}

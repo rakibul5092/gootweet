@@ -1,0 +1,37 @@
+ion-segment-button {
+  --color: #0a1e53;
+  --color-checked: #6a7bff;
+  --indicator-transition: 0.5s;
+  .item {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    span {
+      text-transform: none;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 5px;
+      line-height: 16px;
+      font-style: normal;
+    }
+    ion-icon {
+      text-transform: none;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 16px;
+      font-style: normal;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  ion-segment-button {
+    span {
+      font-size: 12px;
+      letter-spacing: 0px;
+    }
+    ion-icon {
+      font-size: 15px;
+    }
+  }
+}

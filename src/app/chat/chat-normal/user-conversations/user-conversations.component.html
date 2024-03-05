@@ -1,0 +1,60 @@
+<ion-button (click)="isProductSelection.next(false)"
+  [class]="'chat-minimized '+ ((isProductSelection|async)===true?'':'d-none')">
+  <ion-icon name="expand"></ion-icon>
+</ion-button>
+
+<div *ngIf="(service.isSingleChat |async)===true"
+  [class]="'chat-section normal-chat-section m-border-0 m-radius-0 '+ ((isProductSelection|async)===false?'':'d-none')"
+  [style]="
+    service.screen.width.value > 767
+      ? 'height: 85%;' : 'height: 100%;top:0px;'" (drop)="drop($event)" (dragover)="allowDrop($event)" id="drop2">
+  <div class="user-chat chat-top">
+    <div class="pro-cnt">
+      <div class="pro-name-link">
+        <div class="pro-name">
+          {{
+          service.selectedContact?.full_name|join_name:18
+          }}
+          <img style="width: 20px" src="./../../assets/img/verified.svg" alt="img" />
+        </div>
+      </div>
+    </div>
+    <ion-buttons mode="ios" slot="end">
+      <ion-button (click)="gotoCatalog()"><ion-icon color="white"
+          src="assets/img/products-blue.svg"></ion-icon></ion-button>
+      <ion-button (click)="makeCall()"><ion-icon color="white" name="call"></ion-icon></ion-button>
+      <ion-button (click)="service.closeMessage()"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons>
+
+  </div>
+  <!-- (service.callData$|async) !== null -->
+  <div #scrollToMe (scroll)="service.onScroll($event)"
+    style="padding-bottom: 40px;background-image: url(https://storage.googleapis.com/furniin-d393f.appspot.com/backgrounds/chat.png);"
+    [class]="(service.callData$|async) !== null? 'chat-list chat-list-with-call':'chat-list'">
+    <div *ngIf="(service.tempMsgs|async).length > 9" style="display: flex; justify-content: center; margin-top: 5px">
+      <ion-button style="--background: rgb(107, 107, 107); font-size: 12px" mode="ios"
+        (click)="service.loadMoreMessage()">More
+      </ion-button>
+    </div>
+    <!-- Message main container -->
+    <app-message-container *ngFor="let msg of service.tempMsgs|async; let i = index" [message]="msg"
+      [selectedContact]="service.selectedContact" [me]="service.me" [isOutside]="false" [isDesigner]="false">
+    </app-message-container>
+  </div>
+  <!-- Product to share as message -->
+  <app-share-product *ngIf="service.selectedProduct" (onClose)="service.closePost()"
+    [product]="service.selectedProduct"></app-share-product>
+
+  <div *ngIf="service.friendTyping" id="writing" style="position: absolute; left: 0px; bottom: 40px; z-index: 999">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  <!-- *ngIf="(service.callData$|async) as data" [callData]="data" -->
+  <app-video-call-dashboard *ngIf="(service.callData$|async) as data" [callData]="data"></app-video-call-dashboard>
+
+  <app-chat-input [isUploading]="service.isUploading" [selectedProduct]="service.selectedProduct"
+    [isTyping]="service.isTyping" (onMessageSend)="sendMessage($event)"
+    (onMessageChanged)="service.messageTextChanged($event)" (onBrowseImg)="service.onBrowseImage($event)">
+  </app-chat-input>
+</div>

@@ -1,0 +1,244 @@
+<div class="ml-0 mr-0 mb-2 w-100 " *ngIf="sliderShow">
+  <div class="pl-0 pr-0 pt-1 w-100">
+    <div [id]="'slider-category-container-'+wallPost.id" class="slider-category-container d-flex w-100">
+      <swiper #randomSwiper [config]="config" class="ml-0 mr-0 w-100">
+        <ng-template style="width: 200px;" swiperSlide>
+          <div (click)="openMarketPlace()"
+            class="first-category align-items-center justify-content-center d-flex pl-2 pr-2 h-100 flex-column">
+            <img src="https://storage.googleapis.com/furniin-d393f.appspot.com/categories/3.png" />
+            <span>Prekių kategorija</span>
+            <span>Vidaus ir lauko baldai</span>
+          </div>
+        </ng-template>
+        <ng-template style="width: 228px;" swiperSlide *ngFor="let random of randomProducts; let i = index">
+          <div class="product-wrapper">
+            <div class="product" (click)="singleProductService.openSingleProduct(random?.product,random?.owner)">
+              <div class="price">€{{(random.product?.good | getPrice)}}</div>
+              <img [src]="(random.product.main_images|getImage)" alt="">
+              <div class="product-bottom">
+                <div class="text">
+                  <div class="title">{{random.product.title}}</div>
+                </div>
+                <div class="button-container">
+                  <button (click)="sendToMessenger($event,random.product, random.owner)" class="ask-btn-all">
+                    <img src="assets/img/telegram.svg" alt="img" />Klauskite</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</div>
+<app-reels *ngIf="showReels" [width]="196" [height]="360"></app-reels>
+
+<div class="post-container d-flex">
+
+  <div [id]="isPopoverVideo? 'show-popover-video-id': (wallPost?.data?.owner?.rule)||''+'-'+wallPost.id"
+    class="blog w-100" style="padding: 0px;border: none;">
+    <div class="right-container d-flex justify-content-between align-items-start mb-1">
+      <div class="profile-rating d-flex flex-column">
+        <app-profile-photo style="display: flex;" [ratingVisible]="false" [verified]="true" size="42"
+          [nameWidth]="'unset'" verifyIcon="assets/img/verified.svg" [nameVisible]="true" [user]="wallPost?.data?.owner"
+          [statusVisible]="true"></app-profile-photo>
+      </div>
+
+      <div class="follow d-flex justify-content-center">
+        <div class="info-box d-flex flex-column justify-content-center align-items-center watching">
+          <div class="count">{{wallPost?.data?.owner?.followers||0}}</div>
+          <div class="name">Stebi</div>
+        </div>
+        <div class="info-box d-flex flex-column justify-content-center align-items-center reel-records">
+          <div class="count">20</div>
+          <div class="name">Reels</div>
+        </div>
+        <ion-button [disabled]="followButtonDisabled" *ngIf="isFollowed;else notFollowed" (click)="changeFollow()"
+          mode="ios" class="d-none d-md-block" style="--border-radius: 6px;" color="medium"><ion-icon class="mr-1"
+            name="checkmark"></ion-icon>Stebimas</ion-button>
+        <ng-template #notFollowed>
+          <ion-button [disabled]="followButtonDisabled" (click)="changeFollow()" mode="md" class="d-none d-md-block"
+            color="dark"><ion-icon class="mr-1" name="add"></ion-icon>Stebėti</ion-button>
+        </ng-template>
+        <ion-icon (click)="
+          openWallPostMenu(
+            $event,
+            wallPost?.data?.owner?.uid == me?.uid,
+            wallPost.id,
+            wallPost?.data?.type
+          )
+        " class="ion-text-center postOption" name="ellipsis-horizontal">
+        </ion-icon>
+      </div>
+
+    </div>
+    <div class="owner-info-container d-flex flex-column pb-1">
+      <div class="owner-info d-flex justify-content-between align-items-center">
+        <!-- <div class="owner-text-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt hic eveniet sequi
+          autem
+          amet?</div> -->
+      </div>
+      <!-- <div class="blog-tlt pb-1" [innerHTML]="wallPost?.data?.title | urlify"></div> -->
+      <div class="contact-buttons d-flex justify-content-center align-items-center">
+        <ion-button *ngIf="wallPost?.data?.button1Text&& wallPost?.data?.button1Text !== ''"
+          mode="md">{{wallPost?.data?.button1Text }}<ion-icon name="calendar-clear-outline"></ion-icon></ion-button>
+        <ion-button *ngIf="wallPost?.data?.button2Text&&wallPost?.data?.button2Text!==''" mode="md"
+          (click)="openMessenger()">{{wallPost?.data?.button2Text }}<ion-icon
+            name="chatbubbles-outline"></ion-icon></ion-button>
+      </div>
+    </div>
+
+    <div class="with-log-blog-txt-cnt" style="padding-left: 10px; padding-right: 10px;">
+
+      <div class="with-log-blog-txt-all d-block d-md-flex">
+
+        <div *ngIf="wallPost?.data?.products?.length == 1"
+          class="blog-price m-w-100 text-left text-md-center mt-3 mt-md-0 mb-4 mb-md-0">
+          <span class="type-money">€ </span>
+          <span class="money">{{
+            wallPost?.data?.products[0]?.good | getPrice
+            }}</span>
+          <span class="price-set">
+            {{ wallPost?.data?.products[0]?.good | getUnit }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <app-social-preview *ngIf="wallPost.data.metaData" [title]="wallPost.data?.metaData?.title"
+      [img]="wallPost.data?.metaData?.img" [description]="wallPost.data?.metaData?.description"
+      [url]="wallPost.data?.metaData?.url">
+    </app-social-preview>
+    <!-- designer wall post images showing here -->
+    <app-post-images [wallId]="wallPost?.id" [wallPost]="wallPost">
+    </app-post-images>
+
+    <!-- manufacturer product and images showing he re -->
+    <app-post-products [me]="me" *ngIf="wallPost?.data?.products?.length>0" [wallPost]="wallPost"></app-post-products>
+
+    <div class="with-log-blog-txt pl-2 pr-2" style="width: 100%">
+      <div *ngIf="wallPost?.shortened" class="blog-txt">
+        <!-- {{wallPost?.data?.description |shorten:200 :'...'}} -->
+        <div innerHTML="{{
+        wallPost?.data?.description | shorten: 100:'...' | urlify
+      }}"></div>
+
+        <ion-label (click)="wallPost.shortened = false" *ngIf="
+        wallPost?.shortened && wallPost?.data?.description?.length > 100
+      " class="more-less postText">
+          Rodyti daugiau
+        </ion-label>
+      </div>
+      <div *ngIf="!wallPost?.shortened" class="blog-txt">
+        <!-- {{wallPost?.data?.description }} -->
+        <div innerHTML="{{ wallPost?.data?.description | urlify }}"></div>
+
+        <ion-label (click)="wallPost.shortened = true" *ngIf="!wallPost?.shortened" class="more-less postText">
+          Rodyti mažiau
+        </ion-label>
+      </div>
+    </div>
+
+    <div *ngIf="wallPost?.data?.reactionCounts>0" class="count-container d-flex align-items-center">
+      <img [style]="'z-index:'+ (6 -i) " *ngFor="let reaction of wallPost.data.reactions;let i = index"
+        [src]="'assets/reactions/'+reaction.icon+'.gif'" alt="">
+      {{
+      wallPost?.data?.reactionCounts||0
+      }}
+    </div>
+
+    <div class="like-comment-count justify-content-between pl-2 pr-2"
+      [style]="(startCommenting?'':'border-bottom:none')">
+
+      <div class="reaction-icons d-flex">
+        <span (click)="toggleReactions('flex')" (mouseenter)="startTimer()" (mouseleave)="cancelTimer()"
+          class="like_cnt">
+          <div [id]="'reactions-'+wallPost.id" class="reaction-container">
+            <img (click)="sendReaction(reaction )" *ngFor="let reaction of reactions"
+              [src]="'assets/reactions/'+reaction.icon+'.gif'" />
+          </div>
+          <ion-icon *ngIf="!wallPost.reacted;else reaction" name="heart-outline"></ion-icon>
+          <ng-template #reaction>
+            <img class="like-img-react" [src]="('assets/reactions/'+wallPost?.reacted?.icon+'.gif')" alt="img" />
+            <div class="react-text" [attr.type]="wallPost?.reacted?.type" style="text-transform: capitalize;">
+              {{wallPost?.reacted?.icon||''}}</div>
+          </ng-template>
+        </span>
+
+        <span class="cmmnt_cnt" (click)="onCommentClick()">
+          <ion-icon class="like-img " name="chatbox-ellipses-outline" alt="img"></ion-icon>
+        </span>
+
+        <span (click)="openSharePopup()" class="shareT_underLine">
+          <ion-icon style="margin-bottom: 3px;" name="arrow-redo-outline" alt="img"></ion-icon>
+        </span>
+      </div>
+      <div (click)="viewAllComment(wallPost)" class="comment-count d-flex justify-content-center align-items-center">
+        Peržiūrėti visus{{' '+
+        wallPost?.comments?.length+' ' }}Komentarus
+      </div>
+
+    </div>
+
+    <div class="comment-cnt-all">
+      <!--******************************** Comment section here  *********************************** -->
+      <app-comment class="comment-cnt"
+        *ngFor="let comment of wallPost?.comments|slice: 0: (!wallPost.isCommentAll? 1: wallPost?.comments?.length)"
+        [comment]="comment" [wallPost]="wallPost" [me]="me">
+      </app-comment>
+
+
+
+      <!-- Typing indicator -->
+      <div *ngIf="wallPost.whoTyping?.uid !== me?.uid && wallPost?.whoTyping?.name"
+        style="width: 100%; display: flex; justify-content: center; margin: 5px">
+        <div id="writing">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <ion-label style="font-size: 13px; font-style: italic; margin-left: 5px">
+            {{ wallPost?.whoTyping?.name }}</ion-label>
+        </div>
+      </div>
+
+      <!-- Write comment box here -->
+      <app-write-box *ngIf="me && startCommenting" [me]="me" [wallPost]="wallPost" (onTyping)="commentTyping(wallPost)"
+        (onSendComments)="sendComments(wallPost, me?.uid)" [text]="wallPost.commentText"></app-write-box>
+    </div>
+  </div>
+
+  <div class="right-container" *ngIf="false">
+    <div class="top-info d-flex w-100 align-items-center">
+      <div class="status">Gamintojas</div>
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+    </div>
+    <app-profile-photo style="display: flex;flex-direction: column;" [verified]="true" size="42"
+      verifyIcon="assets/img/verified.svg" [nameVisible]="true" [user]="wallPost?.data?.owner"
+      [statusVisible]="false"></app-profile-photo>
+    <div class="rating d-flex justify-content-center align-items-center mt-1">
+      <img width="17" height="17" src="assets/img/star-border.svg" />
+      {{' 4.9/5'}}
+    </div>
+    <div class="d-flex justify-content-center align-items-center  pb-3 pt-3 ml-3 mr-3">
+      <ion-button mode="md" class="ion-button-outlined"><ion-icon name="add"></ion-icon> Stebėti</ion-button>
+    </div>
+    <div class="user-other-info d-flex w-100 mt-2">
+      <div class="info-box d-flex flex-column justify-content-center align-items-center watching">
+        <div class="count">18k</div>
+        <div class="name">Stebi</div>
+      </div>
+      <div class="info-box d-flex flex-column justify-content-center align-items-center reel-records">
+        <div class="count">20</div>
+        <div class="name">“Reels” įrašai</div>
+      </div>
+      <!-- <div class="info-box d-flex flex-column justify-content-center align-items-center live-records">
+        <div class="count">30</div>
+        <div class="name">Video įrašai</div>
+      </div> -->
+    </div>
+    <div class="write-to-user d-flex justify-content-between radius-5 radius-5 mt-5 mr-2 ml-2 p-2 pl-3 pr-3">
+      <div class="text">Rašyti konsultantui</div>
+      <img src="assets/img/send_black.svg" alt="">
+    </div>
+  </div>
+</div>

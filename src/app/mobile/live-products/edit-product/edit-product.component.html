@@ -1,0 +1,84 @@
+<ion-modal #modal [isOpen]="openEditModal" [backdropDismiss]="true" [animated]="true" mode="ios" [initialBreakpoint]="1"
+  [breakpoints]="[0.50, 0.75, 1]" class="implicit-swipe-modal-skip">
+  <ng-template>
+    <form [formGroup]="liveProductForm" style="padding: 15px;">
+      <div class="modal-form-container" style="display: flex;flex-direction: column;margin-top: 20px;gap: 10px;">
+        <div class="product-container" style="display: flex;gap: 10px;">
+          <img style="width: 124px;height: 100px;object-fit: cover;" [src]="liveProductPhotoBaseUrl+product?.photo" />
+          <div class="data-container" style="display: flex;flex-direction: column;gap: 10px;">
+            <span
+              style="background: lightgray;padding: 10px 20px;border-radius: 10px;display: flex;font-size: 16px; font-weight: bold;">€
+              <ion-input (ionFocus)="onPriceFocus($event)" placeholder="Kaina" formControlName="price" id="price"
+                type="number" style="--padding-top: 0px; --padding-bottom:0px;margin-left: 10px;"></ion-input></span>
+            <ion-button id="open-colors-modal">Spalvos</ion-button>
+            <ion-button id="open-sizes-modal">Dydžiai</ion-button>
+          </div>
+        </div>
+        <ion-textarea formControlName="about" id="about"
+          style="background: lightgray;padding: 10px;border-radius: 10px;"
+          placeholder="Trumpas prekės aprašymas."></ion-textarea>
+        <div style="display: flex;justify-content: space-evenly;">
+          <ion-button (click)="onEditingCancel(modal)" mode="md" color="danger"
+            style="min-width: 35%;">Atšaukti</ion-button>
+          <ion-button (click)="onProductInfoDone(modal)" mode="md" style="min-width: 35%;">Baigta</ion-button>
+        </div>
+      </div>
+    </form>
+
+    <ion-modal #colorModal trigger="open-colors-modal" [backdropDismiss]="true" [animated]="true" mode="ios"
+      [initialBreakpoint]="0.50" [breakpoints]="[0, 0.50, 0.75]" class="implicit-swipe-modal-skip">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Spalvos</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="onSaveColorsAndSizes(colorModal)" [strong]="true">Išsaugoti</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div class="colors d-flex">
+            <ion-row class="ion-text-center input-row">
+              <ion-input #colorInput placeholder="Pridėti nauja spalvą ( įrašyti)"></ion-input>
+              <ion-button mode="md" class="ml-1" (click)="addColorOrSize(colorInput, true)"
+                color="primary">Add</ion-button>
+            </ion-row>
+            <div class="items" *ngFor="let color of colors">
+              <ion-icon name="close" (click)="onDeleteColorOrSize(color, true)"></ion-icon>
+              <ion-button class="item" mode="md" [color]="color.selected? 'primary':'light'"
+                (click)="color.selected = !color.selected">{{color.name}}</ion-button>
+            </div>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-modal #sizeModal trigger="open-sizes-modal" [backdropDismiss]="true" [animated]="true" mode="ios"
+      [initialBreakpoint]="0.50" [breakpoints]="[0, 0.50, 0.75]" class="implicit-swipe-modal-skip">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Dydžiai</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="onSaveColorsAndSizes(sizeModal, false)" [strong]="true">Išsaugoti</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div class="colors d-flex">
+            <ion-row class="ion-text-center input-row">
+              <ion-input #sizeInput placeholder="Pridėti naują dydį (išsaugoti)"></ion-input>
+              <ion-button mode="md" (click)="addColorOrSize(sizeInput, false)" color="primary">Add</ion-button>
+            </ion-row>
+
+            <div class="items" *ngFor="let size of sizes">
+              <ion-icon name="close" (click)="onDeleteColorOrSize(size, false)"></ion-icon>
+              <ion-button class="item" mode="md" [color]="size.selected? 'primary':'light'"
+                (click)="size.selected = !size.selected">{{size.name}}</ion-button>
+            </div>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </ng-template>
+</ion-modal>

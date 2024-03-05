@@ -1,0 +1,12 @@
+@import "./../../../../theme/mixins/mixins";
+@import "./../../../../theme/advertisement.page.scss";
+.advertisement-section.advertisement-section-2 {
+  .advertisement-cnt {
+    .advertisement-4-cnt {
+      @include background-p-map($ad4-advertisement-4-cnt-background);
+      .ad-pro-col {
+        @include padding-p-map($ad-pro-col-padding);
+      }
+    }
+  }
+}

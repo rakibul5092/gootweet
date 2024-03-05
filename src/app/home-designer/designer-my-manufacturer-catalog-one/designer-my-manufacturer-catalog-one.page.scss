@@ -1,0 +1,26 @@
+@import "./../../../theme/mixins/mixins";
+@import "./designer-manufacturer-catalog.page.scss";
+.blog-cnt {
+  .mbc-col {
+    @include flex-p-map($mbc-col-flex);
+    @include max-width-p-map($mbc-col-max-width);
+  }
+  .blog {
+    .pro-cnt {
+      &.user-cnt {
+        padding-bottom: 15px;
+        margin-bottom: 0;
+      }
+    }
+
+    .cart-btn {
+      padding: 7px 10px;
+    }
+  }
+}
+.d-manufacturer-cnt {
+  .abg-com {
+    transform: none;
+    margin-bottom: 20px;
+  }
+}

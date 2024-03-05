@@ -1,0 +1,34 @@
+<ion-content>
+  <div class="title">
+    Gamintojų ir distributorių prekių katalogas
+  </div>
+  <ion-row class="category-wrapper">
+    <ion-col size="3.5" class="sidebar">
+      <ng-container *ngIf="searchPopupService.categoriesForShow.length>0; else loader">
+        <ion-row (click)="onCatClick(cat)"
+          *ngFor="let cat of searchPopupService.categoriesForShow | slice: 0:11;let i = index"
+          [class]="'category-item ion-activatable ripple-parent rectangle ' + (cat.isSelected? ' selected-row':'')">
+          <img class="cat-img" [src]="baseUrl + cat.data.img" alt="" />
+          <div class="title">{{cat.data.category}}</div>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-row>
+      </ng-container>
+      <ng-template #loader>
+        <ion-row *ngFor="let cat of [1,2,3,4,5,6,7,8];let i = index"
+          class="category-item ion-activatable ripple-parent rectangle">
+          <ion-skeleton-text style="height: 85px; width: 85px; border-radius: 50%" animated="true"></ion-skeleton-text>
+        </ion-row>
+      </ng-template>
+    </ion-col>
+    <ion-col size="8.5" class="right-panel">
+      <ion-row>
+        <ion-col (click)="onSubClick(subCat)" *ngFor="let subCat of (selectedCategory|async)?.subCategories" size="6"
+          class="products ion-activatable ripple-parent rectangle">
+          <img [src]="subcatImageBase+subCat.data.image" alt="Girl in a jacket" class="img" height="130" />
+          <ion-label>{{subCat.data.sub_category}}</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>

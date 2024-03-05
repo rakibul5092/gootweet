@@ -1,0 +1,94 @@
+<ion-content>
+  <div style="display: flex">
+    <nav style="width: 259px; height: 100%; margin-left: 8px">
+      <ul class="mcd-menu">
+        <li>
+          <a href="javascript:void(0)">
+            <ion-icon name="home"></ion-icon>
+            <strong>Dashboard</strong>
+            <small>statistics of gootweet</small>
+          </a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/admin/admin-categories']"
+            (click)="active = 1"
+            [class]="active == 1? 'active':''"
+          >
+            <ion-icon name="create"></ion-icon>
+            <strong>Category</strong>
+            <small>Plan Gootweet category</small>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" [class]="active == 2? 'active':''">
+            <ion-icon name="person"></ion-icon>
+            <strong>Users</strong>
+            <small>all user of Gootweet</small>
+          </a>
+          <ul>
+            <li>
+              <a href="javascript:void(0)">
+                <ion-icon name="globe"></ion-icon>Manufacturers
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <ion-icon name="globe"></ion-icon>Users
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <ion-icon name="globe"></ion-icon>Designers
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)" [class]="active == 3? 'active':''">
+            <ion-icon name="globe"></ion-icon>
+            <strong>Live zone</strong>
+            <small>all wallpost is here</small>
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)" [class]="active == 4? 'active':''">
+            <ion-icon name="id-card"></ion-icon>
+            <strong>Products</strong>
+            <small>all products</small>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" [class]="active == 5? 'active':''">
+            <ion-icon name="document"></ion-icon>
+            <strong>Materials</strong>
+            <small>all materials</small>
+          </a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/admin/streamings']"
+            (click)="active = 6"
+            [class]="active == 6? 'active':''"
+          >
+            <ion-icon name="videocam"></ion-icon>
+            <strong>Streaming</strong>
+            <small>Video streamings</small>
+          </a>
+        </li>
+        <li class="nav-item d-none d-md-inline-block btnHovr">
+          <div class="nav-link pr-0" (click)="logout()">
+            <button class="btn ctm-btn cart-btn log-reg-btn">
+              <ion-icon name="log-out"></ion-icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div style="width: 100%">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<form *ngIf="manufacturerForm else loading" (ngSubmit)="onSubmit()" class="form-container"
+  [formGroup]="manufacturerForm">
+  <div class="combined">
+    <gootweet-input-field type="text" formControlName="brand_name"
+      [label]="'Markės pavadinimas'"></gootweet-input-field>
+    <gootweet-input-field type="text" formControlName="company_name"
+      [label]="'Įmonės pavadinimas'"></gootweet-input-field>
+  </div>
+  <div class="combined">
+    <gootweet-input-field type="text" formControlName="company_code" [label]="'Įmonės kodas'"></gootweet-input-field>
+    <gootweet-input-field type="text" formControlName="pvm_code" [label]="'PVM kodas'"></gootweet-input-field>
+  </div>
+  <div class="combined">
+    <gootweet-input-field type="text" formControlName="telephone_no"
+      [label]="'Telefono numeris'"></gootweet-input-field>
+    <gootweet-input-field readonly="true" type="email" formControlName="email"
+      [label]="'El. paštas'"></gootweet-input-field>
+  </div>
+  <ion-button [disabled]="!(manufacturerForm.valid && manufacturerForm.dirty && enabled)" mode="md" type="submit"
+    color="primary" id="login_submit" class="">išsaugoti</ion-button>
+</form>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

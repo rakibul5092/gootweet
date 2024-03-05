@@ -1,0 +1,8 @@
+pm2:
+pm2 start dist/server/main.js --name gootweet
+pm2 stop gootweet
+pm2 start gootweet
+pm2 status
+
+
+nginx: sudo systemctl restart nginx

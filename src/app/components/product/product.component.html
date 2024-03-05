@@ -1,0 +1,85 @@
+<div *ngIf="isWeb else mobile" class="product m-radius-0" [style]="profile? 'background: #ededed;': ''">
+  <div *ngIf="profile" style="cursor: pointer" class="pro-img logoImg">
+    <app-profile-photo [style]="'object-fit: fill;'" [size]="40" [user]="productOwner"></app-profile-photo>
+    <div class="profile-info-container">
+      <a [routerLink]="['profile',  (productOwner.full_name.first_name||'') + '_' + productOwner.full_name.last_name||'', productOwner?.uid]"
+        class="name">{{ productOwner?.full_name | join_name }}</a>
+      <div class="info-container">
+        <span class="info">Prekes pardavejas</span>
+        <img class="flag" src="https://s3.amazonaws.com/images.wpr.com/flag-pages/png100/lt.png" />
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div class="product-img-p">
+        <div class="product-img cover">
+          <button title="Greita perziura" (click)="quickView()" class="quick-view-btn">
+            Greita perziura
+          </button>
+          <img class="img-center prod-img" id="drag1" draggable="true" (dragstart)="drag($event, product, productOwner)"
+            [defaultImage]="default" [lazyLoad]="
+              searched ? product?.image : (product.main_images | getImage)
+            " (click)="productPopup(product, productOwner)" />
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="product-txt">
+        <div (click)="productPopup(product, productOwner)" class="product-tlt">
+          {{ product.title }}
+          <button *ngIf="isDesignerLoggedIn" (click)="sendToMessenger(product)"
+            class="btn ctm-btn pro-btn btnDWU d-none d-md-inline-flex ml-2" style="white-space: nowrap">
+            <img src="./../../assets/img/chat-bubble.svg" alt="img" />Persiųsti
+            konsultacijai
+          </button>
+        </div>
+        <!-- <app-material-list
+          *ngIf="!searched"
+          [good]="product?.good"
+        ></app-material-list> -->
+        <!-- <div class="measures">
+          <div class="measure" *ngFor="let meause of product.measures | slice: 0:1; let i = index">{{
+            (meause?.name && meause?.name !== ""
+            ? meause.measure+' / '+meause.name
+            : "")}}</div>
+        </div> -->
+        <div class="product-price">
+          <app-price [good]="product.good" [price]="product?.price"></app-price>
+
+          <span class="product-btn">
+            <button title="Dalintis chat" (click)="sendToMessenger(product)" class="share-btn">
+              <img src="assets/img/telegram.svg" alt="img" /> Dalintis chat
+            </button></span>
+        </div>
+        <button *ngIf="isDesignerLoggedIn" (click)="sendToMessenger(product)"
+          class="btn ctm-btn pro-btn btnDWU d-inline-flex d-md-none w-100 mt-3" style="white-space: nowrap">
+          <img src="./../../assets/img/chat-bubble.svg" alt="img" />Persiųsti
+          konsultacijai
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #mobile>
+  <div class="mobile-product">
+    <img class="img-center prod-img" id="drag1" draggable="true" (dragstart)="drag($event, product, productOwner)"
+      [defaultImage]="default" [lazyLoad]="
+              searched ? product?.image : (product.main_images | getImage)
+            " (click)="productPopup(product, productOwner)" />
+
+    <div class="pH15">
+      <p (click)="productPopup(product, productOwner)" class="text-in-one-line regular-text text-center black-text">
+        {{ product?.title }}
+      </p>
+      <p class="text-in-one-line red-text large-text">
+        € <span> {{product?.good|getPrice}}</span>
+      </p>
+    </div>
+    <div style="display: flex; justify-content: flex-end; padding-bottom: 20px">
+      <button class="button medium-text" (click)="quickView()">
+        Greita perziura
+      </button>
+    </div>
+  </div>
+</ng-template>

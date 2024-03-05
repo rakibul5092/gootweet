@@ -1,0 +1,18 @@
+<form *ngIf="generalForms else loading" class="form-container" (ngSubmit)="onSubmit()" [formGroup]="generalForms">
+  <div class="combined">
+    <gootweet-input-field type="text" formControlName="first_name" [label]="'Vardas'"></gootweet-input-field>
+    <gootweet-input-field type="text" formControlName="last_name" [label]="'Pavardė'"></gootweet-input-field>
+  </div>
+  <div class="combined">
+    <gootweet-input-field id="googlePlaces" type="text" formControlName="address"
+      [label]="'Adresas'"></gootweet-input-field>
+    <gootweet-input-field readonly="true" type="text" formControlName="email"
+      [label]="'El. paštas'"></gootweet-input-field>
+  </div>
+  <gootweet-input-field type="text" formControlName="status" [label]="'Statusas'"></gootweet-input-field>
+  <ion-button mode="md" [disabled]="!(generalForms.valid && generalForms.dirty && enabled)" type="submit"
+    color="primary" id="login_submit" class="">išsaugoti</ion-button>
+</form>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

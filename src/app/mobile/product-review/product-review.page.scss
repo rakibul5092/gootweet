@@ -1,0 +1,157 @@
+.my_container {
+    width: 100%;
+
+}
+
+.medioum-text {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.regular-text {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgb(49, 46, 46);
+}
+
+
+.red-text {
+    color: #f15307e0;
+}
+
+.sized-box {
+    height: 10px;
+}
+
+.review-image {
+    height: 400px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.img-badge {
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+}
+
+.badge-item {
+    border-radius: 20px;
+    background-color: rgba(230, 230, 230, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge-item ion-icon {
+    font-size: 22px;
+}
+
+.user-bonus {
+    background: #f15307e0;
+    padding: 6px 15px;
+}
+
+.new-price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.main-price {
+    font-size: 15px;
+    text-decoration: line-through;
+    padding-left: 10px;
+}
+
+.discount {
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.hr {
+    height: 1px;
+    background-color: #ecdddd;
+}
+
+.product-color-sec {
+    display: flex;
+    flex-direction: row;
+}
+
+.product-by-colors {
+    margin-right: 15px;
+    border-radius: 8px;
+}
+
+.get-button {
+    display: flex;
+    font-size: medium;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #f15307e0;
+}
+
+.coupon {
+    background: #F5F5F5;
+    padding: 10px;
+}
+
+.rating-alignment {
+    align-items: center;
+}
+
+.rating-alignment ion-icon {
+    font-size: 15px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+}
+
+.footer-option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer ion-icon {
+    font-size: 22px;
+}
+
+.footer-buttons {
+    justify-content: center;
+    align-items: center;
+    height: 87%;
+    margin-top: 5px;
+}
+
+.add-to-card-button {
+    padding: 12px 12px;
+    border-radius: 20px 0px 0px 20px;
+    width: 50%;
+    background-image: linear-gradient(to right, #f19307e5, #f8b524e0);
+}
+
+.buy-button {
+    padding: 12px 12px;
+    border-radius: 0px 20px 20px 0px;
+    width: 50%;
+    background-image: linear-gradient(to right, #f15307e0, #f1a707e0);
+    // background: #f15307e0;
+}
+
+.justify-align-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}

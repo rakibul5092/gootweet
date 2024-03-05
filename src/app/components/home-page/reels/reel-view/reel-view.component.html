@@ -1,0 +1,74 @@
+<ion-content [scrollY]="false">
+  <div class="top-buttons">
+    <ion-buttons>
+      <ion-button (click)="onClose()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+      <ion-button (click)="gotoCreateReel()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+  <swiper #swiper pagination="false" (activeIndexChange)="onSwipe($event)" [initialSlide]="reelsService.selectedIndex"
+    direction="vertical" style="height: 100%;width: 100%;" mousewheel="true">
+    <ng-template swiperSlide *ngFor="let reel of reels; let i = index">
+      <div class="reel-container h-100 w-100">
+        <!-- <video [id]="'reel-player-'+i" class="h-100" style="object-fit: contain;" playsinline autoplay loop muted>
+          <source [src]="reel.asset.public_id|cloudinary" />
+        </video> -->
+        <!-- <vg-player>
+          <video #myMedia [vgMedia]="myMedia" [id]="'reel-player-'+i" loop autoplay playsInline
+            [src]="reel.asset.public_id|cloudinary">
+          </video>
+        </vg-player> -->
+        <ion-buttons class="volume">
+          <ion-button (click)="unmutePlayer(i)">
+            <ion-icon style="color: white;" [name]="muted? 'volume-mute':'volume-high'"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <div [id]="'video-container-'+i" style="position: relative;" class="h-100">
+          <vg-player>
+            <vg-overlay-play></vg-overlay-play>
+            <vg-buffering></vg-buffering>
+
+            <video [vgMedia]="media" #media [id]="'reel-player-'+i" loop style="height:100%;width:100%" autoplay
+              playsinline preload oncontextmenu="return false;">
+
+            </video>
+          </vg-player>
+        </div>
+        <!-- <advanced-video [cldVid]="reel.asset.public_id|cloudinary"></advanced-video> -->
+        <div class="bottom-container mb-2">
+          <div class="left-info">
+            <app-profile-photo [user]="reel?.owner" [size]="30" [nameWidth]="'150px'"
+              [nameVisible]="true"></app-profile-photo>
+            <div class="about-reel d-flex">
+              <div #text (blur)="more=false" [class]="'text '+ (more?'w-100':'truncate')">
+                {{reel.about}}
+              </div>
+              <div *ngIf="!more && reel.about !==''" class="more-btn" (click)="more = true;text.focus()">more</div>
+            </div>
+          </div>
+          <ion-buttons mode="ios" class="right-buttons d-flex">
+            <ion-button (click)="onLiked()" class="icons liked d-flex">
+              <div class="text-icon d-flex">
+                <ion-icon name="heart" [style]="'color:'+ (isLiked?'#d10000':'white')"></ion-icon>
+                {{reel.likeCount}}
+              </div>
+            </ion-button>
+            <ion-button (click)="openComments()" class="icons commented">
+              <div class="text-icon d-flex">
+                <ion-icon name="chatbubbles"></ion-icon>
+                {{reel.commentCount}}
+              </div>
+            </ion-button>
+            <ion-button class="icons share">
+              <ion-icon name="paper-plane"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+
+</ion-content>

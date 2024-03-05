@@ -1,0 +1,118 @@
+<!-- for mobile -->
+<div class="manufacturer-tab d-block d-md-none">
+  <button (click)="openFilterPopup()" class="btn ctm-btn pro-btn w-100">
+    Katalogo filtravimas
+  </button>
+  <button routerLink="/insert" class="btn ctm-btn cart-btn w-100 btnNav">
+    <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+    Pridėti prekę
+  </button>
+</div>
+<div class="text-center d-block d-md-none mb-3">
+  <button class="btn ctm-btn d-btn">Veiksmai su pažymėtais (2)</button>
+</div>
+<!-- for mobile -->
+
+<section class="products-section pb-5 mp-0">
+  <div class="row m-0" style="padding-top: 68px">
+    <div class="col-12 column-left pl-0 d-none d-md-block">
+      <div class="left-side-bar">
+        <div class="left-side-cnt">
+          <div class="loading-btn">
+            <h4 class="ul-tlt">Prekių įkėlimas</h4>
+            <button routerLink="/insert" class="btn ctm-btn cart-btn w-100 btnNav">
+              <img src="./../../assets/img/add-circle-full.svg" alt="img" />
+              Pridėti prekę
+            </button>
+          </div>
+          <div class="importation-btn">
+            <h4 class="ul-tlt">Prekių įkėlimo API</h4>
+            <ion-button color="success" (click)="openApiInstructions()" class="w-100">
+              API surišimas
+            </ion-button>
+          </div>
+        </div>
+        <div class="left-side-cnt filter-cnt">
+          <h4 class="ul-tlt">Katalogo filtravimas</h4>
+          <div class="form-cnt p-0 border-0">
+            <form method="post" action="">
+              <div>
+                <div class="form-group">
+                  <div class="form-input">
+                    <span class="input-group-txt"><img src="./../../assets/img/search.svg" alt="img" /></span>
+
+                    <!-- <input type="text" /> -->
+                    <ion-input name="search" id="search" class="form-control search-input" placeholder="Įveskite frazę"
+                      style="--padding-start: 40px" [(ngModel)]="service.searchText"
+                      (ionChange)="service.onSearchByKeyword(service.searchText, 0, $event,'call')" debounce="1000"
+                      type="text"></ion-input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>
+                    <h6 class="">Kategorijos</h6>
+                  </label>
+                  <div class="cat-ul">
+                    <div *ngFor="let cat of categories" class="cat-li active">
+                      <div class="form-input" *ngIf="cat?.products?.length>0">
+                        <label class="ctm-container cat-li-ch">
+                          {{cat?.category}}
+                          <input type="checkbox"
+                            [checked]="service.categoryName != '' && service.categoryName == cat?.category"
+                            (click)="service.filterWithCategory(cat.category, $event)" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="cat-list pt-0">
+          <span class="cat-l">Privatumo politika</span>
+          <span class="cat-l">Taisyklės Kontaktai</span>
+          <span class="cat-l">Pranešti klaidą</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 column-mid p-0">
+      <div *ngIf="service.activeType != 'search'">
+        <div class="products-list-cnt">
+          <div class="row mr-0" style="padding-top: 16px">
+            <div class="col-12 col-lg-4 pr-0" *ngFor="let product of products; let i = index">
+              <app-product [product]="product" (onCopyMessageEvent)="copyMessage(me.uid,$event)"
+                (onProductOpenEvent)="openProduct($event, product, me)"
+                (onDeletePermissionEvent)="askPermissionForDelete(i, product)"
+                (onOpenSettingEvent)="openSetting(product.id)">
+              </app-product>
+            </div>
+          </div>
+          <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+            <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </div>
+      </div>
+
+      <!-- ======================== search result   ==================== -->
+
+      <span *ngIf="service.activeType == 'search' && service.searchType == 'product_id' ">
+        <div class="row">
+          <div class="col-12 col-lg-4 pr-0" *ngFor="let product of products; let i = index">
+            <app-product [product]="product" (onCopyMessageEvent)="copyMessage(me.uid,$event)"
+              (onProductOpenEvent)="openProduct($event, product, me)"
+              (onDeletePermissionEvent)="askPermissionForDelete(i, product)"
+              (onOpenSettingEvent)="openSetting(product.id)">
+            </app-product>
+          </div>
+
+          <ion-infinite-scroll
+            (ionInfinite)="service.onSearchByKeyword(service.searchText, service.page+1, $event, 'scroll')">
+            <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </div>
+      </span>
+    </div>
+  </div>
+</section>

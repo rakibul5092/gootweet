@@ -1,0 +1,5 @@
+<div class="cookieContainer" *ngIf="!closePopup">
+  <ion-button (click)="openCookieModal()">{{ 'COOKIE.POLICY' }}</ion-button>
+  <ion-button color="primary" (click)="acceptCookie()">{{ 'COOKIE.ACCEPT' }}</ion-button>
+  <ion-button color="primary" (click)="denyCookie()">{{ 'COOKIE.DENY' }}</ion-button>
+</div>

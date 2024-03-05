@@ -1,0 +1,35 @@
+@import "../../components/live/live-products/live-products.component.scss";
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.image-wrapper {
+  // height: 35vh;
+  width: 100%;
+}
+
+.review-image {
+  height: 40vh;
+  width: 100%;
+  position: relative;
+  object-fit: contain;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  ion-button {
+    ion-icon {
+      font-size: 25px;
+      margin-right: 4px;
+    }
+  }
+}
+.card-button {
+  flex-grow: 1;
+  color: white;
+  /* background-color: #ebebeb; */
+  font-size: 17px;
+  font-weight: 700;
+}

@@ -1,0 +1,13 @@
+<div class="user-reg-txt-btn image-video-upload d-block text-center">
+  <span class="w-100 u-reg-txt">
+    <span class="add-photo"><img src="./../../assets/img/add-photo.svg" alt="img" /></span>
+    <span class="add-photo-txt">Įterpkite ir paleiskite nuotrauką arba image</span>
+  </span>
+  <span class="w-100 d-block u-reg-arba">arba</span>
+  <span class="w-100 d-block u-reg-btn"><button onclick="document.getElementById('browselogo').click()"
+      class="btn ctm-btn cart-btn btnNav">
+      Įkelkite iš failų
+    </button></span>
+  <input id="browselogo" type="file" style="display: none" multiple accept="image/*,video/mp4"
+    (change)="onBrowseImage($event)" />
+</div>

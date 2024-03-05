@@ -1,0 +1,14 @@
+<div class="search-container">
+  <ion-buttons *ngIf="!isWeb" mode="ios">
+    <ion-button (click)="openInnerCategoryModal()">
+      <ion-icon slot="icon-only" name="filter"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-searchbar showClearButton="true" placeholder="Prekių paieška" animated="true" (keyup.enter)="onEnter(searchText)"
+    (ionClear)="cancel.emit()" [(ngModel)]="searchText" mode="ios"></ion-searchbar>
+  <ion-buttons>
+    <ion-button (click)="onEnter(searchText)">
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</div>

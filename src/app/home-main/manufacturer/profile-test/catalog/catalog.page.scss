@@ -1,0 +1,24 @@
+.product-col {
+  padding: 0px 5px 5px 0px;
+}
+
+.container {
+  padding-left: 0px;
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
+
+.mobile-product {
+  grid-row: 1;
+  columns: 2;
+  grid-gap: 9px;
+  gap: 9px;
+  grid-row-gap: 9px;
+  row-gap: 9px;
+  padding: 5px;
+}

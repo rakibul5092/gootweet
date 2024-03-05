@@ -1,0 +1,47 @@
+<div *ngIf="notification && notification.data.senderInfo" style="cursor: pointer" class="user border-0 d-flex"
+  (click)="onClick(notification)">
+  <div class="pro-cnt border-0">
+    <div class="pro-img">
+      <img class="cover" [src]="
+          notification?.data.senderInfo?.profile_photo
+            ? (notification?.data.senderInfo?.profile_photo
+              | sanitizeImage: '150_150_')
+            : 'assets/profile.png'
+        " alt="img" />
+    </div>
+    <div class="pro-name-link">
+      <div class="pro-cnt w-100 border-0">
+        <div class="pro-name-link w-100 pl-0">
+          <div class="pro-name">
+            {{ notification?.data?.senderInfo?.full_name | join_name: 30 }}
+            <div [class]="!notification?.data?.seen ? 'active-time' : ''">
+              {{ (notification?.data?.timestamp) | dateAgo}}
+            </div>
+          </div>
+          <ng-container [ngSwitch]="notification?.data?.type">
+            <div *ngSwitchCase="4" class="pro-link missed-call d-flex flex-column">Praleidote skambutį iš
+              {{notification.data.missedCallData.callerInfo.full_name
+              |join_name}} <ion-button mode="md" color="danger">Call back</ion-button></div>
+            <div class="pro-link comment" *ngSwitchCase="1">
+              {{ notification?.data?.comment_data?.comment_text }}
+            </div>
+            <div class="pro-link" *ngSwitchCase="2">
+              {{
+              (notification?.data?.senderInfo?.full_name | join_name) +
+              " patinka jūsų įrašas"
+              }}
+            </div>
+            <div class="pro-link" *ngSwitchCase="3">
+              {{
+              (notification?.data?.senderInfo?.full_name | join_name) +
+              " Konsultantas atsiunte užklausą"
+              }}
+            </div>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

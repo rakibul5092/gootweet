@@ -1,0 +1,48 @@
+<!--************************************ One image tab *************************************-->
+
+<div class="product-show product-show-three" *ngIf="wallPost.data.products.length>0">
+  <app-products-slider (onProductClick)="openProduct(wallPost, $event)" [me]="me" [owner]="wallPost.data.owner"
+    [products]="wallPost.data.products" [buttonText]="wallPost?.data?.button1Text"></app-products-slider>
+
+  <div class="row m-0 d-none">
+    <div *ngFor="
+        let product of wallPost?.data?.products | slice: 0:6;
+        let i = index
+      " [class]="
+        length == 1
+          ? 'col-12 p-0'
+          : length == 2
+          ? i == 0?'col-6 p-0 pr-1':'col-6 p-0 pl-1'
+          : length == 3 && i == 0
+          ? 'col-12 p-1'
+          : length == 3 && i >= 0
+          ? 'col-6 p-1'
+          : length == 4 && i == 0
+          ? 'col-12 p-1'
+          : length == 4 && i > 0
+          ? 'col-4 p-1'
+          : length == 5 && i <= 1
+          ? 'col-6 p-1'
+          : 'col-6 col-lg-4 p-1'
+      ">
+      <div class="show-img-p">
+        <div class="show-img wh-100 flex-box">
+          <div *ngIf="wallPost?.data?.products.length > 1" class="inner-price">
+            <span class="type-money">€</span>
+            <span class="money">{{
+              (wallPost?.data?.products[i]?.good | getPrice) +
+              (wallPost?.data?.products[i]?.good | getUnit)
+              }}</span>
+          </div>
+          <img [defaultImage]="default" class="img-center imgHovr" id="drag1" draggable="true" (dragstart)="
+              drag($event, wallPost?.data?.products[i], wallPost?.data?.owner)
+            " (click)="openProduct(wallPost, i)" [lazyLoad]="
+              wallPost?.data?.products?.length > 0
+                ? (wallPost?.data?.products[i]?.main_images | getImage)
+                : '/assets/image_placeholder.webp'
+            " alt="img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

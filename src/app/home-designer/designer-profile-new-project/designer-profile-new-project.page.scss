@@ -1,0 +1,46 @@
+@import "./../../../theme/mixins/mixins";
+.designer-section {
+  @include padding-p-map($new-project-designer-section-padding);
+}
+
+.log-reg {
+  background: transparent;
+  padding: 0;
+  .img-cnt {
+    .user-reg-txt-btn {
+      padding: 35px 25px;
+      .u-reg-txt {
+        max-width: 250px;
+        @include margin-p-map($modeler-u-reg-txt-margin);
+        @include width-p-map($modeler-u-reg-txt-width);
+      }
+      .u-reg-arba {
+        text-align: center;
+        @include margin-p-map($modeler-u-reg-arba-margin);
+        @include width-p-map($modeler-u-reg-arba-width);
+        display: inline-block;
+      }
+      .u-reg-btn {
+        text-align: center;
+        @include width-p-map($modeler-u-reg-arba-width);
+        display: inline-block;
+      }
+    }
+  }
+
+  .form-cnt {
+    @include padding-p-map($new-project-form-cnt-padding);
+    border-radius: 5px;
+    margin-bottom: 30px;
+    .form-control {
+      padding: 0 20px;
+    }
+    .form-input {
+      textarea.form-control {
+        height: 200px;
+        resize: none;
+        padding: 20px;
+      }
+    }
+  }
+}

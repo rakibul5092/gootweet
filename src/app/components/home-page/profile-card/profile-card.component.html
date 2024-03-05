@@ -1,0 +1,34 @@
+<div class="slider_image " style="cursor: pointer;  width: 164px" (click)="gotoProfile(profile)">
+  <div class="overlay animated-hover" style="height: 238px; width: 164px;">
+    <div class="text_part">
+      <img style="cursor: pointer; border-radius: 5px;"
+        *ngIf="profile.cover_photo && profile.cover_photo != '';else cover_placeholder" class="text_part_cover"
+        [src]="profile.cover_photo | getCoverImage" />
+      <ng-template #cover_placeholder>
+        <div class="text_part_cover" style="background: #ede3e3"></div>
+      </ng-template>
+      <div class="user">
+        <div class="d-flex user-container">
+          <app-profile-photo [isSlider]="true" [user]="profile"></app-profile-photo>
+          <div class="follow-container"><img src="assets/img/profile-slider/user.svg" /> <span>2012</span>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 8px;" [title]="profile?.full_name?.first_name">
+          {{ profile?.full_name?.first_name }}
+        </h3>
+        <h3 [title]="profile?.full_name?.last_name">
+          {{ profile?.full_name?.last_name }}
+        </h3>
+        <p class="user_text" [title]="profile?.status" style="text-transform: capitalize">
+          {{ profile?.rule | status: profile?.status }}
+        </p>
+      </div>
+    </div>
+
+    <ion-button (click)="openMessage($event, profile)" fill="clear">
+      <img src="../../assets/img/chat_sms.svg" alt="" />
+      <span> Susisiekti </span>
+    </ion-button>
+  </div>
+</div>

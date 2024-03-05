@@ -1,0 +1,144 @@
+<ion-header>
+  <div class="detail-header p-2" style="height: 4em; background: #181818">
+    <div class="d-flex align-items-center text-white"
+      style="background-color: #2d2d2d; padding: 8px 12px; font-size: 20px">
+      <span class="d-flex align-items-center">
+        <ion-icon name="time-outline" style="font-size: 20px; color: #d8dae2"></ion-icon>
+        Atrasti
+      </span>
+    </div>
+    <!-- start 2nd item -->
+    <div style="width: 1px; height: 80%; background: #fff; margin-left: 1em">
+      |
+    </div>
+    <!-- start 3rd item -->
+    <button class="d-flex align-items-center bg-dark p-2 text-white-50" class="header-item">
+      Viskas
+    </button>
+    <!-- start 4th item -->
+    <button class="d-flex align-items-center bg-dark p-2 text-white-50" class="header-item">
+      Viskas
+    </button>
+    <!-- start 5th item -->
+    <button class="d-flex align-items-center bg-dark p-2 text-white-50" class="header-item">
+      Viskas
+    </button>
+    <!-- start 6th item -->
+    <button class="d-flex align-items-center bg-dark p-2 text-white-50" class="header-item">
+      Viskas
+    </button>
+    <!-- start 7th item -->
+    <button class="d-flex align-items-center bg-dark p-2 text-white-50" class="header-item">
+      Viskas
+    </button>
+    <!-- start 8th item -->
+    <button class="d-flex align-items-center bg-dark p-2 text-white-50" class="header-item">
+      Viskas
+    </button>
+  </div>
+</ion-header>
+<ion-content>
+  <div class="custom-container row">
+    <!-- end header section -->
+
+    <!-- youtube video start -->
+    <ng-container *ngFor="let video of videos; let i =index">
+      <app-video-element class="col-12 col-md-6 col-lg-4 col-xl-3" [me]="me" [video]="video"
+        (onDelete)="onDelete(i)"></app-video-element>
+    </ng-container>
+    <!-- <ion-row>
+        <ion-col size="1.5" class="d-flex flex-row justify-content-center">
+          <img class="avatar mr-1"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4krnX3kYrzs4UiyneRsmNdyqG8g79YqwrnQ&usqp=CAU"
+            alt="avatar image" />
+        </ion-col>
+        <ion-col class="text-white h4">Shorts</ion-col>
+      </ion-row> -->
+    <!-- <div *ngIf="i==1" class="shorts-wrapper">
+        <div class="shorts-item"
+          style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8uBLK5QFpo5rVaj4-Du-TyjWTB7FIyrJ7eA&usqp=CAU')">
+          <div class="d-flex justify-content-end" style="width: 200px;">
+            <ion-icon name="ellipsis-vertical-outline" style="font-size: 20px;margin: 8px;"></ion-icon>
+          </div>
+          <div style="position: absolute; bottom: 10px;" class="p-2 text-dark">
+            <h5 class="m-0">Katherine Langford so beautiful 🥰❤️😍</h5>
+            <label for="" class="h6">1.8M Views</label>
+          </div>
+        </div>
+        <div class="shorts-item"
+          style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaWgGP4hVt6bTL95ng84LDN06xGmRqEQVoBg&usqp=CAU')">
+          <div class="d-flex justify-content-end" style="width: 200px;">
+            <ion-icon name="ellipsis-vertical-outline" style="font-size: 20px;margin: 8px;"></ion-icon>
+          </div>
+          <div style="position: absolute; bottom: 10px;" class="p-2 text-dark">
+            <h5 class="m-0">Katherine Langford so beautiful 🥰❤️😍</h5>
+            <label for="" class="h6">1.8M Views</label>
+          </div>
+        </div>
+        <div class="shorts-item"
+          style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaWgGP4hVt6bTL95ng84LDN06xGmRqEQVoBg&usqp=CAU')">
+          <div class="d-flex justify-content-end" style="width: 200px;">
+            <ion-icon name="ellipsis-vertical-outline" style="font-size: 20px;margin: 8px;"></ion-icon>
+          </div>
+          <div style="position: absolute; bottom: 10px;" class="p-2 text-dark">
+            <h5 class="m-0">Katherine Langford so beautiful 🥰❤️😍</h5>
+            <label for="" class="h6">1.8M Views</label>
+          </div>
+        </div>
+        <div class="shorts-item"
+          style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4krnX3kYrzs4UiyneRsmNdyqG8g79YqwrnQ&usqp=CAU')">
+          <div class="d-flex justify-content-end" style="width: 200px;">
+            <ion-icon name="ellipsis-vertical-outline" style="font-size: 20px;margin: 8px;"></ion-icon>
+          </div>
+          <div style="position: absolute; bottom: 10px;" class="p-2 text-dark">
+            <h5 class="m-0">Katherine Langford so beautiful 🥰❤️😍</h5>
+            <label for="" class="h6">1.8M Views</label>
+          </div>
+        </div>
+        <div class="shorts-item"
+          style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4krnX3kYrzs4UiyneRsmNdyqG8g79YqwrnQ&usqp=CAU')">
+          <div class="d-flex justify-content-end" style="width: 200px;">
+            <ion-icon name="ellipsis-vertical-outline" style="font-size: 20px;margin: 8px;"></ion-icon>
+          </div>
+          <div style="position: absolute; bottom: 10px;" class="p-2 text-dark">
+            <h5 class="m-0">Katherine Langford so beautiful 🥰❤️😍</h5>
+            <label for="" class="h6">1.8M Views</label>
+          </div>
+        </div>
+      </div> -->
+
+  </div>
+</ion-content>
+
+<!-- <div class="d-flex justify-content-end pt-2 pr-2">
+  <div class="d-flex flex-column justify-content-between" style="height: 260;">
+    <div class="d-flex justify-content-end pt-2 pr-2">
+      <span
+        class="d-flex justify-content-around align-items-center"
+        style="
+          background: rgba(105, 98, 80, 0.3);
+          height: 40px;
+          width: 100px;
+        "
+      >
+        <ion-icon
+          name="volume-mute-outline"
+          style="font-size: 30px; color: #fff"
+        ></ion-icon>
+        <ion-icon
+          name="logo-closed-captioning"
+          style="font-size: 30px; color: #fff"
+        ></ion-icon>
+      </span>
+    </div>
+    ///video top icon end ///
+    <div class="d-flex justify-content-end" style="margin-top: auto">
+      <span
+        class="d-flex justify-content-around align-items-center"
+        style="background: #21221c; height: 40px; width: 100px"
+      >
+        15:59
+      </span>
+    </div>
+  </div>
+</div> -->

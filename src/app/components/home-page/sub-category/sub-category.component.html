@@ -1,0 +1,55 @@
+<div *ngIf="categorySubject" class="subcat-container">
+  <div class="main-row" *ngIf="
+      categorySubject.value.subCategories &&
+      categorySubject.value.subCategories.length > 0
+    ">
+    <ul class="col1">
+      <div class="search-info">
+        <img src="assets/img/filter.svg" />
+        <span class="title">Rūšiavimas</span>
+        <span class="count" *ngIf="searchInfo">{{
+          searchInfo?.from + " - " + searchInfo?.to
+          }}</span>
+      </div>
+      <ion-content>
+        <li class="item" (click)="onSubClick(sub)" *ngFor="let sub of categorySubject.value.subCategories">
+          <div class="outer">
+            <img [src]="subcatImageBase + sub?.data?.image" />
+            <span class="sub-name">{{ sub?.data?.sub_category || "" }}</span>
+          </div>
+        </li>
+      </ion-content>
+    </ul>
+    <div class="col2">
+      <ion-content>
+        <div class="tags">
+          <span (click)="onInnerClick(inner)" class="inner-tags"
+            [style]="inner.selected? 'text-decoration: underline; color: rgb(27, 27, 167)':''" *ngFor="
+              let inner of selectedInners ||
+                categorySubject.value.subCategories[0]?.innerCategories ||
+                categorySubject.value.subCategories[1]?.innerCategories ||
+                categorySubject.value.subCategories[2]?.innerCategories
+            ">
+            {{ inner.data.inner_category }}
+          </span>
+        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size-md="6" size-lg="2.9" size-xl="2.9" *ngFor="let product of results | async"
+              class="product-col">
+              <app-product [product]="product.original_data" [isSearchPopup]="true" [profile]="true"
+                [productOwner]="product" [isSubcategory]="true" (onQuickView)="quickView($event, product.uid)">
+              </app-product>
+            </ion-col>
+            <ion-infinite-scroll (ionInfinite)="findNextPage($event)">
+              <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </div>
+  </div>
+  <div *ngIf="categorySubject.value.subCategories.length == 0" class="loading">
+    {{ searchPopupService.loading ? "Please wait..." : "No data found." }}
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<ion-content>
+	<div class="main-wrapper ">
+		<div class="log-reg reg-step-4">
+			<div class="purchase-cnt">
+				<div class="purchase-back">
+					<span class="back-li" (click)="onBack()" style="display: inline-flex;align-items:center">
+						<ion-icon name="chevron-back" style="font-size: 17px;"></ion-icon> Sugrįžti
+					</span>
+				</div>
+				<div class="tlt pur-m-tlt">
+					<span class="step-no">
+						<span class="cur">1</span>
+						/
+						<span class="total">3</span>
+					</span>
+					Krepšelis
+				</div>
+				<div class="purchase-list-cnt">
+
+
+					<div *ngFor="let owner of sortedCartItems; let i = index" class="purchase-list">
+						<div class="pro-cnt mb-3">
+							<div class="pro-img border-0">
+								<img class="cover" [src]="owner?.owner?.profile_photo|sanitizeImage:'150_150_'"
+									alt="img" />
+							</div>
+							<div class="pro-name-link">
+								<div class="pro-name">
+									{{owner?.owner?.full_name|join_name}}
+									<img src="./../../assets/img/verified.svg" alt="img" />
+								</div>
+								<div class="pro-link">Gamintojas</div>
+							</div>
+						</div>
+
+						<div *ngFor="let prod of owner.products; let j=index" class="single-purchase">
+
+							<div class="row ml-0 purchase-item">
+								<span (click)="removeFromCart(prod,i,j )" class="reviews-delet-i remove_icon"><img
+										src="./../../assets/img/delete.svg" alt="img" /></span>
+								<div class="pl-0 mb-3 mb-lg-0 mr-1" style="width: 130px">
+									<img class="img-center" [src]="prod.data.main_images[0] | getSingleImage"
+										alt="img" />
+								</div>
+
+								<div class="pl-0 mr-5 title-part">
+									<div class="purchase-mid-txt">
+										<div class="tlt tlt1">{{prod?.data?.title}}</div>
+										<span class="pur-mid-s-txt" *ngIf="checkMaterial(prod)">
+											<span class="pur-mid-img" style="margin-right: 8px;">
+												<img [src]="prod.data.good | getMaterialImageForCartList" alt="">
+											</span>
+
+											<span>{{'Medžiagos ID: '+MaterialCodeForCartList(prod.data.good)}}</span>
+										</span>
+										<span style="margin-left: 15px;" class="pur-mid-s-txt"
+											*ngIf="prod?.data?.good?.quantity && prod.data.totalUnitOfMeasurment != 0 && prod?.data?.totalUnitOfMeasurment">
+											{{prod?.data?.good?.unit + ': ' + prod?.data?.totalUnitOfMeasurment}}
+										</span>
+									</div>
+								</div>
+
+								<div class=" mt-3 mt-lg-0 p-0">
+									<div class="purchase-price">
+										<div class="price-single">
+											<div class="pr-ur-tlt">Kaina</div>
+											<div class="price">€{{(prod?.data?.good.price)}}</div>
+										</div>
+										<div class="price-single">
+											<div class="pr-ur-tlt">Kiekis</div>
+											<div class="price qnt">
+												<ion-buttons>
+													<ion-button slot="icon-only" class="qnt-mi"
+														(click)="decreaseQnt(prod)">
+														<img src="./../../assets/img/minus.svg" alt="img" />
+													</ion-button>
+													<span class="">{{prod?.data?.quantity}} </span>
+													<ion-button class="qnt-pl" (click)="increseQnt(prod)">
+														<img src="./../../assets/img/plus.svg" alt="img" />
+													</ion-button>
+												</ion-buttons>
+											</div>
+										</div>
+										<div class="price-single">
+											<div class="pr-ur-tlt">Iš viso</div>
+											<div class="price">€{{(+prod?.data?.cart_price).toFixed(2)}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div *ngIf="sortedCartItems.length>0" class="sent-btn text-right">
+					<button (click)="gotoPurchaseTwo()" style="width: auto;"
+						class="btn ctm-btn cart-btn btnNav">Tęsti</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>

@@ -1,0 +1,57 @@
+ .materials-list-list {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    /*overflow: auto;  */
+    margin-bottom: 20px;
+    .table {
+      th,
+      td {
+        border-top: 0;
+        text-align: center;
+        @include width-p-map($cat-table-td-width);
+        @include padding-p-map($cat-table-td-padding);
+        vertical-align: middle;
+        background: #fff;
+        font-size: 14px;
+        color: #6a6975;
+        font-weight: 400;
+      }
+      th {
+        font-weight: 700;
+      }
+      tbody {
+        tr {
+          &:nth-of-type(even) {
+            th,
+            td {
+              background: #f5f5f9;
+            }
+          }
+        }
+      }
+      .img-td {
+        img {
+          @include width-p-map($img-td-img-width);
+          @include min-width-p-map($img-td-img-min-width);
+        }
+      }
+      .name-td {
+        font-weight: 700;
+        color: #6a7bff;
+      }
+      .no-th {
+        width: 2%;
+      }
+      .ctm-btn {
+        margin: 4px 0;
+        @include font-size-p-map($cat-td-ctm-btn-font-size);
+        @include padding-p-map($cat-td-ctm-btn-padding);
+        color: #6a6975;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .d-btn {
+        border-color: #6a6975;
+      }
+    }
+  }

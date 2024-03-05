@@ -1,0 +1,19 @@
+<div class="pt-2 w-100">
+  <a class="w-100 h-50" target="_blank" [href]="url">
+    <img [src]="img" class="w-100 h-50" style="cursor: pointer;" />
+  </a>
+  <div class=" w-100 p-2 bg-custom">
+    <span>{{siteName}}</span>
+    <a class=" d-block font-weight-bold" target="_blank" [href]="url">{{ title }}</a>
+
+    <span *ngIf="description?.length>60 && shortened; else normalDescription" class="description">{{
+      description|shorten: 60 }}
+      <span (click)="shortened = false">{{ '...more' }}</span>
+    </span>
+    <ng-template #normalDescription>
+      <span class="description">{{ description }}
+        <span *ngIf="description?.length>60" (click)="shortened = true">{{ ' less' }}</span>
+      </span>
+    </ng-template>
+  </div>
+</div>

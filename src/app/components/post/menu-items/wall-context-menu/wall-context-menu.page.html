@@ -1,0 +1,5 @@
+<ion-list>
+  <ion-item (click)="onEditWallPost()" *ngIf="isMe" mode="md">Redaguoti</ion-item>
+  <ion-item button *ngIf="!isMe" mode="md">Pranešti administratoriui</ion-item>
+  <ion-item (click)="onDeletePost()" *ngIf="isMe" lines="none" mode="md">Ištrinti</ion-item>
+</ion-list>

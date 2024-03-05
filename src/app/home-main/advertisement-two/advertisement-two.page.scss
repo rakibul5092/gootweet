@@ -1,0 +1,26 @@
+@import "./../../../theme/mixins/mixins";
+@import "./../../../theme/advertisement.page.scss";
+
+.btn-primary {
+  background-color: #6a7bff;
+}
+
+.user-reg-txt-btn {
+  width: 100%;
+  margin-left: 0px;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #1e66b4;
+  border-color: #0062cc;
+}
+.add-btn {
+  position: absolute;
+  font-size: 16px;
+  color: #6a7bff;
+  cursor: pointer;
+  font-weight: 400;
+  top: -8px;
+  left: 0px;
+}

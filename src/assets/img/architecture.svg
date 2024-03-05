@@ -1,0 +1,12 @@
+<svg id="architecture-24px" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="Group_1108" data-name="Group 1108">
+    <rect id="Rectangle_307" data-name="Rectangle 307" width="48" height="48" fill="none"/>
+  </g>
+  <g id="Group_1110" data-name="Group 1110" transform="translate(12.64 5.962)">
+    <g id="Group_1109" data-name="Group 1109">
+      <path id="Path_191" data-name="Path 191" d="M6.36,26.58l.5,4.412,3.22-3.061,5.505-15.1a7.781,7.781,0,0,1-3.518-1.948Z" transform="translate(-6.36 4.78)" fill="#6a6975"/>
+      <path id="Path_192" data-name="Path 192" d="M16.518,10.88A7.885,7.885,0,0,1,13,12.828l5.505,15.1,3.22,3.061.517-4.412Z" transform="translate(0.196 4.78)" fill="#6a6975"/>
+      <path id="Path_193" data-name="Path 193" d="M20.924,12.937a5.983,5.983,0,0,0-3.975-5.6V3H12.975V7.332a5.955,5.955,0,1,0,7.949,5.6Zm-5.962,1.987a1.987,1.987,0,1,1,1.987-1.987A1.993,1.993,0,0,1,14.962,14.924Z" transform="translate(-3.753 -3)" fill="#6a6975"/>
+    </g>
+  </g>
+</svg>

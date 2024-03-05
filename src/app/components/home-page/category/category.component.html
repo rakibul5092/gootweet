@@ -1,0 +1,24 @@
+<section class="category">
+  <ng-container *ngIf="searchPopupService.categoriesForShow?.length > 0; else skeleton">
+    <div *ngFor="
+        let cat of searchPopupService.categoriesForShow | slice: 0:11;
+        let i = index
+      " data-toggle="tooltip" data-placement="bottom" class="category-item dropdown" (click)="onCategoryClick(cat)"
+      [style]="
+        cat.clicked && !searchPopupService.isAllDismissed
+          ? 'background-color: rgb(217, 217, 217);color: black;'
+          : ''
+      " [title]="cat.data.category">
+      <img class="cat-img" (load)="onImgLoad(i)" [src]="baseUrl + cat.data.img" alt="" />
+    </div>
+  </ng-container>
+  <ng-template #skeleton>
+    <div class="category-item" *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]">
+      <ion-skeleton-text style="height: 85px; width: 85px; border-radius: 50%" animated="true"></ion-skeleton-text>
+    </div>
+  </ng-template>
+</section>
+<section class="section-text">
+  SOCIALINIS PREKYBOS TINKLAS. OFICIALUS!!! GAMINTOJŲ-DISTRIBUTORIŲ PREKIŲ
+  E-KATALOGAS
+</section>

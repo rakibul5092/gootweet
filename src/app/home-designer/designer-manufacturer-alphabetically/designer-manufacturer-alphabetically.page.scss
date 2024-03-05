@@ -1,0 +1,56 @@
+@import "./../../../theme/mixins/mixins";
+.designer-body-cnt {
+  .blog-cnt {
+    .col-manu {
+      @include flex-p-map($col-manu-flex);
+      @include max-width-p-map($col-manu-max-width);
+    }
+    .blog {
+      @include padding-p-map($manu-alp-blog-padding);
+      margin-bottom: 15px;
+    }
+  }
+  .sort-menu-cnt {
+    margin-top: 15px;
+    .tlt {
+      position: relative;
+      margin-bottom: 10px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eaeaea;
+      .btn {
+        padding: 6px 30px;
+        margin: 10px 0 10px 10px;
+        @include position-p-map($sort-menu-btn-position);
+        right: 0;
+        top: -20px;
+      }
+    }
+    .sort-menu {
+      margin-bottom: 10px;
+      .sort-li {
+        margin-left: 25px;
+        cursor: pointer;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        .ac {
+          display: none;
+        }
+        img {
+          margin-right: 5px;
+        }
+        &:focus {
+          outline: none;
+        }
+        &.active {
+          .ac {
+            display: inline-block;
+          }
+          .in-ac {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

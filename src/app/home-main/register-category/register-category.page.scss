@@ -1,0 +1,16 @@
+@import "./../../../theme/mixins/_mixins";
+@import "./../../../theme/pages/register";
+a.back-li {
+  position: absolute;
+  top: 38px;
+  font-size: 18px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #6a6975;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  i {
+    margin-right: 5px;
+  }
+}

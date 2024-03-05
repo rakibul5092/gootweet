@@ -1,0 +1,210 @@
+@import "../../mobile/uploader/uploader.page.scss";
+@import "../../home-designer/video-call-dashboard/video-call-dashboard.page.scss";
+ion-content {
+  --background: black;
+}
+ion-toolbar {
+  --background: #202766;
+  ion-title {
+    --color: white;
+  }
+  ion-buttons {
+    ion-button {
+      --color: white;
+    }
+  }
+}
+.enable-buttons {
+  top: 80px;
+}
+.stream-container {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+app-profile-photo {
+  --name-color: white;
+}
+.cam-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-background-image {
+  height: 93vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  overflow-y: hidden;
+}
+
+.chat-background-image img {
+  height: 100%;
+}
+
+.content-wrapper {
+  height: 100%;
+  width: 100%;
+  background: black;
+  // padding-bottom: 3em;
+}
+
+.detail-header {
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: #00000045;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px !important;
+  border-radius: 50%;
+}
+
+.header-item {
+  padding: 0px 10px;
+  margin: 0px;
+  color: white;
+  border-radius: 5px;
+}
+
+.user-name {
+  font-size: 20px;
+}
+
+.message-wrapper {
+  height: 45%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  overflow-y: auto;
+  padding-bottom: 65px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.write-box {
+  display: flex;
+  border-radius: 5px;
+  .inputs {
+    background: lightgray;
+    padding: 5px 10px 5px 20px;
+    border-radius: 20px 20px 0px 0px;
+    width: 100%;
+    display: flex;
+    ion-input {
+      height: 40px;
+      margin: 4px 2px;
+    }
+    ion-button {
+      --border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      --padding-start: 0.4em;
+      --padding-end: 0.3em;
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+/* For Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  width: 0em;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* For Firefox */
+.message-wrapper {
+  scrollbar-width: 0px;
+  scrollbar-color: transparent transparent;
+}
+
+.sender-panel,
+.write-box {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  max-width: 500px;
+  z-index: 999999;
+}
+
+.sender-panel {
+  height: 54px;
+  justify-content: space-evenly;
+  ion-button:nth-child(1) {
+    width: 80%;
+  }
+}
+
+.sender-panel form {
+  background-color: #ebebeb;
+  display: flex;
+}
+
+.sender-panel textarea {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 30px;
+}
+
+.sender-panel button {
+  height: 100%;
+  width: 50px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  // background-color: dodgerblue;
+  color: white;
+}
+
+.send-box ion-icon {
+  color: dodgerblue;
+  font-size: 30px;
+}
+
+@media only screen and (min-height: 880px) {
+  .message-body {
+    overflow-y: auto;
+    height: 100%;
+    border-bottom: 0.3em outset transparent;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .stream-container {
+    max-width: unset;
+    margin-left: unset;
+    margin-right: unset;
+  }
+  .cam-container {
+    width: 65%;
+  }
+  .message-wrapper {
+    height: 90%;
+    width: 35%;
+    right: 0px;
+  }
+}

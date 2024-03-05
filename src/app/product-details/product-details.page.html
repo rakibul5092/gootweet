@@ -1,0 +1,230 @@
+<ion-content productmoreScrollDirective [id]="'productMoreMobileSlider'+productId"
+  [containerId]="'productMoreMobileSliderContainer'+productId" [style]="isMobile?'':'--padding-top: 15px'"
+  [scrollEvents]="true" [scrollY]="true">
+  <ng-container *ngIf="product && productOwner; else loading">
+    <!-- For web -->
+    <div class="row no-gutters" *ngIf="!isMobile else mobile">
+      <div class="col-2">
+        <app-manufacturer-info [owner]="productOwner"></app-manufacturer-info>
+      </div>
+      <div class="col-5 center">
+        <div class="photos-videos">
+          <div class="other-photos">
+            <img (click)="onOtherPhotoClick(i)" *ngFor="let img of product.main_images; let i = index"
+              [src]="[img] | getImage" />
+          </div>
+          <div class="slider-details-container">
+            <div class="photo-view">
+              <app-video-player *ngIf="haveVideo; else photos" [loop]="true" [autoplay]="true"
+                [url]="productVideoBase+product.video" (onEnd)="ended($event)"></app-video-player>
+              <ng-template #photos>
+                <app-slider [showAnimation]="true" [viewImages]="product.main_images"
+                  (slideChange)="onSlideChange($event)" [isQuickView]="false" [viewProduct]="product"></app-slider>
+              </ng-template>
+              <div *ngIf="mainProductSelectedMat && !haveVideo" class="selected-color">
+                <ion-icon name="close" (click)="mainProductSelectedMat = null"></ion-icon>
+                <img [src]="mainProductSelectedMat.images|getMaterialImage" />
+              </div>
+            </div>
+            <div class="bottom-product-details">
+              <div class="price-and-button">
+                <div class="price">€ <div class="amount">{{product.good | getPrice}}</div>
+                </div>
+                <div class="buttons d-flex">
+                  <ion-button (click)="addToCart(product, productOwner?.uid)" mode="md"><ion-icon
+                      name="cart"></ion-icon>
+                    Į krepšelį</ion-button>
+                  <ion-button (click)="buyNow()" mode="md"><ion-icon name="card"></ion-icon>
+                    Mokėti dabar</ion-button>
+                </div>
+              </div>
+              <app-delivery-info *ngIf="deliveryType" [centered]="false"
+                [deliveryType]="deliveryType"></app-delivery-info>
+              <ion-button (click)="goToProfileCatalog()" mode="md"><ion-icon name="book"></ion-icon>Daugiau prekių šio
+                pardavėjo</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="profile-bar mb-3">
+          <app-profile-photo [user]="productOwner" [nameWidth]="'unset'" size="50" [nameVisible]="true"
+            [verified]="true"></app-profile-photo>
+          <ion-button style="font-size: 12px;" mode="md" color="success">Follow</ion-button>
+          <ion-buttons>
+            <ion-button><ion-icon src="assets/img/like.svg"></ion-icon> 138</ion-button>
+          </ion-buttons>
+
+        </div>
+        <div class="code-bar">
+          <div class="code-text">{{product.title}} / kodas {{product.product_id}}</div>
+          <ion-buttons *ngIf="me">
+            <ion-button (click)="sendToMessenger()" style="font-size: 18px;">
+              <ion-icon style="margin-bottom: 1px;" src="assets/img/telegram.svg" alt="img"></ion-icon>
+              Dalintis</ion-button>
+          </ion-buttons>
+        </div>
+        <div class="category-bar">
+          Išmatavimai / spalvos / savybės
+        </div>
+        <div class="color-container mt-3" *ngIf="colors.length>0">
+          <div class="color-title mb-2">Spalvos</div>
+          <div class="colors">
+            <ion-button mode="md" (click)="onSelection(colors, i, 'color')" [attr.selected]="color.selected"
+              *ngFor="let color of colors; let i =  index">{{color.name}}</ion-button>
+          </div>
+        </div>
+        <div *ngIf="product.category.data.category === 'Apranga-avalynė-aseksuarai'" class="color-container mt-3">
+          <div class="color-title mb-2">Išmatavimai</div>
+          <div class="colors">
+            <ion-button mode="md" (click)="onSelection(sizes, i, 'size')" [attr.selected]="size.selected"
+              *ngFor="let size of (product.inner_category.data.inner_category === 'batai'? shoesSizes: sizes); let i = index">{{size.name}}</ion-button>
+          </div>
+        </div>
+        <div class="material-container mt-3">
+          <app-material-list [isProductDetails]="true" *ngIf="product.good|isArray" [slice]="false"
+            (onMaterialSelect)="onMaterialSelect($event)" [good]="product.good"></app-material-list>
+        </div>
+        <div class="color-container mt-3">
+          <div class="color-title mb-2">Savybės</div>
+          <div class="description">
+            <div class="text" [innerHTML]="product.description"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #mobile>
+      <!-- For mobile -->
+      <div class="row no-gutters mobile">
+        <div class="profile-bar">
+          <app-profile-photo [user]="productOwner" [nameWidth]="'unset'" size="50" [nameVisible]="true"
+            [verified]="true"></app-profile-photo>
+          <ion-button style="font-size: 12px;" mode="md" color="success">Follow</ion-button>
+          <ion-buttons>
+            <ion-button><ion-icon src="assets/img/like.svg"></ion-icon> 138</ion-button>
+          </ion-buttons>
+        </div>
+        <div class="col-12">
+          <div class="photos-videos">
+            <div class="slider-details-container">
+              <div [id]="'productMoreMobileSliderContainer'+productId" class="photo-view-container">
+                <div [id]="'productMoreMobileSlider'+productId" class="photo-view">
+                  <div class="slider-container">
+                    <app-video-player *ngIf="haveVideo; else photos" [loop]="true" [autoplay]="true"
+                      [url]="productVideoBase+product.video" (onEnd)="ended($event)"></app-video-player>
+                    <ng-template #photos>
+                      <app-slider [showAnimation]="true" [viewImages]="product.main_images"
+                        (slideChange)="onSlideChange($event)" [isQuickView]="false"
+                        [viewProduct]="product"></app-slider>
+                    </ng-template>
+
+                    <div *ngIf="mainProductSelectedMat && !haveVideo" class="selected-color">
+                      <ion-icon name="close" (click)="mainProductSelectedMat = null"></ion-icon>
+                      <img [src]="mainProductSelectedMat.images|getMaterialImage" />
+                    </div>
+
+                  </div>
+                  <div class="other-photos">
+                    <img (click)="onOtherPhotoClick(i)" *ngFor="let img of product.main_images; let i = index"
+                      [src]="[img] | getImage" />
+                  </div>
+                  <div class="price-and-button">
+                    <div class="price">€ <div class="amount">{{product.good | getPrice}}</div>
+                    </div>
+                    <div class="buttons d-flex">
+                      <ion-button (click)="addToCart(product, productOwner?.uid)" mode="md"><ion-icon
+                          name="cart"></ion-icon>
+                        Į krepšelį</ion-button>
+                      <ion-button (click)="buyNow()" mode="md"><ion-icon name="card"></ion-icon>
+                        Mokėti dabar</ion-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom-product-details">
+                <div *ngIf="deliveryType" class="delivery-info">
+                  <app-delivery-info [centered]="false" [deliveryType]="deliveryType"></app-delivery-info>
+                  <ion-buttons>
+                    <ion-button mode="md" (click)="informationVisible = true">
+                      <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 bottom-space">
+          <div class="code-bar">
+            <div class="code-text">{{product.title}} / kodas {{product.product_id}}</div>
+            <ion-buttons *ngIf="me">
+              <ion-button style="font-size: 16px;" (click)="sendToMessenger()">
+                <ion-icon style="margin-bottom: 1px;" src="assets/img/telegram.svg" alt="img"></ion-icon>
+                Dalintis</ion-button>
+            </ion-buttons>
+          </div>
+          <div class="category-bar">
+            Išmatavimai / spalvos / savybės
+          </div>
+          <div class="color-container mt-3" *ngIf="colors.length>0">
+            <div class="color-title mb-2">Spalvos</div>
+            <div class="colors">
+              <ion-button mode="md" (click)="onSelection(colors, i, 'color')" [attr.selected]="color.selected"
+                *ngFor="let color of colors; let i =  index">{{color.name}}</ion-button>
+            </div>
+          </div>
+          <div *ngIf="product.category.data.category === 'Apranga-avalynė-aseksuarai'" class="color-container mt-3">
+            <div class="color-title mb-2">Išmatavimai</div>
+            <div class="colors">
+              <ion-button mode="md" (click)="onSelection(sizes, i, 'size')" [attr.selected]="size.selected"
+                *ngFor="let size of (product.inner_category.data.inner_category === 'batai'? shoesSizes: sizes); let i = index">{{size.name}}</ion-button>
+            </div>
+          </div>
+          <div class="material-container mt-3">
+            <app-material-list [isProductDetails]="true" *ngIf="product.good|isArray" [slice]="false"
+              (onMaterialSelect)="onMaterialSelect($event)" [good]="product.good"></app-material-list>
+          </div>
+          <div class="color-container mt-3 pb-5">
+            <div class="color-title mb-2">Savybės</div>
+            <div class="description ">
+              <div class="text" [innerHTML]="product.description"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-buttons">
+          <ion-button (click)="goToProfileCatalog()" mode="md"><ion-icon name="book"></ion-icon>Daugiau prekių šio
+            pardavėjo</ion-button>
+          <app-cart-item [me]="me" [isProductMore]="true"></app-cart-item>
+          <!-- <ion-button (click)="openCartPopover()" mode="md"><ion-icon slot="icon-only"
+              name="cart"></ion-icon></ion-button> -->
+        </div>
+      </div>
+
+      <ion-modal [isOpen]="informationVisible" [initialBreakpoint]="[0.50]" [breakpoints]="[0.25, 0.75]">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Manufacturer</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="informationVisible = false">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <app-manufacturer-info [owner]="productOwner"></app-manufacturer-info>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </ng-template>
+</ion-content>

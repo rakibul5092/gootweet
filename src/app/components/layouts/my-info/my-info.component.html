@@ -1,0 +1,43 @@
+<div *ngIf="visible" class="left-side-bar radius-5 bg-white p-3" id="leftBar">
+  <div class="profile-details d-flex flex-column align-items-center">
+    <div class="profile-info d-flex flex-column w-100 align-items-center border-bottom">
+      <img (click)="gotoProfile()" class="rounded-box" [src]="me?.cover_photo | getCoverImage" />
+      <img (click)="gotoProfile()" class="profile-photo" [src]="me?.profile_photo| sanitizeImage: ''" alt="">
+      <ng-container *ngIf="me;else loginButtons">
+        <div (click)="gotoProfile()" class="name"> {{ me?.full_name | join_name }}</div>
+        <div (click)="gotoProfile()" class="status">{{me?.rule | status: me?.status}}</div>
+      </ng-container>
+      <ng-template #loginButtons>
+        <div class="login-buttons d-flex flex-column">
+          <ion-button mode="md" routerLink="/login">Prisijungti</ion-button>
+          <ion-button mode="md" routerLink="/register">Registruotis</ion-button>
+        </div>
+      </ng-template>
+    </div>
+    <div class="profile-data border-bottom w-100 d-flex pt-3">
+      <div class="follow">{{this.me?.followers||0}}<span>Tave stebi</span></div>
+      <div class="reels">31 <span>“Reels” įrašai</span></div>
+      <div class="notifications">61<span>Pranešimai</span></div>
+    </div>
+    <ion-buttons class="normal-items border-bottom d-flex flex-column align-items-start w-100 p-2">
+      <ion-button (click)="onButtonClicked(button)" *ngFor="let button of normalButtons"><ion-icon
+          [name]="button.icon"></ion-icon>{{button.name}}</ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="me?.rule !== 'manufacturer' || !me"
+      class="normal-items border-bottom d-flex flex-column align-items-start w-100 p-2">
+      <div class="button-title">B2C Verslas</div>
+      <ion-button (click)="onButtonClicked(button)" *ngFor="let button of businessButtons"><ion-icon
+          [name]="button.icon"></ion-icon>{{button.name}}</ion-button>
+    </ion-buttons>
+
+    <ion-buttons class="normal-items d-flex flex-column align-items-start w-100 p-2">
+      <div class="button-title">Taisyklės</div>
+      <ion-button (click)="onButtonClicked(button)" *ngFor="let button of infoButtons"><ion-icon
+          [name]="button.icon"></ion-icon>{{button.name}}</ion-button>
+      <ion-button *ngIf="me" style="color: #fa7a8b;" (click)="logout()"><ion-icon
+          name="log-out"></ion-icon>Atsijungti</ion-button>
+    </ion-buttons>
+
+  </div>
+</div>
